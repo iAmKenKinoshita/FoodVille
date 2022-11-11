@@ -27,6 +27,7 @@ function RecipeList () {
       </div>)
       })): <SingleRecipeList
       selectedRecipe={selectedRecipe}
+      
       />}
       
    </div>

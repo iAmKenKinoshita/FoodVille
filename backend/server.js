@@ -9,7 +9,7 @@ require("dotenv").config({ path: "../.env.local" });
 const indexRoutes = require("./routes/index");
 const myRecipe = require("./routes/myrecipe")
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "../build")));
 
 app.use(express.json());
 
