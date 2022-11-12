@@ -25,8 +25,6 @@ export default function AllRecipeList(props) {
 					</div>
 				);
 			})}
-
-			<div>This is for API Recipes</div>
 		</div>
 	);
 }
