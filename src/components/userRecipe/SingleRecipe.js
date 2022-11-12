@@ -1,41 +1,41 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
+export default function SingleRecipeList(props) {
+	const { selectedRecipe, setCurrentView } = props;
 
-function SingleRecipeList(props) {
+	const [ingredients, setIngredients] = useState([]);
 
-  const {selectedRecipe} = props;
-  const [ingredients, setIngredients] = useState([])
+	const ID = selectedRecipe.id;
 
-  const ID = selectedRecipe.id;
+	useEffect(() => {
+		fetch(`userRecipe/list/${ID}`)
+			.then((result) => result.json())
+			.then((data) => setIngredients(data));
+	});
 
-  useEffect(() => {
-    fetch(`myrecipe/list/${ID}`).then((result) => result.json()).then((data) => setIngredients(data))
-  })
-
-  return (
-    <div>
-      
-     
-    <div>
-        <p >{selectedRecipe.name}</p>
-        <p>{selectedRecipe.description}</p>
-        {ingredients.map((ingredient) => {
-          return(
-            <>
-              <p>{ingredient.ingredient_name}</p>
-              <p>{ingredient.amount}</p>
-            </>
-          )
-        })}
-        <p>{selectedRecipe.instruction}</p>
-      </div>
-      
-   </div>
-
-  )
-
-
-
+	return (
+		<div>
+			<div>
+				<p>{selectedRecipe.name}</p>
+				<p>{selectedRecipe.description}</p>
+				{ingredients.map((ingredient) => {
+					return (
+						<>
+							<p>
+								{ingredient.amount} {ingredient.ingredient_name}
+							</p>
+						</>
+					);
+				})}
+				<p>{selectedRecipe.instruction}</p>
+				<button
+					onClick={() => {
+						setCurrentView("addIngredients");
+					}}
+				>
+					Add ingredients
+				</button>
+			</div>
+		</div>
+	);
 }
-
-export default SingleRecipeList;

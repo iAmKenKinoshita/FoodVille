@@ -2,35 +2,26 @@ import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 
-import RecipeList from "./components/userRecipe/RecipeList"
+import Recipe from "./components/userRecipe/Recipe";
+import Navbar from "./components/NavBar";
+import Homepage from "./components/homepage/Homepage";
 
 function App() {
-	const [hello, setHello] = useState("");
+	const [currentView, setCurrentView] = useState("home");
 
-	// useEffect(() => {
-	// 	fetch("/")
-	// 		.then((res) => res.json())
-	// 		.then((data) => console.log(data));
-	// }, []);
-
-	///fasdfasdfags
+	useEffect(() => {
+		if (currentView === "home") {
+			setCurrentView(<Homepage />);
+		} else if (currentView === "recipes") {
+			setCurrentView(<Recipe />);
+		}
+	});
 
 	return (
 		<>
-			<RecipeList/>
-
-
-			{/* <button
-				onClick={(e) => {
-					fetch("/myrecipe/list")
-						.then((res) => res.json())
-						.then((data) => setHello(data.hello));
-				}}
-			>
-				Click here
-			</button> */}
-			{hello}
-			
+			<Navbar setCurrentView={setCurrentView} />
+			<div>------</div>
+			{currentView}
 		</>
 	);
 }

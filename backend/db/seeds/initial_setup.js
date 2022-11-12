@@ -2,14 +2,13 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
- exports.seed = async function (knex) {
+exports.seed = async function (knex) {
 	// Deletes ALL existing entries
 	await knex("recipe_ingredients").del();
 	await knex("recipe").del();
-	
+
 	await knex("recipe").insert([
 		{
-			id: 1,
 			name: "Sunny-Side-Up Eggs",
 			description: "Simple yet amazing egg dish",
 			instruction:
@@ -40,7 +39,6 @@
 	]);
 	await knex("recipe").insert([
 		{
-			id: 2,
 			name: "Scrambled Eggs",
 			description: "Simple scrambled egg",
 			instruction:
@@ -68,6 +66,5 @@
 			ingredient_name: "Cream",
 			amount: "6 tablespoon",
 		},
-		
 	]);
 };

@@ -2,9 +2,9 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
- exports.up = async function (knex) {
+exports.up = async function (knex) {
 	await knex.schema.createTable("recipe", (table) => {
-		table.increments("id").primary();
+		table.increments("id").primary().unsigned().notNullable();
 		table.string("name");
 		table.string("description");
 		table.string("instruction", 1500);
@@ -24,5 +24,4 @@
 exports.down = async function (knex) {
 	await knex.schema.dropTable("recipe_ingredients");
 	await knex.schema.dropTable("recipe");
-	
 };

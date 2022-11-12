@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.2.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "knex": "^2.3.0",
@@ -14,6 +15,7 @@
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -22,8 +24,8 @@
     "start-back": "cd backend && nodemon server.js",
     "start-front": "react-scripts start",
     "migrate:latest": "npx knex migrate:latest --knexfile backend/db/knexfile",
-		"migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
-		"seed:data": "npx knex seed:run --knexfile backend/db/knexfile",
+    "migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
+    "seed:data": "npx knex seed:run --knexfile backend/db/knexfile",
     "build": "npm install && npm run migrate:latest && npm run seed:data && react-scripts build"
   },
   "eslintConfig": {
