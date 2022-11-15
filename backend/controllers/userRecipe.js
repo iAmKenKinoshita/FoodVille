@@ -30,7 +30,12 @@ exports.addIngredient = async (req, res, next) => {
 
 exports.editRecipe = async (req, res, next) => {
 	const ID = req.params.listId;
-	console.log("This is edit receipe");
+	const ingredients = JSON.parse(req.get("ingredients"));
+	const recipeDetails = JSON.parse(req.get("recipeDetails"));
+	console.log(ID);
+	console.log(ingredients);
+	console.log(recipeDetails);
+	await userRecipeModel.editRecipe(ingredients);
 };
 
 exports.deleteRecipe = async (req, res, next) => {

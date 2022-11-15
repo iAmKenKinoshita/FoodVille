@@ -54,6 +54,7 @@ export default function AllRecipeList(props) {
 							onClick={() => {
 								const ID = recipe.id;
 								deleteRecipe(ID);
+								setCurrentView("allRecipes");
 							}}
 						>
 							Delete

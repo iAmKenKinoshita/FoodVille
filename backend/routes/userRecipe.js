@@ -11,7 +11,7 @@ router.post("/createNewRecipe", userRecipeController.createNewRecipe);
 router.post("/addIngredients/:listId", userRecipeController.addIngredient);
 
 //Patch Routes
-router.patch("/editRecipe/:listId");
+router.patch("/editRecipe/:listId", userRecipeController.editRecipe);
 
 //Delete Routes
 router.delete("/deleteRecipe/:listId", userRecipeController.deleteRecipe);

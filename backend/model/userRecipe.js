@@ -44,4 +44,10 @@ module.exports = {
 	deleteRecipe(id) {
 		return knex("recipe").where({ id: id }).del();
 	},
+
+	editRecipe(recipeDetails) {
+		for (const index of recipeDetails) {
+			console.log(index);
+		}
+	},
 };

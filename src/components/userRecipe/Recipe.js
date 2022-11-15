@@ -3,6 +3,7 @@ import AllRecipeList from "./AllRecipeList";
 import SingleRecipeList from "./SingleRecipe";
 import AddNewRecipe from "./AddNewRecipe";
 import AddIngredients from "./AddIngredients";
+import EditRecipe from "./EditRecipe";
 
 export default function Recipe(props) {
 	const {} = props;
@@ -45,6 +46,13 @@ export default function Recipe(props) {
 				<AddIngredients
 					selectedRecipe={selectedRecipe}
 					setCurrentView={setCurrentView}
+				/>
+			);
+		} else if (currentView === "editRecipe") {
+			setCurrentView(
+				<EditRecipe
+					setCurrentView={setCurrentView}
+					selectedRecipe={selectedRecipe}
 				/>
 			);
 		}

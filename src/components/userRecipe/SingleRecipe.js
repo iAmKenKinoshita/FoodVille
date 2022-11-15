@@ -5,16 +5,15 @@ export default function SingleRecipeList(props) {
 
 	const [ingredients, setIngredients] = useState([]);
 
-	const ID = selectedRecipe.id;
-
-	useEffect(() => {
-		fetch(`userRecipe/list/${ID}`)
-			.then((result) => result.json())
-			.then((data) => setIngredients(data));
-	});
-
 	return (
 		<div>
+			<button
+				onClick={() => {
+					setCurrentView("allRecipes");
+				}}
+			>
+				Back
+			</button>
 			<div>
 				<p>{selectedRecipe.name}</p>
 				<p>{selectedRecipe.description}</p>
@@ -28,6 +27,14 @@ export default function SingleRecipeList(props) {
 					);
 				})}
 				<p>{selectedRecipe.instruction}</p>
+				<button
+					onClick={() => {
+						console.log("This is edit button");
+						setCurrentView("editRecipe");
+					}}
+				>
+					Edit Button
+				</button>
 				<button
 					onClick={() => {
 						setCurrentView("addIngredients");
