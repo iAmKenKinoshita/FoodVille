@@ -32,3 +32,9 @@ exports.editRecipe = async (req, res, next) => {
 	const ID = req.params.listId;
 	console.log("This is edit receipe");
 };
+
+exports.deleteRecipe = async (req, res, next) => {
+	const ID = req.params.listId;
+	await userRecipeModel.deleteIngredients(ID);
+	await userRecipeModel.deleteRecipe(ID);
+};

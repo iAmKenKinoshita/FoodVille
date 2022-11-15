@@ -2,6 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 
+//Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+
+//Components
 import Recipe from "./components/userRecipe/Recipe";
 import Navbar from "./components/NavBar";
 import Homepage from "./components/homepage/Homepage";

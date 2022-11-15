@@ -37,4 +37,11 @@ module.exports = {
 			amount: amount,
 		});
 	},
+
+	deleteIngredients(id) {
+		return knex("recipe_ingredients").where({ recipe_id: id }).del();
+	},
+	deleteRecipe(id) {
+		return knex("recipe").where({ id: id }).del();
+	},
 };

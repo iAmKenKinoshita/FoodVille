@@ -13,4 +13,7 @@ router.post("/addIngredients/:listId", userRecipeController.addIngredient);
 //Patch Routes
 router.patch("/editRecipe/:listId");
 
+//Delete Routes
+router.delete("/deleteRecipe/:listId", userRecipeController.deleteRecipe);
+
 module.exports = router;
