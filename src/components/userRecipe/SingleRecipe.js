@@ -5,6 +5,14 @@ export default function SingleRecipeList(props) {
 
 	const [ingredients, setIngredients] = useState([]);
 
+	const ID = selectedRecipe.id;
+
+	useEffect(() => {
+		fetch(`userRecipe/list/${ID}`)
+			.then((result) => result.json())
+			.then((data) => setIngredients(data));
+	}, []);
+
 	return (
 		<div>
 			<button
@@ -33,15 +41,15 @@ export default function SingleRecipeList(props) {
 						setCurrentView("editRecipe");
 					}}
 				>
-					Edit Button
+					Edit
 				</button>
-				<button
+				{/* <button
 					onClick={() => {
 						setCurrentView("addIngredients");
 					}}
 				>
 					Add ingredients
-				</button>
+				</button> */}
 			</div>
 		</div>
 	);

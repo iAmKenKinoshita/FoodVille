@@ -15,10 +15,10 @@ export default function EditRecipe(props) {
 		setRecipeDetails(selectedRecipe);
 	}, []);
 
-	const onInputChange = ({ name, value }, position) => {
+	const onInputChange = ({ name, value }, index) => {
 		const clonedIngredients = [...ingredients];
-		clonedIngredients.splice(position, 1, {
-			...ingredients[position],
+		clonedIngredients.splice(index, 1, {
+			...ingredients[index],
 			[name]: value,
 		});
 		setIngredients(clonedIngredients);
@@ -40,11 +40,30 @@ export default function EditRecipe(props) {
 				recipeDetails: JSON.stringify(recipeDetails),
 			},
 		});
+		setCurrentView("allRecipes");
+	};
+
+	const addIngredient = () => {
+		const clonedIngredients = [...ingredients];
+		const ingredientData = { ingredient_name: "", amount: "" };
+		clonedIngredients.push(ingredientData);
+		setIngredients(clonedIngredients);
+	};
+
+	const deleteIngredient = (index) => {
+		const clonedIngredients = [...ingredients];
+		console.log(index);
+		clonedIngredients.splice(index, 1);
+		console.log(clonedIngredients);
+		setIngredients(clonedIngredients);
 	};
 
 	return (
 		<>
 			<p>This is from the edit component</p>
+			<button type="button" onClick={() => setCurrentView("singleRecipe")}>
+				Back
+			</button>
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
@@ -72,7 +91,8 @@ export default function EditRecipe(props) {
 							key={index}
 							ingredient={ingredient}
 							onInputChange={onInputChange}
-							position={index}
+							index={index}
+							deleteIngredient={deleteIngredient}
 						/>
 					);
 				})}
@@ -86,6 +106,10 @@ export default function EditRecipe(props) {
 						handleChange(e.target);
 					}}
 				/>
+				<button type="button" onClick={addIngredient}>
+					Add More Ingredient
+				</button>
+
 				<button type="submit">Update</button>
 			</form>
 		</>

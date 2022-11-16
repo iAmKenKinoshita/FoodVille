@@ -22,6 +22,9 @@ export default function AddNewRecipe(props) {
 
 	return (
 		<>
+			<button type="button" onClick={() => setCurrentView("allRecipes")}>
+				Back
+			</button>
 			<form>
 				<input
 					onChange={(e) => {

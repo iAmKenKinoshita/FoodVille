@@ -45,9 +45,20 @@ module.exports = {
 		return knex("recipe").where({ id: id }).del();
 	},
 
-	editRecipe(recipeDetails) {
-		for (const index of recipeDetails) {
-			console.log(index);
+	editRecipeDetails(details, id) {
+		return knex("recipe").where({ id: id }).update({
+			name: details.name,
+			description: details.description,
+			instruction: details.instruction,
+		});
+	},
+
+	async editRecipeIngredients(ingredients, id) {
+		if (ingredients.length !== 0) {
+			for (const ingredient of ingredients) {
+				ingredient.recipe_id = id;
+			}
+			return await knex("recipe_ingredients").insert(ingredients);
 		}
 	},
 };
