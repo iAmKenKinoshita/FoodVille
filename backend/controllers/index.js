@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args));
 

@@ -9,6 +9,7 @@ exports.seed = async function (knex) {
 
 	await knex("recipe").insert([
 		{
+			user_id: 1,
 			name: "Sunny-Side-Up Eggs",
 			description: "Simple yet amazing egg dish",
 			instruction:
@@ -47,6 +48,7 @@ exports.seed = async function (knex) {
 	]);
 	await knex("recipe_ingredients").insert([
 		{
+			user_id: 1,
 			recipe_id: 2,
 			ingredient_name: "Butter",
 			amount: "1 tablespoon",

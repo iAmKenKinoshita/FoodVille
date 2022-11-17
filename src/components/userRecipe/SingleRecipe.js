@@ -37,7 +37,6 @@ export default function SingleRecipeList(props) {
 				<p>{selectedRecipe.instruction}</p>
 				<button
 					onClick={() => {
-						console.log("This is edit button");
 						setCurrentView("editRecipe");
 					}}
 				>

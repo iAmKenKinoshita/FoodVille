@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //Bootstrap
 import Button from "react-bootstrap/Button";
@@ -7,6 +7,8 @@ import Popover from "react-bootstrap/Popover";
 
 export default function AllRecipeList(props) {
 	const { setCurrentView, setSelectedRecipe, userRecipes } = props;
+
+	const user = JSON.parse(localStorage.getItem("userData"));
 
 	const popover = (
 		<Popover id="popover-basic">
@@ -22,12 +24,15 @@ export default function AllRecipeList(props) {
 		fetch(`userRecipe/deleteRecipe/${id}`, {
 			method: "DELETE",
 		});
-		console.log(id);
-		console.log("This is delete");
 	};
 
 	return (
 		<div>
+			<button
+				onClick={() => {
+					console.log(user);
+				}}
+			></button>
 			<button
 				onClick={() => {
 					setCurrentView("addNewRecipe");

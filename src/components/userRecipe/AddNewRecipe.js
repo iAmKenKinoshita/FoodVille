@@ -7,9 +7,12 @@ export default function AddNewRecipe(props) {
 	const [description, setDescription] = useState("");
 	const [instruction, setInstruction] = useState("");
 
+	const user = JSON.parse(localStorage.getItem("userData"));
+	const userId = user[0].userId;
+
 	const addNewRecipe = (e) => {
 		e.preventDefault();
-		fetch("userRecipe/createNewRecipe", {
+		fetch(`userRecipe/createNewRecipe/${userId}`, {
 			method: "POST",
 			headers: {
 				name: name,

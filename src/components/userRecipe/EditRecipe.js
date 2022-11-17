@@ -32,7 +32,6 @@ export default function EditRecipe(props) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(ingredients);
 		fetch(`userRecipe/editRecipe/${ID}`, {
 			method: "PATCH",
 			headers: {
@@ -52,7 +51,6 @@ export default function EditRecipe(props) {
 
 	const deleteIngredient = (index) => {
 		const clonedIngredients = [...ingredients];
-		console.log(index);
 		clonedIngredients.splice(index, 1);
 		console.log(clonedIngredients);
 		setIngredients(clonedIngredients);

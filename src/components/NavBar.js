@@ -25,6 +25,13 @@ export default function NavigationBar(props) {
 				>
 					My Recipes
 				</div>
+				<div
+					onClick={() => {
+						setCurrentView("user");
+					}}
+				>
+					User
+				</div>
 			</div>
 			<>
 				<br />

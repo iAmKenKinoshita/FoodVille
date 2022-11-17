@@ -6,15 +6,16 @@ require("dotenv").config({ path: "../.env.local" });
 
 //Routes
 const indexRoutes = require("./routes/index");
-const myRecipe = require("./routes/userRecipe");
+const userRecipeRooutes = require("./routes/userRecipe");
+const userRoutes = require("./routes/user");
 
 app.use(express.static(path.join(__dirname, "../build")));
 
 app.use(express.json());
 
-//Get request
 app.use("/index", indexRoutes);
-app.use("/userRecipe", myRecipe);
+app.use("/userRecipe", userRecipeRooutes);
+app.use("/user", userRoutes);
 
 //Other Requests
 

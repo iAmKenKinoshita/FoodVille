@@ -5,21 +5,22 @@ import AddNewRecipe from "./AddNewRecipe";
 import AddIngredients from "./AddIngredients";
 import EditRecipe from "./EditRecipe";
 
-export default function Recipe(props) {
-	const {} = props;
-
+export default function Recipe() {
 	const [currentView, setCurrentView] = useState("allRecipes");
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [userRecipes, setUserRecipes] = useState([]);
 
+	const user = JSON.parse(localStorage.getItem("userData"));
+	const userId = user[0].userId;
+
 	useEffect(() => {
-		fetch("userRecipe/list")
+		fetch(`userRecipe/list/${userId}`)
 			.then((result) => result.json())
 			.then((data) => setUserRecipes(data));
 	});
 	useEffect(() => {
 		if (currentView === "allRecipes") {
-			fetch("userRecipe/list")
+			fetch(`userRecipe/list/${userId}`)
 				.then((result) => result.json())
 				.then((data) => {
 					setUserRecipes(data);

@@ -6,9 +6,10 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //Components
-import Recipe from "./components/userRecipe/Recipe";
 import Navbar from "./components/NavBar";
 import Homepage from "./components/homepage/Homepage";
+import Recipe from "./components/userRecipe/Recipe";
+import User from "./components/user/User";
 
 function App() {
 	const [currentView, setCurrentView] = useState("home");
@@ -18,6 +19,8 @@ function App() {
 			setCurrentView(<Homepage />);
 		} else if (currentView === "recipes") {
 			setCurrentView(<Recipe />);
+		} else if (currentView === "user") {
+			setCurrentView(<User />);
 		}
 	});
 
