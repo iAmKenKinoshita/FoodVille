@@ -1,10 +1,6 @@
 const userRecipeModel = require("../model/userRecipe");
 
 exports.getMyRecipeList = async (req, res, next) => {
-	// console.log(req.params.userId);
-	// const recipe = await userRecipeModel.getAllRecipeList();
-	// res.send(recipe);
-
 	const userID = req.params.userId;
 	const recipe = await userRecipeModel.getAllRecipeList(userID);
 	res.send(recipe);
@@ -18,35 +14,42 @@ exports.getAllIngredients = async (req, res, next) => {
 };
 
 exports.createNewRecipe = async (req, res, next) => {
-	console.log(req.params.userId);
 	const userID = req.params.userId;
 	const name = req.get("name");
 	const description = req.get("description");
 	const instruction = req.get("instruction");
-	console.log(name, description, instruction);
+	const ingredients = JSON.parse(req.get("ingredients"));
 
 	await userRecipeModel.createNewRecipe(userID, name, description, instruction);
-};
 
-exports.addIngredient = async (req, res, next) => {
-	const ID = req.params.listId;
-	const name = req.get("ingredientName");
-	const amount = req.get("amount");
+	let allRecipes = [];
 
-	await userRecipeModel.addIngredients(name, amount, ID);
+	await userRecipeModel.getAllRecipeList(userID).then((data) => {
+		allRecipes = data;
+	});
+
+	let recipe = allRecipes.find((recipe) => recipe.name === name);
+	let RecipeId = recipe.id;
+
+	await userRecipeModel.editRecipeIngredients(ingredients, RecipeId);
+
+	res.status(200).send("Created new recipe");
 };
 
 exports.editRecipe = async (req, res, next) => {
 	const ID = req.params.listId;
 	const ingredients = JSON.parse(req.get("ingredients"));
 	const recipeDetails = JSON.parse(req.get("recipeDetails"));
+
 	await userRecipeModel.editRecipeDetails(recipeDetails, ID);
 	await userRecipeModel.deleteIngredients(ID);
 	await userRecipeModel.editRecipeIngredients(ingredients, ID);
+	res.send("Edited recipe");
 };
 
 exports.deleteRecipe = async (req, res, next) => {
 	const ID = req.params.listId;
 	await userRecipeModel.deleteIngredients(ID);
 	await userRecipeModel.deleteRecipe(ID);
+	res.send("Deleted recipe");
 };

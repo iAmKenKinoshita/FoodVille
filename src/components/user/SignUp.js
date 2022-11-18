@@ -1,7 +1,7 @@
 // import "../../styles/User.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRef, useState, useEffect } from "react";
-import authService from "./utils/auth.service";
+import AuthService from "./utils/auth.service";
 
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -78,7 +78,7 @@ const Register = (props) => {
 						variant="primary"
 						type="submit"
 						onClick={() => {
-							authService.signup(userName, email, password);
+							AuthService.signup(userName, email, password);
 							if (err === "") {
 								setLoginView("login");
 							}

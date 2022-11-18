@@ -1,7 +1,7 @@
 // import "../../styles/User.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRef, useState, useEffect } from "react";
-import authService from "./utils/auth.service";
+import AuthService from "./utils/auth.service";
 
 //Styling
 import Container from "react-bootstrap/Container";
@@ -48,8 +48,8 @@ const Login = (props) => {
 						variant="primary"
 						type="submit"
 						onClick={async () => {
-							await authService.login(email, password).then((res) => {
-								authService.getUserData(res.accessToken).then((res) => {
+							await AuthService.login(email, password).then((res) => {
+								AuthService.getUserData(res.accessToken).then((res) => {
 									localStorage.setItem("userData", JSON.stringify(res));
 									if (err === "") {
 										setLoginView("profile");

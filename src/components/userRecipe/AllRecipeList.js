@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import UserRecipeUtils from "./utils/userRecipe";
 
 //Bootstrap
 import Button from "react-bootstrap/Button";
@@ -20,19 +21,8 @@ export default function AllRecipeList(props) {
 		</Popover>
 	);
 
-	const deleteRecipe = (id) => {
-		fetch(`userRecipe/deleteRecipe/${id}`, {
-			method: "DELETE",
-		});
-	};
-
 	return (
 		<div>
-			<button
-				onClick={() => {
-					console.log(user);
-				}}
-			></button>
 			<button
 				onClick={() => {
 					setCurrentView("addNewRecipe");
@@ -58,8 +48,7 @@ export default function AllRecipeList(props) {
 						<button
 							onClick={() => {
 								const ID = recipe.id;
-								deleteRecipe(ID);
-								setCurrentView("allRecipes");
+								UserRecipeUtils.deleteRecipe(ID, setCurrentView);
 							}}
 						>
 							Delete

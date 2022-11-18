@@ -1,9 +1,18 @@
 import React from "react";
 
 export default function EditIngredients(props) {
-	const { key, ingredient, onInputChange, index, deleteIngredient } = props;
+	const {
+		key,
+		ingredient,
+		onIngredientChange,
+		index,
+		deleteIngredient,
+		setIngredients,
+		ingredients,
+	} = props;
 
-	const onChange = (e) => onInputChange(e.target, index);
+	const onChange = (e) =>
+		onIngredientChange(e.target, index, ingredients, setIngredients);
 
 	return (
 		<div>
@@ -30,7 +39,7 @@ export default function EditIngredients(props) {
 			<button
 				type="button"
 				onClick={() => {
-					deleteIngredient(index);
+					deleteIngredient(index, ingredients, setIngredients);
 				}}
 			>
 				This is delete

@@ -1,27 +1,17 @@
 import React, { useState } from "react";
+import UserRecipeUtils from "./utils/userRecipe";
+import EditIngredients from "./EditIngredients";
 
 export default function AddNewRecipe(props) {
 	const { setCurrentView } = props;
 
+	const [ingredients, setIngredients] = useState([]);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [instruction, setInstruction] = useState("");
 
 	const user = JSON.parse(localStorage.getItem("userData"));
 	const userId = user[0].userId;
-
-	const addNewRecipe = (e) => {
-		e.preventDefault();
-		fetch(`userRecipe/createNewRecipe/${userId}`, {
-			method: "POST",
-			headers: {
-				name: name,
-				description: description,
-				instruction: instruction,
-			},
-		});
-		setCurrentView("allRecipes");
-	};
 
 	return (
 		<>
@@ -52,7 +42,39 @@ export default function AddNewRecipe(props) {
 					cols="33"
 					placeholder="Instruction"
 				></textarea>
-				<button onClick={addNewRecipe}>Create</button>
+				{ingredients.map((ingredient, index) => {
+					return (
+						<EditIngredients
+							key={index}
+							ingredient={ingredient}
+							onIngredientChange={UserRecipeUtils.onIngredientChange}
+							index={index}
+							deleteIngredient={UserRecipeUtils.deleteIngredient}
+							setIngredients={setIngredients}
+							ingredients={ingredients}
+						/>
+					);
+				})}
+				<button
+					type="button"
+					onClick={() => {
+						UserRecipeUtils.addIngredient(ingredients, setIngredients);
+					}}
+				>
+					Add ingredients
+				</button>
+				<button
+					onClick={(e) => {
+						UserRecipeUtils.addNewRecipe(e, userId, setCurrentView, {
+							name,
+							description,
+							instruction,
+							ingredients,
+						});
+					}}
+				>
+					Create
+				</button>
 			</form>
 		</>
 	);

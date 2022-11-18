@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import AllRecipeList from "./AllRecipeList";
 import SingleRecipeList from "./SingleRecipe";
 import AddNewRecipe from "./AddNewRecipe";
-import AddIngredients from "./AddIngredients";
 import EditRecipe from "./EditRecipe";
+import UserRecipeUtils from "./utils/userRecipe";
 
 export default function Recipe() {
 	const [currentView, setCurrentView] = useState("allRecipes");
@@ -14,13 +14,13 @@ export default function Recipe() {
 	const userId = user[0].userId;
 
 	useEffect(() => {
-		fetch(`userRecipe/list/${userId}`)
+		fetch(`userRecipe/recipes/${userId}`)
 			.then((result) => result.json())
 			.then((data) => setUserRecipes(data));
 	});
 	useEffect(() => {
 		if (currentView === "allRecipes") {
-			fetch(`userRecipe/list/${userId}`)
+			fetch(`userRecipe/recipes/${userId}`)
 				.then((result) => result.json())
 				.then((data) => {
 					setUserRecipes(data);
@@ -42,13 +42,6 @@ export default function Recipe() {
 			);
 		} else if (currentView === "addNewRecipe") {
 			setCurrentView(<AddNewRecipe setCurrentView={setCurrentView} />);
-		} else if (currentView === "addIngredients") {
-			setCurrentView(
-				<AddIngredients
-					selectedRecipe={selectedRecipe}
-					setCurrentView={setCurrentView}
-				/>
-			);
 		} else if (currentView === "editRecipe") {
 			setCurrentView(
 				<EditRecipe
@@ -59,5 +52,10 @@ export default function Recipe() {
 		}
 	});
 
-	return <>{currentView}</>;
+	return (
+		<>
+			<button onClick={UserRecipeUtils.onInputChange}></button>
+			{currentView}
+		</>
+	);
 }

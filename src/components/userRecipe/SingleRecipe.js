@@ -8,7 +8,7 @@ export default function SingleRecipeList(props) {
 	const ID = selectedRecipe.id;
 
 	useEffect(() => {
-		fetch(`userRecipe/list/${ID}`)
+		fetch(`userRecipe/ingredients/${ID}`)
 			.then((result) => result.json())
 			.then((data) => setIngredients(data));
 	}, []);

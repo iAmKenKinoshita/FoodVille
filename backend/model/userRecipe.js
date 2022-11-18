@@ -1,16 +1,6 @@
 const knex = require("../knex");
 
 module.exports = {
-	// getAllRecipeList() {
-	// 	return knex
-	// 		.select({
-	// 			id: "id",
-	// 			name: "name",
-	// 			description: "description",
-	// 			instruction: "instruction",
-	// 		})
-	// 		.from("recipe");
-	// },
 	getAllRecipeList(id) {
 		return knex
 			.select({
@@ -34,20 +24,11 @@ module.exports = {
 	},
 
 	createNewRecipe(userId, name, description, instruction) {
-		console.log(userId, name, description, instruction);
 		return knex("recipe").insert({
 			user_id: userId,
 			name: name,
 			description: description,
 			instruction: instruction,
-		});
-	},
-
-	addIngredients(name, amount, id) {
-		return knex("recipe_ingredients").insert({
-			recipe_id: id,
-			ingredient_name: name,
-			amount: amount,
 		});
 	},
 

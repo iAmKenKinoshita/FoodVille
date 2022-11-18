@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import User from "../user/User";
 import EditIngredients from "./EditIngredients";
+import UserRecipeUtils from "./utils/userRecipe";
 
 export default function EditRecipe(props) {
 	const { setCurrentView, selectedRecipe } = props;
@@ -9,60 +11,29 @@ export default function EditRecipe(props) {
 	const ID = selectedRecipe.id;
 
 	useEffect(() => {
-		fetch(`userRecipe/list/${ID}`)
+		fetch(`userRecipe/ingredients/${ID}`)
 			.then((result) => result.json())
 			.then((data) => setIngredients(data));
 		setRecipeDetails(selectedRecipe);
 	}, []);
 
-	const onInputChange = ({ name, value }, index) => {
-		const clonedIngredients = [...ingredients];
-		clonedIngredients.splice(index, 1, {
-			...ingredients[index],
-			[name]: value,
-		});
-		setIngredients(clonedIngredients);
-	};
-
-	const handleChange = ({ name, value }) => {
-		const clonedSelectedRecipe = { ...recipeDetails };
-		clonedSelectedRecipe[name] = value;
-		setRecipeDetails(clonedSelectedRecipe);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		fetch(`userRecipe/editRecipe/${ID}`, {
-			method: "PATCH",
-			headers: {
-				ingredients: JSON.stringify(ingredients),
-				recipeDetails: JSON.stringify(recipeDetails),
-			},
-		});
-		setCurrentView("allRecipes");
-	};
-
-	const addIngredient = () => {
-		const clonedIngredients = [...ingredients];
-		const ingredientData = { ingredient_name: "", amount: "" };
-		clonedIngredients.push(ingredientData);
-		setIngredients(clonedIngredients);
-	};
-
-	const deleteIngredient = (index) => {
-		const clonedIngredients = [...ingredients];
-		clonedIngredients.splice(index, 1);
-		console.log(clonedIngredients);
-		setIngredients(clonedIngredients);
-	};
 
 	return (
 		<>
-			<p>This is from the edit component</p>
 			<button type="button" onClick={() => setCurrentView("singleRecipe")}>
 				Back
 			</button>
-			<form onSubmit={handleSubmit}>
+			<form
+				onSubmit={(e) => {
+					UserRecipeUtils.handleSubmit(
+						e,
+						ID,
+						setCurrentView,
+						ingredients,
+						recipeDetails
+					);
+				}}
+			>
 				<input
 					type="text"
 					className="form-control form-control-lg"
@@ -70,7 +41,11 @@ export default function EditRecipe(props) {
 					name="name"
 					value={recipeDetails.name}
 					onChange={(e) => {
-						handleChange(e.target);
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
 					}}
 				/>
 				<textarea
@@ -80,20 +55,13 @@ export default function EditRecipe(props) {
 					name="description"
 					value={recipeDetails.description}
 					onChange={(e) => {
-						handleChange(e.target);
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
 					}}
 				/>
-				{ingredients.map((ingredient, index) => {
-					return (
-						<EditIngredients
-							key={index}
-							ingredient={ingredient}
-							onInputChange={onInputChange}
-							index={index}
-							deleteIngredient={deleteIngredient}
-						/>
-					);
-				})}
 				<textarea
 					type="text"
 					className="form-control form-control-lg"
@@ -101,10 +69,33 @@ export default function EditRecipe(props) {
 					name="instruction"
 					value={recipeDetails.instruction}
 					onChange={(e) => {
-						handleChange(e.target);
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
 					}}
 				/>
-				<button type="button" onClick={addIngredient}>
+				{ingredients.map((ingredient, index) => {
+					return (
+						<EditIngredients
+							key={index}
+							ingredient={ingredient}
+							onIngredientChange={UserRecipeUtils.onIngredientChange}
+							index={index}
+							deleteIngredient={UserRecipeUtils.deleteIngredient}
+							setIngredients={setIngredients}
+							ingredients={ingredients}
+						/>
+					);
+				})}
+
+				<button
+					type="button"
+					onClick={() => {
+						UserRecipeUtils.addIngredient(ingredients, setIngredients);
+					}}
+				>
 					Add More Ingredient
 				</button>
 

@@ -3,12 +3,11 @@ const router = express.Router();
 const userRecipeController = require("../controllers/userRecipe");
 
 //Get Routes
-router.get("/list/:userId", userRecipeController.getMyRecipeList);
-// router.get("/list/:listId", userRecipeController.getAllIngredients);
+router.get("/recipes/:userId", userRecipeController.getMyRecipeList);
+router.get("/ingredients/:listId", userRecipeController.getAllIngredients);
 
 //Post Routes
 router.post("/createNewRecipe/:userId", userRecipeController.createNewRecipe);
-// router.post("/addIngredients/:listId", userRecipeController.addIngredient);
 
 //Patch Routes
 router.patch("/editRecipe/:listId", userRecipeController.editRecipe);

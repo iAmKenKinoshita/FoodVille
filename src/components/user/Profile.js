@@ -1,7 +1,7 @@
 // import "../../styles/User.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRef, useState, useEffect } from "react";
-import authService from "./utils/auth.service";
+import AuthService from "./utils/auth.service";
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -18,7 +18,6 @@ const Profile = (props) => {
 		<>
 			<Container className="profile">
 				<h1>Your Profile</h1>
-				
 
 				<Card className="profile-card">
 					<Card.Title className="user-name">{user[0].userName}</Card.Title>
@@ -31,7 +30,7 @@ const Profile = (props) => {
 				<Button
 					className="button"
 					onClick={() => {
-						authService.logout();
+						AuthService.logout();
 						setLoginView("login");
 					}}
 				>
