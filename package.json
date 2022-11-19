@@ -1,55 +1,55 @@
 {
-  "name": "solo_mvp_project",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8080/",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.2.1",
-    "@fortawesome/free-solid-svg-icons": "^6.2.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.1.3",
-    "bcrypt": "^5.1.0",
-    "bootstrap": "^5.2.2",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
-    "knex": "^2.3.0",
-    "node-fetch": "^3.2.10",
-    "nodemon": "^2.0.20",
-    "pg": "^8.8.0",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.6.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start-back": "cd backend && nodemon server.js",
-    "start-front": "react-scripts start",
-    "migrate:latest": "npx knex migrate:latest --knexfile backend/db/knexfile",
-    "migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
-    "seed:data": "npx knex seed:run --knexfile backend/db/knexfile",
-    "build": "npm install && npm run migrate:latest && npm run seed:data && react-scripts build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "solo_mvp_project",
+	"version": "0.1.0",
+	"private": true,
+	"proxy": "http://localhost:8080/",
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.2.1",
+		"@fortawesome/free-solid-svg-icons": "^6.2.1",
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"axios": "^1.1.3",
+		"bcrypt": "^5.1.0",
+		"bootstrap": "^5.2.2",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^8.5.1",
+		"knex": "^2.3.0",
+		"node-fetch": "^3.2.10",
+		"nodemon": "^2.0.20",
+		"pg": "^8.8.0",
+		"react": "^18.2.0",
+		"react-bootstrap": "^2.6.0",
+		"react-dom": "^18.2.0",
+		"react-scripts": "5.0.1",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start-back": "cd backend && nodemon server.js",
+		"start-front": "react-scripts start",
+		"migrate:latest": "npx knex migrate:latest --knexfile backend/db/knexfile",
+		"migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
+		"seed:data": "npx knex seed:run --knexfile backend/db/knexfile",
+		"build": "npm install && npm run migrate:latest && react-scripts build"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
