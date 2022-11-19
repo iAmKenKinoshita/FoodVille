@@ -9,7 +9,6 @@ const signup = async (username, email, password) => {
 			userPassword: password,
 		})
 		.then((res) => {
-			console.log(res);
 			if (res.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(res.data));
 			}

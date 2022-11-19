@@ -3,7 +3,9 @@ import AllRecipeList from "./AllRecipeList";
 import SingleRecipeList from "./SingleRecipe";
 import AddNewRecipe from "./AddNewRecipe";
 import EditRecipe from "./EditRecipe";
-import UserRecipeUtils from "./utils/userRecipe";
+// import UserRecipeUtils from "./utils/userRecipe";
+
+import Container from "react-bootstrap/Container";
 
 export default function Recipe() {
 	const [currentView, setCurrentView] = useState("allRecipes");
@@ -54,8 +56,7 @@ export default function Recipe() {
 
 	return (
 		<>
-			<button onClick={UserRecipeUtils.onInputChange}></button>
-			{currentView}
+			<Container>{currentView}</Container>
 		</>
 	);
 }

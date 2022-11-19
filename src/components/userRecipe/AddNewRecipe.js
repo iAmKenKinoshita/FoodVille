@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import UserRecipeUtils from "./utils/userRecipe";
 import EditIngredients from "./EditIngredients";
 
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+
 export default function AddNewRecipe(props) {
 	const { setCurrentView } = props;
 
@@ -15,33 +19,47 @@ export default function AddNewRecipe(props) {
 
 	return (
 		<>
-			<button type="button" onClick={() => setCurrentView("allRecipes")}>
-				Back
-			</button>
-			<form>
-				<input
-					onChange={(e) => {
-						setName(e.target.value);
-					}}
-					type="text"
-					placeholder="Name"
-				></input>
-				<textarea
-					onChange={(e) => {
-						setDescription(e.target.value);
-					}}
-					rows="5"
-					cols="33"
-					placeholder="Description"
-				></textarea>
-				<textarea
-					onChange={(e) => {
-						setInstruction(e.target.value);
-					}}
-					rows="5"
-					cols="33"
-					placeholder="Instruction"
-				></textarea>
+			<Button
+				variant="primary"
+				type="button"
+				onClick={() => setCurrentView("allRecipes")}
+			>
+				Back to Recipes
+			</Button>
+			<Form>
+				<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+					<Form.Label>Recipe Name:</Form.Label>
+					<Form.Control
+						type="text"
+						placeholder="Enter recipe name"
+						onChange={(e) => {
+							setName(e.target.value);
+						}}
+					/>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+					<Form.Label>Description:</Form.Label>
+					<Form.Control
+						as="textarea"
+						rows={3}
+						placeholder="Enter description"
+						onChange={(e) => {
+							setDescription(e.target.value);
+						}}
+					/>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+					<Form.Label>Instruction:</Form.Label>
+					<Form.Control
+						as="textarea"
+						rows={3}
+						placeholder="Enter instruction"
+						onChange={(e) => {
+							setInstruction(e.target.value);
+						}}
+					/>
+					<Row></Row>
+				</Form.Group>
 				{ingredients.map((ingredient, index) => {
 					return (
 						<EditIngredients
@@ -55,15 +73,19 @@ export default function AddNewRecipe(props) {
 						/>
 					);
 				})}
-				<button
+				<hr></hr>
+				<Button
+					variant="primary"
 					type="button"
 					onClick={() => {
 						UserRecipeUtils.addIngredient(ingredients, setIngredients);
 					}}
 				>
-					Add ingredients
-				</button>
-				<button
+					Add ingredient
+				</Button>{" "}
+				<Button
+					variant="primary"
+					type="submit"
 					onClick={(e) => {
 						UserRecipeUtils.addNewRecipe(e, userId, setCurrentView, {
 							name,
@@ -74,8 +96,8 @@ export default function AddNewRecipe(props) {
 					}}
 				>
 					Create
-				</button>
-			</form>
+				</Button>
+			</Form>
 		</>
 	);
 }

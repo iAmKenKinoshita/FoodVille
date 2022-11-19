@@ -44,7 +44,7 @@ const Register = (props) => {
 								setEmail(e.target.value);
 							}}
 						/>
-						<Form.Text className="text-muted">Update Later</Form.Text>
+						<Form.Text className="text-muted"></Form.Text>
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">

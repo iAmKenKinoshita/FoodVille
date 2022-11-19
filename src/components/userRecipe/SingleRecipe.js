@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+import Card from "react-bootstrap/Card";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+
 export default function SingleRecipeList(props) {
 	const { selectedRecipe, setCurrentView } = props;
 
@@ -15,41 +19,49 @@ export default function SingleRecipeList(props) {
 
 	return (
 		<div>
-			<button
-				onClick={() => {
-					setCurrentView("allRecipes");
-				}}
+			<Button
+				variant="primary"
+				type="button"
+				onClick={() => setCurrentView("allRecipes")}
 			>
-				Back
-			</button>
-			<div>
-				<p>{selectedRecipe.name}</p>
-				<p>{selectedRecipe.description}</p>
-				{ingredients.map((ingredient) => {
-					return (
-						<>
-							<p>
-								{ingredient.amount} {ingredient.ingredient_name}
-							</p>
-						</>
-					);
-				})}
-				<p>{selectedRecipe.instruction}</p>
-				<button
-					onClick={() => {
-						setCurrentView("editRecipe");
-					}}
-				>
-					Edit
-				</button>
-				{/* <button
-					onClick={() => {
-						setCurrentView("addIngredients");
-					}}
-				>
-					Add ingredients
-				</button> */}
-			</div>
+				Back to Recipes
+			</Button>{" "}
+			<Card>
+				<Card.Header>{selectedRecipe.name}</Card.Header>
+				<Card.Body>
+					<Card.Title>{selectedRecipe.description}</Card.Title>
+					<Table striped bordered hover>
+						<thead>
+							<tr>
+								<th>Ingredients</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							{ingredients.map((ingredient) => {
+								return (
+									<>
+										<tr>
+											<td>{ingredient.ingredient_name}</td>
+											<td>{ingredient.amount}</td>
+										</tr>
+									</>
+								);
+							})}
+						</tbody>
+					</Table>
+					<Card.Title>Instructions: </Card.Title>
+					<Card.Text>{selectedRecipe.instruction}</Card.Text>
+					{/* <Button variant="primary">Go somewhere</Button> */}
+				</Card.Body>
+			</Card>
+			<Button
+				variant="primary"
+				type="button"
+				onClick={() => setCurrentView("editRecipe")}
+			>
+				Edit Recipe
+			</Button>
 		</div>
 	);
 }

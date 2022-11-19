@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 const Profile = (props) => {
-	const { setLoginView } = props;
+	const { setLoginView, setCurrentView } = props;
 
 	const [err, setErr] = useState("");
 
@@ -20,18 +20,21 @@ const Profile = (props) => {
 				<h1>Your Profile</h1>
 
 				<Card className="profile-card">
-					<Card.Title className="user-name">{user[0].userName}</Card.Title>
+					<Card.Title className="user-name">
+						Username: {user[0].userName}
+					</Card.Title>
 					<Card></Card>
-					<Card.Title className="card-title">user id:</Card.Title>
+					<Card.Title className="card-title">User ID:</Card.Title>
 					<Card.Text className="card-text">{user[0].userId}</Card.Text>
-					<Card.Title className="card-title">email address</Card.Title>
+					<Card.Title className="card-title">Email Address: </Card.Title>
 					<Card.Text className="card-text">{user[0].userEmail}</Card.Text>
 				</Card>
 				<Button
 					className="button"
 					onClick={() => {
 						AuthService.logout();
-						setLoginView("login");
+						setCurrentView("home");
+						// setLoginView("login");
 					}}
 				>
 					Log out

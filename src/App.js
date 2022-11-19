@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
 
 //Components
 import Navbar from "./components/NavBar";
@@ -20,15 +21,16 @@ function App() {
 		} else if (currentView === "recipes") {
 			setCurrentView(<Recipe />);
 		} else if (currentView === "user") {
-			setCurrentView(<User />);
+			setCurrentView(<User setCurrentView={setCurrentView} />);
 		}
 	});
 
 	return (
 		<>
-			<Navbar setCurrentView={setCurrentView} />
-			<div>------</div>
-			{currentView}
+			<Container>
+				<Navbar setCurrentView={setCurrentView} />
+				{currentView}
+			</Container>
 		</>
 	);
 }

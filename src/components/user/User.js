@@ -2,16 +2,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
 
-// import Login from "./user/Login";
-// import Register from "./user/Register";
-// import Profile from "./user/Profile";
+import Container from "react-bootstrap/Container";
 
 import Login from "./LogIn";
 import SignUp from "./SignUp";
 import Profile from "./Profile";
 
 const User = (props) => {
-	const {} = props;
+	const { setCurrentView } = props;
 
 	const [loginView, setLoginView] = useState("");
 
@@ -25,13 +23,20 @@ const User = (props) => {
 
 	return (
 		<>
-			<div className="user-div">
-				{loginView === "login" && <Login setLoginView={setLoginView} />}
+			<Container>
+				{loginView === "login" && (
+					<Login setLoginView={setLoginView} setCurrentView={setCurrentView} />
+				)}
 
 				{loginView === "registration" && <SignUp setLoginView={setLoginView} />}
 
-				{loginView === "profile" && <Profile setLoginView={setLoginView} />}
-			</div>
+				{loginView === "profile" && (
+					<Profile
+						setLoginView={setLoginView}
+						setCurrentView={setCurrentView}
+					/>
+				)}
+			</Container>
 		</>
 	);
 };

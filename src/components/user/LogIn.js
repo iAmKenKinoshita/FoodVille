@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const Login = (props) => {
-	const { user, setUser, setLoginView } = props;
+	const { user, setUser, setLoginView, setCurrentView } = props;
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -52,7 +52,8 @@ const Login = (props) => {
 								AuthService.getUserData(res.accessToken).then((res) => {
 									localStorage.setItem("userData", JSON.stringify(res));
 									if (err === "") {
-										setLoginView("profile");
+										setCurrentView("home");
+										// setLoginView("profile");
 									}
 								});
 							});

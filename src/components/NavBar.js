@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //Bootstrap
 import Container from "react-bootstrap/Container";
@@ -8,44 +8,48 @@ import Navbar from "react-bootstrap/Navbar";
 export default function NavigationBar(props) {
 	const { setCurrentView } = props;
 
+	const loggedIn = localStorage.getItem("user");
+
+	useEffect(() => {}, [loggedIn]);
+
 	return (
 		<>
-			<div>
-				<div
-					onClick={() => {
-						setCurrentView("home");
-					}}
-				>
-					Home
-				</div>
-				<div
-					onClick={() => {
-						setCurrentView("recipes");
-					}}
-				>
-					My Recipes
-				</div>
-				<div
-					onClick={() => {
-						setCurrentView("user");
-					}}
-				>
-					User
-				</div>
-			</div>
-			<>
-				<br />
-				<Navbar bg="light" variant="light">
-					<Container>
-						<Navbar.Brand href="#home">Navbar</Navbar.Brand>
-						<Nav className="me-auto">
-							<Nav.Link href="#home">Home</Nav.Link>
-							<Nav.Link href="#features">Features</Nav.Link>
-							<Nav.Link href="#pricing">Pricing</Nav.Link>
-						</Nav>
-					</Container>
-				</Navbar>
-			</>
+			<Navbar bg="light" variant="light">
+				{/* <Container> */}
+				{/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
+				<Nav className="me-auto">
+					<Nav.Link
+						href="#home"
+						onClick={() => {
+							setCurrentView("home");
+						}}
+					>
+						Home
+					</Nav.Link>
+					{loggedIn === null ? (
+						""
+					) : (
+						<Nav.Link
+							href="#myrecipes"
+							onClick={() => {
+								setCurrentView("recipes");
+							}}
+						>
+							My Recipes
+						</Nav.Link>
+					)}
+
+					<Nav.Link
+						href="#user"
+						onClick={() => {
+							setCurrentView("user");
+						}}
+					>
+						{loggedIn === null ? "Sign In" : "My Account"}
+					</Nav.Link>
+				</Nav>
+				{/* </Container> */}
+			</Navbar>
 		</>
 	);
 }

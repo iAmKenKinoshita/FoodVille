@@ -3,57 +3,93 @@ import UserRecipeUtils from "./utils/userRecipe";
 
 //Bootstrap
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import Container from "react-bootstrap/Container";
 
 export default function AllRecipeList(props) {
 	const { setCurrentView, setSelectedRecipe, userRecipes } = props;
 
 	const user = JSON.parse(localStorage.getItem("userData"));
 
-	const popover = (
+	const popover = (ID) => (
 		<Popover id="popover-basic">
-			<Popover.Header as="h3">Popover right</Popover.Header>
+			<Popover.Header as="h3">Delete recipe?</Popover.Header>
 			<Popover.Body>
-				And here's some <strong>amazing</strong> content. It's very engaging.
-				right?
+				Are you sure you want to <strong>delete</strong> this recipe?
 			</Popover.Body>
+			<Button
+				variant="primary"
+				onClick={() => {
+					UserRecipeUtils.deleteRecipe(ID, setCurrentView);
+				}}
+			>
+				Yes
+			</Button>{" "}
+			<Button
+				variant="primary"
+				onClick={() => {
+					setCurrentView("allRecipes");
+				}}
+			>
+				No
+			</Button>{" "}
 		</Popover>
 	);
 
 	return (
 		<div>
-			<button
-				onClick={() => {
-					setCurrentView("addNewRecipe");
-				}}
-			>
-				Add New Recipe
-			</button>
+			<Container>
+				{userRecipes.length === 0 ? <p>No recipes yet</p> : ""}
+				<Button
+					variant="primary"
+					onClick={() => {
+						setCurrentView("addNewRecipe");
+					}}
+				>
+					Add New Recipe
+				</Button>{" "}
+			</Container>
+
 			{userRecipes.map((recipe, index) => {
 				return (
-					<div>
-						<p
-							onClick={() => {
-								setCurrentView("singleRecipe");
-								setSelectedRecipe(userRecipes[index]);
-							}}
-						>
-							{recipe.name}
-						</p>
-						<p>{recipe.description}</p>
-						{/* <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-							<Button variant="success">Click me to see</Button>
-						</OverlayTrigger> */}
-						<button
-							onClick={() => {
-								const ID = recipe.id;
-								UserRecipeUtils.deleteRecipe(ID, setCurrentView);
-							}}
-						>
-							Delete
-						</button>
-					</div>
+					<Container>
+						<div>
+							<Card style={{ width: "18rem" }}>
+								<Card.Body>
+									<Card.Title>{recipe.name}</Card.Title>
+									<Card.Subtitle className="mb-2 text-muted">
+										Description:
+									</Card.Subtitle>
+									<Card.Text>{recipe.description}</Card.Text>
+									<Button
+										variant="primary"
+										onClick={() => {
+											setCurrentView("singleRecipe");
+											setSelectedRecipe(userRecipes[index]);
+										}}
+									>
+										Details
+									</Button>
+									{"   "}
+									<OverlayTrigger
+										trigger="focus"
+										placement="top"
+										overlay={popover(recipe.id)}
+									>
+										<Button variant="danger">Delete</Button>
+									</OverlayTrigger>
+								</Card.Body>
+							</Card>
+							<p
+								onClick={() => {
+									setCurrentView("singleRecipe");
+									setSelectedRecipe(userRecipes[index]);
+								}}
+							></p>
+						</div>
+					</Container>
 				);
 			})}
 		</div>

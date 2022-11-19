@@ -13,7 +13,7 @@ const options = {
 
 exports.getRecipes = (req, res) => {
 	fetch(
-		"https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes",
+		"https://tasty.p.rapidapi.com/recipes/list?from=0&size=5&tags=under_30_minutes",
 		options
 	)
 		.then((response) => response.json())
