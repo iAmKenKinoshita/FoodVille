@@ -44,7 +44,9 @@ export default function EditRecipe(props) {
 					<Form.Label>Recipe Name:</Form.Label>
 					<Form.Control
 						type="text"
+						className="form-control form-control-lg"
 						placeholder="Enter name"
+						name="name"
 						value={recipeDetails.name}
 						onChange={(e) => {
 							UserRecipeUtils.onRecipeDetailChange(
@@ -61,9 +63,10 @@ export default function EditRecipe(props) {
 				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 					<Form.Label>Description:</Form.Label>
 					<Form.Control
-						as="textarea"
-						rows={3}
+						type="text"
+						className="form-control form-control-lg"
 						placeholder="Enter description"
+						name="description"
 						value={recipeDetails.description}
 						onChange={(e) => {
 							UserRecipeUtils.onRecipeDetailChange(
@@ -80,9 +83,10 @@ export default function EditRecipe(props) {
 				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 					<Form.Label>Instruction:</Form.Label>
 					<Form.Control
-						as="textarea"
-						rows={3}
+						type="text"
+						className="form-control form-control-lg"
 						placeholder="Enter instruction"
+						name="instruction"
 						value={recipeDetails.instruction}
 						onChange={(e) => {
 							UserRecipeUtils.onRecipeDetailChange(
@@ -111,16 +115,94 @@ export default function EditRecipe(props) {
 				})}
 				<hr></hr>
 				<Button
-					variant="primary"
 					type="button"
 					onClick={() => {
 						UserRecipeUtils.addIngredient(ingredients, setIngredients);
 					}}
 				>
-					Add ingredient
+					Add more ingredient
 				</Button>{" "}
 				<Button type="submit">Update</Button>
 			</Form>
+
+			{/* <form
+				onSubmit={(e) => {
+					UserRecipeUtils.handleSubmit(
+						e,
+						ID,
+						setCurrentView,
+						ingredients,
+						recipeDetails
+					);
+				}}
+			>
+				<input
+					type="text"
+					className="form-control form-control-lg"
+					placeholder="Enter name"
+					name="name"
+					value={recipeDetails.name}
+					onChange={(e) => {
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
+					}}
+				/>
+				<textarea
+					type="text"
+					className="form-control form-control-lg"
+					placeholder="Enter description"
+					name="description"
+					value={recipeDetails.description}
+					onChange={(e) => {
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
+					}}
+				/>
+				<textarea
+					type="text"
+					className="form-control form-control-lg"
+					placeholder="Enter instruction"
+					name="instruction"
+					value={recipeDetails.instruction}
+					onChange={(e) => {
+						UserRecipeUtils.onRecipeDetailChange(
+							e.target,
+							recipeDetails,
+							setRecipeDetails
+						);
+					}}
+				/>
+				{ingredients.map((ingredient, index) => {
+					return (
+						<EditIngredients
+							key={index}
+							ingredient={ingredient}
+							onIngredientChange={UserRecipeUtils.onIngredientChange}
+							index={index}
+							deleteIngredient={UserRecipeUtils.deleteIngredient}
+							setIngredients={setIngredients}
+							ingredients={ingredients}
+						/>
+					);
+				})}
+
+				<button
+					type="button"
+					onClick={() => {
+						UserRecipeUtils.addIngredient(ingredients, setIngredients);
+					}}
+				>
+					Add More Ingredient
+				</button>
+
+				<button type="submit">Update</button>
+			</form> */}
 		</>
 	);
 }

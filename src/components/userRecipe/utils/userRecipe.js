@@ -41,6 +41,7 @@ exports.onRecipeDetailChange = (
 	recipeDetails,
 	setRecipeDetails
 ) => {
+	console.log(name, value, recipeDetails, setRecipeDetails);
 	const clonedSelectedRecipe = { ...recipeDetails };
 	clonedSelectedRecipe[name] = value;
 	setRecipeDetails(clonedSelectedRecipe);
