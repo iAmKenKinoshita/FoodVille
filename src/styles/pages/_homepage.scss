@@ -1,0 +1,12 @@
+@use "../main" as *;
+
+body {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
