@@ -11,6 +11,7 @@ import Navbar from "./pages/NavBar";
 import Homepage from "./pages/homepage/Homepage";
 import Footer from "./pages/Footer";
 import Recipe from "./pages/userRecipe/Recipe";
+import SignIn from "./pages/user/SignIn";
 import User from "./pages/user/User";
 
 function App() {
@@ -54,9 +55,20 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Navbar />
+							<Navbar user={user} />
 							<Homepage />
-							<Footer />
+							{/* <Footer /> */}
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/signIn"
+					element={
+						<>
+							{/* <Navbar /> */}
+							<SignIn />
+							{/* <Footer /> */}
 						</>
 					}
 				/>

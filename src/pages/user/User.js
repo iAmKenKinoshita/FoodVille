@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import Container from "react-bootstrap/Container";
 
-import Login from "./LogIn";
+import Login from "./SignIn";
 import SignUp from "./SignUp";
 import Profile from "./Profile";
 
@@ -23,20 +23,15 @@ const User = (props) => {
 
 	return (
 		<>
-			<Container>
-				{loginView === "login" && (
-					<Login setLoginView={setLoginView} setCurrentView={setCurrentView} />
-				)}
+			{loginView === "login" && (
+				<Login setLoginView={setLoginView} setCurrentView={setCurrentView} />
+			)}
 
-				{loginView === "registration" && <SignUp setLoginView={setLoginView} />}
+			{loginView === "registration" && <SignUp setLoginView={setLoginView} />}
 
-				{loginView === "profile" && (
-					<Profile
-						setLoginView={setLoginView}
-						setCurrentView={setCurrentView}
-					/>
-				)}
-			</Container>
+			{loginView === "profile" && (
+				<Profile setLoginView={setLoginView} setCurrentView={setCurrentView} />
+			)}
 		</>
 	);
 };
