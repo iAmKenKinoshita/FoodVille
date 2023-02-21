@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/pages/_signInUp.scss";
 
 //Image
-import SideImage from "../../images/LogIn.png";
+// import SideImage from "../../images/LogIn.png";
 import Logo from "../../images/FoodVille.png";
 
 //Boostrap
@@ -93,18 +93,9 @@ const Login = (props) => {
 		//New Code
 		<>
 			<div className="columns">
-				<div className="column is-6">
-					<img src={SideImage} style={{ height: "100vh" }} alt="" />
-				</div>
-				<div className="column">
-					<div className="logoContainer">
-						<figure class="image is-124x124">
-							<img src={Logo} style={{ width: "300px" }} />
-						</figure>
-					</div>
-
-					<div className="columns">
-						<form className="column is-6">
+				<div className="column is-5 is-offset-one-quarter">
+					<div className="">
+						<form className="box">
 							<div class="field">
 								<label class="label">Email address</label>
 								<div class="control">
@@ -117,7 +108,6 @@ const Login = (props) => {
 									/>
 								</div>
 							</div>
-
 							<div class="field">
 								<label class="label">Password</label>
 								<div class="control">
@@ -125,13 +115,18 @@ const Login = (props) => {
 										class="input"
 										type="password"
 										onChange={(e) => {
-											setPassword(e.target.value);
+											setEmail(e.target.value);
 										}}
 									/>
 								</div>
 							</div>
-
 							<button class="button is-primary">Sign in</button>
+							<p class="help">
+								Don't have an account yet? Sign Up{" "}
+								<a href="/signUp">
+									<strong>here</strong>!
+								</a>
+							</p>
 						</form>
 					</div>
 				</div>

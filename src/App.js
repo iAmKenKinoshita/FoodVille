@@ -66,13 +66,21 @@ function App() {
 					path="/signIn"
 					element={
 						<>
-							{/* <Navbar /> */}
+							<Navbar />
 							<SignIn />
-							{/* <Footer /> */}
 						</>
 					}
 				/>
-				<Route />
+				<Route
+					exact
+					path="/signUp"
+					element={
+						<>
+							<Navbar />
+							<SignIn />
+						</>
+					}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);

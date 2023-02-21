@@ -1,7 +1,11 @@
-body {
-	overflow: hidden;
-}
-
 .logoContainer {
 	margin-top: 5em;
+}
+
+.hello {
+	background: url("../../images/LogOut.png");
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	height: 150px;
 }
