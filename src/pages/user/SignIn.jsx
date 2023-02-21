@@ -1,26 +1,14 @@
 // import "../../styles/User.css";
 
 import { useRef, useState, useEffect } from "react";
-import AuthService from "./utils/auth.service";
+import UserUtils from "./utils/userUtils";
 
 //Styling
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/pages/_signInUp.scss";
 
-//Image
-// import SideImage from "../../images/LogIn.png";
-import Logo from "../../images/FoodVille.png";
-
-//Boostrap
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
-//Log In Image
-
 const Login = (props) => {
 	const { user, setUser, setLoginView, setCurrentView } = props;
-	console.log(user);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -95,7 +83,16 @@ const Login = (props) => {
 			<div className="columns">
 				<div className="column is-5 is-offset-one-quarter">
 					<div className="">
-						<form className="box">
+						<form
+							className="box"
+							onSubmit={async (e) => {
+								e.preventDefault();
+								let data = await UserUtils.signIn(email, password);
+								let userData = await UserUtils.getUserData(data.accessToken);
+								console.log(userData);
+								localStorage.setItem("userData", JSON.stringify(userData));
+							}}
+						>
 							<div class="field">
 								<label class="label">Email address</label>
 								<div class="control">
@@ -115,7 +112,7 @@ const Login = (props) => {
 										class="input"
 										type="password"
 										onChange={(e) => {
-											setEmail(e.target.value);
+											setPassword(e.target.value);
 										}}
 									/>
 								</div>

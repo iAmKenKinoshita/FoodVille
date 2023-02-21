@@ -1,7 +1,7 @@
 // import "../../styles/User.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useRef, useState, useEffect } from "react";
-import AuthService from "./utils/auth.service";
+import AuthService from "./utils/userUtils";
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
