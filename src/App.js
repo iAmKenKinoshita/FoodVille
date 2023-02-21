@@ -4,15 +4,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
 
 //Pages
 import Navbar from "./pages/NavBar";
 import Homepage from "./pages/homepage/Homepage";
+import SignIn from "./pages/user/SignIn";
+import SignUp from "./pages/user/SignUp";
 import Footer from "./pages/Footer";
 import Recipe from "./pages/userRecipe/Recipe";
-import SignIn from "./pages/user/SignIn";
-import User from "./pages/user/User";
+
+import User from "./pages/UnusedPages/User";
 
 function App() {
 	// const [currentView, setCurrentView] = useState("home");
@@ -41,13 +42,6 @@ function App() {
 	//For search recipes
 
 	return (
-		// <>
-		// 	<Container>
-		// 		<Navbar setCurrentView={setCurrentView} />
-		// 		{currentView}
-		// 	</Container>
-		// </>
-
 		<BrowserRouter>
 			<Routes>
 				<Route
@@ -77,7 +71,7 @@ function App() {
 					element={
 						<>
 							<Navbar />
-							<SignIn />
+							<SignUp />
 						</>
 					}
 				/>

@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 
 import Container from "react-bootstrap/Container";
 
-import Login from "./SignIn";
-import SignUp from "./SignUp";
-import Profile from "./Profile";
+import Login from "../user/SignIn";
+import SignUp from "../user/SignUp";
+import Profile from "../user/Profile";
 
 const User = (props) => {
 	const { setCurrentView } = props;

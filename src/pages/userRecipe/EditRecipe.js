@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import User from "../user/User";
+import User from "../UnusedPages/User";
 import EditIngredients from "./EditIngredients";
 import UserRecipeUtils from "./utils/userRecipe";
 

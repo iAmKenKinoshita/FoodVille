@@ -100,12 +100,18 @@ export default function NavigationBar(props) {
 					<div class="navbar-end">
 						<div class="navbar-item">
 							<div class="buttons">
-								<a class="button is-primary">
-									<strong>Sign up</strong>
-								</a>
-								<a class="button is-light" onClick={() => navigate("/signIn")}>
-									Log in
-								</a>
+								{user === true ||
+								window.location.pathname === "/signIn" ||
+								window.location.pathname === "/signUp" ? (
+									""
+								) : (
+									<a
+										class="button is-primary"
+										onClick={() => navigate("/signIn")}
+									>
+										<strong>Sign In</strong>
+									</a>
+								)}
 							</div>
 						</div>
 					</div>
