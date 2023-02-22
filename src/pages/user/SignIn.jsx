@@ -28,11 +28,11 @@ const SignIn = (props) => {
 								}
 							}}
 						>
-							<div class="field">
-								<label class="label">Email address</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Email address</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="email"
 										onChange={(e) => {
 											setEmail(e.target.value);
@@ -40,11 +40,11 @@ const SignIn = (props) => {
 									/>
 								</div>
 							</div>
-							<div class="field">
-								<label class="label">Password</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Password</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="password"
 										onChange={(e) => {
 											setPassword(e.target.value);
@@ -52,8 +52,8 @@ const SignIn = (props) => {
 									/>
 								</div>
 							</div>
-							<button class="button is-primary">Sign in</button>
-							<p class="help">
+							<button className="button is-primary">Sign in</button>
+							<p className="help">
 								Don't have an account yet?{" "}
 								<a
 									href="javascript:void(0);"

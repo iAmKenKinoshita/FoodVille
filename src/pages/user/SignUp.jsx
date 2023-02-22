@@ -27,37 +27,37 @@ const SignUp = (props) => {
 								}
 							}}
 						>
-							<div class="field">
-								<label class="label">Username</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Username</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="text"
 										onChange={(e) => {
 											setUserName(e.target.value);
 										}}
 									/>
 								</div>
-								<p class="help is-danger">This field is required</p>
+								<p className="help is-danger">This field is required</p>
 							</div>
-							<div class="field">
-								<label class="label">Email address</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Email address</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="email"
 										onChange={(e) => {
 											setEmail(e.target.value);
 										}}
 									/>
 								</div>
-								<p class="help is-danger">This field is required</p>
+								<p className="help is-danger">This field is required</p>
 							</div>
-							<div class="field">
-								<label class="label">Password</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Password</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="password"
 										onChange={(e) => {
 											setPassword(e.target.value);
@@ -65,11 +65,11 @@ const SignUp = (props) => {
 									/>
 								</div>
 							</div>
-							<div class="field">
-								<label class="label">Confirm Password</label>
-								<div class="control">
+							<div className="field">
+								<label className="label">Confirm Password</label>
+								<div className="control">
 									<input
-										class="input"
+										className="input"
 										type="password"
 										onChange={(e) => {
 											setConfirmPassword(e.target.value);
@@ -77,8 +77,8 @@ const SignUp = (props) => {
 									/>
 								</div>
 							</div>
-							<button class="button is-primary">Sign Up</button>
-							<p class="help">
+							<button className="button is-primary">Sign Up</button>
+							<p className="help">
 								Have an account already?{" "}
 								<a
 									href="javascript:void(0);"
