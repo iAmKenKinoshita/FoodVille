@@ -4,43 +4,62 @@ const userUtils = {
 	//User Verification
 
 	signUp: async (username, email, password) => {
-		let data = await axios.post("/user/signUp", {
-			userName: username,
-			userEmail: email,
-			userPassword: password,
-		});
-		if (data.data.accessToken) {
-			localStorage.setItem("user", JSON.stringify(data));
-			return data.data;
+		try {
+			let data = await axios.post("/user/signUp", {
+				userName: username,
+				userEmail: email,
+				userPassword: password,
+			});
+			if (data.data.accessToken) {
+				localStorage.setItem("user", JSON.stringify(data));
+				return data.data;
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	},
 	signIn: async (email, password) => {
-		let data = await axios.post("/user/logIn", {
-			userEmail: email,
-			userPassword: password,
-		});
-		console.log("this is data", data);
-		if (data.data.accessToken) {
-			console.log("There is an Access Token");
-			localStorage.setItem("user", JSON.stringify(data));
-			return data.data;
+		try {
+			let data = await axios.post("/user/logIn", {
+				userEmail: email,
+				userPassword: password,
+			});
+			console.log("this is data", data);
+			if (data.data.accessToken) {
+				console.log("There is an Access Token");
+				localStorage.setItem("user", JSON.stringify(data));
+				return data.data;
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	},
 	getUserData: async (token) => {
-		let data = await axios.post("/user/userProfile", {
-			accessToken: token,
-		});
-		return data.data;
+		try {
+			let data = await axios.post("/user/userProfile", {
+				accessToken: token,
+			});
+			return data.data;
+		} catch (error) {
+			console.log(error);
+		}
 	},
 	signOut: () => {
-		localStorage.removeItem("user");
-		localStorage.removeItem("userData");
+		try {
+			localStorage.removeItem("user");
+			localStorage.removeItem("userData");
+		} catch (error) {
+			console.log(error);
+		}
 	},
 	getCurrentUser: () => {
-		return JSON.parse(localStorage.getItem("user"));
+		try {
+			return JSON.parse(localStorage.getItem("user"));
+		} catch (error) {
+			console.log(error);
+		}
 	},
 };
-
 
 /////OLD CODES
 //send Email and password to backend

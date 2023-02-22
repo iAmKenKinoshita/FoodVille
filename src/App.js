@@ -34,6 +34,7 @@ function App() {
 	const [userRecipes, setUserRecipes] = useState(null);
 
 	useEffect(() => {
+		//Checks if theres is user in local storage
 		if (!user) {
 			console.log("No user get");
 		}
@@ -60,8 +61,8 @@ function App() {
 					path="/signIn"
 					element={
 						<>
-							<Navbar />
-							<SignIn />
+							<Navbar user={user} />
+							<SignIn user={user} setUser={setUser} />
 						</>
 					}
 				/>
@@ -70,7 +71,7 @@ function App() {
 					path="/signUp"
 					element={
 						<>
-							<Navbar />
+							<Navbar user={user} />
 							<SignUp />
 						</>
 					}

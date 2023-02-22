@@ -30,8 +30,8 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start-back": "cd backend && nodemon server.js",
-		"start-front": "react-scripts start",
+		"backend": "cd backend && nodemon server.js",
+		"frontend": "react-scripts start",
 		"migrate:latest": "npx knex migrate:latest --knexfile backend/db/knexfile",
 		"migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
 		"seed:data": "npx knex seed:run --knexfile backend/db/knexfile",

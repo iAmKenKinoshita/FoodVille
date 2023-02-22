@@ -23,6 +23,7 @@ const SignUp = (props) => {
 								e.preventDefault();
 								if (username && email && password && confirmPassword) {
 									await UserUtils.signUp(username, email, password);
+									navigate("/");
 								}
 							}}
 						>
