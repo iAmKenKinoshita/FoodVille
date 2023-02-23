@@ -10,6 +10,8 @@ import Navbar from "./pages/NavBar";
 import Homepage from "./pages/homepage/Homepage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
+import RecipePage from "./pages/userRecipe/RecipePage";
+
 import Footer from "./pages/Footer";
 import Recipe from "./pages/userRecipe/Recipe";
 
@@ -29,7 +31,7 @@ function App() {
 	// });
 
 	//New code from here
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(true);
 	const [searchRecipes, setSearchRecipes] = useState(null);
 	const [userRecipes, setUserRecipes] = useState(null);
 
@@ -73,6 +75,26 @@ function App() {
 						<>
 							<Navbar user={user} />
 							<SignUp />
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/recipe"
+					element={
+						<>
+							<Navbar user={user} />
+							<Recipe user={user} />
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/recipes"
+					element={
+						<>
+							<Navbar user={user} />
+							<RecipePage user={user} />
 						</>
 					}
 				/>

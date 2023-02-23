@@ -9,7 +9,7 @@ import Navbar from "react-bootstrap/Navbar";
 //Logo
 import FVLogo from "../images/FoodVille.png";
 
-export default function NavigationBar(props) {
+export default function NavBar(props) {
 	const navigate = useNavigate();
 	const { user } = props;
 	console.log("Reloaded");
@@ -89,7 +89,18 @@ export default function NavigationBar(props) {
 							Home
 						</a>
 
-						{user === true ? <a class="navbar-item">Recipes</a> : ""}
+						{user === true ? (
+							<a
+								class="navbar-item"
+								onClick={() => {
+									navigate("/recipes");
+								}}
+							>
+								Recipes
+							</a>
+						) : (
+							""
+						)}
 					</div>
 
 					<div class="navbar-end">
