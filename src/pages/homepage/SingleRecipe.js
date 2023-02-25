@@ -10,13 +10,13 @@ export default function SingleRecipe(props) {
 
 	const [recipeDetails, setRecipeDetails] = useState("");
 
-	// useEffect(() => {
-	// 	fetch(`/index/getRecipeDetails/${ID}`)
-	// 		.then((result) => result.json())
-	// 		.then((data) => {
-	// 			setRecipeDetails(data);
-	// 		});
-	// });
+	useEffect(() => {
+		fetch(`/index/getRecipeDetails/${ID}`)
+			.then((result) => result.json())
+			.then((data) => {
+				setRecipeDetails(data);
+			});
+	});
 
 	const ID = selectedRecipe.id;
 

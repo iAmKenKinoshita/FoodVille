@@ -64,9 +64,10 @@ const userRecipeUtils = {
 		setIngredients(clonedIngredients);
 	},
 	onRecipeDetailChange: ({ name, value }, recipeDetails, setRecipeDetails) => {
-		console.log(name, value, recipeDetails, setRecipeDetails);
+		// console.log(name, value, recipeDetails, setRecipeDetails);
 		const clonedSelectedRecipe = { ...recipeDetails };
 		clonedSelectedRecipe[name] = value;
+		console.log(clonedSelectedRecipe);
 		setRecipeDetails(clonedSelectedRecipe);
 	},
 	addIngredient: (ingredients, setIngredients) => {
@@ -80,7 +81,7 @@ const userRecipeUtils = {
 		clonedIngredients.splice(index, 1);
 		setIngredients(clonedIngredients);
 	},
-	handleSubmit: (e, id, setCurrentView, ingredients, recipeDetails) => {
+	saveRecipeChanges: (e, id, ingredients, recipeDetails) => {
 		try {
 			e.preventDefault();
 			fetch(`userRecipe/editRecipe/${id}`, {
@@ -89,8 +90,6 @@ const userRecipeUtils = {
 					ingredients: JSON.stringify(ingredients),
 					recipeDetails: JSON.stringify(recipeDetails),
 				},
-			}).then(() => {
-				setCurrentView("allRecipes");
 			});
 		} catch (error) {
 			console.log(error);

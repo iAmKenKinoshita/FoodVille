@@ -19,7 +19,6 @@ exports.createNewRecipe = async (req, res, next) => {
 	const description = req.get("description");
 	const instruction = req.get("instruction");
 	const ingredients = JSON.parse(req.get("ingredients"));
-	console.log(userID, name, description, instruction, ingredients);
 
 	await userRecipeModel.createNewRecipe(userID, name, description, instruction);
 

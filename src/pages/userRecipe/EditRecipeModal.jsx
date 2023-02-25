@@ -1,16 +1,29 @@
-import { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Modal } from "react-bootstrap";
 
 import EditIngredients from "./EditIngredients";
 
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
-function CreateNewRecipe(props) {
+function EditRecipeModal(props) {
+	const { selectedRecipe } = props;
+
 	const [ingredients, setIngredients] = useState([]);
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [instruction, setInstruction] = useState("");
+	const [recipeDetails, setRecipeDetails] = useState("");
+
+	const ID = selectedRecipe.id;
+
+	useEffect(() => {
+		if (selectedRecipe !== "") {
+			fetch(`userRecipe/ingredients/${selectedRecipe.id}`)
+				.then((result) => result.json())
+				.then((data) => {
+					setIngredients(data);
+					setRecipeDetails(selectedRecipe);
+				});
+		}
+	}, [selectedRecipe]);
 
 	return (
 		<Modal
@@ -21,7 +34,7 @@ function CreateNewRecipe(props) {
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
-					Create New Recipe
+					Edit Recipe
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
@@ -32,8 +45,14 @@ function CreateNewRecipe(props) {
 							<input
 								className="input"
 								type="text"
+								name="name"
+								value={recipeDetails.name}
 								onChange={(e) => {
-									setName(e.target.value);
+									UserRecipeUtils.onRecipeDetailChange(
+										e.target,
+										recipeDetails,
+										setRecipeDetails
+									);
 								}}
 							/>
 						</div>
@@ -44,8 +63,14 @@ function CreateNewRecipe(props) {
 							<input
 								className="input"
 								type="text"
+								value={recipeDetails.description}
+								name="description"
 								onChange={(e) => {
-									setDescription(e.target.value);
+									UserRecipeUtils.onRecipeDetailChange(
+										e.target,
+										recipeDetails,
+										setRecipeDetails
+									);
 								}}
 							/>
 						</div>
@@ -57,8 +82,14 @@ function CreateNewRecipe(props) {
 							<textarea
 								className="textarea"
 								type="text"
+								name="instruction"
+								value={recipeDetails.instruction}
 								onChange={(e) => {
-									setInstruction(e.target.value);
+									UserRecipeUtils.onRecipeDetailChange(
+										e.target,
+										recipeDetails,
+										setRecipeDetails
+									);
 								}}
 							/>
 						</div>
@@ -67,7 +98,7 @@ function CreateNewRecipe(props) {
 					{ingredients.map((ingredient, index) => {
 						return (
 							<EditIngredients
-								key={index}
+								// key={index}
 								ingredient={ingredient}
 								onIngredientChange={UserRecipeUtils.onIngredientChange}
 								index={index}
@@ -91,20 +122,20 @@ function CreateNewRecipe(props) {
 			<Modal.Footer>
 				<button
 					className="button is-success"
-					onClick={async (e) => {
-						await UserRecipeUtils.addNewRecipe(e, 1, {
-							name,
-							description,
-							instruction,
+					onClick={(e) => {
+						UserRecipeUtils.saveRecipeChanges(
+							e,
+							ID,
 							ingredients,
-						});
+							recipeDetails
+						);
 					}}
 				>
-					Create
+					Save Changes
 				</button>
 			</Modal.Footer>
 		</Modal>
 	);
 }
 
-export default CreateNewRecipe;
+export default EditRecipeModal;

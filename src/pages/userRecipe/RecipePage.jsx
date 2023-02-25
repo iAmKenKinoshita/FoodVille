@@ -11,23 +11,29 @@ import { OverlayTrigger } from "react-bootstrap";
 
 //C
 import CreateNewRecipe from "./CreateNewRecipe";
+import RecipeDetailsModal from "./RecipeDetailsModal";
+import EditRecipeModal from "./EditRecipeModal";
 import DeletePopOver from "./DeletePopOver";
 
 //Image
 import Sample from "../../images/FoodVille.png";
 
 function RecipePage(props) {
-	const [modalShow, setModalShow] = useState(false);
+	const [createRecipeShow, setCreateRecipeShow] = useState(false);
+	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
+	const [editRecipeShow, setEditRecipeShow] = useState(false);
+
+	const [selectedRecipe, setSelectedRecipe] = useState("");
 
 	const {} = props;
 
 	// const [foodVille, setFoodVille]
-	const [selectedRecipes, setSelectedRecipes] = useState(null);
+	const [recipes, setRecipes] = useState(null);
 
 	useEffect(() => {
 		fetch(`userRecipe/recipes/1`)
 			.then((result) => result.json())
-			.then((data) => setSelectedRecipes(data));
+			.then((data) => setRecipes(data));
 	});
 
 	return (
@@ -66,15 +72,18 @@ function RecipePage(props) {
 								</li>
 							</ul>
 						</ul>
-						<button class="button is-link" onClick={() => setModalShow(true)}>
+						<button
+							class="button is-link"
+							onClick={() => setCreateRecipeShow(true)}
+						>
 							+ New Recipe
 						</button>
 					</aside>
 				</div>
 				<div className="column recipe-holder">
 					<div class="tile is-ancestor is-flex-wrap-wrap">
-						{selectedRecipes &&
-							selectedRecipes.map((recipe, index) => {
+						{recipes &&
+							recipes.map((recipe, index) => {
 								return (
 									<div class="tile is-parent is-3">
 										<article class="tile is-child box">
@@ -84,12 +93,18 @@ function RecipePage(props) {
 											<p class="title">{recipe.name}</p>
 											<p class="subtitle">{recipe.description}</p>
 											<div class="buttons">
-												<a class="button is-primary">
+												<a
+													class="button is-primary"
+													onClick={() => {
+														setSingleRecipeShow(true);
+														setSelectedRecipe(recipes[index]);
+													}}
+												>
 													<strong>Details</strong>
 												</a>
 												<OverlayTrigger
 													trigger="focus"
-													placement="bottom"
+													placement="top"
 													overlay={UserRecipeUtils.deletePopover(recipe.id)}
 												>
 													<button className="button is-danger">Delete</button>
@@ -102,7 +117,21 @@ function RecipePage(props) {
 					</div>
 				</div>
 			</div>
-			<CreateNewRecipe show={modalShow} onHide={() => setModalShow(false)} />
+			<CreateNewRecipe
+				show={createRecipeShow}
+				onHide={() => setCreateRecipeShow(false)}
+			/>
+			<RecipeDetailsModal
+				show={singleRecipeShow}
+				onHide={() => setSingleRecipeShow(false)}
+				selectedRecipe={selectedRecipe}
+				setEditRecipeShow={setEditRecipeShow}
+			/>
+			<EditRecipeModal
+				show={editRecipeShow}
+				onHide={() => setEditRecipeShow(false)}
+				selectedRecipe={selectedRecipe}
+			/>
 		</div>
 	);
 }
