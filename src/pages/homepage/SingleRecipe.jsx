@@ -61,8 +61,21 @@ export default function SingleRecipe(props) {
 											<th>Ingredients</th>
 										</tr>
 									</thead>
-									<tbody>
-										{recipeDetails.sections[0].components.map((ingredients) => {
+
+									{recipeDetails.sections.map((section) => {
+										console.log(section.components);
+										return (
+											<tbody>
+												<tr>
+													{section.components.map((ingredient) => {
+														console.log(ingredient.raw_text);
+														return <td>{ingredient.raw_text}</td>;
+													})}
+												</tr>
+											</tbody>
+										);
+									})}
+									{/* {recipeDetails.sections[1].components.map((ingredients) => {
 											return (
 												<>
 													<tr>
@@ -70,8 +83,7 @@ export default function SingleRecipe(props) {
 													</tr>
 												</>
 											);
-										})}
-									</tbody>
+										})} */}
 								</Table>
 							</Card.Body>
 

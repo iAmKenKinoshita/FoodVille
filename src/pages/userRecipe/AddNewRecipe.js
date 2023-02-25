@@ -87,7 +87,7 @@ export default function AddNewRecipe(props) {
 					variant="primary"
 					type="submit"
 					onClick={(e) => {
-						UserRecipeUtils.addNewRecipe(e, userId, setCurrentView, {
+						UserRecipeUtils.addNewRecipe(e, 1, {
 							name,
 							description,
 							instruction,

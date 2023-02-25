@@ -21,8 +21,8 @@ export default function AllRecipeList(props) {
 			</Popover.Body>
 			<Button
 				variant="primary"
-				onClick={() => {
-					UserRecipeUtils.deleteRecipe(ID, setCurrentView);
+				onClick={async () => {
+					await UserRecipeUtils.deleteRecipe(ID, setCurrentView);
 				}}
 			>
 				Yes
