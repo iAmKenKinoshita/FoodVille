@@ -6,6 +6,7 @@ import UserUtils from "./utils/userUtils";
 import "../../styles/pages/_signInUp.scss";
 
 const SignIn = (props) => {
+	const { user, setUser } = props;
 	const navigate = useNavigate();
 
 	const [email, setEmail] = useState(null);
@@ -25,6 +26,8 @@ const SignIn = (props) => {
 									let userData = await UserUtils.getUserData(data.accessToken);
 									console.log(userData);
 									localStorage.setItem("userData", JSON.stringify(userData));
+									setUser(true);
+									navigate("/");
 								}
 							}}
 						>

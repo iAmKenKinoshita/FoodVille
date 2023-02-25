@@ -31,16 +31,17 @@ function App() {
 	// });
 
 	//New code from here
-	const [user, setUser] = useState(true);
-	const [searchRecipes, setSearchRecipes] = useState(null);
+	const [user, setUser] = useState(null);
+
 	const [userRecipes, setUserRecipes] = useState(null);
 
+	const userData = JSON.parse(localStorage.getItem("userData"));
+
 	useEffect(() => {
-		//Checks if theres is user in local storage
-		if (!user) {
-			console.log("No user get");
+		if (userData) {
+			setUser(true);
 		}
-	});
+	}, [user]);
 
 	//For search recipes
 
@@ -52,7 +53,7 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Navbar user={user} />
+							<Navbar user={user} setUser={setUser} />
 							<Homepage />
 							{/* <Footer /> */}
 						</>
@@ -63,7 +64,7 @@ function App() {
 					path="/signIn"
 					element={
 						<>
-							<Navbar user={user} />
+							<Navbar user={user} setUser={setUser} />
 							<SignIn user={user} setUser={setUser} />
 						</>
 					}
@@ -73,8 +74,8 @@ function App() {
 					path="/signUp"
 					element={
 						<>
-							<Navbar user={user} />
-							<SignUp />
+							<Navbar user={user} setUser={setUser} />
+							<SignUp user={user} setUser={setUser} />
 						</>
 					}
 				/>
@@ -83,7 +84,7 @@ function App() {
 					path="/recipe"
 					element={
 						<>
-							<Navbar user={user} />
+							<Navbar user={user} setUser={setUser} />
 							<Recipe user={user} />
 						</>
 					}
@@ -93,7 +94,7 @@ function App() {
 					path="/recipes"
 					element={
 						<>
-							<Navbar user={user} />
+							<Navbar user={user} setUser={setUser} />
 							<RecipePage user={user} />
 						</>
 					}

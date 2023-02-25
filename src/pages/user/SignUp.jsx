@@ -21,9 +21,13 @@ const SignUp = (props) => {
 							className="box"
 							onSubmit={async (e) => {
 								e.preventDefault();
+								if (password !== confirmPassword) {
+									return console.log("password not matched");
+								}
+
 								if (username && email && password && confirmPassword) {
 									await UserUtils.signUp(username, email, password);
-									navigate("/");
+									navigate("/signIn");
 								}
 							}}
 						>

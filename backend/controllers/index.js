@@ -11,14 +11,29 @@ const options = {
 	},
 };
 
-exports.getRecipes = (req, res) => {
-	fetch(
-		"https://tasty.p.rapidapi.com/recipes/list?from=0&size=5&tags=under_30_minutes",
-		options
-	)
-		.then((response) => response.json())
-		.then((response) => res.send(response.results))
-		.catch((err) => console.error(err));
+exports.getRecipes = async (req, res) => {
+	console.log(req.get("query"));
+	const query = req.get("query");
+
+	try {
+		let data = await fetch(
+			`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
+			options
+		);
+		data = await data.json();
+		res.send(data.results);
+	} catch (error) {
+		console.log(error);
+	}
+
+	// Old Code
+	// fetch(
+	// 	`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
+	// 	options
+	// )
+	// 	.then((response) => response.json())
+	// 	.then((response) => res.send(response.results))
+	// 	.catch((err) => console.error(err));
 };
 
 exports.getRecipeDetails = (req, res) => {

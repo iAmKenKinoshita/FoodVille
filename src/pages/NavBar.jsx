@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//UserUtils
+import UserUtils from "./user/utils/userUtils";
+
 //Bootstrap
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -11,8 +14,7 @@ import FVLogo from "../images/FoodVille.png";
 
 export default function NavBar(props) {
 	const navigate = useNavigate();
-	const { user } = props;
-	console.log("Reloaded");
+	const { user, setUser } = props;
 
 	// const loggedIn = localStorage.getItem("user");
 
@@ -125,7 +127,16 @@ export default function NavBar(props) {
 
 									<div class="navbar-dropdown is-right">
 										<a class="navbar-item">My Profile</a>
-										<a class="navbar-item">Log Out</a>
+										<a
+											class="navbar-item"
+											onClick={() => {
+												UserUtils.signOut();
+												setUser(false);
+												navigate("/");
+											}}
+										>
+											Log Out
+										</a>
 									</div>
 								</div>
 							) : (
