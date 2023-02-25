@@ -16,7 +16,6 @@ const userRecipeUtils = {
 					className="button is-danger"
 					onClick={() => {
 						userRecipeUtils.deleteRecipe(ID);
-						// console.log("hheoo");
 					}}
 				>
 					Yes
@@ -26,28 +25,76 @@ const userRecipeUtils = {
 		);
 	},
 	deleteRecipe: async (id) => {
-		// await axios.delete(`${API_URL}/userRecipe/deleteRecipe/${id}`);
-		// console.log("deleted");
-		fetch(`userRecipe/deleteRecipe/${id}`, {
-			method: "DELETE",
-		});
+		try {
+			// await axios.delete(`${API_URL}/userRecipe/deleteRecipe/${id}`);
+			// console.log("deleted");
+			fetch(`userRecipe/deleteRecipe/${id}`, {
+				method: "DELETE",
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	},
 	addNewRecipe: async (
 		e,
 		userId,
 		{ name, description, instruction, ingredients }
 	) => {
-		console.log("I am, hre");
-		e.preventDefault();
-		fetch(`userRecipe/createNewRecipe/1`, {
-			method: "POST",
-			headers: {
-				name: name,
-				description: description,
-				instruction: instruction,
-				ingredients: JSON.stringify(ingredients),
-			},
-		}).then(() => console.log("hello"));
+		try {
+			e.preventDefault();
+			fetch(`userRecipe/createNewRecipe/1`, {
+				method: "POST",
+				headers: {
+					name: name,
+					description: description,
+					instruction: instruction,
+					ingredients: JSON.stringify(ingredients),
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	onIngredientChange: ({ name, value }, index, ingredients, setIngredients) => {
+		const clonedIngredients = [...ingredients];
+		clonedIngredients.splice(index, 1, {
+			...ingredients[index],
+			[name]: value,
+		});
+		setIngredients(clonedIngredients);
+	},
+	onRecipeDetailChange: ({ name, value }, recipeDetails, setRecipeDetails) => {
+		console.log(name, value, recipeDetails, setRecipeDetails);
+		const clonedSelectedRecipe = { ...recipeDetails };
+		clonedSelectedRecipe[name] = value;
+		setRecipeDetails(clonedSelectedRecipe);
+	},
+	addIngredient: (ingredients, setIngredients) => {
+		const clonedIngredients = [...ingredients];
+		const ingredientData = { ingredient_name: "", amount: "" };
+		clonedIngredients.push(ingredientData);
+		setIngredients(clonedIngredients);
+	},
+	deleteIngredient: (index, ingredients, setIngredients) => {
+		const clonedIngredients = [...ingredients];
+		clonedIngredients.splice(index, 1);
+		setIngredients(clonedIngredients);
+	},
+	handleSubmit: (e, id, setCurrentView, ingredients, recipeDetails) => {
+		try {
+			e.preventDefault();
+			fetch(`userRecipe/editRecipe/${id}`, {
+				method: "PATCH",
+				headers: {
+					ingredients: JSON.stringify(ingredients),
+					recipeDetails: JSON.stringify(recipeDetails),
+				},
+			}).then(() => {
+				setCurrentView("allRecipes");
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	},
 };
 

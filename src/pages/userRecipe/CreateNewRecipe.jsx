@@ -1,7 +1,17 @@
-import React from "react";
+import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
+import EditIngredients from "./EditIngredients";
+
+//UserRecipeUtils
+import UserRecipeUtils from "./utils/userRecipe";
+
 function CreateNewRecipe(props) {
+	const [ingredients, setIngredients] = useState([]);
+	const [name, setName] = useState("");
+	const [description, setDescription] = useState("");
+	const [instruction, setInstruction] = useState("");
+
 	return (
 		<Modal
 			{...props}
@@ -11,19 +21,84 @@ function CreateNewRecipe(props) {
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
-					Modal heading
+					Create New Recipe
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<h4>Centered Modal</h4>
-				<p>
-					Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-					dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-					consectetur ac, vestibulum at eros.
-				</p>
+				<form
+					onSubmit={async (e) => {
+						e.preventDefault();
+					}}
+				>
+					<div className="field">
+						<label className="label">Recipe Name</label>
+						<div className="control">
+							<input
+								className="input"
+								type="text"
+								onChange={(e) => {
+									setName(e.target.value);
+								}}
+							/>
+						</div>
+					</div>
+					<div className="field">
+						<label className="label">Description</label>
+						<div className="control">
+							<input
+								className="input"
+								type="email"
+								onChange={(e) => {
+									setDescription(e.target.value);
+								}}
+							/>
+						</div>
+						<p className="help is-danger">This field is required</p>
+					</div>
+					<div className="field">
+						<label className="label">Instruction</label>
+						<div className="control">
+							<textarea
+								className="textarea"
+								type="text"
+								onChange={(e) => {
+									setInstruction(e.target.value);
+								}}
+							/>
+						</div>
+					</div>
+					<label className="label">Ingredients</label>
+					{ingredients.map((ingredient, index) => {
+						return (
+							<EditIngredients
+								key={index}
+								ingredient={ingredient}
+								onIngredientChange={UserRecipeUtils.onIngredientChange}
+								index={index}
+								deleteIngredient={UserRecipeUtils.deleteIngredient}
+								setIngredients={setIngredients}
+								ingredients={ingredients}
+							/>
+						);
+					})}
+					<button
+						className="button is-primary"
+						type="button"
+						onClick={() => {
+							UserRecipeUtils.addIngredient(ingredients, setIngredients);
+						}}
+					>
+						Add Ingredient
+					</button>
+				</form>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={props.onHide}>Close</Button>
+				{/* <button className="button" onClick={props.onHide}>
+					Close
+				</button> */}
+				<button className="button is-success" onClick={props.onHide}>
+					Create
+				</button>
 			</Modal.Footer>
 		</Modal>
 	);
