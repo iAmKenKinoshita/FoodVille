@@ -91,7 +91,7 @@ function RecipePage(props) {
 												<img src="https://bulma.io/images/placeholders/256x256.png" />
 											</figure>
 											<p class="title">{recipe.name}</p>
-											<p class="subtitle">{recipe.description}</p>
+											{/* <p class="subtitle">{recipe.description}</p> */}
 											<div class="buttons">
 												<a
 													class="button is-primary"

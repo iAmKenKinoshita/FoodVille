@@ -63,17 +63,16 @@ module.exports = {
 	},
 
 	saveApiRecipe(userId, selectedRecipe) {
-
-		const instructions = [];
-		const name = selectedRecipe.name
-		const description = selectedRecipe.description
+		let instructions = [];
+		const name = selectedRecipe.name;
+		const description = selectedRecipe.description;
 
 		selectedRecipe.instructions.map((instruction) => {
 			instructions.push(instruction.display_text);
 		});
 
-		instructions.join(" ");
-		// console.log(selectedRecipe.name, instructions);
+		instructions = instructions.join(" ");
+		console.log(instructions);
 
 		return knex("recipe").insert({
 			user_id: userId,
