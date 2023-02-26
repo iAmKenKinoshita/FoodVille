@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 
+import HomepageUtils from "./utils/homepageUtils";
+
 function RecipeDetailsModal(props) {
 	const { selectedRecipe } = props;
 
@@ -34,7 +36,6 @@ function RecipeDetailsModal(props) {
 						<tbody>
 							{selectedRecipe &&
 								selectedRecipe.sections.map((section) => {
-									console.log(section.components);
 									return (
 										<>
 											{section.components.map((ingredient) => {
@@ -69,10 +70,11 @@ function RecipeDetailsModal(props) {
 			<Modal.Footer>
 				<button
 					className="button is-success"
-					// onClick={() => {
-					// 	props.onHide();
-					// 	setEditRecipeShow(true);
-					// }}
+					onClick={async () => {
+						props.onHide();
+						// setEditRecipeShow(true);
+						HomepageUtils.saveApiRecipe(1, selectedRecipe);
+					}}
 				>
 					Save
 				</button>

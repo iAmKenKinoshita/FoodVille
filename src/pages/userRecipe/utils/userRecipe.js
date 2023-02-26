@@ -40,7 +40,7 @@ const userRecipeUtils = {
 		userId,
 		{ name, description, instruction, ingredients }
 	) => {
-		console.log(ingredients);
+		console.log(ingredients, name, description, instruction);
 		try {
 			e.preventDefault();
 			fetch(`userRecipe/createNewRecipe/1`, {

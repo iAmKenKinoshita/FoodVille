@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const indexController = require("../controllers/homepage");
+const homepageController = require("../controllers/homepage");
 
 //Get requests
-router.get("/", indexController.getRecipes);
-router.get("/getRecipeDetails/:id", indexController.getRecipeDetails);
+router.get("/", homepageController.getRecipes);
+
+//Not needed?
+// router.get("/getRecipeDetails/:id", homepageController.getRecipeDetails);
+
+//Post requests
+router.post("/saveApiRecipe/:id", homepageController.saveApiRecipe);
 
 module.exports = router;
