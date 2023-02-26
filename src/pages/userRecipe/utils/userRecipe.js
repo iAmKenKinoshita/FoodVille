@@ -40,6 +40,7 @@ const userRecipeUtils = {
 		userId,
 		{ name, description, instruction, ingredients }
 	) => {
+		console.log(ingredients, name, description, instruction);
 		try {
 			e.preventDefault();
 			fetch(`userRecipe/createNewRecipe/1`, {
@@ -49,6 +50,7 @@ const userRecipeUtils = {
 					description: description,
 					instruction: instruction,
 					ingredients: JSON.stringify(ingredients),
+					is_fv: false,
 				},
 			});
 		} catch (error) {
@@ -72,7 +74,9 @@ const userRecipeUtils = {
 	},
 	addIngredient: (ingredients, setIngredients) => {
 		const clonedIngredients = [...ingredients];
-		const ingredientData = { ingredient_name: "", amount: "" };
+		//Old Code
+		// const ingredientData = { ingredient_name: "", amount: "" };
+		const ingredientData = { ingredient_info: "" };
 		clonedIngredients.push(ingredientData);
 		setIngredients(clonedIngredients);
 	},

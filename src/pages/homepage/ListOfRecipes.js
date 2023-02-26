@@ -12,7 +12,7 @@ export default function ListOfRecipes(props) {
 	const [recipeArray, setRecipeArray] = useState([]);
 
 	const loadRecipe = () => {
-		fetch("/index")
+		fetch("/home")
 			.then((result) => result.json())
 			.then((data) => setRecipeArray(data));
 	};

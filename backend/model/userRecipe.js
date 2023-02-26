@@ -8,6 +8,7 @@ module.exports = {
 				name: "name",
 				description: "description",
 				instruction: "instruction",
+				is_fv: "is_fv",
 			})
 			.from("recipe")
 			.where({ user_id: id });
@@ -16,19 +17,22 @@ module.exports = {
 	getAllIngredients(id) {
 		return knex
 			.select({
-				ingredient_name: "ingredient_name",
-				amount: "amount",
+				ingredient_info: "ingredient_info",
+				//Old Code
+				// ingredient_name: "ingredient_name",
+				// amount: "amount",
 			})
 			.from("recipe_ingredients")
 			.where({ recipe_id: id });
 	},
 
-	createNewRecipe(userId, name, description, instruction) {
+	createNewRecipe(userId, name, description, instruction, is_fv) {
 		return knex("recipe").insert({
 			user_id: userId,
 			name: name,
 			description: description,
 			instruction: instruction,
+			is_fv: is_fv,
 		});
 	},
 
@@ -40,10 +44,12 @@ module.exports = {
 	},
 
 	editRecipeDetails(details, id) {
+		console.log(details.is_fv);
 		return knex("recipe").where({ id: id }).update({
 			name: details.name,
 			description: details.description,
 			instruction: details.instruction,
+			is_fv: details.is_fv,
 		});
 	},
 
@@ -55,4 +61,27 @@ module.exports = {
 			return await knex("recipe_ingredients").insert(ingredients);
 		}
 	},
+
+	saveApiRecipe(userId, selectedRecipe) {
+
+		const instructions = [];
+		const name = selectedRecipe.name
+		const description = selectedRecipe.description
+
+		selectedRecipe.instructions.map((instruction) => {
+			instructions.push(instruction.display_text);
+		});
+
+		instructions.join(" ");
+		// console.log(selectedRecipe.name, instructions);
+
+		return knex("recipe").insert({
+			user_id: userId,
+			name: name,
+			description: description,
+			instruction: instructions,
+			is_fv: true,
+		});
+	},
+	saveApiRecipeIngredients(selectedRecipe) {},
 };

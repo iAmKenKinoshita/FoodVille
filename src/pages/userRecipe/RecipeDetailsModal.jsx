@@ -5,6 +5,7 @@ function RecipeDetailsModal(props) {
 	const { selectedRecipe, setEditRecipeShow } = props;
 
 	const [ingredients, setIngredients] = useState([]);
+	// console.log(ingredients);
 
 	useEffect(() => {
 		if (selectedRecipe !== "") {
@@ -32,16 +33,20 @@ function RecipeDetailsModal(props) {
 				<div class="table-container">
 					<table class="table is-striped">
 						<thead>
-							<th>Ingredients</th>
-							<th>Amount</th>
+							{ingredients.length <= 1 ? (
+								<th>Ingredient</th>
+							) : (
+								<th>Ingredients</th>
+							)}
 						</thead>
 						<tbody>
 							{ingredients.map((ingredient) => {
 								return (
 									<>
 										<tr>
-											<td>{ingredient.ingredient_name}</td>
-											<td>{ingredient.amount}</td>
+											<td>{ingredient.ingredient_info}</td>
+											{/* <td>{ingredient.ingredient_name}</td>
+											<td>{ingredient.amount}</td> */}
 										</tr>
 									</>
 								);

@@ -26,18 +26,19 @@ export default function EditIngredients(props) {
 					<Form.Label>Ingredient details:</Form.Label>
 					<Form.Control
 						type="text"
-						placeholder="Enter name"
-						name="ingredient_name"
-						value={ingredient.ingredient_name}
+						placeholder="Enter ingredient and info"
+						name="ingredient_info"
+						// value={ingredient.ingredient_name}
+						value={ingredient.ingredient_info}
 						onChange={onChange}
 					/>
-					<Form.Control
+					{/* <Form.Control
 						type="text"
 						placeholder="Enter amount"
 						name="amount"
 						value={ingredient.amount}
 						onChange={onChange}
-					/>
+					/> */}
 				</Form.Group>
 				<Button
 					variant="primary"
