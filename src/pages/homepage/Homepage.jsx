@@ -6,9 +6,6 @@ import "../../styles/pages/_homepage.scss";
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
 
-import ListOfRecipes from "./ListOfRecipes";
-import SingleRecipe from "./SingleRecipe";
-
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
@@ -18,41 +15,7 @@ export default function Homepage(props) {
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 
-	useEffect(() => {
-		console.log(searchRecipes);
-	}, [searchRecipes]);
-
-	// const [currentView, setCurrentView] = useState("listOfRecipes");
-	// const [selectedRecipe, setSelectedRecipe] = useState("");
-
-	// useEffect(() => {
-	// 	if (currentView === "listOfRecipes") {
-	// 		setCurrentView(
-	// 			<ListOfRecipes
-	// 				setCurrentView={setCurrentView}
-	// 				setSelectedRecipe={setSelectedRecipe}
-	// 				selectedRecipe={selectedRecipe}
-	// 			/>
-	// 		);
-	// 	} else if (currentView === "singleRecipe") {
-	// 		setCurrentView(
-	// 			<SingleRecipe
-	// 				selectedRecipe={selectedRecipe}
-	// 				setCurrentView={setCurrentView}
-	// 			/>
-	// 		);
-	// 	}
-	// });
-
-	// return (
-	// 	<>
-	// 		<Container>{currentView}</Container>
-	// 	</>
-	// );
-
-	//New Code from here
-
-	const {} = props;
+	useEffect(() => {}, [searchRecipes]);
 
 	return (
 		<>
@@ -137,13 +100,6 @@ export default function Homepage(props) {
 											>
 												<strong>Details</strong>
 											</a>
-											{/* <OverlayTrigger
-											trigger="focus"
-											placement="top"
-											overlay={UserRecipeUtils.deletePopover(recipe.id)}
-										>
-											<button className="button is-danger">Delete</button>
-										</OverlayTrigger> */}
 										</div>
 									</article>
 								</div>

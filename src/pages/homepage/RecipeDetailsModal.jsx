@@ -3,9 +3,6 @@ import { Modal } from "react-bootstrap";
 
 function RecipeDetailsModal(props) {
 	const { selectedRecipe } = props;
-	console.log(selectedRecipe);
-
-	const [ingredients, setIngredients] = useState([]);
 
 	return (
 		<Modal
@@ -34,18 +31,6 @@ function RecipeDetailsModal(props) {
 						<thead>
 							<th>Ingredients</th>
 						</thead>
-						{/* <tbody>
-							{ingredients.map((ingredient) => {
-								return (
-									<>
-										<tr>
-											<td>{ingredient.ingredient_name}</td>
-											<td>{ingredient.amount}</td>
-										</tr>
-									</>
-								);
-							})}
-						</tbody> */}
 						<tbody>
 							{selectedRecipe &&
 								selectedRecipe.sections.map((section) => {
@@ -70,8 +55,6 @@ function RecipeDetailsModal(props) {
 
 					{selectedRecipe.instructions &&
 						selectedRecipe.instructions.map((instruction, index) => {
-							console.log(instruction.display_text);
-							// return ({instruction.display_text})
 							return (
 								<>
 									<p class="is-6">
