@@ -3,15 +3,19 @@ import React, { useEffect, useState } from "react";
 //Styling
 import "../../styles/pages/_homepage.scss";
 
+//Modal
+import RecipeDetailsModal from "./RecipeDetailsModal";
+
 import ListOfRecipes from "./ListOfRecipes";
 import SingleRecipe from "./SingleRecipe";
-
-import Container from "react-bootstrap/Container";
 
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
+	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
+
 	const [searchRecipes, setSearchRecipes] = useState([]);
+	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 
 	useEffect(() => {
@@ -69,7 +73,6 @@ export default function Homepage(props) {
 									placeholder="Enter an ingredient or a recipe name (i.e. burger)"
 									onChange={(e) => {
 										setQuery(e.target.value);
-										console.log("fasdfasr");
 									}}
 								/>
 							</p>
@@ -109,42 +112,53 @@ export default function Homepage(props) {
 				</div>
 			</div>
 
-			<div className="box">
-				{searchRecipes.length > 0
-					? `${searchRecipes.length} matching results`
-					: ""}
-				<div className="tile ancestor is-flex-wrap-wrap">
-					{searchRecipes.map((recipe) => {
-						return (
-							<div class="tile is-parent is-3">
-								<article class="tile is-child box">
-									<p class="title">Hello World</p>
-									<p class="subtitle">What is up?</p>
-								</article>
-							</div>
-						);
-					})}
-
-					<div class="tile is-parent is-3">
-						<article class="tile is-child box">
-							<p class="title">Hello World</p>
-							<p class="subtitle">What is up?</p>
-						</article>
-					</div>
-					<div class="tile is-parent is-3">
-						<article class="tile is-child box">
-							<p class="title">Hello World</p>
-							<p class="subtitle">What is up?</p>
-						</article>
-					</div>
-					<div class="tile is-parent is-3">
-						<article class="tile is-child box">
-							<p class="title">Hello World</p>
-							<p class="subtitle">What is up?</p>
-						</article>
+			{searchRecipes.length > 0 ? (
+				<div className="box">
+					{searchRecipes.length > 0
+						? `${searchRecipes.length} matching results`
+						: ""}
+					<div className="tile ancestor is-flex-wrap-wrap">
+						{searchRecipes.map((recipe, index) => {
+							return (
+								<div class="tile is-parent is-3">
+									<article class="tile is-child box">
+										<figure class="image is-square is-256x256">
+											<img src={recipe.thumbnail_url} />
+										</figure>
+										<p class="title">{recipe.name}</p>
+										{/* <p class="subtitle">{recipe.description}</p> */}
+										<div class="buttons">
+											<a
+												class="button is-primary"
+												onClick={() => {
+													setSelectedRecipeShow(true);
+													setSelectedRecipe(recipe);
+												}}
+											>
+												<strong>Details</strong>
+											</a>
+											{/* <OverlayTrigger
+											trigger="focus"
+											placement="top"
+											overlay={UserRecipeUtils.deletePopover(recipe.id)}
+										>
+											<button className="button is-danger">Delete</button>
+										</OverlayTrigger> */}
+										</div>
+									</article>
+								</div>
+							);
+						})}
 					</div>
 				</div>
-			</div>
+			) : (
+				""
+			)}
+			<RecipeDetailsModal
+				show={selectedRecipeShow}
+				onHide={() => setSelectedRecipeShow(false)}
+				selectedRecipe={selectedRecipe}
+			/>
 		</>
 	);
 }
