@@ -44,10 +44,12 @@ module.exports = {
 	},
 
 	editRecipeDetails(details, id) {
+		console.log(details.is_fv);
 		return knex("recipe").where({ id: id }).update({
 			name: details.name,
 			description: details.description,
 			instruction: details.instruction,
+			is_fv: details.is_fv,
 		});
 	},
 

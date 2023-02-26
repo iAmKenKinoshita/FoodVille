@@ -123,6 +123,9 @@ function EditRecipeModal(props) {
 				<button
 					className="button is-success"
 					onClick={(e) => {
+						if (recipeDetails.is_fv === true) {
+							recipeDetails.is_fv = false;
+						}
 						UserRecipeUtils.saveRecipeChanges(
 							e,
 							ID,

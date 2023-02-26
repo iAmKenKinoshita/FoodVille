@@ -33,8 +33,11 @@ function RecipeDetailsModal(props) {
 				<div class="table-container">
 					<table class="table is-striped">
 						<thead>
-							<th>Ingredients</th>
-							<th>Amount</th>
+							{ingredients.length <= 1 ? (
+								<th>Ingredient</th>
+							) : (
+								<th>Ingredients</th>
+							)}
 						</thead>
 						<tbody>
 							{ingredients.map((ingredient) => {

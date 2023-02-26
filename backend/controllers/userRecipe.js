@@ -52,7 +52,7 @@ exports.editRecipe = async (req, res, next) => {
 	await userRecipeModel.editRecipeDetails(recipeDetails, ID);
 	await userRecipeModel.deleteIngredients(ID);
 	await userRecipeModel.editRecipeIngredients(ingredients, ID);
-	res.send("Edited recipe");
+	res.send("Recipe Edited");
 };
 
 exports.deleteRecipe = async (req, res, next) => {
