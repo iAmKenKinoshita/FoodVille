@@ -11,7 +11,7 @@ export default function SingleRecipe(props) {
 	const [recipeDetails, setRecipeDetails] = useState("");
 
 	useEffect(() => {
-		fetch(`/index/getRecipeDetails/${ID}`)
+		fetch(`/home/getRecipeDetails/${ID}`)
 			.then((result) => result.json())
 			.then((data) => {
 				setRecipeDetails(data);
@@ -40,7 +40,7 @@ export default function SingleRecipe(props) {
 					{recipeDetails === "" ? (
 						<button
 							onClick={() => {
-								fetch(`/index/getRecipeDetails/${ID}`)
+								fetch(`/home/getRecipeDetails/${ID}`)
 									.then((result) => result.json())
 									.then((data) => {
 										setRecipeDetails(data);

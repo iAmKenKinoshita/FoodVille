@@ -1,7 +1,7 @@
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
-			let recipes = await fetch("/index", {
+			let recipes = await fetch("/home", {
 				method: "GET",
 				headers: {
 					query: keywords,
@@ -23,7 +23,7 @@ const homepageUtils = {
 
 		console.log(keywords);
 		//Old Code
-		// fetch("/index", {
+		// fetch(""/home, {
 		// 	method: "GET",
 		// 	headers: {
 		// 		query: keywords,
