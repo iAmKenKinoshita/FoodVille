@@ -3,13 +3,14 @@ const userRecipeModel = require("../model/userRecipe");
 exports.getMyRecipeList = async (req, res, next) => {
 	const userID = req.params.userId;
 	const recipe = await userRecipeModel.getAllRecipeList(userID);
+	// console.log(recipe);
 	res.send(recipe);
 };
 
 exports.getAllIngredients = async (req, res, next) => {
 	const ID = req.params.listId;
 	const ingredients = await userRecipeModel.getAllIngredients(ID);
-
+	console.log(ingredients);
 	res.send(ingredients);
 };
 
@@ -19,8 +20,15 @@ exports.createNewRecipe = async (req, res, next) => {
 	const description = req.get("description");
 	const instruction = req.get("instruction");
 	const ingredients = JSON.parse(req.get("ingredients"));
+	const is_fv = req.get("is_fv");
 
-	await userRecipeModel.createNewRecipe(userID, name, description, instruction);
+	await userRecipeModel.createNewRecipe(
+		userID,
+		name,
+		description,
+		instruction,
+		is_fv
+	);
 
 	let allRecipes = [];
 

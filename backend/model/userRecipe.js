@@ -8,6 +8,7 @@ module.exports = {
 				name: "name",
 				description: "description",
 				instruction: "instruction",
+				is_fv: "is_fv",
 			})
 			.from("recipe")
 			.where({ user_id: id });
@@ -16,19 +17,22 @@ module.exports = {
 	getAllIngredients(id) {
 		return knex
 			.select({
-				ingredient_name: "ingredient_name",
-				amount: "amount",
+				ingredient_info: "ingredient_info",
+				//Old Code
+				// ingredient_name: "ingredient_name",
+				// amount: "amount",
 			})
 			.from("recipe_ingredients")
 			.where({ recipe_id: id });
 	},
 
-	createNewRecipe(userId, name, description, instruction) {
+	createNewRecipe(userId, name, description, instruction, is_fv) {
 		return knex("recipe").insert({
 			user_id: userId,
 			name: name,
 			description: description,
 			instruction: instruction,
+			is_fv: is_fv,
 		});
 	},
 
