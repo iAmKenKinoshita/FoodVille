@@ -29,11 +29,11 @@ const homepageController = {
 		}
 	},
 	saveApiRecipe: async (req, res) => {
-		const data = req.body;
-		const userId = req.params.id;
-		let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
-		await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
 		try {
+			const data = req.body;
+			const userId = req.params.id;
+			let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
+			await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
 		} catch (error) {
 			console.log(error);
 		}

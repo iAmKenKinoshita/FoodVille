@@ -28,8 +28,6 @@ function App() {
 		}
 	}, [user]);
 
-	//For search recipes
-
 	return (
 		<BrowserRouter>
 			<Routes>

@@ -89,7 +89,6 @@ const userRecipeUtils = {
 	},
 	saveRecipeChanges: (id, ingredients, recipeDetails) => {
 		try {
-			// e.preventDefault();
 			fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
