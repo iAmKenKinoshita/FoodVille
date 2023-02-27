@@ -20,20 +20,6 @@ const homepageUtils = {
 		} catch (error) {
 			console.log(error);
 		}
-
-		console.log(keywords);
-		//Old Code
-		// fetch(""/home, {
-		// 	method: "GET",
-		// 	headers: {
-		// 		query: keywords,
-		// 	},
-		// })
-		// 	.then((result) => result.json())
-		// 	.then((data) => {
-		// 		console.log(data);
-		// 		setSearchRecipes(data);
-		// 	});
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
 		try {

@@ -8,19 +8,23 @@ const userRecipeUtils = {
 	deletePopover: (ID) => {
 		return (
 			<Popover id="popover-basic">
-				<Popover.Header as="h3">Delete confirmation?</Popover.Header>
+				<Popover.Header as="h3">Delete confirmation</Popover.Header>
 				<Popover.Body>
 					Are you sure you want to <strong>delete</strong> this recipe?
+					<div className="box">
+						<div className="columns is-1">
+							<button
+								className="button is-danger column"
+								onClick={() => {
+									userRecipeUtils.deleteRecipe(ID);
+								}}
+							>
+								Yes
+							</button>{" "}
+							<button className="button column">No</button>{" "}
+						</div>
+					</div>
 				</Popover.Body>
-				<button
-					className="button is-danger"
-					onClick={() => {
-						userRecipeUtils.deleteRecipe(ID);
-					}}
-				>
-					Yes
-				</button>{" "}
-				<button className="button">No</button>{" "}
 			</Popover>
 		);
 	},
@@ -40,10 +44,9 @@ const userRecipeUtils = {
 		userId,
 		{ name, description, instruction, ingredients }
 	) => {
-		console.log(ingredients, name, description, instruction);
 		try {
 			e.preventDefault();
-			fetch(`userRecipe/createNewRecipe/1`, {
+			fetch(`userRecipe/createNewRecipe/${userId}`, {
 				method: "POST",
 				headers: {
 					name: name,
@@ -69,7 +72,6 @@ const userRecipeUtils = {
 		// console.log(name, value, recipeDetails, setRecipeDetails);
 		const clonedSelectedRecipe = { ...recipeDetails };
 		clonedSelectedRecipe[name] = value;
-		console.log(clonedSelectedRecipe);
 		setRecipeDetails(clonedSelectedRecipe);
 	},
 	addIngredient: (ingredients, setIngredients) => {
@@ -85,9 +87,9 @@ const userRecipeUtils = {
 		clonedIngredients.splice(index, 1);
 		setIngredients(clonedIngredients);
 	},
-	saveRecipeChanges: (e, id, ingredients, recipeDetails) => {
+	saveRecipeChanges: (id, ingredients, recipeDetails) => {
 		try {
-			e.preventDefault();
+			// e.preventDefault();
 			fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
@@ -100,80 +102,5 @@ const userRecipeUtils = {
 		}
 	},
 };
-
-// exports.addNewRecipe = (
-// 	e,
-// 	userId,
-// 	setCurrentView,
-// 	{ name, description, instruction, ingredients }
-// ) => {
-// 	e.preventDefault();
-// 	fetch(`userRecipe/createNewRecipe/${userId}`, {
-// 		method: "POST",
-// 		headers: {
-// 			name: name,
-// 			description: description,
-// 			instruction: instruction,
-// 			ingredients: JSON.stringify(ingredients),
-// 		},
-// 	}).then(() => setCurrentView("allRecipes"));
-// };
-
-// exports.deleteRecipe = (id, setCurrentView) => {
-// 	fetch(`userRecipe/deleteRecipe/${id}`, {
-// 		method: "DELETE",
-// 	}).then(() => setCurrentView("allRecipes"));
-// };
-
-// exports.onIngredientChange = (
-// 	{ name, value },
-// 	index,
-// 	ingredients,
-// 	setIngredients
-// ) => {
-// 	const clonedIngredients = [...ingredients];
-// 	clonedIngredients.splice(index, 1, {
-// 		...ingredients[index],
-// 		[name]: value,
-// 	});
-// 	setIngredients(clonedIngredients);
-// };
-
-// exports.onRecipeDetailChange = (
-// 	{ name, value },
-// 	recipeDetails,
-// 	setRecipeDetails
-// ) => {
-// 	console.log(name, value, recipeDetails, setRecipeDetails);
-// 	const clonedSelectedRecipe = { ...recipeDetails };
-// 	clonedSelectedRecipe[name] = value;
-// 	setRecipeDetails(clonedSelectedRecipe);
-// };
-
-// exports.addIngredient = (ingredients, setIngredients) => {
-// 	const clonedIngredients = [...ingredients];
-// 	const ingredientData = { ingredient_name: "", amount: "" };
-// 	clonedIngredients.push(ingredientData);
-// 	setIngredients(clonedIngredients);
-// };
-
-// exports.deleteIngredient = (index, ingredients, setIngredients) => {
-// 	const clonedIngredients = [...ingredients];
-// 	clonedIngredients.splice(index, 1);
-// 	setIngredients(clonedIngredients);
-// };
-
-// exports.handleSubmit = (e, id, setCurrentView, ingredients, recipeDetails) => {
-// 	e.preventDefault();
-// 	fetch(`userRecipe/editRecipe/${id}`, {
-// 		method: "PATCH",
-// 		headers: {
-// 			ingredients: JSON.stringify(ingredients),
-// 			recipeDetails: JSON.stringify(recipeDetails),
-// 		},
-// 	}).then(() => {
-// 		setCurrentView("allRecipes");
-// 	});
-// };
 
 export default userRecipeUtils;

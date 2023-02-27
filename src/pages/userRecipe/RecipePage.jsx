@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 //Styling
 import "../../styles/pages/_recipepage.scss";
 
-//User Utils
+//UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
 //Bootstrap
 import { OverlayTrigger } from "react-bootstrap";
 
-//C
 import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";

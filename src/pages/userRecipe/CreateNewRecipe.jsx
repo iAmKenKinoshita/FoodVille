@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 import EditIngredients from "./EditIngredients";
 
@@ -11,6 +11,9 @@ function CreateNewRecipe(props) {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [instruction, setInstruction] = useState("");
+
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userId = userData[0].userId;
 
 	return (
 		<Modal
@@ -92,7 +95,7 @@ function CreateNewRecipe(props) {
 				<button
 					className="button is-success"
 					onClick={async (e) => {
-						await UserRecipeUtils.addNewRecipe(e, 1, {
+						await UserRecipeUtils.addNewRecipe(e, userId, {
 							name,
 							description,
 							instruction,

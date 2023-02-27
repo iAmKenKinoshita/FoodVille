@@ -13,9 +13,6 @@ import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 
 import Footer from "./pages/Footer";
-import Recipe from "./pages/userRecipe/Recipe";
-
-import User from "./pages/UnusedPages/User";
 
 function App() {
 	//New code from here
@@ -67,16 +64,6 @@ function App() {
 						<>
 							<Navbar user={user} setUser={setUser} />
 							<SignUp user={user} setUser={setUser} />
-						</>
-					}
-				/>
-				<Route
-					exact
-					path="/recipe"
-					element={
-						<>
-							<Navbar user={user} setUser={setUser} />
-							<Recipe user={user} />
 						</>
 					}
 				/>

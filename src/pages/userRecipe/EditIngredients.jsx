@@ -1,10 +1,5 @@
 import React from "react";
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import CloseButton from "react-bootstrap/CloseButton";
-import UserRecipeUtils from "./utils/userRecipe";
-
 export default function EditIngredients(props) {
 	const {
 		key,
@@ -19,7 +14,6 @@ export default function EditIngredients(props) {
 	const onChange = (e) =>
 		onIngredientChange(e.target, index, ingredients, setIngredients);
 
-	//NewCode
 	return (
 		<>
 			<div className="field has-addons">
