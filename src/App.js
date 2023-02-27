@@ -1,37 +1,82 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
 
-//Components
-import Navbar from "./components/NavBar";
-import Homepage from "./components/homepage/Homepage";
-import Recipe from "./components/userRecipe/Recipe";
-import User from "./components/user/User";
+//Pages
+import Navbar from "./pages/NavBar";
+import Homepage from "./pages/homepage/Homepage";
+import SignIn from "./pages/user/SignIn";
+import SignUp from "./pages/user/SignUp";
+import RecipePage from "./pages/userRecipe/RecipePage";
+
+import Footer from "./pages/Footer";
 
 function App() {
-	const [currentView, setCurrentView] = useState("home");
+	//New code from here
+	const [user, setUser] = useState(null);
+
+	const [searchRecipes, setSearchRecipes] = useState([]);
+
+	const userData = JSON.parse(localStorage.getItem("userData"));
 
 	useEffect(() => {
-		if (currentView === "home") {
-			setCurrentView(<Homepage />);
-		} else if (currentView === "recipes") {
-			setCurrentView(<Recipe />);
-		} else if (currentView === "user") {
-			setCurrentView(<User setCurrentView={setCurrentView} />);
+		if (userData) {
+			setUser(true);
 		}
-	});
+	}, [user]);
 
 	return (
-		<>
-			<Container>
-				<Navbar setCurrentView={setCurrentView} />
-				{currentView}
-			</Container>
-		</>
+		<BrowserRouter>
+			<Routes>
+				<Route
+					exact
+					path="/"
+					element={
+						<>
+							<Navbar user={user} setUser={setUser} />
+							<Homepage
+								searchRecipes={searchRecipes}
+								setSearchRecipes={setSearchRecipes}
+							/>
+							{/* <Footer /> */}
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/signIn"
+					element={
+						<>
+							<Navbar user={user} setUser={setUser} />
+							<SignIn user={user} setUser={setUser} />
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/signUp"
+					element={
+						<>
+							<Navbar user={user} setUser={setUser} />
+							<SignUp user={user} setUser={setUser} />
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/recipes"
+					element={
+						<>
+							<Navbar user={user} setUser={setUser} />
+							<RecipePage user={user} />
+						</>
+					}
+				/>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

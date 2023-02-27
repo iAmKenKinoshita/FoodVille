@@ -5,16 +5,16 @@ const PORT = process.env.PORT || 8080;
 require("dotenv").config({ path: "../.env.local" });
 
 //Routes
-const indexRoutes = require("./routes/index");
-const userRecipeRooutes = require("./routes/userRecipe");
+const indexRoutes = require("./routes/homepage");
+const userRecipeRoutes = require("./routes/userRecipe");
 const userRoutes = require("./routes/user");
 
 app.use(express.static(path.join(__dirname, "../build")));
 
 app.use(express.json());
 
-app.use("/index", indexRoutes);
-app.use("/userRecipe", userRecipeRooutes);
+app.use("/home", indexRoutes);
+app.use("/userRecipe", userRecipeRoutes);
 app.use("/user", userRoutes);
 
 //Other Requests

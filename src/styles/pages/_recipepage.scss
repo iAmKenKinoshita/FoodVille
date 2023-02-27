@@ -1,0 +1,16 @@
+.sidebar {
+	margin-left: 1em;
+}
+
+.recipe-holder {
+	margin-left: 1em;
+}
+
+.modal-content {
+	// margin: auto auto;
+	z-index: 1100 !important;
+}
+.modal-backdrop {
+	display: none;
+	z-index: 1040 !important;
+}
