@@ -3,20 +3,15 @@ import { useState, useEffect } from "react";
 //Styling
 import "../../styles/pages/_recipepage.scss";
 
-//User Utils
+//UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
 //Bootstrap
 import { OverlayTrigger } from "react-bootstrap";
 
-//C
 import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";
-import DeletePopOver from "./DeletePopOver";
-
-//Image
-import Sample from "../../images/FoodVille.png";
 
 function RecipePage(props) {
 	const [createRecipeShow, setCreateRecipeShow] = useState(false);
@@ -24,8 +19,6 @@ function RecipePage(props) {
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
 	const [selectedRecipe, setSelectedRecipe] = useState("");
-
-	const {} = props;
 
 	// const [foodVille, setFoodVille]
 	const [recipes, setRecipes] = useState(null);

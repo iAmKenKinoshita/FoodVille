@@ -29,57 +29,15 @@ const homepageController = {
 		}
 	},
 	saveApiRecipe: async (req, res) => {
-		const data = req.body;
-		const userId = req.params.id;
-
-		//Saved?
-		// console.log("This is save");
-		// const name = req.get("name");
-		// const description = req.get("description");
-		// const instructions = req.get("hello");
-		// const ingredients = req.get("ingredients");
-		// const is_fv = req.get("is_fv");
-		// console.log(name, description, instructions, ingredients, is_fv);
-		let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
-		console.log("this is the id", recipeID);
-		await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
 		try {
-		} catch (error) {}
+			const data = req.body;
+			const userId = req.params.id;
+			let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
+			await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
+		} catch (error) {
+			console.log(error);
+		}
 	},
 };
 
 module.exports = homepageController;
-
-// exports.getRecipes = async (req, res) => {
-// 	console.log(req.get("query"));
-// 	const query = req.get("query");
-
-// 	try {
-// 		let data = await fetch(
-// 			`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
-// 			options
-// 		);
-// 		data = await data.json();
-// 		res.send(data.results);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-
-// 	// Old Code
-// 	// fetch(
-// 	// 	`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
-// 	// 	options
-// 	// )
-// 	// 	.then((response) => response.json())
-// 	// 	.then((response) => res.send(response.results))
-// 	// 	.catch((err) => console.error(err));
-// };
-
-//Not Needed?
-// exports.getRecipeDetails = (req, res) => {
-// 	const ID = req.params.id;
-// 	fetch(`https://tasty.p.rapidapi.com/recipes/get-more-info?id=${ID}`, options)
-// 		.then((response) => response.json())
-// 		.then((response) => res.send(response))
-// 		.catch((err) => console.error(err));
-// };

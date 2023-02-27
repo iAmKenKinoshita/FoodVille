@@ -38,7 +38,7 @@ function EditRecipeModal(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<form>
+				<form id="edit-recipe-form">
 					<div className="field">
 						<label className="label">Recipe Name</label>
 						<div className="control">
@@ -122,12 +122,12 @@ function EditRecipeModal(props) {
 			<Modal.Footer>
 				<button
 					className="button is-success"
-					onClick={(e) => {
+					form="edit-recipe-form"
+					onClick={() => {
 						if (recipeDetails.is_fv === true) {
 							recipeDetails.is_fv = false;
 						}
 						UserRecipeUtils.saveRecipeChanges(
-							e,
 							ID,
 							ingredients,
 							recipeDetails

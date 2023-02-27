@@ -19,9 +19,6 @@ module.exports = {
 		return knex
 			.select({
 				ingredient_info: "ingredient_info",
-				//Old Code
-				// ingredient_name: "ingredient_name",
-				// amount: "amount",
 			})
 			.from("recipe_ingredients")
 			.where({ recipe_id: id });
@@ -76,7 +73,6 @@ module.exports = {
 		});
 
 		instructions = instructions.join(" ");
-		console.log(instructions);
 
 		return knex("recipe")
 			.insert({
@@ -99,9 +95,6 @@ module.exports = {
 				});
 			});
 		});
-		// for (const ingredient of ingredients) {
-		// 	ingredient.recipe_id = recipeId;
-		// }
 		return knex("recipe_ingredients").insert(ingredients);
 	},
 };

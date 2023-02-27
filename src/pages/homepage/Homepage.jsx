@@ -9,9 +9,9 @@ import RecipeDetailsModal from "./RecipeDetailsModal";
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
-	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
+	const { searchRecipes, setSearchRecipes } = props;
 
-	const [searchRecipes, setSearchRecipes] = useState([]);
+	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 
@@ -23,7 +23,6 @@ export default function Homepage(props) {
 				<div className="column is-6 is-offset-one-quarter box">
 					<form
 						onSubmit={async (e) => {
-							//Request for the backend
 							e.preventDefault();
 							HomepageUtils.searchRecipe(setSearchRecipes, query);
 						}}

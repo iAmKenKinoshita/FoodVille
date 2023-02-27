@@ -13,27 +13,12 @@ import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 
 import Footer from "./pages/Footer";
-import Recipe from "./pages/userRecipe/Recipe";
-
-import User from "./pages/UnusedPages/User";
 
 function App() {
-	// const [currentView, setCurrentView] = useState("home");
-
-	// useEffect(() => {
-	// 	if (currentView === "home") {
-	// 		setCurrentView(<Homepage />);
-	// 	} else if (currentView === "recipes") {
-	// 		setCurrentView(<Recipe />);
-	// 	} else if (currentView === "user") {
-	// 		setCurrentView(<User setCurrentView={setCurrentView} />);
-	// 	}
-	// });
-
 	//New code from here
 	const [user, setUser] = useState(null);
 
-	const [userRecipes, setUserRecipes] = useState(null);
+	const [searchRecipes, setSearchRecipes] = useState([]);
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -42,8 +27,6 @@ function App() {
 			setUser(true);
 		}
 	}, [user]);
-
-	//For search recipes
 
 	return (
 		<BrowserRouter>
@@ -54,7 +37,10 @@ function App() {
 					element={
 						<>
 							<Navbar user={user} setUser={setUser} />
-							<Homepage />
+							<Homepage
+								searchRecipes={searchRecipes}
+								setSearchRecipes={setSearchRecipes}
+							/>
 							{/* <Footer /> */}
 						</>
 					}
@@ -76,16 +62,6 @@ function App() {
 						<>
 							<Navbar user={user} setUser={setUser} />
 							<SignUp user={user} setUser={setUser} />
-						</>
-					}
-				/>
-				<Route
-					exact
-					path="/recipe"
-					element={
-						<>
-							<Navbar user={user} setUser={setUser} />
-							<Recipe user={user} />
 						</>
 					}
 				/>
