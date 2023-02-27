@@ -22,10 +22,8 @@ function App() {
 	const [user, setUser] = useState(null);
 
 	const [searchRecipes, setSearchRecipes] = useState([]);
-	const [userRecipes, setUserRecipes] = useState(null);
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
-	const userId = user[0].userId;
 
 	useEffect(() => {
 		if (userData) {

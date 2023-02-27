@@ -19,95 +19,30 @@ export default function EditIngredients(props) {
 	const onChange = (e) =>
 		onIngredientChange(e.target, index, ingredients, setIngredients);
 
+	//NewCode
 	return (
-		<div>
-			<Form>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Ingredient details:</Form.Label>
-					<Form.Control
+		<>
+			<div className="field has-addons">
+				<div className="control is-expanded">
+					<input
+						className="input"
 						type="text"
-						placeholder="Enter ingredient and info"
+						placeholder="1 kg potatoes, sliced"
 						name="ingredient_info"
-						// value={ingredient.ingredient_name}
 						value={ingredient.ingredient_info}
 						onChange={onChange}
 					/>
-					{/* <Form.Control
-						type="text"
-						placeholder="Enter amount"
-						name="amount"
-						value={ingredient.amount}
-						onChange={onChange}
-					/> */}
-				</Form.Group>
-				<Button
-					variant="primary"
+				</div>
+				<button
+					className="button is-danger"
 					type="button"
 					onClick={() => {
 						deleteIngredient(index, ingredients, setIngredients);
 					}}
 				>
-					Delete ingredient
-				</Button>
-			</Form>
-			{/* <div className="form-group">
-				<input
-					type="text"
-					className="form-control form-control-lg"
-					placeholder="Enter ingredient name"
-					name="ingredient_name"
-					value={ingredient.ingredient_name}
-					onChange={onChange}
-				/>
+					Delete Ingredient
+				</button>
 			</div>
-			<div className="form-group">
-				<input
-					type="text"
-					className="form-control form-control-lg"
-					placeholder="Enter amount"
-					name="amount"
-					value={ingredient.amount}
-					onChange={onChange}
-				/>
-			</div>
-			<button
-				type="button"
-				onClick={() => {
-					deleteIngredient(index, ingredients, setIngredients);
-				}}
-			>
-				This is delete
-			</button> */}
-		</div>
+		</>
 	);
-
-	//NewCode
-	// return (
-	// 	<>
-	// 		<div className="field has-addons">
-	// 			<div className="control is-expanded">
-	// 				<input
-	// 					className="input"
-	// 					type="text"
-	// 					placeholder="1 kg potatoes, sliced"
-	// 					onChange={(e) => {
-	// 						onChange();
-	// 					}}
-	// 				/>
-	// 			</div>
-	// 			<button
-	// 				className="button is-danger"
-	// 				onClick={() => {
-	// 					UserRecipeUtils.deleteIngredient(
-	// 						index,
-	// 						ingredients,
-	// 						setIngredients
-	// 					);
-	// 				}}
-	// 			>
-	// 				Delete Ingredient
-	// 			</button>
-	// 		</div>
-	// 	</>
-	// );
 }
