@@ -9,6 +9,7 @@ module.exports = {
 				description: "description",
 				instruction: "instruction",
 				is_fv: "is_fv",
+				image_url: "image_url",
 			})
 			.from("recipe")
 			.where({ user_id: id });
@@ -54,34 +55,53 @@ module.exports = {
 	},
 
 	async editRecipeIngredients(ingredients, id) {
+		console.log("this is ingredients", ingredients);
 		if (ingredients.length !== 0) {
 			for (const ingredient of ingredients) {
 				ingredient.recipe_id = id;
 			}
+			console.log("this is edited?", ingredients);
 			return await knex("recipe_ingredients").insert(ingredients);
 		}
 	},
 
 	saveApiRecipe(userId, selectedRecipe) {
-
-		const instructions = [];
-		const name = selectedRecipe.name
-		const description = selectedRecipe.description
+		let instructions = [];
+		const name = selectedRecipe.name;
+		const description = selectedRecipe.description;
+		const image_url = selectedRecipe.thumbnail_url;
 
 		selectedRecipe.instructions.map((instruction) => {
 			instructions.push(instruction.display_text);
 		});
 
-		instructions.join(" ");
-		// console.log(selectedRecipe.name, instructions);
+		instructions = instructions.join(" ");
+		console.log(instructions);
 
-		return knex("recipe").insert({
-			user_id: userId,
-			name: name,
-			description: description,
-			instruction: instructions,
-			is_fv: true,
-		});
+		return knex("recipe")
+			.insert({
+				user_id: userId,
+				name: name,
+				description: description,
+				instruction: instructions,
+				is_fv: true,
+				image_url: image_url,
+			})
+			.returning("id");
 	},
-	saveApiRecipeIngredients(selectedRecipe) {},
+	saveApiRecipeIngredients(recipeId, selectedRecipe) {
+		const ingredients = [];
+		selectedRecipe.sections.map((section) => {
+			section.components.map((ingredient) => {
+				ingredients.push({
+					ingredient_info: ingredient.raw_text,
+					recipe_id: recipeId,
+				});
+			});
+		});
+		// for (const ingredient of ingredients) {
+		// 	ingredient.recipe_id = recipeId;
+		// }
+		return knex("recipe_ingredients").insert(ingredients);
+	},
 };

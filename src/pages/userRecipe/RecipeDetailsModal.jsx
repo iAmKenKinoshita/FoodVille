@@ -28,17 +28,18 @@ function RecipeDetailsModal(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<h3 class="title is-6">Description</h3>
-				<h5 class="subtitle is-5">{selectedRecipe.description}</h5>
+				{selectedRecipe.description ? (
+					<>
+						<h3 class="title is-6">Description</h3>
+						<h5 class="subtitle is-5">{selectedRecipe.description}</h5>
+					</>
+				) : (
+					""
+				)}
+
 				<div class="table-container">
 					<table class="table is-striped">
-						<thead>
-							{ingredients.length <= 1 ? (
-								<th>Ingredient</th>
-							) : (
-								<th>Ingredients</th>
-							)}
-						</thead>
+						<thead>{ingredients.length < 1 ? "" : <th>Ingredients</th>}</thead>
 						<tbody>
 							{ingredients.map((ingredient) => {
 								return (

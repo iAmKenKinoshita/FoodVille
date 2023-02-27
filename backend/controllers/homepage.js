@@ -40,9 +40,9 @@ const homepageController = {
 		// const ingredients = req.get("ingredients");
 		// const is_fv = req.get("is_fv");
 		// console.log(name, description, instructions, ingredients, is_fv);
-		let recipeID = await userRecipeModel.saveApiRecipe(userId, req.body);
-		console.log(recipeID);
-		// userRecipeModel.saveApiRecipeIngredients()
+		let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
+		console.log("this is the id", recipeID);
+		await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
 		try {
 		} catch (error) {}
 	},
