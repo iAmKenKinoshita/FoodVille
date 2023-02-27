@@ -84,11 +84,18 @@ function RecipePage(props) {
 					<div class="tile is-ancestor is-flex-wrap-wrap">
 						{recipes &&
 							recipes.map((recipe, index) => {
+								// console.log(recipe);
 								return (
 									<div class="tile is-parent is-3">
 										<article class="tile is-child box">
 											<figure class="image">
-												<img src="https://bulma.io/images/placeholders/256x256.png" />
+												<img
+													src={
+														recipe.image_url
+															? recipe.image_url
+															: "https://bulma.io/images/placeholders/256x256.png"
+													}
+												/>
 											</figure>
 											<p class="title">{recipe.name}</p>
 											{/* <p class="subtitle">{recipe.description}</p> */}

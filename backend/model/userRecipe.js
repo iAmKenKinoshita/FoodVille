@@ -9,6 +9,7 @@ module.exports = {
 				description: "description",
 				instruction: "instruction",
 				is_fv: "is_fv",
+				image_url: "image_url",
 			})
 			.from("recipe")
 			.where({ user_id: id });
@@ -68,6 +69,7 @@ module.exports = {
 		let instructions = [];
 		const name = selectedRecipe.name;
 		const description = selectedRecipe.description;
+		const image_url = selectedRecipe.thumbnail_url;
 
 		selectedRecipe.instructions.map((instruction) => {
 			instructions.push(instruction.display_text);
@@ -83,6 +85,7 @@ module.exports = {
 				description: description,
 				instruction: instructions,
 				is_fv: true,
+				image_url: image_url,
 			})
 			.returning("id");
 	},
