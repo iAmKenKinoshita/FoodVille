@@ -9,9 +9,11 @@ import RecipeDetailsModal from "./RecipeDetailsModal";
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
+	const { searchRecipes, setSearchRecipes } = props;
+
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 
-	const [searchRecipes, setSearchRecipes] = useState([]);
+	// const [searchRecipes, setSearchRecipes] = useState([]);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 

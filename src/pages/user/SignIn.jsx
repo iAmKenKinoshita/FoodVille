@@ -24,7 +24,6 @@ const SignIn = (props) => {
 								if (email && password) {
 									let data = await UserUtils.signIn(email, password);
 									let userData = await UserUtils.getUserData(data.accessToken);
-									console.log(userData);
 									localStorage.setItem("userData", JSON.stringify(userData));
 									setUser(true);
 									navigate("/");
