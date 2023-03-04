@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+<p align="center">
+  <img alt="FoodVille" width="400px" src="./src/images/FoodVille.png" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 📖 Table of Contents
 
-## Available Scripts
+- [❓ About](#-about-)
+- [✨ Features](#-features-)
+- [💻 Getting Started](#-getting-started-)
+- [⚙️ Setup](#-setup-)
 
-In the project directory, you can run:
+### ❓ About
 
-### `npm start`
+Foodville is full-stack web application which allows users to save their own recipes and browse recipes from a third-party API.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ✨ Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Uses Tasty API to browse for recipes. Click [here](https://rapidapi.com/apidojo/api/tasty) for more info about the API.
+- Users can save their own recipes.
+- Grants users to browse and save recipes from an API.
+- Allows users to edit saved recipes ingredients, descriptions, etc.
 
-### `npm test`
+### 💻 Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Make sure you have: -[postgresql] (https://www.postgresql.org/) installed -[Tasty] (https://rapidapi.com/apidojo/api/tasty) API Key
 
-### `npm run build`
+## ⚙️ Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# - Creating/Updating Database
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. You will need to add `.env.local` file in the root folder containing:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+SECRET_KEY=<your_tasty_api_key>
+DB_NAME=<your_db_name>
+DB_USER=<your_db_username>
+NODE_ENV=development
+```
 
-### `npm run eject`
+2. Then create a postgresql database by running this command:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+psql
+CREATE DATABASE <db_name>;
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Quit 'psql' and update database
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run migrate:latest
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# - Running the server (backend) and React app (frontend)
 
-## Learn More
+1. Install all the independencies in the root folder.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. To start server
 
-### Code Splitting
+```bash
+npm run server
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. To start React App
 
-### Analyzing the Bundle Size
+```bash
+npm run react-app
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- ### 🛠 Contributors
+Feel free to check out our github pages and see what other projects I have worked on! 😎
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/iAmKenKinoshita"><img src="https://avatars.githubusercontent.com/u/89846582?s=400&u=b052bbb5e3d39e2d2645d0aa61c2c06ce0fe92c2&v=4" width="200px;" alt=""/><br /><sub><b>Ken Kinoshita</b></sub></a></td>
+  </tr>
+</table> -->
