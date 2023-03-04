@@ -4,69 +4,73 @@
 
 # 📖 Table of Contents
 
-- [❓ About](#-about-)
-- [✨ Features](#-features-)
-- [💻 Getting Started](#-getting-started-)
-- [⚙️ Setup](#-setup-)
+- [❓ About](#-about)
+- [✨ Features](#-features)
+- [💻 Getting Started](#-getting-started)
+- [⚙️ Setup](#-setup)
+  - [Creating/Updating Database](#--creatingupdating-database)
+  - [Running the server (backend) and React app (frontend)](#--running-the-server-backend-and-react-app-frontend)
 
-# ❓ About
+# ❓About
 
 Foodville is full-stack web application which allows users to save their own recipes and browse recipes from a third-party API.
 
-# ✨ Features
+# ✨Features
 
 - Uses Tasty API to browse for recipes. Click [here](https://rapidapi.com/apidojo/api/tasty) for more info about the API.
 - Users can save their own recipes.
 - Grants users to browse and save recipes from an API.
 - Allows users to edit saved recipes ingredients, descriptions, etc.
 
-# 💻 Getting Started
+# 💻Getting Started
 
-Make sure you have: -[postgresql] (https://www.postgresql.org/) installed -[Tasty] (https://rapidapi.com/apidojo/api/tasty) API Key
+### Make sure you have:
+* [postgresql](https://www.postgresql.org/) installed
+* [Tasty](https://rapidapi.com/apidojo/api/tasty) API Key
 
-## ⚙️ Setup
+# ⚙️Setup
 
-### - Creating/Updating Database
+## - Creating/Updating Database -
 
-1. You will need to add `.env.local` file in the root folder containing:
+You will need to add `.env.local` file in the root folder containing:
 
-```bash
+```
 SECRET_KEY=<your_tasty_api_key>
 DB_NAME=<your_db_name>
 DB_USER=<your_db_username>
 NODE_ENV=development
 ```
 
-2. Then create a postgresql database by running this command:
+Then create a postgresql database by running this command:
 
-```bash
+```js
 psql
 CREATE DATABASE <db_name>;
 ```
 
-3. Quit 'psql' and update database
+Quit 'psql' and update database
 
-```bash
+```js
 npm run migrate:latest
 ```
 
-### - Running the server (backend) and React app (frontend)
+## - Running the server (backend) and React app (frontend) -
 
-1. Install all the independencies in the root folder.
+Install all the independencies in the root folder.
 
-```bash
+```js
 npm install
 ```
 
-2. To start server
+To start server
 
-```bash
+```js
 npm run server
 ```
 
-3. To start React App
+To start React App
 
-```bash
+```js
 npm run react-app
 ```
 
