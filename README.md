@@ -4,32 +4,32 @@
 
 # 📖 Table of Contents
 
-- [❓About](#about)
-- [✨Features](#features)
+- [❓About](#-about)
+- [✨Features](#-features)
 - [💻Getting Started](#-getting-started)
 - [⚙️Setup](#-setup)
   - [Creating/Updating Database](#--creatingupdating-database--)
   - [Running the server (backend) and React app (frontend)](#--running-the-server-backend-and-react-app-frontend--)
 
-# ❓About
+# ❓ About
 
 Foodville is full-stack web application which allows users to save their own recipes and browse recipes from a third-party API.
 
-# ✨Features
+# ✨ Features
 
 - Uses Tasty API to browse for recipes. Click [here](https://rapidapi.com/apidojo/api/tasty) for more info about the API.
 - Users can save their own recipes.
 - Grants users to browse and save recipes from an API.
 - Allows users to edit saved recipes ingredients, descriptions, etc.
 
-# 💻Getting Started
+# 💻 Getting Started
 
 ### Make sure you have:
 
 - [postgresql](https://www.postgresql.org/) installed
 - [Tasty](https://rapidapi.com/apidojo/api/tasty) API Key
 
-# ⚙️Setup
+# ⚙️ Setup
 
 ## - Creating/Updating Database -
 
