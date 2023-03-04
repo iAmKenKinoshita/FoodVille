@@ -7,7 +7,7 @@
 - [❓ About](#-about)
 - [✨ Features](#-features)
 - [💻 Getting Started](#-getting-started)
-- [⚙️ Setup](#-setup)
+- [⚙️ Setup](#--setup)
   - [Creating/Updating Database](#--creatingupdating-database--)
   - [Running the server (backend) and React app (frontend)](#--running-the-server-backend-and-react-app-frontend--)
 
@@ -29,7 +29,7 @@ Foodville is full-stack web application which allows users to save their own rec
 - [postgresql](https://www.postgresql.org/) installed
 - [Tasty](https://rapidapi.com/apidojo/api/tasty) API Key
 
-# ⚙️ Setup
+# ⚙️  Setup
 
 ## - Creating/Updating Database -
 
