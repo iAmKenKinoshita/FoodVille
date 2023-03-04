@@ -14,7 +14,7 @@ const userRecipeUtils = {
 	) => {
 		let allRecipes = await fetch(`userRecipe/recipes/${userId}`);
 		allRecipes = await allRecipes.json();
-		setSelectedRecipes(allRecipes)
+		setSelectedRecipes(allRecipes);
 		setAllRecipes(allRecipes);
 		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv === true);
 		setFoodVilleRecipes(foodVilleRecipes);

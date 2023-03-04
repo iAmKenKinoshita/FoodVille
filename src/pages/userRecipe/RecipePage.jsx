@@ -19,10 +19,14 @@ function RecipePage(props) {
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
 	const [selectedRecipes, setSelectedRecipes] = useState(null);
+	//For All Recipes
 	const [allRecipes, setAllRecipes] = useState(null);
+	//For FoodVille Recipes
 	const [foodVilleRecipes, setFoodVilleRecipes] = useState(null);
+	//For UserRecipes
 	const [userRecipes, setUserRecipes] = useState(null);
 
+	//For RecipeDetails
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
@@ -39,7 +43,7 @@ function RecipePage(props) {
 		// fetch(`userRecipe/recipes/1`)
 		// 	.then((result) => result.json())
 		// 	.then((data) => setAllRecipes(data));
-	});
+	}, []);
 
 	return (
 		<div>
@@ -127,10 +131,20 @@ function RecipePage(props) {
 													class="button is-primary"
 													onClick={() => {
 														setSingleRecipeShow(true);
-														setSelectedRecipe(setSelectedRecipes[index]);
+														setSelectedRecipe(selectedRecipes[index]);
+														console.log(selectedRecipe);
 													}}
 												>
-													<strong>Details</strong>
+													Details
+												</a>
+												<a
+													class="button is-primary"
+													onClick={() => {
+														//Request to add as favorites
+														console.log("hello");
+													}}
+												>
+													Add to Favorites
 												</a>
 												<OverlayTrigger
 													trigger="focus"
