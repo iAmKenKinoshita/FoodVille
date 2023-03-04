@@ -18,15 +18,27 @@ function RecipePage(props) {
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
+	const [selectedRecipes, setSelectedRecipes] = useState(null);
+	const [allRecipes, setAllRecipes] = useState(null);
+	const [foodVilleRecipes, setFoodVilleRecipes] = useState(null);
+	const [userRecipes, setUserRecipes] = useState(null);
+
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 
-	// const [foodVille, setFoodVille]
-	const [recipes, setRecipes] = useState(null);
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userId = userData[0].userId;
 
 	useEffect(() => {
-		fetch(`userRecipe/recipes/1`)
-			.then((result) => result.json())
-			.then((data) => setRecipes(data));
+		UserRecipeUtils.getRecipes(
+			userId,
+			setSelectedRecipes,
+			setAllRecipes,
+			setFoodVilleRecipes,
+			setUserRecipes
+		);
+		// fetch(`userRecipe/recipes/1`)
+		// 	.then((result) => result.json())
+		// 	.then((data) => setAllRecipes(data));
 	});
 
 	return (
@@ -37,7 +49,13 @@ function RecipePage(props) {
 						<p class="menu-label">Recipes</p>
 						<ul class="menu-list">
 							<li>
-								<a>All</a>
+								<a
+									onClick={() => {
+										setSelectedRecipes(allRecipes);
+									}}
+								>
+									All
+								</a>
 							</li>
 							<li>
 								<a>Favorites</a>
@@ -47,7 +65,13 @@ function RecipePage(props) {
 						<ul class="menu-list">
 							<ul class="menu-list">
 								<li>
-									<a>All</a>
+									<a
+										onClick={() => {
+											setSelectedRecipes(foodVilleRecipes);
+										}}
+									>
+										All
+									</a>
 								</li>
 								<li>
 									<a>Favorites</a>
@@ -58,7 +82,13 @@ function RecipePage(props) {
 						<ul class="menu-list">
 							<ul class="menu-list">
 								<li>
-									<a>All</a>
+									<a
+										onClick={() => {
+											setSelectedRecipes(userRecipes);
+										}}
+									>
+										All
+									</a>
 								</li>
 								<li>
 									<a>Favorites</a>
@@ -75,8 +105,8 @@ function RecipePage(props) {
 				</div>
 				<div className="column recipe-holder">
 					<div class="tile is-ancestor is-flex-wrap-wrap">
-						{recipes &&
-							recipes.map((recipe, index) => {
+						{selectedRecipes &&
+							selectedRecipes.map((recipe, index) => {
 								// console.log(recipe);
 								return (
 									<div class="tile is-parent is-3">
@@ -97,7 +127,7 @@ function RecipePage(props) {
 													class="button is-primary"
 													onClick={() => {
 														setSingleRecipeShow(true);
-														setSelectedRecipe(recipes[index]);
+														setSelectedRecipe(setSelectedRecipes[index]);
 													}}
 												>
 													<strong>Details</strong>

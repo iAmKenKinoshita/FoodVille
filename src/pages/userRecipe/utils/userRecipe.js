@@ -5,6 +5,26 @@ import API_URL, { REACT_APP_URL } from "../../../Constants";
 import axios from "axios";
 
 const userRecipeUtils = {
+	getRecipes: async (
+		userId,
+		setSelectedRecipes,
+		setAllRecipes,
+		setFoodVilleRecipes,
+		setUserRecipes
+	) => {
+		let allRecipes = await fetch(`userRecipe/recipes/${userId}`);
+		allRecipes = await allRecipes.json();
+		setSelectedRecipes(allRecipes)
+		setAllRecipes(allRecipes);
+		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv === true);
+		setFoodVilleRecipes(foodVilleRecipes);
+		let userRecipes = allRecipes.filter((recipe) => recipe.is_fv === false);
+		setUserRecipes(userRecipes);
+
+		// fetch(`userRecipe/recipes/1`)
+		// 	.then((result) => result.json())
+		// 	.then((data) => setRecipes(data));
+	},
 	deletePopover: (ID) => {
 		return (
 			<Popover id="popover-basic">
@@ -32,7 +52,7 @@ const userRecipeUtils = {
 		try {
 			// await axios.delete(`${API_URL}/userRecipe/deleteRecipe/${id}`);
 			// console.log("deleted");
-			fetch(`userRecipe/deleteRecipe/${id}`, {
+			await fetch(`userRecipe/deleteRecipe/${id}`, {
 				method: "DELETE",
 			});
 		} catch (error) {
@@ -46,7 +66,7 @@ const userRecipeUtils = {
 	) => {
 		try {
 			e.preventDefault();
-			fetch(`userRecipe/createNewRecipe/${userId}`, {
+			await fetch(`userRecipe/createNewRecipe/${userId}`, {
 				method: "POST",
 				headers: {
 					name: name,
@@ -87,9 +107,9 @@ const userRecipeUtils = {
 		clonedIngredients.splice(index, 1);
 		setIngredients(clonedIngredients);
 	},
-	saveRecipeChanges: (id, ingredients, recipeDetails) => {
+	saveRecipeChanges: async (id, ingredients, recipeDetails) => {
 		try {
-			fetch(`userRecipe/editRecipe/${id}`, {
+			await fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
 					ingredients: JSON.stringify(ingredients),
