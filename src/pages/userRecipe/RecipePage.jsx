@@ -21,9 +21,13 @@ function RecipePage(props) {
 	const [selectedRecipes, setSelectedRecipes] = useState(null);
 	//For All Recipes
 	const [allRecipes, setAllRecipes] = useState(null);
+	const [allFavoriteRecipes, setAllFavoriteRecipes] = useState(null);
 	//For FoodVille Recipes
 	const [foodVilleRecipes, setFoodVilleRecipes] = useState(null);
+	const [foodVilleFavoriteRecipes, setFoodVilleFavoriteRecipes] =
+		useState(null);
 	//For UserRecipes
+	const [userFavoriteRecipes, setUserFavoriteRecipes] = useState(null);
 	const [userRecipes, setUserRecipes] = useState(null);
 
 	//For RecipeDetails
@@ -37,8 +41,11 @@ function RecipePage(props) {
 			userId,
 			setSelectedRecipes,
 			setAllRecipes,
+			setAllFavoriteRecipes,
 			setFoodVilleRecipes,
-			setUserRecipes
+			setFoodVilleFavoriteRecipes,
+			setUserRecipes,
+			setUserFavoriteRecipes
 		);
 		// fetch(`userRecipe/recipes/1`)
 		// 	.then((result) => result.json())
@@ -62,7 +69,13 @@ function RecipePage(props) {
 								</a>
 							</li>
 							<li>
-								<a>Favorites</a>
+								<a
+									onClick={() => {
+										setSelectedRecipes(allFavoriteRecipes);
+									}}
+								>
+									Favorites
+								</a>
 							</li>
 						</ul>
 						<p class="menu-label">Food Ville's</p>
@@ -78,7 +91,13 @@ function RecipePage(props) {
 									</a>
 								</li>
 								<li>
-									<a>Favorites</a>
+									<a
+										onClick={() => {
+											setSelectedRecipes(foodVilleFavoriteRecipes);
+										}}
+									>
+										Favorites
+									</a>
 								</li>
 							</ul>
 						</ul>
@@ -95,7 +114,13 @@ function RecipePage(props) {
 									</a>
 								</li>
 								<li>
-									<a>Favorites</a>
+									<a
+										onClick={() => {
+											setSelectedRecipes(userFavoriteRecipes);
+										}}
+									>
+										Favorites
+									</a>
 								</li>
 							</ul>
 						</ul>
@@ -132,7 +157,6 @@ function RecipePage(props) {
 													onClick={() => {
 														setSingleRecipeShow(true);
 														setSelectedRecipe(selectedRecipes[index]);
-														console.log(selectedRecipe);
 													}}
 												>
 													Details
@@ -141,7 +165,15 @@ function RecipePage(props) {
 													class="button is-primary"
 													onClick={() => {
 														//Request to add as favorites
-														console.log("hello");
+														UserRecipeUtils.addOrRemoveFavorite(
+															recipe.id,
+															recipe.is_favorite,
+															userId,
+															setSelectedRecipes,
+															setAllRecipes,
+															setFoodVilleRecipes,
+															setUserRecipes
+														);
 													}}
 												>
 													Add to Favorites

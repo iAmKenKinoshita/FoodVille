@@ -95,7 +95,7 @@ function CreateNewRecipe(props) {
 				<button
 					className="button is-success"
 					onClick={async (e) => {
-						await UserRecipeUtils.addNewRecipe(e, userId, {
+						await UserRecipeUtils.addNewRecipe(userId, {
 							name,
 							description,
 							instruction,

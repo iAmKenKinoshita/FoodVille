@@ -10,6 +10,7 @@ module.exports = {
 				instruction: "instruction",
 				is_fv: "is_fv",
 				image_url: "image_url",
+				is_favorite: "is_favorite",
 			})
 			.from("recipe")
 			.where({ user_id: id });
@@ -24,13 +25,14 @@ module.exports = {
 			.where({ recipe_id: id });
 	},
 
-	createNewRecipe(userId, name, description, instruction, is_fv) {
+	createNewRecipe(userId, name, description, instruction, is_fv, is_favorite) {
 		return knex("recipe").insert({
 			user_id: userId,
 			name: name,
 			description: description,
 			instruction: instruction,
 			is_fv: is_fv,
+			is_favorite: is_favorite,
 		});
 	},
 
@@ -52,7 +54,6 @@ module.exports = {
 	},
 
 	async editRecipeIngredients(ingredients, id) {
-		console.log("this is ingredients", ingredients);
 		if (ingredients.length !== 0) {
 			for (const ingredient of ingredients) {
 				ingredient.recipe_id = id;
@@ -96,5 +97,11 @@ module.exports = {
 			});
 		});
 		return knex("recipe_ingredients").insert(ingredients);
+	},
+	addToFavorites(recipeId, is_favorite) {
+		console.log("This is from the model", recipeId, is_favorite);
+		return knex("recipe").where({ id: recipeId }).update({
+			is_favorite: is_favorite,
+		});
 	},
 };
