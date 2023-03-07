@@ -47,9 +47,6 @@ function RecipePage(props) {
 			setUserRecipes,
 			setUserFavoriteRecipes
 		);
-		// fetch(`userRecipe/recipes/1`)
-		// 	.then((result) => result.json())
-		// 	.then((data) => setAllRecipes(data));
 	}, []);
 
 	return (
@@ -163,16 +160,24 @@ function RecipePage(props) {
 												</a>
 												<a
 													class="button is-primary"
-													onClick={() => {
+													onClick={async () => {
+														// recipe.is_favorite = !recipe.is_favorite;
 														//Request to add as favorites
-														UserRecipeUtils.addOrRemoveFavorite(
+
+														await UserRecipeUtils.addOrRemoveFavorite(
 															recipe.id,
-															recipe.is_favorite,
-															userId,
+															recipe.is_favorite
+														);
+														UserRecipeUtils.handleFavorite(
+															recipe,
+															selectedRecipes,
 															setSelectedRecipes,
-															setAllRecipes,
+															allRecipes,
+															setAllFavoriteRecipes,
 															setFoodVilleRecipes,
-															setUserRecipes
+															setFoodVilleFavoriteRecipes,
+															setUserRecipes,
+															setUserFavoriteRecipes
 														);
 													}}
 												>

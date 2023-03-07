@@ -99,7 +99,6 @@ module.exports = {
 		return knex("recipe_ingredients").insert(ingredients);
 	},
 	addToFavorites(recipeId, is_favorite) {
-		console.log("This is from the model", recipeId, is_favorite);
 		return knex("recipe").where({ id: recipeId }).update({
 			is_favorite: is_favorite,
 		});

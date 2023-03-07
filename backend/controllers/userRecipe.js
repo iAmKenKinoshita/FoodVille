@@ -86,9 +86,8 @@ exports.addToFavorites = async (req, res) => {
 	try {
 		const recipeId = req.params.recipeId;
 		const is_favorite = req.get("is_favorite");
-		console.log("this is the recipe ID", recipeId, is_favorite);
 		await userRecipeModel.addToFavorites(recipeId, is_favorite);
-		res.send("Deleted recipe");
+		res.send("Added/Removed Favorites");
 	} catch (error) {
 		console.log(error);
 	}

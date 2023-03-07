@@ -84,15 +84,7 @@ const userRecipeUtils = {
 			console.log(error);
 		}
 	},
-	addOrRemoveFavorite: async (
-		recipeId,
-		is_favorite,
-		userId,
-		setSelectedRecipes,
-		setAllRecipes,
-		setFoodVilleRecipes,
-		setUserRecipes
-	) => {
+	addOrRemoveFavorite: async (recipeId, is_favorite) => {
 		try {
 			await fetch(`userRecipe/addToFavorites/${recipeId}`, {
 				method: "PATCH",
@@ -100,15 +92,50 @@ const userRecipeUtils = {
 					is_favorite: !is_favorite,
 				},
 			});
-			userRecipeUtils.getRecipes(
-				userId,
-				setSelectedRecipes,
-				setAllRecipes,
-				setFoodVilleRecipes,
-				setUserRecipes
-			);
 		} catch (error) {
 			console.log(error);
+		}
+	},
+	handleFavorite: (
+		recipe,
+		selectedRecipes,
+		setSelectedRecipes,
+		allRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes
+	) => {
+		recipe.is_favorite = !recipe.is_favorite;
+		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
+		console.log(AllFavoriteRecipes);
+		setAllFavoriteRecipes(AllFavoriteRecipes);
+
+		//Foodville Recipes
+		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv);
+		setFoodVilleRecipes(foodVilleRecipes);
+		let foodVilleFavoriteRecipes = allRecipes.filter(
+			(recipe) => recipe.is_fv && recipe.is_favorite
+		);
+		setFoodVilleFavoriteRecipes(foodVilleFavoriteRecipes);
+		console.log(foodVilleFavoriteRecipes);
+
+		//User Recipes
+		let userRecipes = allRecipes.filter((recipe) => !recipe.is_fv);
+		setUserRecipes(userRecipes);
+		let userFavoriteRecipes = allRecipes.filter(
+			(recipe) => !recipe.is_fv && recipe.is_favorite
+		);
+		setUserFavoriteRecipes(userFavoriteRecipes);
+		console.log(userFavoriteRecipes);
+
+		if (recipe.is_fv && !recipe.is_favorite) {
+			setSelectedRecipes(foodVilleFavoriteRecipes);
+		}
+
+		if (!recipe.is_fv && !recipe.is_favorite) {
+			setSelectedRecipes(userFavoriteRecipes);
 		}
 	},
 
