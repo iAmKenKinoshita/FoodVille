@@ -5,6 +5,146 @@ import API_URL, { REACT_APP_URL } from "../../../Constants";
 import axios from "axios";
 
 const userRecipeUtils = {
+	//Recipes API
+	getRecipes: async (
+		userId,
+		setSelectedRecipes,
+		setAllRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes
+	) => {
+		let allRecipes = await fetch(`userRecipe/recipes/${userId}`);
+		allRecipes = await allRecipes.json();
+
+		setSelectedRecipes(allRecipes);
+
+		//All Recipes
+		setAllRecipes(allRecipes);
+		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
+		setAllFavoriteRecipes(AllFavoriteRecipes);
+
+		//Foodville Recipes
+		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv);
+		setFoodVilleRecipes(foodVilleRecipes);
+		let foodVilleFavoriteRecipes = allRecipes.filter(
+			(recipe) => recipe.is_fv && recipe.is_favorite
+		);
+		setFoodVilleFavoriteRecipes(foodVilleFavoriteRecipes);
+
+		//User Recipes
+		let userRecipes = allRecipes.filter((recipe) => !recipe.is_fv);
+		setUserRecipes(userRecipes);
+		let userFavoriteRecipes = allRecipes.filter(
+			(recipe) => !recipe.is_fv && recipe.is_favorite
+		);
+		setUserFavoriteRecipes(userFavoriteRecipes);
+	},
+	deleteRecipe: async (id) => {
+		try {
+			await fetch(`userRecipe/deleteRecipe/${id}`, {
+				method: "DELETE",
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	addNewRecipe: async (
+		userId,
+		{ name, description, instruction, ingredients }
+	) => {
+		try {
+			await fetch(`userRecipe/createNewRecipe/${userId}`, {
+				method: "POST",
+				headers: {
+					name: name,
+					description: description,
+					instruction: instruction,
+					ingredients: JSON.stringify(ingredients),
+					is_fv: false,
+					is_favorite: false,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	saveRecipeChanges: async (id, ingredients, recipeDetails) => {
+		try {
+			await fetch(`userRecipe/editRecipe/${id}`, {
+				method: "PATCH",
+				headers: {
+					ingredients: JSON.stringify(ingredients),
+					recipeDetails: JSON.stringify(recipeDetails),
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	addOrRemoveFavorite: async (recipeId, is_favorite) => {
+		try {
+			await fetch(`userRecipe/addToFavorites/${recipeId}`, {
+				method: "PATCH",
+				headers: {
+					is_favorite: !is_favorite,
+				},
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	handleFavorite: (
+		recipe,
+		currentRecipes,
+		setSelectedRecipes,
+		allRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes
+	) => {
+		recipe.is_favorite = !recipe.is_favorite;
+		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
+		console.log(AllFavoriteRecipes);
+		setAllFavoriteRecipes(AllFavoriteRecipes);
+
+		//Foodville Recipes
+		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv);
+		setFoodVilleRecipes(foodVilleRecipes);
+		let foodVilleFavoriteRecipes = allRecipes.filter(
+			(recipe) => recipe.is_fv && recipe.is_favorite
+		);
+		setFoodVilleFavoriteRecipes(foodVilleFavoriteRecipes);
+		console.log(foodVilleFavoriteRecipes);
+
+		//User Recipes
+		let userRecipes = allRecipes.filter((recipe) => !recipe.is_fv);
+		setUserRecipes(userRecipes);
+		let userFavoriteRecipes = allRecipes.filter(
+			(recipe) => !recipe.is_fv && recipe.is_favorite
+		);
+		setUserFavoriteRecipes(userFavoriteRecipes);
+
+		if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+			setSelectedRecipes(AllFavoriteRecipes);
+		}
+		if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
+			setSelectedRecipes(foodVilleFavoriteRecipes);
+		}
+		if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
+			setSelectedRecipes(userFavoriteRecipes);
+		}
+	},
+
+	toggleSideBarIsActive: (e) => {
+		document.querySelector(".is-active").classList.remove("is-active");
+		e.target.classList.add("is-active");
+	},
+
 	deletePopover: (ID) => {
 		return (
 			<Popover id="popover-basic">
@@ -28,38 +168,7 @@ const userRecipeUtils = {
 			</Popover>
 		);
 	},
-	deleteRecipe: async (id) => {
-		try {
-			// await axios.delete(`${API_URL}/userRecipe/deleteRecipe/${id}`);
-			// console.log("deleted");
-			fetch(`userRecipe/deleteRecipe/${id}`, {
-				method: "DELETE",
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	addNewRecipe: async (
-		e,
-		userId,
-		{ name, description, instruction, ingredients }
-	) => {
-		try {
-			e.preventDefault();
-			fetch(`userRecipe/createNewRecipe/${userId}`, {
-				method: "POST",
-				headers: {
-					name: name,
-					description: description,
-					instruction: instruction,
-					ingredients: JSON.stringify(ingredients),
-					is_fv: false,
-				},
-			});
-		} catch (error) {
-			console.log(error);
-		}
-	},
+
 	onIngredientChange: ({ name, value }, index, ingredients, setIngredients) => {
 		const clonedIngredients = [...ingredients];
 		clonedIngredients.splice(index, 1, {
@@ -86,19 +195,6 @@ const userRecipeUtils = {
 		const clonedIngredients = [...ingredients];
 		clonedIngredients.splice(index, 1);
 		setIngredients(clonedIngredients);
-	},
-	saveRecipeChanges: (id, ingredients, recipeDetails) => {
-		try {
-			fetch(`userRecipe/editRecipe/${id}`, {
-				method: "PATCH",
-				headers: {
-					ingredients: JSON.stringify(ingredients),
-					recipeDetails: JSON.stringify(recipeDetails),
-				},
-			});
-		} catch (error) {
-			console.log(error);
-		}
 	},
 };
 
