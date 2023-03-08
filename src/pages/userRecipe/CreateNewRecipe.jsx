@@ -28,7 +28,7 @@ function CreateNewRecipe(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<form>
+				<form id="createrecipe">
 					<div className="field">
 						<label className="label">Recipe Name</label>
 						<div className="control">
@@ -93,8 +93,10 @@ function CreateNewRecipe(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
+					type="submit"
+					form="createrecipe"
 					className="button is-success"
-					onClick={async (e) => {
+					onClick={async () => {
 						await UserRecipeUtils.addNewRecipe(userId, {
 							name,
 							description,

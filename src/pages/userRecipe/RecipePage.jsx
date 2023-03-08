@@ -57,9 +57,9 @@ function RecipePage(props) {
 		<div>
 			<div className="columns">
 				<div className="column is-1 sidebar">
-					<aside class="menu">
-						<p class="menu-label">Recipes</p>
-						<ul class="menu-list">
+					<aside className="menu">
+						<p className="menu-label">Recipes</p>
+						<ul className="menu-list">
 							<li>
 								<a
 									className="is-active"
@@ -84,9 +84,9 @@ function RecipePage(props) {
 								</a>
 							</li>
 						</ul>
-						<p class="menu-label">Food Ville's</p>
-						<ul class="menu-list">
-							<ul class="menu-list">
+						<p className="menu-label">Food Ville's</p>
+						<ul className="menu-list">
+							<ul className="menu-list">
 								<li>
 									<a
 										onClick={(e) => {
@@ -111,9 +111,9 @@ function RecipePage(props) {
 								</li>
 							</ul>
 						</ul>
-						<p class="menu-label">Your Recipes</p>
-						<ul class="menu-list">
-							<ul class="menu-list">
+						<p className="menu-label">Your Recipes</p>
+						<ul className="menu-list">
+							<ul className="menu-list">
 								<li>
 									<a
 										onClick={(e) => {
@@ -139,7 +139,7 @@ function RecipePage(props) {
 							</ul>
 						</ul>
 						<button
-							class="button is-link"
+							className="button is-link"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe
@@ -147,74 +147,89 @@ function RecipePage(props) {
 					</aside>
 				</div>
 				<div className="column recipe-holder">
-					<div class="tile is-ancestor is-flex-wrap-wrap">
+					<div className="tile is-ancestor is-flex-wrap-wrap">
 						{selectedRecipes &&
 							selectedRecipes.map((recipe, index) => {
-								// console.log(recipe);
 								return (
-									<div class="tile is-parent is-3">
-										<article class="tile is-child box">
-											<figure class="image">
-												<img
-													src={
-														recipe.image_url
-															? recipe.image_url
-															: "https://bulma.io/images/placeholders/256x256.png"
-													}
-												/>
-											</figure>
-											<p class="title">
-												{recipe.name}
-												{recipe.is_fv ? (
-													<span class="image is-32x32">
-														<img src={FVIcon} />
-													</span>
-												) : (
-													"World"
-												)}
-											</p>
-											{/* <p class="subtitle">{recipe.description}</p> */}
-											<div class="buttons">
-												<a
-													class="button is-primary"
-													onClick={() => {
-														setSingleRecipeShow(true);
-														setSelectedRecipe(selectedRecipes[index]);
-													}}
-												>
-													Details
-												</a>
-												<a
-													class="button is-primary"
-													onClick={async () => {
-														await UserRecipeUtils.addOrRemoveFavorite(
-															recipe.id,
-															recipe.is_favorite
-														);
-														UserRecipeUtils.handleFavorite(
-															recipe,
-															currentRecipes,
-															setSelectedRecipes,
-															allRecipes,
-															setAllFavoriteRecipes,
-															setFoodVilleRecipes,
-															setFoodVilleFavoriteRecipes,
-															setUserRecipes,
-															setUserFavoriteRecipes
-														);
-													}}
-												>
-													{!recipe.is_favorite
-														? "Add to Favorites"
-														: "Remove from Favorites"}
-												</a>
-												<OverlayTrigger
-													trigger="focus"
-													placement="top"
-													overlay={UserRecipeUtils.deletePopover(recipe.id)}
-												>
-													<button className="button is-danger">Delete</button>
-												</OverlayTrigger>
+									<div className="tile is-parent is-3">
+										<article className="tile is-child box card">
+											<div className="card-image">
+												<figure className="image is-4by3">
+													<img
+														src={
+															recipe.image_url
+																? recipe.image_url
+																: "https://bulma.io/images/placeholders/256x256.png"
+														}
+														alt="Placeholder image"
+													/>
+												</figure>
+											</div>
+											<div className="card-content">
+												<div className="media">
+													<div className="media-content">
+														<p className="title is-4">{recipe.name}</p>
+														{/* <p class="subtitle is-6">@johnsmith</p> */}
+													</div>
+													<div className="media-left">
+														{recipe.is_fv ? (
+															<figure className="image is-48x48">
+																<img src={FVIcon} alt="Placeholder image" />
+															</figure>
+														) : (
+															""
+														)}
+													</div>
+												</div>
+											</div>
+											<div clasNames="card">
+												<footer className="card-footer buttons">
+													<a
+														onClick={() => {
+															setSingleRecipeShow(true);
+															setSelectedRecipe(selectedRecipes[index]);
+														}}
+														className="card-footer-item button is-primary"
+													>
+														Details
+													</a>
+													<a
+														onClick={async () => {
+															await UserRecipeUtils.addOrRemoveFavorite(
+																recipe.id,
+																recipe.is_favorite
+															);
+															UserRecipeUtils.handleFavorite(
+																recipe,
+																currentRecipes,
+																setSelectedRecipes,
+																allRecipes,
+																setAllFavoriteRecipes,
+																setFoodVilleRecipes,
+																setFoodVilleFavoriteRecipes,
+																setUserRecipes,
+																setUserFavoriteRecipes
+															);
+														}}
+														className="card-footer-item button is-primary"
+													>
+														{!recipe.is_favorite
+															? "Add to Favorites"
+															: "Remove from Favorites"}
+													</a>
+													<OverlayTrigger
+														trigger="focus"
+														placement="top"
+														overlay={UserRecipeUtils.deletePopover(recipe.id)}
+													>
+														<a
+															href="#"
+															className="card-footer-item button is-danger"
+														>
+															Delete
+														</a>
+													</OverlayTrigger>
+												</footer>
 											</div>
 										</article>
 									</div>
