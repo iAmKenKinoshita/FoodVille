@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 //Styling
 import "../../styles/pages/_recipepage.scss";
 
+//Icons
+import FVIcon from "../../images/FVIcon.png";
+
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
@@ -18,6 +21,7 @@ function RecipePage(props) {
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
+	const [currentRecipes, setCurrentRecipes] = useState("");
 	const [selectedRecipes, setSelectedRecipes] = useState(null);
 	//For All Recipes
 	const [allRecipes, setAllRecipes] = useState(null);
@@ -58,8 +62,11 @@ function RecipePage(props) {
 						<ul class="menu-list">
 							<li>
 								<a
-									onClick={() => {
+									className="is-active"
+									onClick={(e) => {
+										UserRecipeUtils.toggleSideBarIsActive(e);
 										setSelectedRecipes(allRecipes);
+										setCurrentRecipes("");
 									}}
 								>
 									All
@@ -67,8 +74,10 @@ function RecipePage(props) {
 							</li>
 							<li>
 								<a
-									onClick={() => {
+									onClick={(e) => {
+										UserRecipeUtils.toggleSideBarIsActive(e);
 										setSelectedRecipes(allFavoriteRecipes);
+										setCurrentRecipes("allFavorites");
 									}}
 								>
 									Favorites
@@ -80,8 +89,10 @@ function RecipePage(props) {
 							<ul class="menu-list">
 								<li>
 									<a
-										onClick={() => {
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(foodVilleRecipes);
+											setCurrentRecipes("");
 										}}
 									>
 										All
@@ -89,8 +100,10 @@ function RecipePage(props) {
 								</li>
 								<li>
 									<a
-										onClick={() => {
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(foodVilleFavoriteRecipes);
+											setCurrentRecipes("foodVilleFavorites");
 										}}
 									>
 										Favorites
@@ -103,8 +116,10 @@ function RecipePage(props) {
 							<ul class="menu-list">
 								<li>
 									<a
-										onClick={() => {
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(userRecipes);
+											setCurrentRecipes("");
 										}}
 									>
 										All
@@ -112,8 +127,10 @@ function RecipePage(props) {
 								</li>
 								<li>
 									<a
-										onClick={() => {
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(userFavoriteRecipes);
+											setCurrentRecipes("userFavorites");
 										}}
 									>
 										Favorites
@@ -146,7 +163,16 @@ function RecipePage(props) {
 													}
 												/>
 											</figure>
-											<p class="title">{recipe.name}</p>
+											<p class="title">
+												{recipe.name}
+												{recipe.is_fv ? (
+													<span class="image is-32x32">
+														<img src={FVIcon} />
+													</span>
+												) : (
+													"World"
+												)}
+											</p>
 											{/* <p class="subtitle">{recipe.description}</p> */}
 											<div class="buttons">
 												<a
@@ -161,16 +187,13 @@ function RecipePage(props) {
 												<a
 													class="button is-primary"
 													onClick={async () => {
-														// recipe.is_favorite = !recipe.is_favorite;
-														//Request to add as favorites
-
 														await UserRecipeUtils.addOrRemoveFavorite(
 															recipe.id,
 															recipe.is_favorite
 														);
 														UserRecipeUtils.handleFavorite(
 															recipe,
-															selectedRecipes,
+															currentRecipes,
 															setSelectedRecipes,
 															allRecipes,
 															setAllFavoriteRecipes,
@@ -181,7 +204,9 @@ function RecipePage(props) {
 														);
 													}}
 												>
-													Add to Favorites
+													{!recipe.is_favorite
+														? "Add to Favorites"
+														: "Remove from Favorites"}
 												</a>
 												<OverlayTrigger
 													trigger="focus"

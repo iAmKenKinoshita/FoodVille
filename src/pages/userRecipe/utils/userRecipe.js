@@ -98,7 +98,7 @@ const userRecipeUtils = {
 	},
 	handleFavorite: (
 		recipe,
-		selectedRecipes,
+		currentRecipes,
 		setSelectedRecipes,
 		allRecipes,
 		setAllFavoriteRecipes,
@@ -128,15 +128,21 @@ const userRecipeUtils = {
 			(recipe) => !recipe.is_fv && recipe.is_favorite
 		);
 		setUserFavoriteRecipes(userFavoriteRecipes);
-		console.log(userFavoriteRecipes);
 
-		if (recipe.is_fv && !recipe.is_favorite) {
+		if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+			setSelectedRecipes(AllFavoriteRecipes);
+		}
+		if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
 			setSelectedRecipes(foodVilleFavoriteRecipes);
 		}
-
-		if (!recipe.is_fv && !recipe.is_favorite) {
+		if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
 			setSelectedRecipes(userFavoriteRecipes);
 		}
+	},
+
+	toggleSideBarIsActive: (e) => {
+		document.querySelector(".is-active").classList.remove("is-active");
+		e.target.classList.add("is-active");
 	},
 
 	deletePopover: (ID) => {
