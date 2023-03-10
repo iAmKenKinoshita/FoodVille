@@ -139,13 +139,77 @@ const userRecipeUtils = {
 			setSelectedRecipes(userFavoriteRecipes);
 		}
 	},
+	handleDelete: (
+		recipeId,
+		currentRecipes,
+		setSelectedRecipes,
+		allRecipes,
+		setAllRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes
+	) => {
+		allRecipes = allRecipes.filter((recipe) => recipe.id !== recipeId);
+		setAllRecipes(allRecipes);
+
+		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
+		setAllFavoriteRecipes(AllFavoriteRecipes);
+
+		//Foodville Recipes
+		let foodVilleRecipes = allRecipes.filter((recipe) => recipe.is_fv);
+		setFoodVilleRecipes(foodVilleRecipes);
+		let foodVilleFavoriteRecipes = allRecipes.filter(
+			(recipe) => recipe.is_fv && recipe.is_favorite
+		);
+		setFoodVilleFavoriteRecipes(foodVilleFavoriteRecipes);
+
+		//User Recipes
+		let userRecipes = allRecipes.filter((recipe) => !recipe.is_fv);
+		setUserRecipes(userRecipes);
+		let userFavoriteRecipes = allRecipes.filter(
+			(recipe) => !recipe.is_fv && recipe.is_favorite
+		);
+		setUserFavoriteRecipes(userFavoriteRecipes);
+
+		if (currentRecipes === "allRecipes") {
+			setSelectedRecipes(allRecipes);
+		}
+		if (currentRecipes === "allFavorites") {
+			setSelectedRecipes(AllFavoriteRecipes);
+		}
+		if (currentRecipes === "foodVilleRecipes") {
+			setSelectedRecipes(foodVilleRecipes);
+		}
+		if (currentRecipes === "foodVilleFavorites") {
+			setSelectedRecipes(foodVilleFavoriteRecipes);
+		}
+		if (currentRecipes === "userRecipes") {
+			setSelectedRecipes(userRecipes);
+		}
+		if (currentRecipes === "userFavorites") {
+			setSelectedRecipes(userFavoriteRecipes);
+		}
+	},
 
 	toggleSideBarIsActive: (e) => {
 		document.querySelector(".is-active").classList.remove("is-active");
 		e.target.classList.add("is-active");
 	},
 
-	deletePopover: (ID) => {
+	deletePopover: (
+		ID,
+		currentRecipes,
+		setSelectedRecipes,
+		allRecipes,
+		setAllRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes
+	) => {
 		return (
 			<Popover id="popover-basic">
 				<Popover.Header as="h3">Delete confirmation</Popover.Header>
@@ -154,9 +218,22 @@ const userRecipeUtils = {
 					<div className="box">
 						<div className="columns is-1">
 							<button
+								type="button"
 								className="button is-danger column"
 								onClick={() => {
 									userRecipeUtils.deleteRecipe(ID);
+									userRecipeUtils.handleDelete(
+										ID,
+										currentRecipes,
+										setSelectedRecipes,
+										allRecipes,
+										setAllRecipes,
+										setAllFavoriteRecipes,
+										setFoodVilleRecipes,
+										setFoodVilleFavoriteRecipes,
+										setUserRecipes,
+										setUserFavoriteRecipes
+									);
 								}}
 							>
 								Yes
