@@ -93,7 +93,6 @@ function CreateNewRecipe(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					type="submit"
 					form="createrecipe"
 					className="button is-success"
 					onClick={async () => {

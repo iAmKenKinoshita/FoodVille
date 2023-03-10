@@ -21,7 +21,7 @@ function RecipePage(props) {
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
-	const [currentRecipes, setCurrentRecipes] = useState("");
+	const [currentRecipes, setCurrentRecipes] = useState("allRecipes");
 	const [selectedRecipes, setSelectedRecipes] = useState(null);
 	//For All Recipes
 	const [allRecipes, setAllRecipes] = useState(null);
@@ -66,7 +66,7 @@ function RecipePage(props) {
 									onClick={(e) => {
 										UserRecipeUtils.toggleSideBarIsActive(e);
 										setSelectedRecipes(allRecipes);
-										setCurrentRecipes("");
+										setCurrentRecipes("allRecipes");
 									}}
 								>
 									All
@@ -92,7 +92,7 @@ function RecipePage(props) {
 										onClick={(e) => {
 											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(foodVilleRecipes);
-											setCurrentRecipes("");
+											setCurrentRecipes("foodVilleRecipes");
 										}}
 									>
 										All
@@ -119,7 +119,7 @@ function RecipePage(props) {
 										onClick={(e) => {
 											UserRecipeUtils.toggleSideBarIsActive(e);
 											setSelectedRecipes(userRecipes);
-											setCurrentRecipes("");
+											setCurrentRecipes("userRecipes");
 										}}
 									>
 										All
@@ -139,7 +139,7 @@ function RecipePage(props) {
 							</ul>
 						</ul>
 						<button
-							className="button is-link"
+							className="button is-link new-recipe"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe
@@ -182,7 +182,7 @@ function RecipePage(props) {
 													</div>
 												</div>
 											</div>
-											<div clasNames="card">
+											<div classNames="card">
 												<footer className="card-footer buttons">
 													<a
 														onClick={() => {
@@ -220,7 +220,18 @@ function RecipePage(props) {
 													<OverlayTrigger
 														trigger="focus"
 														placement="top"
-														overlay={UserRecipeUtils.deletePopover(recipe.id)}
+														overlay={UserRecipeUtils.deletePopover(
+															recipe.id,
+															currentRecipes,
+															setSelectedRecipes,
+															allRecipes,
+															setAllRecipes,
+															setAllFavoriteRecipes,
+															setFoodVilleRecipes,
+															setFoodVilleFavoriteRecipes,
+															setUserRecipes,
+															setUserFavoriteRecipes
+														)}
 													>
 														<a
 															href="#"
