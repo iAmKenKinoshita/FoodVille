@@ -106,7 +106,6 @@ function CreateNewRecipe(props) {
 							instruction,
 							ingredients,
 						});
-						navigate("/recipes.");
 					}}
 				>
 					Create

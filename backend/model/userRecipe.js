@@ -72,7 +72,6 @@ module.exports = {
 		});
 
 		instructions = instructions.join(" ");
-		// console.log(instructions);
 
 		return knex("recipe")
 			.insert({
