@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 //Styling
 import "../../styles/pages/_recipepage.scss";
 
+//Icons
+import FVIcon from "../../images/FVIcon.png";
+
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
@@ -18,55 +21,125 @@ function RecipePage(props) {
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
 
+	const [currentRecipes, setCurrentRecipes] = useState("allRecipes");
+	const [selectedRecipes, setSelectedRecipes] = useState(null);
+	//For All Recipes
+	const [allRecipes, setAllRecipes] = useState(null);
+	const [allFavoriteRecipes, setAllFavoriteRecipes] = useState(null);
+	//For FoodVille Recipes
+	const [foodVilleRecipes, setFoodVilleRecipes] = useState(null);
+	const [foodVilleFavoriteRecipes, setFoodVilleFavoriteRecipes] =
+		useState(null);
+	//For UserRecipes
+	const [userFavoriteRecipes, setUserFavoriteRecipes] = useState(null);
+	const [userRecipes, setUserRecipes] = useState(null);
+
+	//For RecipeDetails
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 
-	// const [foodVille, setFoodVille]
-	const [recipes, setRecipes] = useState(null);
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userId = userData[0].userId;
 
 	useEffect(() => {
-		fetch(`userRecipe/recipes/1`)
-			.then((result) => result.json())
-			.then((data) => setRecipes(data));
-	});
+		UserRecipeUtils.getRecipes(
+			userId,
+			setSelectedRecipes,
+			setAllRecipes,
+			setAllFavoriteRecipes,
+			setFoodVilleRecipes,
+			setFoodVilleFavoriteRecipes,
+			setUserRecipes,
+			setUserFavoriteRecipes
+		);
+	}, []);
 
 	return (
 		<div>
 			<div className="columns">
 				<div className="column is-1 sidebar">
-					<aside class="menu">
-						<p class="menu-label">Recipes</p>
-						<ul class="menu-list">
+					<aside className="menu">
+						<p className="menu-label">Recipes</p>
+						<ul className="menu-list">
 							<li>
-								<a>All</a>
+								<a
+									className="is-active"
+									onClick={(e) => {
+										UserRecipeUtils.toggleSideBarIsActive(e);
+										setSelectedRecipes(allRecipes);
+										setCurrentRecipes("allRecipes");
+									}}
+								>
+									All
+								</a>
 							</li>
 							<li>
-								<a>Favorites</a>
+								<a
+									onClick={(e) => {
+										UserRecipeUtils.toggleSideBarIsActive(e);
+										setSelectedRecipes(allFavoriteRecipes);
+										setCurrentRecipes("allFavorites");
+									}}
+								>
+									Favorites
+								</a>
 							</li>
 						</ul>
-						<p class="menu-label">Food Ville's</p>
-						<ul class="menu-list">
-							<ul class="menu-list">
+						<p className="menu-label">Food Ville's</p>
+						<ul className="menu-list">
+							<ul className="menu-list">
 								<li>
-									<a>All</a>
+									<a
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
+											setSelectedRecipes(foodVilleRecipes);
+											setCurrentRecipes("foodVilleRecipes");
+										}}
+									>
+										All
+									</a>
 								</li>
 								<li>
-									<a>Favorites</a>
+									<a
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
+											setSelectedRecipes(foodVilleFavoriteRecipes);
+											setCurrentRecipes("foodVilleFavorites");
+										}}
+									>
+										Favorites
+									</a>
 								</li>
 							</ul>
 						</ul>
-						<p class="menu-label">Your Recipes</p>
-						<ul class="menu-list">
-							<ul class="menu-list">
+						<p className="menu-label">Your Recipes</p>
+						<ul className="menu-list">
+							<ul className="menu-list">
 								<li>
-									<a>All</a>
+									<a
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
+											setSelectedRecipes(userRecipes);
+											setCurrentRecipes("userRecipes");
+										}}
+									>
+										All
+									</a>
 								</li>
 								<li>
-									<a>Favorites</a>
+									<a
+										onClick={(e) => {
+											UserRecipeUtils.toggleSideBarIsActive(e);
+											setSelectedRecipes(userFavoriteRecipes);
+											setCurrentRecipes("userFavorites");
+										}}
+									>
+										Favorites
+									</a>
 								</li>
 							</ul>
 						</ul>
 						<button
-							class="button is-link"
+							className="button is-link new-recipe"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe
@@ -74,41 +147,100 @@ function RecipePage(props) {
 					</aside>
 				</div>
 				<div className="column recipe-holder">
-					<div class="tile is-ancestor is-flex-wrap-wrap">
-						{recipes &&
-							recipes.map((recipe, index) => {
-								// console.log(recipe);
+					<div className="tile is-ancestor is-flex-wrap-wrap">
+						{selectedRecipes &&
+							selectedRecipes.map((recipe, index) => {
 								return (
-									<div class="tile is-parent is-3">
-										<article class="tile is-child box">
-											<figure class="image">
-												<img
-													src={
-														recipe.image_url
-															? recipe.image_url
-															: "https://bulma.io/images/placeholders/256x256.png"
-													}
-												/>
-											</figure>
-											<p class="title">{recipe.name}</p>
-											{/* <p class="subtitle">{recipe.description}</p> */}
-											<div class="buttons">
-												<a
-													class="button is-primary"
-													onClick={() => {
-														setSingleRecipeShow(true);
-														setSelectedRecipe(recipes[index]);
-													}}
-												>
-													<strong>Details</strong>
-												</a>
-												<OverlayTrigger
-													trigger="focus"
-													placement="top"
-													overlay={UserRecipeUtils.deletePopover(recipe.id)}
-												>
-													<button className="button is-danger">Delete</button>
-												</OverlayTrigger>
+									<div className="tile is-parent is-3">
+										<article className="tile is-child box card">
+											<div className="card-image">
+												<figure className="image is-4by3">
+													<img
+														src={
+															recipe.image_url
+																? recipe.image_url
+																: "https://bulma.io/images/placeholders/256x256.png"
+														}
+														alt="Placeholder image"
+													/>
+												</figure>
+											</div>
+											<div className="card-content">
+												<div className="media">
+													<div className="media-content">
+														<p className="title is-4">{recipe.name}</p>
+														{/* <p class="subtitle is-6">@johnsmith</p> */}
+													</div>
+													<div className="media-left">
+														{recipe.is_fv ? (
+															<figure className="image is-48x48">
+																<img src={FVIcon} alt="Placeholder image" />
+															</figure>
+														) : (
+															""
+														)}
+													</div>
+												</div>
+											</div>
+											<div classNames="card">
+												<footer className="card-footer buttons">
+													<a
+														onClick={() => {
+															setSingleRecipeShow(true);
+															setSelectedRecipe(selectedRecipes[index]);
+														}}
+														className="card-footer-item button is-primary"
+													>
+														Details
+													</a>
+													<a
+														onClick={async () => {
+															await UserRecipeUtils.addOrRemoveFavorite(
+																recipe.id,
+																recipe.is_favorite
+															);
+															UserRecipeUtils.handleFavorite(
+																recipe,
+																currentRecipes,
+																setSelectedRecipes,
+																allRecipes,
+																setAllFavoriteRecipes,
+																setFoodVilleRecipes,
+																setFoodVilleFavoriteRecipes,
+																setUserRecipes,
+																setUserFavoriteRecipes
+															);
+														}}
+														className="card-footer-item button is-primary"
+													>
+														{!recipe.is_favorite
+															? "Add to Favorites"
+															: "Remove from Favorites"}
+													</a>
+													<OverlayTrigger
+														trigger="focus"
+														placement="top"
+														overlay={UserRecipeUtils.deletePopover(
+															recipe.id,
+															currentRecipes,
+															setSelectedRecipes,
+															allRecipes,
+															setAllRecipes,
+															setAllFavoriteRecipes,
+															setFoodVilleRecipes,
+															setFoodVilleFavoriteRecipes,
+															setUserRecipes,
+															setUserFavoriteRecipes
+														)}
+													>
+														<a
+															href="#"
+															className="card-footer-item button is-danger"
+														>
+															Delete
+														</a>
+													</OverlayTrigger>
+												</footer>
 											</div>
 										</article>
 									</div>

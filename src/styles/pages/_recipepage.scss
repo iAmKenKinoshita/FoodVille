@@ -4,6 +4,7 @@
 
 .recipe-holder {
 	margin-left: 1em;
+	margin-right: 1em;
 }
 
 .modal-content {
@@ -13,4 +14,8 @@
 .modal-backdrop {
 	display: none;
 	z-index: 1040 !important;
+}
+
+.new-recipe {
+	margin-top: 1em;
 }

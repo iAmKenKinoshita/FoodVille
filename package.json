@@ -30,11 +30,10 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"backend": "cd backend && nodemon server.js",
-		"frontend": "react-scripts start",
+		"server": "cd backend && nodemon server.js",
+		"react-app": "react-scripts start",
 		"migrate:latest": "npx knex migrate:latest --knexfile backend/db/knexfile",
 		"migrate:down": "npx knex migrate:down --knexfile backend/db/knexfile",
-		"seed:data": "npx knex seed:run --knexfile backend/db/knexfile",
 		"build": "npm install && npm run migrate:latest && react-scripts build"
 	},
 	"eslintConfig": {

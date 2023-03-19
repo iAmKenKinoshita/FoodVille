@@ -23,7 +23,6 @@ const homepageUtils = {
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
 		try {
-			console.log(selectedRecipe)
 			await fetch(`/home/saveApiRecipe/${userId}`, {
 				method: "POST",
 				headers: {
