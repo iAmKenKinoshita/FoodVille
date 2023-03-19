@@ -21,6 +21,7 @@ const homepageUtils = {
 		}
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
+		console.log("hhelo");
 		try {
 			await fetch(`/home/saveApiRecipe/${userId}`, {
 				method: "POST",

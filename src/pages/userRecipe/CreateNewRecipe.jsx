@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
+import { useNavigate } from "react-router-dom";
+
 import EditIngredients from "./EditIngredients";
 
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
 function CreateNewRecipe(props) {
+	const navigate = useNavigate();
+
 	const [ingredients, setIngredients] = useState([]);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
@@ -102,6 +106,7 @@ function CreateNewRecipe(props) {
 							instruction,
 							ingredients,
 						});
+						navigate("/recipes.");
 					}}
 				>
 					Create
