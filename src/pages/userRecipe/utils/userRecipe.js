@@ -109,7 +109,6 @@ const userRecipeUtils = {
 	) => {
 		recipe.is_favorite = !recipe.is_favorite;
 		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
-		console.log(AllFavoriteRecipes);
 		setAllFavoriteRecipes(AllFavoriteRecipes);
 
 		//Foodville Recipes
@@ -119,7 +118,6 @@ const userRecipeUtils = {
 			(recipe) => recipe.is_fv && recipe.is_favorite
 		);
 		setFoodVilleFavoriteRecipes(foodVilleFavoriteRecipes);
-		console.log(foodVilleFavoriteRecipes);
 
 		//User Recipes
 		let userRecipes = allRecipes.filter((recipe) => !recipe.is_fv);
@@ -255,7 +253,6 @@ const userRecipeUtils = {
 		setIngredients(clonedIngredients);
 	},
 	onRecipeDetailChange: ({ name, value }, recipeDetails, setRecipeDetails) => {
-		// console.log(name, value, recipeDetails, setRecipeDetails);
 		const clonedSelectedRecipe = { ...recipeDetails };
 		clonedSelectedRecipe[name] = value;
 		setRecipeDetails(clonedSelectedRecipe);

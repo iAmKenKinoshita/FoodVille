@@ -8,7 +8,7 @@ const fetch = (...args) =>
 const options = {
 	method: "GET",
 	headers: {
-		"X-RapidAPI-Key": "4a0f4158b8msh4c2e002dd23f7b9p15ff75jsn13b73e5788bb",
+		"X-RapidAPI-Key": process.env.TASTY_API,
 		"X-RapidAPI-Host": "tasty.p.rapidapi.com",
 	},
 };
