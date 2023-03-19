@@ -6,6 +6,9 @@ import HomepageUtils from "./utils/homepageUtils";
 function RecipeDetailsModal(props) {
 	const { selectedRecipe } = props;
 
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userId = userData[0].userId;
+
 	return (
 		<Modal
 			{...props}
@@ -73,7 +76,7 @@ function RecipeDetailsModal(props) {
 					onClick={async () => {
 						props.onHide();
 						// setEditRecipeShow(true);
-						HomepageUtils.saveApiRecipe(1, selectedRecipe);
+						HomepageUtils.saveApiRecipe(userId, selectedRecipe);
 					}}
 				>
 					Save
