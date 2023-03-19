@@ -5,7 +5,6 @@ function RecipeDetailsModal(props) {
 	const { selectedRecipe, setEditRecipeShow } = props;
 
 	const [ingredients, setIngredients] = useState([]);
-	// console.log(ingredients);
 
 	useEffect(() => {
 		if (selectedRecipe !== "") {

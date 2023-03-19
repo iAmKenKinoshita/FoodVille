@@ -33,7 +33,8 @@ Foodville is full-stack web application which allows users to save their own rec
 You will need to add `.env.local` file in the root folder containing:
 
 ```
-SECRET_KEY=<your_tasty_api_key>
+TASTY_API=<your_tasty_api_key>
+SECRET_KEY=<your_jwt_secret_key>
 DB_NAME=<your_db_name>
 DB_USER=<your_db_username>
 NODE_ENV=development

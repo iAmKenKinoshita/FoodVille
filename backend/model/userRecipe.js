@@ -44,7 +44,6 @@ module.exports = {
 	},
 
 	editRecipeDetails(details, id) {
-		console.log(details.is_fv);
 		return knex("recipe").where({ id: id }).update({
 			name: details.name,
 			description: details.description,
@@ -58,7 +57,6 @@ module.exports = {
 			for (const ingredient of ingredients) {
 				ingredient.recipe_id = id;
 			}
-			console.log("this is edited?", ingredients);
 			return await knex("recipe_ingredients").insert(ingredients);
 		}
 	},
