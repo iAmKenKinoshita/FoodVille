@@ -30,7 +30,7 @@ exports.createNewRecipe = async (req, res) => {
 		const is_fv = req.get("is_fv");
 		const is_favorite = req.get("is_favorite");
 
-		await userRecipeModel.createNewRecipe(
+		let recipeId = await userRecipeModel.createNewRecipe(
 			userID,
 			name,
 			description,
@@ -39,16 +39,7 @@ exports.createNewRecipe = async (req, res) => {
 			is_favorite
 		);
 
-		let allRecipes = [];
-
-		let data = await userRecipeModel.getAllRecipeList(userID).then((data) => {
-			allRecipes = data;
-		});
-
-		let recipe = allRecipes.find((recipe) => recipe.name === name);
-		let RecipeId = recipe.id;
-
-		await userRecipeModel.editRecipeIngredients(ingredients, RecipeId);
+		// await userRecipeModel.editRecipeIngredients(ingredients, recipeId[0].id);
 
 		res.status(200).send("Created new recipe");
 	} catch (error) {

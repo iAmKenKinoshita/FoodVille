@@ -9,15 +9,25 @@ import EditIngredients from "./EditIngredients";
 import UserRecipeUtils from "./utils/userRecipe";
 
 function CreateNewRecipe(props) {
-	const navigate = useNavigate();
+	const {
+		userId,
+		setSelectedRecipes,
+		setAllRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes,
+		setCreateRecipeShow,
+	} = props;
 
 	const [ingredients, setIngredients] = useState([]);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [instruction, setInstruction] = useState("");
 
-	const userData = JSON.parse(localStorage.getItem("userData"));
-	const userId = userData[0].userId;
+	// const userData = JSON.parse(localStorage.getItem("userData"));
+	// const userId = userData[0].userId;
 
 	return (
 		<Modal
@@ -99,13 +109,27 @@ function CreateNewRecipe(props) {
 				<button
 					form="createrecipe"
 					className="button is-success"
-					onClick={async () => {
+					onClick={async (e) => {
+						e.preventDefault();
 						await UserRecipeUtils.addNewRecipe(userId, {
 							name,
 							description,
 							instruction,
 							ingredients,
 						});
+						console.log(userId);
+
+						await UserRecipeUtils.getRecipes(
+							userId,
+							setSelectedRecipes,
+							setAllRecipes,
+							setAllFavoriteRecipes,
+							setFoodVilleRecipes,
+							setFoodVilleFavoriteRecipes,
+							setUserRecipes,
+							setUserFavoriteRecipes
+						);
+						setCreateRecipeShow(false);
 					}}
 				>
 					Create
