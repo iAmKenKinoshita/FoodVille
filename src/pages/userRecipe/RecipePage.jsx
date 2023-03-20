@@ -251,6 +251,15 @@ function RecipePage(props) {
 			<CreateNewRecipe
 				show={createRecipeShow}
 				onHide={() => setCreateRecipeShow(false)}
+				userId={userId}
+				setSelectedRecipes={setSelectedRecipes}
+				setAllRecipes={setAllRecipes}
+				setAllFavoriteRecipes={setAllFavoriteRecipes}
+				setFoodVilleRecipes={setFoodVilleRecipes}
+				setFoodVilleFavoriteRecipes={setFoodVilleFavoriteRecipes}
+				setUserRecipes={setUserRecipes}
+				setUserFavoriteRecipes={setUserFavoriteRecipes}
+				setCreateRecipeShow={setCreateRecipeShow}
 			/>
 			<RecipeDetailsModal
 				show={singleRecipeShow}

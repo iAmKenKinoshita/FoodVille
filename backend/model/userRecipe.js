@@ -26,14 +26,16 @@ module.exports = {
 	},
 
 	createNewRecipe(userId, name, description, instruction, is_fv, is_favorite) {
-		return knex("recipe").insert({
-			user_id: userId,
-			name: name,
-			description: description,
-			instruction: instruction,
-			is_fv: is_fv,
-			is_favorite: is_favorite,
-		});
+		return knex("recipe")
+			.insert({
+				user_id: userId,
+				name: name,
+				description: description,
+				instruction: instruction,
+				is_fv: is_fv,
+				is_favorite: is_favorite,
+			})
+			.returning("id");
 	},
 
 	deleteIngredients(id) {
