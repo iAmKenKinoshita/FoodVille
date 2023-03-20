@@ -21,10 +21,12 @@ function App() {
 	const [searchRecipes, setSearchRecipes] = useState([]);
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
+	const [userId, setUserId] = useState(null);
 
 	useEffect(() => {
 		if (userData) {
 			setUser(true);
+			setUserId(userData[0].userId);
 		}
 	}, [user]);
 
@@ -38,6 +40,8 @@ function App() {
 						<>
 							<Navbar user={user} setUser={setUser} />
 							<Homepage
+								user={user}
+								userId={userId}
 								searchRecipes={searchRecipes}
 								setSearchRecipes={setSearchRecipes}
 							/>

@@ -4,10 +4,7 @@ import { Modal } from "react-bootstrap";
 import HomepageUtils from "./utils/homepageUtils";
 
 function RecipeDetailsModal(props) {
-	const { selectedRecipe } = props;
-
-	const userData = JSON.parse(localStorage.getItem("userData"));
-	const userId = userData[0].userId;
+	const { selectedRecipe, user, userId } = props;
 
 	return (
 		<Modal
@@ -76,7 +73,11 @@ function RecipeDetailsModal(props) {
 					onClick={async () => {
 						props.onHide();
 						// setEditRecipeShow(true);
-						HomepageUtils.saveApiRecipe(userId, selectedRecipe);
+						if (user && userId !== null) {
+							HomepageUtils.saveApiRecipe(userId, selectedRecipe);
+						}
+
+						
 					}}
 				>
 					Save

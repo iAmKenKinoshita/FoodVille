@@ -34,7 +34,6 @@ const homepageController = {
 			const userId = req.params.id;
 			let recipeID = await userRecipeModel.saveApiRecipe(userId, data);
 			await userRecipeModel.saveApiRecipeIngredients(recipeID[0].id, data);
-			console.log("it is here", userId, recipeID);
 		} catch (error) {
 			console.log(error);
 		}

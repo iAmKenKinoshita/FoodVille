@@ -9,7 +9,7 @@ import RecipeDetailsModal from "./RecipeDetailsModal";
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
-	const { searchRecipes, setSearchRecipes } = props;
+	const { user, userId, searchRecipes, setSearchRecipes } = props;
 
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
@@ -83,23 +83,47 @@ export default function Homepage(props) {
 						{searchRecipes.map((recipe, index) => {
 							return (
 								<div class="tile is-parent is-3">
-									<article class="tile is-child box">
-										<figure class="image is-square is-256x256">
-											<img src={recipe.thumbnail_url} />
-										</figure>
-										<p class="title">{recipe.name}</p>
+									<article class="tile is-child box card">
+										<div className="card-image">
+											<figure class="image is-square is-4by3">
+												<img src={recipe.thumbnail_url} />
+											</figure>
+										</div>
+										<div className="card-content">
+											<div className="media">
+												<div className="media-content">
+													<p className="title is-4">{recipe.name}</p>
+													{/* <p class="subtitle is-6">@johnsmith</p> */}
+												</div>
+											</div>
+										</div>
+
 										{/* <p class="subtitle">{recipe.description}</p> */}
-										<div class="buttons">
+
+										<footer class="card-footer buttons">
 											<a
-												class="button is-primary"
+												class="button is-primary card-footer-item"
 												onClick={() => {
 													setSelectedRecipeShow(true);
 													setSelectedRecipe(recipe);
 												}}
 											>
-												<strong>Details</strong>
+												Details
 											</a>
-										</div>
+											<a
+												className="button is-primary card-footer-item"
+												onClick={() => {
+													if (user && userId !== null) {
+														HomepageUtils.saveApiRecipe(userId, recipe);
+													}
+													if (!user) {
+														console.log("Create an account first");
+													}
+												}}
+											>
+												Save
+											</a>
+										</footer>
 									</article>
 								</div>
 							);
@@ -113,6 +137,8 @@ export default function Homepage(props) {
 				show={selectedRecipeShow}
 				onHide={() => setSelectedRecipeShow(false)}
 				selectedRecipe={selectedRecipe}
+				user={user}
+				userId={userId}
 			/>
 		</>
 	);

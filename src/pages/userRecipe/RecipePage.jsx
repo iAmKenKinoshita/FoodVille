@@ -182,66 +182,65 @@ function RecipePage(props) {
 													</div>
 												</div>
 											</div>
-											<div classNames="card">
-												<footer className="card-footer buttons">
-													<a
-														onClick={() => {
-															setSingleRecipeShow(true);
-															setSelectedRecipe(selectedRecipes[index]);
-														}}
-														className="card-footer-item button is-primary"
-													>
-														Details
-													</a>
-													<a
-														onClick={async () => {
-															await UserRecipeUtils.addOrRemoveFavorite(
-																recipe.id,
-																recipe.is_favorite
-															);
-															UserRecipeUtils.handleFavorite(
-																recipe,
-																currentRecipes,
-																setSelectedRecipes,
-																allRecipes,
-																setAllFavoriteRecipes,
-																setFoodVilleRecipes,
-																setFoodVilleFavoriteRecipes,
-																setUserRecipes,
-																setUserFavoriteRecipes
-															);
-														}}
-														className="card-footer-item button is-primary"
-													>
-														{!recipe.is_favorite
-															? "Add to Favorites"
-															: "Remove from Favorites"}
-													</a>
-													<OverlayTrigger
-														trigger="focus"
-														placement="top"
-														overlay={UserRecipeUtils.deletePopover(
+
+											<footer className="card-footer buttons">
+												<a
+													onClick={() => {
+														setSingleRecipeShow(true);
+														setSelectedRecipe(selectedRecipes[index]);
+													}}
+													className="card-footer-item button is-primary"
+												>
+													Details
+												</a>
+												<a
+													onClick={async () => {
+														await UserRecipeUtils.addOrRemoveFavorite(
 															recipe.id,
+															recipe.is_favorite
+														);
+														UserRecipeUtils.handleFavorite(
+															recipe,
 															currentRecipes,
 															setSelectedRecipes,
 															allRecipes,
-															setAllRecipes,
 															setAllFavoriteRecipes,
 															setFoodVilleRecipes,
 															setFoodVilleFavoriteRecipes,
 															setUserRecipes,
 															setUserFavoriteRecipes
-														)}
+														);
+													}}
+													className="card-footer-item button is-primary"
+												>
+													{!recipe.is_favorite
+														? "Add to Favorites"
+														: "Remove from Favorites"}
+												</a>
+												<OverlayTrigger
+													trigger="focus"
+													placement="top"
+													overlay={UserRecipeUtils.deletePopover(
+														recipe.id,
+														currentRecipes,
+														setSelectedRecipes,
+														allRecipes,
+														setAllRecipes,
+														setAllFavoriteRecipes,
+														setFoodVilleRecipes,
+														setFoodVilleFavoriteRecipes,
+														setUserRecipes,
+														setUserFavoriteRecipes
+													)}
+												>
+													<a
+														href="#"
+														className="card-footer-item button is-danger"
 													>
-														<a
-															href="#"
-															className="card-footer-item button is-danger"
-														>
-															Delete
-														</a>
-													</OverlayTrigger>
-												</footer>
-											</div>
+														Delete
+													</a>
+												</OverlayTrigger>
+											</footer>
 										</article>
 									</div>
 								);
