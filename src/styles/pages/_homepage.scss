@@ -1,22 +1,24 @@
 @use "../main" as *;
 
 .homepage-container {
-	height: 100vh;
-	// display: grid;
-	// grid-template-columns: 1fr minmax(min-content, 1fr) 1fr;
-	// align-items: center;
+	// background-color: #6f6965;
+	height: calc(100vh - 3.6rem);
 }
 
 .search-bar {
 	margin-top: 2em;
 }
 
-.recipe-container {
-	background-color: transparent;
+.search-bar .button {
+	background-color: #6f6965 !important;
 }
-// body {
-// 	height: 100vh;
-// }
+
+.recipe-container {
+	background-color: #6f6965;
+	overflow: auto;
+	height: 60rem;
+	padding: 10px;
+}
 
 // .homepage-container {
 // 	height: auto;

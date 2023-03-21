@@ -26,8 +26,8 @@ export default function Homepage(props) {
 
 	return (
 		<div className="homepage-container">
-			<div className="columns">
-				<div className="column is-6 is-offset-one-quarter box search-bar">
+			<div className="columns is-mobile">
+				<div className="column is-4 is-offset-4 box search-bar">
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
@@ -81,11 +81,23 @@ export default function Homepage(props) {
 				</div>
 			</div>
 
+			
 			{searchRecipes.length > 0 ? (
-				<div className="box recipe-container">
-					{searchRecipes.length > 0
-						? `${searchRecipes.length} matching results`
-						: ""}
+				<div className="columns">
+					<div className="column is-offset-2">
+						<h6 className="subtitle is-6">
+							{searchRecipes.length} matching results
+						</h6>
+					</div>
+				</div>
+				
+			) : (
+				""
+			)}
+			<div className="columns">
+			{searchRecipes.length > 0 ? (
+				<div className="box recipe-container column is-8 is-offset-2">
+					
 					<div className="tile ancestor is-flex-wrap-wrap">
 						{searchRecipes.map((recipe, index) => {
 							return (
@@ -158,6 +170,7 @@ export default function Homepage(props) {
 			) : (
 				""
 			)}
+			</div>
 			<RecipeDetailsModal
 				show={selectedRecipeShow}
 				onHide={() => setSelectedRecipeShow(false)}
