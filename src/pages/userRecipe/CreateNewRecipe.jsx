@@ -117,7 +117,6 @@ function CreateNewRecipe(props) {
 							instruction,
 							ingredients,
 						});
-						console.log(userId);
 
 						await UserRecipeUtils.getRecipes(
 							userId,

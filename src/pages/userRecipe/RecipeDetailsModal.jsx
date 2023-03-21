@@ -29,15 +29,15 @@ function RecipeDetailsModal(props) {
 			<Modal.Body>
 				{selectedRecipe.description ? (
 					<>
-						<h3 class="title is-6">Description</h3>
-						<h5 class="subtitle is-5">{selectedRecipe.description}</h5>
+						<h3 className="title is-6">Description</h3>
+						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
 					</>
 				) : (
 					""
 				)}
 
-				<div class="table-container">
-					<table class="table is-striped">
+				<div className="table-container">
+					<table className="table is-striped">
 						<thead>{ingredients.length < 1 ? "" : <th>Ingredients</th>}</thead>
 						<tbody>
 							{ingredients.map((ingredient) => {
@@ -53,8 +53,8 @@ function RecipeDetailsModal(props) {
 							})}
 						</tbody>
 					</table>
-					<h3 class="title is-6">Instruction</h3>
-					<h5 class="subtitle is-5">{selectedRecipe.instruction}</h5>
+					<h3 className="title is-6">Instruction</h3>
+					<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
