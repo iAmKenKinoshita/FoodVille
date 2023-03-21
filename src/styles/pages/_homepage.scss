@@ -1,5 +1,19 @@
 @use "../main" as *;
 
+.homepage-container {
+	height: 100vh;
+	// display: grid;
+	// grid-template-columns: 1fr minmax(min-content, 1fr) 1fr;
+	// align-items: center;
+}
+
+.search-bar {
+	margin-top: 2em;
+}
+
+.recipe-container {
+	background-color: transparent;
+}
 // body {
 // 	height: 100vh;
 // }

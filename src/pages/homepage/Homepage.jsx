@@ -25,9 +25,9 @@ export default function Homepage(props) {
 	useEffect(() => {}, [searchRecipes]);
 
 	return (
-		<>
+		<div className="homepage-container">
 			<div className="columns">
-				<div className="column is-6 is-offset-one-quarter box">
+				<div className="column is-6 is-offset-one-quarter box search-bar">
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
@@ -82,7 +82,7 @@ export default function Homepage(props) {
 			</div>
 
 			{searchRecipes.length > 0 ? (
-				<div className="box">
+				<div className="box recipe-container">
 					{searchRecipes.length > 0
 						? `${searchRecipes.length} matching results`
 						: ""}
@@ -165,6 +165,6 @@ export default function Homepage(props) {
 				user={user}
 				userId={userId}
 			/>
-		</>
+		</div>
 	);
 }
