@@ -46,6 +46,12 @@ const userUtils = {
 		try {
 			localStorage.removeItem("user");
 			localStorage.removeItem("userData");
+
+			//Return saved button to save
+			var buttons = document.getElementsByTagName("button");
+			for (let i = 0; i < buttons.length; i++) {
+				buttons[i].disabled = false;
+			}
 		} catch (error) {
 			console.log(error);
 		}

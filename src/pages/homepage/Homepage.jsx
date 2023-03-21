@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+//Bootstrap
+import { OverlayTrigger } from "react-bootstrap";
+
+import { useNavigate } from "react-router-dom";
+
 //Styling
 import "../../styles/pages/_homepage.scss";
 
@@ -9,6 +14,8 @@ import RecipeDetailsModal from "./RecipeDetailsModal";
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
+	const navigate = useNavigate();
+
 	const { user, userId, searchRecipes, setSearchRecipes } = props;
 
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
@@ -110,19 +117,37 @@ export default function Homepage(props) {
 											>
 												Details
 											</a>
-											<a
-												className="button is-primary card-footer-item"
-												onClick={() => {
-													if (user && userId !== null) {
-														HomepageUtils.saveApiRecipe(userId, recipe);
-													}
-													if (!user) {
-														console.log("Create an account first");
-													}
-												}}
-											>
-												Save
-											</a>
+											{user && userId !== null ? (
+												<button
+													className="button is-primary card-footer-item"
+													disabled={recipe.disabled}
+													onClick={(e) => {
+														if (user && userId !== null) {
+															HomepageUtils.saveApiRecipe(userId, recipe);
+															e.target.disabled = true;
+															recipe.disabled = true;
+															e.target.innerText = "Saved";
+														}
+														if (!user) {
+														}
+													}}
+												>
+													{recipe.disabled ? "Saved" : "Save"}
+												</button>
+											) : (
+												<OverlayTrigger
+													trigger="focus"
+													placement="top"
+													overlay={HomepageUtils.logInPopover(navigate)}
+												>
+													<a
+														href="#"
+														className="card-footer-item button is-primary"
+													>
+														Save
+													</a>
+												</OverlayTrigger>
+											)}
 										</footer>
 									</article>
 								</div>
