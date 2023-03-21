@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 //UserUtils
 import UserUtils from "./user/utils/userUtils";
 
+//Styling
+import "../styles/pages/_navBar.scss";
+
 //Bootstrap
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -14,7 +17,7 @@ import FVLogo from "../images/FoodVille.png";
 
 export default function NavBar(props) {
 	const navigate = useNavigate();
-	const { user, setUser } = props;
+	const { user, setUser, userName } = props;
 
 	// const loggedIn = localStorage.getItem("user");
 
@@ -60,100 +63,131 @@ export default function NavBar(props) {
 
 		//New Code
 
-		<>
-			<nav class="navbar" role="navigation" aria-label="main navigation">
-				<div class="navbar-brand">
-					<a class="navbar-item" onClick={() => navigate("/")}>
-						<img src={FVLogo} width="112" height="28" />
-					</a>
+		<nav className="navbar" role="navigation" aria-label="main navigation">
+			<div className="navbar-brand">
+				<a className="navbar-item" onClick={() => navigate("/")}>
+					<img src={FVLogo} width="112" height="28" />
+				</a>
 
+				<a
+					role="button"
+					className="navbar-burger"
+					aria-label="menu"
+					aria-expanded="false"
+					data-target="navbarBasicExample"
+					onClick={() => {
+						let navBurger = document.querySelector(".navbar-burger");
+						navBurger.classList.toggle("is-active");
+						let navBar = document.querySelector("#navbarBasicExample");
+						navBar.classList.toggle("is-active");
+					}}
+				>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+
+			<div id="navbarBasicExample" className="navbar-menu">
+				<div className="navbar-start">
 					<a
-						role="button"
-						class="navbar-burger"
-						aria-label="menu"
-						aria-expanded="false"
-						data-target="navbarBasicExample"
+						className="navbar-item"
+						onClick={() => {
+							navigate("/");
+							let width = window.innerWidth;
+							if (width <= 1023) {
+								let navBurger = document.querySelector(".navbar-burger");
+								navBurger.classList.toggle("is-active");
+								let navBar = document.querySelector("#navbarBasicExample");
+								navBar.classList.toggle("is-active");
+							}
+						}}
 					>
-						<span aria-hidden="true"></span>
-						<span aria-hidden="true"></span>
-						<span aria-hidden="true"></span>
+						Home
 					</a>
-				</div>
 
-				<div id="navbarBasicExample" class="navbar-menu">
-					<div class="navbar-start">
+					{user === true ? (
 						<a
 							class="navbar-item"
 							onClick={() => {
-								navigate("/");
+								navigate("/recipes");
+								let width = window.innerWidth;
+								if (width <= 1023) {
+									let navBurger = document.querySelector(".navbar-burger");
+									navBurger.classList.toggle("is-active");
+									let navBar = document.querySelector("#navbarBasicExample");
+									navBar.classList.toggle("is-active");
+								}
 							}}
 						>
-							Home
+							Recipes
 						</a>
-
-						{user === true ? (
-							<a
-								class="navbar-item"
-								onClick={() => {
-									navigate("/recipes");
-								}}
-							>
-								Recipes
-							</a>
-						) : (
-							""
-						)}
-					</div>
-
-					<div class="navbar-end">
-						<div class="navbar-item">
-							<div class="buttons">
-								{user === true ||
-								window.location.pathname === "/signIn" ||
-								window.location.pathname === "/signUp" ? (
-									""
-								) : (
-									<>
-									<a
-										class="button is-primary"
-										onClick={() => navigate("/signIn")}
-									>
-										<strong>Sign In</strong>
-									</a>
-									<a
-										class="button is-primary"
-										onClick={() => navigate("/signIn")}
-									>
-										<strong>Sign In</strong>
-									</a>
-									</>
-								)}
-							</div>
-							{user === true ? (
-								<div class="navbar-item has-dropdown is-hoverable">
-									<a class="navbar-link">User's Name</a>
-
-									<div class="navbar-dropdown is-right">
-										<a class="navbar-item">My Profile</a>
-										<a
-											class="navbar-item"
-											onClick={() => {
-												UserUtils.signOut();
-												setUser(false);
-												navigate("/");
-											}}
-										>
-											Log Out
-										</a>
-									</div>
-								</div>
-							) : (
-								""
-							)}
-						</div>
-					</div>
+					) : (
+						""
+					)}
 				</div>
-			</nav>
-		</>
+
+				<div className="navbar-end">
+					{user === true ||
+					window.location.pathname === "/signIn" ||
+					window.location.pathname === "/signUp" ? (
+						""
+					) : (
+						<>
+							<div className="navbar-item">
+								<a
+									className="button is-primary"
+									onClick={() => {
+										navigate("/signIn");
+										let width = window.innerWidth;
+										if (width <= 1023) {
+											let navBurger = document.querySelector(".navbar-burger");
+											navBurger.classList.toggle("is-active");
+											let navBar = document.querySelector(
+												"#navbarBasicExample"
+											);
+											navBar.classList.toggle("is-active");
+										}
+									}}
+								>
+									<strong>Sign In</strong>
+								</a>
+							</div>
+						</>
+					)}
+
+					{user === true ? (
+						<div className="navbar-item has-dropdown is-hoverable">
+							<a className="navbar-link">{userName}</a>
+
+							<div className="navbar-dropdown is-right">
+								{/* <a className="navbar-item">My Profile</a> */}
+								<a
+									className="navbar-item"
+									onClick={() => {
+										UserUtils.signOut();
+										setUser(false);
+										navigate("/");
+										let width = window.innerWidth;
+										if (width <= 1023) {
+											let navBurger = document.querySelector(".navbar-burger");
+											navBurger.classList.toggle("is-active");
+											let navBar = document.querySelector(
+												"#navbarBasicExample"
+											);
+											navBar.classList.toggle("is-active");
+										}
+									}}
+								>
+									Log Out
+								</a>
+							</div>
+						</div>
+					) : (
+						""
+					)}
+				</div>
+			</div>
+		</nav>
 	);
 }

@@ -21,15 +21,15 @@ function RecipeDetailsModal(props) {
 			<Modal.Body>
 				{selectedRecipe.description ? (
 					<>
-						<h3 class="title is-6">Description</h3>
-						<h5 class="subtitle is-5">{selectedRecipe.description}</h5>
+						<h3 className="title is-6">Description</h3>
+						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
 					</>
 				) : (
 					""
 				)}
 
-				<div class="table-container">
-					<table class="table is-striped">
+				<div className="table-container">
+					<table className="table is-striped">
 						<thead>
 							<th>Ingredients</th>
 						</thead>
@@ -52,13 +52,13 @@ function RecipeDetailsModal(props) {
 								})}
 						</tbody>
 					</table>
-					<h3 class="title is-6">Instruction</h3>
+					<h3 className="title is-6">Instruction</h3>
 
 					{selectedRecipe.instructions &&
 						selectedRecipe.instructions.map((instruction, index) => {
 							return (
 								<>
-									<p class="is-6">
+									<p className="is-6">
 										{index + 1 + ". "}
 										{instruction.display_text}
 									</p>
@@ -76,8 +76,6 @@ function RecipeDetailsModal(props) {
 						if (user && userId !== null) {
 							HomepageUtils.saveApiRecipe(userId, selectedRecipe);
 						}
-
-						
 					}}
 				>
 					Save
