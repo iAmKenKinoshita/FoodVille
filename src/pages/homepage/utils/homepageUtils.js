@@ -44,7 +44,7 @@ const homepageUtils = {
 					<a href="javascript:void(0);" onClick={() => navigate("/signIn")}>
 						<strong>here</strong>
 					</a>{" "}
-					to sign in and save this recipe!
+					to sign-in and save this recipe!
 				</Popover.Body>
 			</Popover>
 		);

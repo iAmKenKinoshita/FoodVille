@@ -113,12 +113,20 @@ export default function NavBar(props) {
 								window.location.pathname === "/signUp" ? (
 									""
 								) : (
+									<>
 									<a
 										class="button is-primary"
 										onClick={() => navigate("/signIn")}
 									>
 										<strong>Sign In</strong>
 									</a>
+									<a
+										class="button is-primary"
+										onClick={() => navigate("/signIn")}
+									>
+										<strong>Sign In</strong>
+									</a>
+									</>
 								)}
 							</div>
 							{user === true ? (
