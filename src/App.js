@@ -21,12 +21,14 @@ function App() {
 	const [searchRecipes, setSearchRecipes] = useState([]);
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
+	const [userName, setUserName] = useState(null);
 	const [userId, setUserId] = useState(null);
 
 	useEffect(() => {
 		if (userData) {
 			setUser(true);
 			setUserId(userData[0].userId);
+			setUserName(userData[0].userName);
 		}
 	}, [user]);
 
@@ -38,7 +40,7 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} />
+							<Navbar user={user} setUser={setUser} userName={userName} />
 							<Homepage
 								user={user}
 								userId={userId}
@@ -54,7 +56,7 @@ function App() {
 					path="/signIn"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} />
+							<Navbar user={user} setUser={setUser} userName={userName} />
 							<SignIn user={user} setUser={setUser} />
 						</>
 					}
@@ -64,7 +66,7 @@ function App() {
 					path="/signUp"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} />
+							<Navbar user={user} setUser={setUser} userName={userName} />
 							<SignUp user={user} setUser={setUser} />
 						</>
 					}
@@ -74,7 +76,7 @@ function App() {
 					path="/recipes"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} />
+							<Navbar user={user} setUser={setUser} userName={userName} />
 							<RecipePage user={user} />
 						</>
 					}

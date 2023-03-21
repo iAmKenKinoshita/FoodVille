@@ -34,10 +34,10 @@ export default function Homepage(props) {
 							HomepageUtils.searchRecipe(setSearchRecipes, query);
 						}}
 					>
-						<div class="field is-grouped">
-							<p class="control is-expanded">
+						<div className="field is-grouped">
+							<p className="control is-expanded">
 								<input
-									class="input"
+									className="input"
 									type="text"
 									placeholder="Enter an ingredient or a recipe name (i.e. burger)"
 									onChange={(e) => {
@@ -45,29 +45,29 @@ export default function Homepage(props) {
 									}}
 								/>
 							</p>
-							<p class="control">
-								<button class="button is-info">Search</button>
+							<p className="control">
+								<button className="button is-info">Search</button>
 							</p>
 						</div>
 
 						{/*For Filter Features */}
-						{/* <div class="field is-grouped">
-							<div class="dropdown is-hoverable">
-								<div class="dropdown-trigger">
+						{/* <div className="field is-grouped">
+							<div className="dropdown is-hoverable">
+								<div className="dropdown-trigger">
 									<button
-										class="button"
+										className="button"
 										aria-haspopup="true"
 										aria-controls="dropdown-menu4"
 									>
 										<span>Hover me</span>
-										<span class="icon is-small">
-											<i class="fas fa-angle-down" aria-hidden="true"></i>
+										<span className="icon is-small">
+											<i className="fas fa-angle-down" aria-hidden="true"></i>
 										</span>
 									</button>
 								</div>
-								<div class="dropdown-menu" id="dropdown-menu4" role="menu">
-									<div class="dropdown-content">
-										<div class="dropdown-item">
+								<div className="dropdown-menu" id="dropdown-menu4" role="menu">
+									<div className="dropdown-content">
+										<div className="dropdown-item">
 											<p>
 												You can insert <strong>any type of content</strong>{" "}
 												within the dropdown menu.
@@ -89,10 +89,10 @@ export default function Homepage(props) {
 					<div className="tile ancestor is-flex-wrap-wrap">
 						{searchRecipes.map((recipe, index) => {
 							return (
-								<div class="tile is-parent is-3">
-									<article class="tile is-child box card">
-										<div className="card-image">
-											<figure class="image is-square is-4by3">
+								<div className="tile is-parent is-3">
+									<article className="tile is-child box card">
+										<div classNameName="card-image">
+											<figure className="image is-square is-4by3">
 												<img src={recipe.thumbnail_url} />
 											</figure>
 										</div>
@@ -100,16 +100,16 @@ export default function Homepage(props) {
 											<div className="media">
 												<div className="media-content">
 													<p className="title is-4">{recipe.name}</p>
-													{/* <p class="subtitle is-6">@johnsmith</p> */}
+													{/* <p className="subtitle is-6">@johnsmith</p> */}
 												</div>
 											</div>
 										</div>
 
-										{/* <p class="subtitle">{recipe.description}</p> */}
+										{/* <p className="subtitle">{recipe.description}</p> */}
 
-										<footer class="card-footer buttons">
+										<footer className="card-footer buttons">
 											<a
-												class="button is-primary card-footer-item"
+												className="button is-primary card-footer-item"
 												onClick={() => {
 													setSelectedRecipeShow(true);
 													setSelectedRecipe(recipe);
