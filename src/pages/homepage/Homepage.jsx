@@ -110,19 +110,22 @@ export default function Homepage(props) {
 											>
 												Details
 											</a>
-											<a
+											<button
 												className="button is-primary card-footer-item"
-												onClick={() => {
+												disabled={recipe.disabled}
+												onClick={(e) => {
 													if (user && userId !== null) {
 														HomepageUtils.saveApiRecipe(userId, recipe);
+														e.target.disabled = true;
+														recipe.disabled = true;
 													}
 													if (!user) {
 														console.log("Create an account first");
 													}
 												}}
 											>
-												Save
-											</a>
+												{recipe.disabled ? "Saved" : "Save"}
+											</button>
 										</footer>
 									</article>
 								</div>
