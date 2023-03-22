@@ -107,6 +107,9 @@ export default function NavBar(props) {
 							}
 						}}
 					>
+						<span class="icon">
+							<i class="fas fa-home"></i>
+						</span>
 						<strong>Home</strong>
 					</a>
 
@@ -124,6 +127,9 @@ export default function NavBar(props) {
 								}
 							}}
 						>
+							<span class="icon">
+								<i class="fas fa-utensils"></i>
+							</span>
 							<strong>Recipes</strong>
 						</a>
 					) : (
@@ -163,6 +169,9 @@ export default function NavBar(props) {
 					{user === true ? (
 						<div className="navbar-item has-dropdown is-hoverable">
 							<a className="navbar-link">
+								<span class="icon">
+									<i class="fas fa-user"></i>
+								</span>
 								<strong>{userName}</strong>
 							</a>
 
