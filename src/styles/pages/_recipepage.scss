@@ -1,10 +1,23 @@
 .sidebar {
 	margin-left: 1em;
+	margin-top: 1em;
+	color: white;
 }
 
-.recipe-holder {
-	margin-left: 1em;
-	margin-right: 1em;
+.menu-label {
+	color: white;
+	font-weight: bolder;
+}
+
+.recipe-container-recipepage {
+	background-color: white;
+	margin: 3rem;
+	overflow: auto;
+	height: 65rem;
+	padding: 2em;
+	border: 2px solid #6f6965;
+	border-radius: 5px;
+	overflow-x: hidden;
 }
 
 .modal-content {
@@ -18,4 +31,7 @@
 
 .new-recipe {
 	margin-top: 1em;
+	background-color: #6f6965;
+	color: white;
+	border: 3px solid;
 }

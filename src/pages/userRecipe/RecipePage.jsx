@@ -139,20 +139,20 @@ function RecipePage(props) {
 							</ul>
 						</ul>
 						<button
-							className="button is-link new-recipe"
+							className="button new-recipe"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe
 						</button>
 					</aside>
 				</div>
-				<div className="column recipe-holder">
+				<div className="column recipe-container-recipepage">
 					<div className="tile is-ancestor is-flex-wrap-wrap">
 						{selectedRecipes &&
 							selectedRecipes.map((recipe, index) => {
 								return (
 									<div className="tile is-parent is-3">
-										<article className="tile is-child box card">
+										<article className="tile is-child card">
 											<div className="card-image">
 												<figure className="image is-4by3">
 													<img
@@ -161,14 +161,14 @@ function RecipePage(props) {
 																? recipe.image_url
 																: "https://bulma.io/images/placeholders/256x256.png"
 														}
-														alt="Placeholder image"
+														alt="Food Image"
 													/>
 												</figure>
 											</div>
 											<div className="card-content">
 												<div className="media">
 													<div className="media-content">
-														<p className="title is-4">{recipe.name}</p>
+														<p className="title is-6">{recipe.name}</p>
 														{/* <p class="subtitle is-6">@johnsmith</p> */}
 													</div>
 													<div className="media-left">
@@ -183,13 +183,13 @@ function RecipePage(props) {
 												</div>
 											</div>
 
-											<footer className="card-footer buttons">
+											<footer className="card-footer">
 												<a
 													onClick={() => {
 														setSingleRecipeShow(true);
 														setSelectedRecipe(selectedRecipes[index]);
 													}}
-													className="card-footer-item button is-primary"
+													className="card-footer-item"
 												>
 													Details
 												</a>
@@ -211,7 +211,7 @@ function RecipePage(props) {
 															setUserFavoriteRecipes
 														);
 													}}
-													className="card-footer-item button is-primary"
+													className="card-footer-item"
 												>
 													{!recipe.is_favorite
 														? "Add to Favorites"
@@ -233,10 +233,7 @@ function RecipePage(props) {
 														setUserFavoriteRecipes
 													)}
 												>
-													<a
-														href="#"
-														className="card-footer-item button is-danger"
-													>
+													<a href="#" className="card-footer-item">
 														Delete
 													</a>
 												</OverlayTrigger>
