@@ -1,18 +1,52 @@
 @use "../main" as *;
 
-// body {
-// 	height: 100vh;
-// }
+body,
+html {
+	height: 100%;
+	margin: 0;
+	background-color: #6f6965;
+}
 
-// .homepage-container {
-// 	height: auto;
-// 	display: flex;
-// 	flex-direction: column;
-// }
+.search-bar {
+	margin-top: 2em;
+}
 
-// .footer {
-// 	background-color: pink;
-// }
+.search-bar .button {
+	background-color: #6f6965;
+}
+.card-content {
+	height: 4em;
+}
+
+.image {
+	overflow: hidden;
+}
+
+.is-child {
+	border: 1px solid #6f6965;
+	border-radius: 7px;
+}
+
+.recipe-container {
+	// background-color: #efa24d;
+	overflow: auto;
+	height: 60rem;
+	padding: 10px;
+	border: 2px solid #6f6965;
+}
+
+.result {
+	color: white;
+}
+
+.card-footer {
+	background-color: #efa24d;
+}
+
+.card-footer-item {
+	color: white;
+}
+
 @media screen and (max-width: 1023px) {
 	.column {
 		margin: 1.5em;
