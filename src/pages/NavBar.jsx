@@ -63,10 +63,14 @@ export default function NavBar(props) {
 
 		//New Code
 
-		<nav className="navbar" role="navigation" aria-label="main navigation">
+		<nav
+			className="navbar is-primary"
+			role="navigation"
+			aria-label="main navigation"
+		>
 			<div className="navbar-brand">
 				<a className="navbar-item" onClick={() => navigate("/")}>
-					<img src={FVLogo} width="112" height="28" />
+					<img src={FVLogo} width="190px" />
 				</a>
 
 				<a
@@ -103,7 +107,10 @@ export default function NavBar(props) {
 							}
 						}}
 					>
-						Home
+						<span class="icon">
+							<i class="fas fa-home"></i>
+						</span>
+						<strong>Home</strong>
 					</a>
 
 					{user === true ? (
@@ -120,7 +127,10 @@ export default function NavBar(props) {
 								}
 							}}
 						>
-							Recipes
+							<span class="icon">
+								<i class="fas fa-utensils"></i>
+							</span>
+							<strong>Recipes</strong>
 						</a>
 					) : (
 						""
@@ -158,7 +168,12 @@ export default function NavBar(props) {
 
 					{user === true ? (
 						<div className="navbar-item has-dropdown is-hoverable">
-							<a className="navbar-link">{userName}</a>
+							<a className="navbar-link">
+								<span class="icon">
+									<i class="fas fa-user"></i>
+								</span>
+								<strong>{userName}</strong>
+							</a>
 
 							<div className="navbar-dropdown is-right">
 								{/* <a className="navbar-item">My Profile</a> */}
