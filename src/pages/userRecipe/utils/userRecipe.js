@@ -211,35 +211,38 @@ const userRecipeUtils = {
 		return (
 			<Popover id="popover-basic">
 				<Popover.Header as="h3">Delete confirmation</Popover.Header>
-				<Popover.Body>
-					Are you sure you want to <strong>delete</strong> this recipe?
-					<div className="box">
-						<div className="columns is-1">
-							<button
-								type="button"
-								className="button is-danger column"
-								onClick={() => {
-									userRecipeUtils.deleteRecipe(ID);
-									userRecipeUtils.handleDelete(
-										ID,
-										currentRecipes,
-										setSelectedRecipes,
-										allRecipes,
-										setAllRecipes,
-										setAllFavoriteRecipes,
-										setFoodVilleRecipes,
-										setFoodVilleFavoriteRecipes,
-										setUserRecipes,
-										setUserFavoriteRecipes
-									);
-								}}
-							>
-								Yes
-							</button>{" "}
-							<button className="button column">No</button>{" "}
+
+				<div className="card">
+					<div class="card-content popover-content">
+						<div class="content">
+							Are you sure you want to <strong>delete</strong> this recipe?
 						</div>
 					</div>
-				</Popover.Body>
+					<div className="card-footer">
+						<a
+							type="button"
+							className="card-footer-item popover-button"
+							onClick={() => {
+								userRecipeUtils.deleteRecipe(ID);
+								userRecipeUtils.handleDelete(
+									ID,
+									currentRecipes,
+									setSelectedRecipes,
+									allRecipes,
+									setAllRecipes,
+									setAllFavoriteRecipes,
+									setFoodVilleRecipes,
+									setFoodVilleFavoriteRecipes,
+									setUserRecipes,
+									setUserFavoriteRecipes
+								);
+							}}
+						>
+							Yes
+						</a>{" "}
+						<a className="card-footer-item popover-button">No</a>{" "}
+					</div>
+				</div>
 			</Popover>
 		);
 	},

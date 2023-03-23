@@ -27,8 +27,7 @@ html {
 	border-radius: 7px;
 }
 
-.recipe-container {
-	// background-color: #efa24d;
+.recipe-container-homepage {
 	overflow: auto;
 	height: 60rem;
 	padding: 10px;
@@ -44,6 +43,15 @@ html {
 }
 
 .card-footer-item {
+	color: white;
+}
+
+.save-button {
+	background-color: #6f6965 !important;
+	color: white;
+}
+
+.search {
 	color: white;
 }
 

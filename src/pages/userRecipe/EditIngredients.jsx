@@ -28,7 +28,7 @@ export default function EditIngredients(props) {
 					/>
 				</div>
 				<button
-					className="button is-danger"
+					className="button delete-button"
 					type="button"
 					onClick={() => {
 						deleteIngredient(index, ingredients, setIngredients);

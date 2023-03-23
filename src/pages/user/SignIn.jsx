@@ -14,7 +14,7 @@ const SignIn = (props) => {
 
 	return (
 		<>
-			<div className="columns">
+			<div className="columns signInUp">
 				<div className="column is-5 is-offset-one-quarter">
 					<div className="">
 						<form
