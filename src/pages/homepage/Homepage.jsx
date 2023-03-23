@@ -153,10 +153,7 @@ export default function Homepage(props) {
 														placement="top"
 														overlay={HomepageUtils.logInPopover(navigate)}
 													>
-														<a
-															href="#"
-															className="card-footer-item button is-primary"
-														>
+														<a href="#" className="card-footer-item">
 															Save
 														</a>
 													</OverlayTrigger>
