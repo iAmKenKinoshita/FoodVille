@@ -69,7 +69,7 @@ function RecipeDetailsModal(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button is-success"
+					className="button save-button"
 					onClick={async () => {
 						props.onHide();
 						// setEditRecipeShow(true);

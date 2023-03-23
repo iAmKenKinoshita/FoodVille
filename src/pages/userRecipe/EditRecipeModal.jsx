@@ -74,7 +74,7 @@ function EditRecipeModal(props) {
 								}}
 							/>
 						</div>
-						<p className="help is-danger">This field is required</p>
+						{/* <p className="help is-danger">This field is required</p> */}
 					</div>
 					<div className="field">
 						<label className="label">Instruction</label>
@@ -109,7 +109,7 @@ function EditRecipeModal(props) {
 						);
 					})}
 					<button
-						className="button is-primary"
+						className="button add-ingredient-button"
 						type="button"
 						onClick={() => {
 							UserRecipeUtils.addIngredient(ingredients, setIngredients);
@@ -121,17 +121,13 @@ function EditRecipeModal(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button is-success"
+					className="button save-change-button"
 					form="edit-recipe-form"
 					onClick={() => {
 						if (recipeDetails.is_fv === true) {
 							recipeDetails.is_fv = false;
 						}
-						UserRecipeUtils.saveRecipeChanges(
-							ID,
-							ingredients,
-							recipeDetails
-						);
+						UserRecipeUtils.saveRecipeChanges(ID, ingredients, recipeDetails);
 					}}
 				>
 					Save Changes
