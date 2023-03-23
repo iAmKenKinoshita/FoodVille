@@ -47,7 +47,7 @@ export default function Homepage(props) {
 							</p>
 							{window.screen.width > 1026 ? (
 								<p className="control">
-									<button className="button is-info">Search</button>
+									<button className="button search">Search</button>
 								</p>
 							) : (
 								""
