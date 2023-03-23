@@ -138,12 +138,12 @@ function RecipePage(props) {
 								</li>
 							</ul>
 						</ul>
-						<button
+						<a
 							className="button new-recipe"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe
-						</button>
+						</a>
 					</aside>
 				</div>
 				<div className="column recipe-container-recipepage">
@@ -211,11 +211,20 @@ function RecipePage(props) {
 															setUserFavoriteRecipes
 														);
 													}}
-													className="card-footer-item"
+													className="card-footer-item favorite"
 												>
+													{/* {!recipe.is_favorite ? (
+														<span class="icon">
+															<i class="fas fa-star favorite"></i>
+														</span>
+													) : (
+														<span class="icon">
+															Add <i class="fas fa-star"></i>
+														</span>
+													)} */}
 													{!recipe.is_favorite
-														? "Add to Favorites"
-														: "Remove from Favorites"}
+														? "Add to favorite"
+														: "Remove from favorite"}
 												</a>
 												<OverlayTrigger
 													trigger="focus"
@@ -234,7 +243,9 @@ function RecipePage(props) {
 													)}
 												>
 													<a href="#" className="card-footer-item">
-														Delete
+														<span className="icon card-footer-item">
+															<i className="fas fa-trash "></i>
+														</span>
 													</a>
 												</OverlayTrigger>
 											</footer>

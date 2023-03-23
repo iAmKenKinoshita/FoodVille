@@ -14,7 +14,7 @@ const SignUp = (props) => {
 
 	return (
 		<>
-			<div className="columns">
+			<div className="columns signInUp">
 				<div className="column is-5 is-offset-one-quarter">
 					<div className="">
 						<form
@@ -42,7 +42,7 @@ const SignUp = (props) => {
 										}}
 									/>
 								</div>
-								<p className="help is-danger">This field is required</p>
+								{/* <p className="help is-danger">This field is required</p> */}
 							</div>
 							<div className="field">
 								<label className="label">Email address</label>
@@ -55,7 +55,7 @@ const SignUp = (props) => {
 										}}
 									/>
 								</div>
-								<p className="help is-danger">This field is required</p>
+								{/* <p className="help is-danger">This field is required</p> */}
 							</div>
 							<div className="field">
 								<label className="label">Password</label>

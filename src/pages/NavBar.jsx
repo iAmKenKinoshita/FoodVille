@@ -8,9 +8,6 @@ import UserUtils from "./user/utils/userUtils";
 import "../styles/pages/_navBar.scss";
 
 //Bootstrap
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 
 //Logo
 import FVLogo from "../images/FoodVille.png";
@@ -19,48 +16,7 @@ export default function NavBar(props) {
 	const navigate = useNavigate();
 	const { user, setUser, userName } = props;
 
-	// const loggedIn = localStorage.getItem("user");
-
-	// useEffect(() => {}, [loggedIn]);
-
 	return (
-		// <>
-		// 	<Navbar bg="light" variant="light">
-		// 		<Nav className="me-auto">
-		// 			<Nav.Link
-		// 				href="#home"
-		// 				onClick={() => {
-		// 					setCurrentView("home");
-		// 				}}
-		// 			>
-		// 				Home
-		// 			</Nav.Link>
-		// 			{loggedIn === null ? (
-		// 				""
-		// 			) : (
-		// 				<Nav.Link
-		// 					href="#myrecipes"
-		// 					onClick={() => {
-		// 						setCurrentView("recipes");
-		// 					}}
-		// 				>
-		// 					My Recipes
-		// 				</Nav.Link>
-		// 			)}
-
-		// 			<Nav.Link
-		// 				href="#user"
-		// 				onClick={() => {
-		// 					setCurrentView("user");
-		// 				}}
-		// 			>
-		// 				{loggedIn === null ? "Sign In" : "My Account"}
-		// 			</Nav.Link>
-		// 		</Nav>
-		// 		{/* </Container> */}
-		// 	</Navbar>
-		// </>
-
 		//New Code
 
 		<nav
@@ -167,36 +123,57 @@ export default function NavBar(props) {
 					)}
 
 					{user === true ? (
-						<div className="navbar-item has-dropdown is-hoverable">
-							<a className="navbar-link">
-								<span class="icon">
-									<i class="fas fa-user"></i>
-								</span>
-								<strong>{userName}</strong>
-							</a>
+						//With hover
+						// <div className="navbar-item has-dropdown is-hoverable">
+						// 	<a className="navbar-link">
+						// 		<span class="icon">
+						// 			<i class="fas fa-user"></i>
+						// 		</span>
+						// 		<strong>{userName}</strong>
+						// 	</a>
 
-							<div className="navbar-dropdown is-right">
-								{/* <a className="navbar-item">My Profile</a> */}
-								<a
-									className="navbar-item"
-									onClick={() => {
-										UserUtils.signOut();
-										setUser(false);
-										navigate("/");
-										let width = window.innerWidth;
-										if (width <= 1023) {
-											let navBurger = document.querySelector(".navbar-burger");
-											navBurger.classList.toggle("is-active");
-											let navBar = document.querySelector(
-												"#navbarBasicExample"
-											);
-											navBar.classList.toggle("is-active");
-										}
-									}}
-								>
-									Log Out
-								</a>
-							</div>
+						// 	<div className="navbar-dropdown is-right">
+						// 		{/* <a className="navbar-item">My Profile</a> */}
+						// 		<a
+						// 			className="navbar-item"
+						// 			onClick={() => {
+						// 				UserUtils.signOut();
+						// 				setUser(false);
+						// 				navigate("/");
+						// 				let width = window.innerWidth;
+						// 				if (width <= 1023) {
+						// 					let navBurger = document.querySelector(".navbar-burger");
+						// 					navBurger.classList.toggle("is-active");
+						// 					let navBar = document.querySelector(
+						// 						"#navbarBasicExample"
+						// 					);
+						// 					navBar.classList.toggle("is-active");
+						// 				}
+						// 			}}
+						// 		>
+						// 			Log Out
+						// 		</a>
+						// 	</div>
+						// </div>
+
+						<div className="navbar-item">
+							<a
+								className="navbar-item logout"
+								onClick={() => {
+									UserUtils.signOut();
+									setUser(false);
+									navigate("/");
+									let width = window.innerWidth;
+									if (width <= 1023) {
+										let navBurger = document.querySelector(".navbar-burger");
+										navBurger.classList.toggle("is-active");
+										let navBar = document.querySelector("#navbarBasicExample");
+										navBar.classList.toggle("is-active");
+									}
+								}}
+							>
+								<strong>Log Out</strong>
+							</a>
 						</div>
 					) : (
 						""

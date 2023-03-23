@@ -36,11 +36,11 @@ function CreateNewRecipe(props) {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 		>
-			<Modal.Header closeButton>
+			{/* <Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
 					Create New Recipe
 				</Modal.Title>
-			</Modal.Header>
+			</Modal.Header> */}
 			<Modal.Body>
 				<form id="createrecipe">
 					<div className="field">
@@ -66,7 +66,7 @@ function CreateNewRecipe(props) {
 								}}
 							/>
 						</div>
-						<p className="help is-danger">This field is required</p>
+						{/* <p className="help is-danger">This field is required</p> */}
 					</div>
 					<div className="field">
 						<label className="label">Instruction</label>
@@ -94,21 +94,21 @@ function CreateNewRecipe(props) {
 							/>
 						);
 					})}
-					<button
-						className="button is-primary"
+					<a
+						className="button add-ingredient-button"
 						type="button"
 						onClick={() => {
 							UserRecipeUtils.addIngredient(ingredients, setIngredients);
 						}}
 					>
 						Add Ingredient
-					</button>
+					</a>
 				</form>
 			</Modal.Body>
 			<Modal.Footer>
 				<button
 					form="createrecipe"
-					className="button is-success"
+					className="button create-button"
 					onClick={async (e) => {
 						e.preventDefault();
 						await UserRecipeUtils.addNewRecipe(userId, {

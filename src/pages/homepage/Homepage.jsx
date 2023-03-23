@@ -27,7 +27,7 @@ export default function Homepage(props) {
 	return (
 		<div className="homepage-container">
 			<div className="columns is-mobile">
-				<div className="column is-4 is-offset-4 box search-bar">
+				<div className="column is-6 is-offset-3  box search-bar">
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
@@ -39,17 +39,19 @@ export default function Homepage(props) {
 								<input
 									className="input"
 									type="text"
-									placeholder={
-										"Enter an ingredient or a recipe name (i.e. burger)"
-									}
+									placeholder={"Search recipe"}
 									onChange={(e) => {
 										setQuery(e.target.value);
 									}}
 								/>
 							</p>
-							<p className="control">
-								<button className="button is-info">Search</button>
-							</p>
+							{window.screen.width > 1026 ? (
+								<p className="control">
+									<button className="button is-info">Search</button>
+								</p>
+							) : (
+								""
+							)}
 						</div>
 
 						{/*For Filter Features */}
