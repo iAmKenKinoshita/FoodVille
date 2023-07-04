@@ -49,6 +49,28 @@ const homepageUtils = {
 			</Popover>
 		);
 	},
+
+	getFeaturedRecipe: async (setSearchRecipes) => {
+		try {
+			console.log("This is from the frontend");
+			let recipes = await fetch("/home", {
+				method: "GET",
+			});
+
+			recipes = await recipes.json();
+			console.log("This is from the frontend2", recipes.results);
+			recipes = await recipes.results.filter((recipe) => {
+				if (Object.keys(recipe).length === 2) {
+					return recipe;
+				}
+			});
+			console.log("These are the recipes", recipes);
+
+			// return setSearchRecipes(recipes);
+		} catch (error) {
+			console.log(error);
+		}
+	},
 };
 
 export default homepageUtils;
