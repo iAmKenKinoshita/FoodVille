@@ -7,7 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 //Pages
 import Navbar from "./pages/NavBar";
+import CatBar from "./pages/CatBar";
 import Homepage from "./pages/homepage/Homepage";
+import Homepage2 from "./pages/homepage/Homepage2";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
@@ -41,7 +43,7 @@ function App() {
 					element={
 						<>
 							<Navbar user={user} setUser={setUser} userName={userName} />
-							<Homepage
+							<Homepage2
 								user={user}
 								userId={userId}
 								searchRecipes={searchRecipes}
