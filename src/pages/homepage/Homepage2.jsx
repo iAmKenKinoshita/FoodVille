@@ -22,10 +22,7 @@ export default function Homepage(props) {
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 
-	useEffect(() => {
-		// const featuredRecipe = HomepageUtils.getFeaturedRecipe(setSearchRecipes);
-		// console.log(featuredRecipe);
-	}, []);
+	useEffect(() => {}, [searchRecipes]);
 
 	return (
 		<div className="homepage-container">
@@ -109,13 +106,13 @@ export default function Homepage(props) {
 										<article className="tile is-child card">
 											<div classNameName="card-image">
 												<figure className="image is-square is-4by3">
-													<img src={recipe.thumbnail_url} />
+													<img src={recipe.item.thumbnail_url} />
 												</figure>
 											</div>
 											<div className="card-content">
 												<div className="media">
 													<div className="media-content">
-														<p className="title is-6">{recipe.name}</p>
+														<p className="title is-6">{recipe.item.name}</p>
 														{/* <p className="subtitle is-6">@johnsmith</p> */}
 													</div>
 												</div>

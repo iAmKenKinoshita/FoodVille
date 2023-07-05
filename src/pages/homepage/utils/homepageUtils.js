@@ -66,7 +66,13 @@ const homepageUtils = {
 			});
 			console.log("These are the recipes", recipes);
 
-			// return setSearchRecipes(recipes);
+			recipes = await recipes.filter((recipe) => {
+				if (Object.keys(recipe.item).length >= 50) {
+					return recipe;
+				}
+			});
+			console.log("These are the FINAL recipes", recipes);
+			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
 		}

@@ -45,9 +45,7 @@ const homepageController = {
 				options
 			);
 			const result = await response.text();
-			console.log("This is from the backend");
 			res.send(result);
-			// console.log("HELLO");
 		} catch (error) {
 			console.error(error);
 		}
