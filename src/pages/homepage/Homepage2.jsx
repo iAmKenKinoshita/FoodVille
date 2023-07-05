@@ -85,20 +85,15 @@ export default function Homepage(props) {
 				</div>
 			</div>
 
-			{searchRecipes.length > 0 ? (
-				<div className="columns">
-					<div className="column is-offset-2">
-						<h6 className="subtitle is-6 result">
-							{searchRecipes.length} matching results
-						</h6>
-					</div>
+			<div className="columns">
+				<div className="column is-offset-1">
+					<h6 className="subtitle is-6 featured">Featured Recipes</h6>
 				</div>
-			) : (
-				""
-			)}
+			</div>
+
 			<div className="columns">
 				{searchRecipes.length > 0 ? (
-					<div className="box recipe-container-homepage column is-8 is-offset-2">
+					<div className="recipe-container-homepage column is-10 is-offset-1">
 						<div className="tile ancestor is-flex-wrap-wrap">
 							{searchRecipes.map((recipe, index) => {
 								return (
@@ -113,52 +108,11 @@ export default function Homepage(props) {
 												<div className="media">
 													<div className="media-content">
 														<p className="title is-6">{recipe.item.name}</p>
-														{/* <p className="subtitle is-6">@johnsmith</p> */}
 													</div>
 												</div>
 											</div>
 
 											{/* <p className="subtitle">{recipe.description}</p> */}
-
-											<footer className="card-footer">
-												<a
-													className="card-footer-item"
-													onClick={() => {
-														setSelectedRecipeShow(true);
-														setSelectedRecipe(recipe);
-													}}
-												>
-													Details
-												</a>
-												{user && userId !== null ? (
-													<a
-														className="card-footer-item"
-														disabled={recipe.disabled}
-														onClick={(e) => {
-															if (user && userId !== null) {
-																HomepageUtils.saveApiRecipe(userId, recipe);
-																e.target.disabled = true;
-																recipe.disabled = true;
-																e.target.innerText = "Saved";
-															}
-															if (!user) {
-															}
-														}}
-													>
-														{recipe.disabled ? "Saved" : "Save"}
-													</a>
-												) : (
-													<OverlayTrigger
-														trigger="focus"
-														placement="top"
-														overlay={HomepageUtils.logInPopover(navigate)}
-													>
-														<a href="#" className="card-footer-item">
-															Save
-														</a>
-													</OverlayTrigger>
-												)}
-											</footer>
 										</article>
 									</div>
 								);
