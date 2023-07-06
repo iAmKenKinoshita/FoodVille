@@ -10,7 +10,7 @@ import Navbar from "./pages/NavBar";
 import CatBar from "./pages/CatBar";
 import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
-import Homepage2 from "./pages/homepage/Homepage2";
+import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
@@ -42,7 +42,7 @@ function App() {
 					element={
 						<>
 							<Navbar user={user} setUser={setUser} userName={userName} />
-							<Homepage2
+							<Homepage
 								user={user}
 								userId={userId}
 								searchRecipes={searchRecipes}
@@ -58,7 +58,7 @@ function App() {
 					element={
 						<>
 							<Navbar user={user} setUser={setUser} userName={userName} />
-							<Homepage
+							<SearchPage
 								user={user}
 								userId={userId}
 								searchRecipes={searchRecipes}

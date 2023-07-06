@@ -17,6 +17,7 @@ const homepageUtils = {
 				}
 			});
 
+			console.log(recipes);
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
