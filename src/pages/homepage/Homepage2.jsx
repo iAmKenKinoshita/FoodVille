@@ -31,7 +31,9 @@ export default function Homepage(props) {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							HomepageUtils.getFeaturedRecipe(setSearchRecipes);
+							// HomepageUtils.getFeaturedRecipe(setSearchRecipes);
+							await HomepageUtils.searchRecipe(setSearchRecipes, query);
+              navigate("/search");
 						}}
 					>
 						<div className="field is-grouped">
@@ -87,7 +89,7 @@ export default function Homepage(props) {
 
 			<div className="columns">
 				<div className="column is-offset-1">
-					<h6 className="subtitle is-6 featured">Featured Recipes</h6>
+					<h6 className="title is-6 featured">Featured Recipes</h6>
 				</div>
 			</div>
 

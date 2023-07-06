@@ -6,7 +6,7 @@ import { OverlayTrigger } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 //Styling
-import "../../styles/pages/_homepage.scss";
+import "../../styles/pages/_search.scss";
 
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
@@ -87,8 +87,8 @@ export default function Homepage(props) {
 
 			{searchRecipes.length > 0 ? (
 				<div className="columns">
-					<div className="column is-offset-2">
-						<h6 className="subtitle is-6 result">
+					<div className="column is-offset-1">
+						<h6 className="title is-6 result">
 							{searchRecipes.length} matching results
 						</h6>
 					</div>
