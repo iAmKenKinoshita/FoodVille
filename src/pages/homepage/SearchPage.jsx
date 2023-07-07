@@ -90,7 +90,7 @@ export default function Homepage(props) {
 
 			{searchRecipes.length > 0 ? (
 				<div className="columns">
-					<div className="column is-offset-1">
+					<div className="column is-offset-2">
 						<h6 className="title is-6 result">
 							{searchRecipes.length} matching results
 						</h6>
@@ -101,7 +101,7 @@ export default function Homepage(props) {
 			)}
 			<div className="columns">
 				{searchRecipes.length > 0 ? (
-					<div className="box recipe-container-homepage column is-8 is-offset-2">
+					<div className="recipe-container-homepage column is-8 is-offset-2">
 						<div className="tile ancestor is-flex-wrap-wrap">
 							{searchRecipes.map((recipe, index) => {
 								return (

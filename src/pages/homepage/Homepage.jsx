@@ -18,11 +18,14 @@ export default function Homepage(props) {
 
 	const { user, userId, searchRecipes, setSearchRecipes } = props;
 
+	const [featuredRecipes, setFeaturedRecipes] = useState("");
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");
 
-	useEffect(() => {}, [searchRecipes]);
+	useEffect(() => {
+		HomepageUtils.getFeaturedRecipes(setFeaturedRecipes);
+	}, [searchRecipes]);
 
 	return (
 		<div className="homepage-container">
@@ -31,9 +34,8 @@ export default function Homepage(props) {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							// HomepageUtils.getFeaturedRecipe(setSearchRecipes);
 							await HomepageUtils.searchRecipe(setSearchRecipes, query);
-              navigate("/search");
+							navigate("/search");
 						}}
 					>
 						<div className="field is-grouped">
@@ -94,10 +96,10 @@ export default function Homepage(props) {
 			</div>
 
 			<div className="columns">
-				{searchRecipes.length > 0 ? (
+				{featuredRecipes.length > 0 ? (
 					<div className="recipe-container-homepage column is-10 is-offset-1">
 						<div className="tile ancestor is-flex-wrap-wrap">
-							{searchRecipes.map((recipe, index) => {
+							{featuredRecipes.map((recipe, index) => {
 								return (
 									<div className="tile is-parent is-3">
 										<article className="tile is-child card">
