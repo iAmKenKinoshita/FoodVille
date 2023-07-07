@@ -22,26 +22,30 @@ html {
 	overflow: hidden;
 }
 
+.is-child {
+	border: 1px solid #6f6965;
+	border-radius: 7px;
+}
+
 .recipe-container-homepage {
 	overflow: auto;
+	height: 60rem;
 	padding: 10px;
+	border: 2px solid #6f6965;
 }
 
 .result {
-	color: white;
-}
-
-.featured {
-	
 	color: #6f6965;
 	margin-top: 10px;
 }
 
 .card-footer {
-	background-color: #efa24d;
+	background-color: pink;
+	// margin: 10px;
 }
 
 .card-footer-item {
+	margin-top: 10px;
 	color: white;
 }
 

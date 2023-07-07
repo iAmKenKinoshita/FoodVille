@@ -10,6 +10,7 @@ const userUtils = {
 				userEmail: email,
 				userPassword: password,
 			});
+			console.log("This is the data.data.acessToken", data.data.accessToken);
 			if (data.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(data));
 				return data.data;
@@ -24,6 +25,7 @@ const userUtils = {
 				userEmail: email,
 				userPassword: password,
 			});
+			console.log(data.data);
 			if (data.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(data));
 				return data.data;

@@ -104,6 +104,8 @@ exports.authToken = async (req, res, next) => {
 					error: "Invalid token",
 				});
 			} else {
+				console.log("This is the userEmail", req.userEmail);
+				console.log("this is the decoded useremail", decoded);
 				req.userEmail = decoded.userEmail;
 				next();
 			}

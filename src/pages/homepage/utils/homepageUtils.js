@@ -17,6 +17,7 @@ const homepageUtils = {
 				}
 			});
 
+			console.log(recipes);
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
@@ -48,6 +49,34 @@ const homepageUtils = {
 				</Popover.Body>
 			</Popover>
 		);
+	},
+
+	getFeaturedRecipe: async (setSearchRecipes) => {
+		try {
+			console.log("This is from the frontend");
+			let recipes = await fetch("/home", {
+				method: "GET",
+			});
+
+			recipes = await recipes.json();
+			console.log("This is from the frontend2", recipes.results);
+			recipes = await recipes.results.filter((recipe) => {
+				if (Object.keys(recipe).length === 2) {
+					return recipe;
+				}
+			});
+			console.log("These are the recipes", recipes);
+
+			recipes = await recipes.filter((recipe) => {
+				if (Object.keys(recipe.item).length >= 50) {
+					return recipe;
+				}
+			});
+			console.log("These are the FINAL recipes", recipes);
+			return setSearchRecipes(recipes);
+		} catch (error) {
+			console.log(error);
+		}
 	},
 };
 
