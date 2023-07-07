@@ -38,18 +38,6 @@ const homepageController = {
 			console.log(error);
 		}
 	},
-	getFeaturedRecipes: async (req, res) => {
-		try {
-			const response = await fetch(
-				"https://tasty.p.rapidapi.com/feeds/list?size=10&timezone=%2B0700&vegetarian=false&from=0",
-				options
-			);
-			const result = await response.text();
-			res.send(result);
-		} catch (error) {
-			console.error(error);
-		}
-	},
 };
 
 module.exports = homepageController;
