@@ -8,8 +8,12 @@
 }
 
 .menu-label {
-	color: white;
-	font-weight: bolder;
+	color: black;
+	font-weight: bold;
+}
+
+.sidebar a {
+	color: black !important;
 }
 
 .recipe-container-recipepage {
@@ -18,7 +22,7 @@
 	overflow: auto;
 	height: 65rem;
 	padding: 2em;
-	border: 2px solid #6f6965;
+	border: 3px solid #6f6965;
 	border-radius: 5px;
 	overflow-x: hidden;
 }
@@ -34,9 +38,9 @@
 
 .new-recipe {
 	margin-top: 1em;
-	background-color: #6f6965;
+	background-color: rgb(10, 211, 10);
 	color: white;
-	border: 3px solid;
+	border: 1px solid;
 }
 
 .card-footer {

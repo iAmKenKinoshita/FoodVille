@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const homepageController = require("../controllers/homepage");
 
-//Get requests
-// router.get("/", homepageController.getRecipes);
+//Home
+router.post("/", homepageController.getRecipes);
+router.get("/", homepageController.getFeaturedRecipes);
 
 //Feature Recipe
-router.get("/", homepageController.getFeaturedRecipes);
 
 //Not needed?
 // router.get("/getRecipeDetails/:id", homepageController.getRecipeDetails);

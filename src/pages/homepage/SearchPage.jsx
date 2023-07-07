@@ -6,7 +6,9 @@ import { OverlayTrigger } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 //Styling
-import "../../styles/pages/_homepage.scss";
+import "../../styles/pages/_search.scss";
+
+import dummy from "./utils/dummydata";
 
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
@@ -31,7 +33,8 @@ export default function Homepage(props) {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							HomepageUtils.getFeaturedRecipe(setSearchRecipes);
+							// HomepageUtils.searchRecipe(setSearchRecipes, query);
+							setSearchRecipes(dummy);
 						}}
 					>
 						<div className="field is-grouped">
@@ -85,15 +88,20 @@ export default function Homepage(props) {
 				</div>
 			</div>
 
-			<div className="columns">
-				<div className="column is-offset-1">
-					<h6 className="subtitle is-6 featured">Featured Recipes</h6>
+			{searchRecipes.length > 0 ? (
+				<div className="columns">
+					<div className="column is-offset-2">
+						<h6 className="title is-6 result">
+							{searchRecipes.length} matching results
+						</h6>
+					</div>
 				</div>
-			</div>
-
+			) : (
+				""
+			)}
 			<div className="columns">
 				{searchRecipes.length > 0 ? (
-					<div className="recipe-container-homepage column is-10 is-offset-1">
+					<div className="recipe-container-homepage column is-8 is-offset-2">
 						<div className="tile ancestor is-flex-wrap-wrap">
 							{searchRecipes.map((recipe, index) => {
 								return (
@@ -101,18 +109,58 @@ export default function Homepage(props) {
 										<article className="tile is-child card">
 											<div classNameName="card-image">
 												<figure className="image is-square is-4by3">
-													<img src={recipe.item.thumbnail_url} />
+													<img src={recipe.thumbnail_url} />
 												</figure>
 											</div>
 											<div className="card-content">
 												<div className="media">
 													<div className="media-content">
-														<p className="title is-6">{recipe.item.name}</p>
+														<p className="title is-6">{recipe.name}</p>
 													</div>
 												</div>
 											</div>
 
 											{/* <p className="subtitle">{recipe.description}</p> */}
+
+											<footer className="card-footer">
+												<a
+													className="card-footer-item"
+													onClick={() => {
+														setSelectedRecipeShow(true);
+														setSelectedRecipe(recipe);
+													}}
+												>
+													Details
+												</a>
+												{user && userId !== null ? (
+													<a
+														className="card-footer-item"
+														disabled={recipe.disabled}
+														onClick={(e) => {
+															if (user && userId !== null) {
+																HomepageUtils.saveApiRecipe(userId, recipe);
+																e.target.disabled = true;
+																recipe.disabled = true;
+																e.target.innerText = "Saved";
+															}
+															if (!user) {
+															}
+														}}
+													>
+														{recipe.disabled ? "Saved" : "Save"}
+													</a>
+												) : (
+													<OverlayTrigger
+														trigger="focus"
+														placement="top"
+														overlay={HomepageUtils.logInPopover(navigate)}
+													>
+														<a href="#" className="card-footer-item">
+															Save
+														</a>
+													</OverlayTrigger>
+												)}
+											</footer>
 										</article>
 									</div>
 								);

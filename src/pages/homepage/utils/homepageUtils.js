@@ -1,10 +1,12 @@
 import { Popover } from "react-bootstrap";
 
+import dummydata from "./dummyfeatured";
+
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
 			let recipes = await fetch("/home", {
-				method: "GET",
+				method: "POST",
 				headers: {
 					query: keywords,
 				},
@@ -17,6 +19,7 @@ const homepageUtils = {
 				}
 			});
 
+			console.log(recipes);
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
@@ -50,29 +53,29 @@ const homepageUtils = {
 		);
 	},
 
-	getFeaturedRecipe: async (setSearchRecipes) => {
+	getFeaturedRecipes: async (setFeaturedRecipes) => {
 		try {
-			console.log("This is from the frontend");
-			let recipes = await fetch("/home", {
-				method: "GET",
-			});
+			// let recipes = await fetch("/home", {
+			// 	method: "GET",
+			// });
 
-			recipes = await recipes.json();
-			console.log("This is from the frontend2", recipes.results);
-			recipes = await recipes.results.filter((recipe) => {
-				if (Object.keys(recipe).length === 2) {
-					return recipe;
-				}
-			});
-			console.log("These are the recipes", recipes);
+			// recipes = await recipes.json();
+			// recipes = await recipes.results.filter((recipe) => {
+			// 	if (Object.keys(recipe).length === 2) {
+			// 		return recipe;
+			// 	}
+			// });
 
-			recipes = await recipes.filter((recipe) => {
-				if (Object.keys(recipe.item).length >= 50) {
-					return recipe;
-				}
-			});
-			console.log("These are the FINAL recipes", recipes);
-			return setSearchRecipes(recipes);
+			// recipes = await recipes.filter((recipe) => {
+			// 	if (Object.keys(recipe.item).length >= 50) {
+			// 		return recipe;
+			// 	}
+			// });
+
+			// return setFeaturedRecipes(recipes);
+
+			console.log(dummydata);
+			return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
 		}
