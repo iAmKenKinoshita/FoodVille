@@ -16,9 +16,16 @@ import HomepageUtils from "./utils/homepageUtils";
 export default function Homepage(props) {
 	const navigate = useNavigate();
 
-	const { user, userId, searchRecipes, setSearchRecipes } = props;
+	const {
+		user,
+		userId,
+		searchRecipes,
+		setSearchRecipes,
+		featuredRecipes,
+		setFeaturedRecipes,
+	} = props;
 
-	const [featuredRecipes, setFeaturedRecipes] = useState("");
+	// const [featuredRecipes, setFeaturedRecipes] = useState("");
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [query, setQuery] = useState("");

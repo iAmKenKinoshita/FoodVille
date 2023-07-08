@@ -33,8 +33,8 @@ export default function Homepage(props) {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							// HomepageUtils.searchRecipe(setSearchRecipes, query);
-							setSearchRecipes(dummy);
+							HomepageUtils.searchRecipe(setSearchRecipes, query);
+							// setSearchRecipes(dummy);
 						}}
 					>
 						<div className="field is-grouped">

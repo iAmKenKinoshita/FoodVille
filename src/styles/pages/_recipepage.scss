@@ -27,10 +27,16 @@
 	overflow-x: hidden;
 }
 
+.modal-title {
+	padding-left: 20px;
+}
+
 .modal-content {
 	// margin: auto auto;
+	min-width: 80%;
 	z-index: 1100 !important;
 }
+
 .modal-backdrop {
 	display: none;
 	z-index: 1040 !important;

@@ -14,12 +14,14 @@ import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
+import RecipeDetailsModal from "./pages/userRecipe/RecipeDetailsModal";
 
 function App() {
 	//New code from here
 	const [user, setUser] = useState(null);
 
 	const [searchRecipes, setSearchRecipes] = useState([]);
+	const [featuredRecipes, setFeaturedRecipes] = useState([]);
 
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const [userName, setUserName] = useState(null);
@@ -47,6 +49,8 @@ function App() {
 								userId={userId}
 								searchRecipes={searchRecipes}
 								setSearchRecipes={setSearchRecipes}
+								featuredRecipes={featuredRecipes}
+								setFeaturedRecipes={setFeaturedRecipes}
 							/>
 							{/* <Footer /> */}
 						</>
