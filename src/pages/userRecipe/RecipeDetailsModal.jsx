@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Container, Row, Col } from "react-bootstrap";
+
+//Styling
+import "../../styles/pages/_recipeModal.scss";
 
 function RecipeDetailsModal(props) {
 	const { selectedRecipe, setEditRecipeShow } = props;
@@ -20,42 +23,62 @@ function RecipeDetailsModal(props) {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			dialogClassName="helloWorld"
 		>
-			<Modal.Header closeButton>
+			{/* <Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
 					{selectedRecipe.name}
 				</Modal.Title>
-			</Modal.Header>
+			</Modal.Header> */}
 			<Modal.Body>
-				{selectedRecipe.description ? (
-					<>
-						<h3 className="title is-6">Description</h3>
-						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
-					</>
-				) : (
-					""
-				)}
-
-				<div className="table-container">
-					<table className="table is-striped">
-						<thead>{ingredients.length < 1 ? "" : <th>Ingredients</th>}</thead>
-						<tbody>
-							{ingredients.map((ingredient) => {
-								return (
-									<>
-										<tr>
-											<td>{ingredient.ingredient_info}</td>
-											{/* <td>{ingredient.ingredient_name}</td>
+				<Container>
+					<Row>
+						<Col lg={4} md={4}>
+							{/* <figure className="image is-5by4">
+								<img
+									src={
+										selectedRecipe.image_url
+											? selectedRecipe.image_url
+											: "https://bulma.io/images/placeholders/256x256.png"
+									}
+									alt="Food Image"
+								/>
+							</figure> */}
+						</Col>
+						<Col lg={8} md={4}></Col>
+					</Row>
+					<Row>
+						<Col lg={4} md={4}>
+							<div className="table-container">
+								<table className="table is-striped">
+									<thead>
+										{ingredients.length < 1 ? "" : <th>Ingredients</th>}
+									</thead>
+									<tbody>
+										{ingredients.map((ingredient) => {
+											return (
+												<>
+													<tr>
+														<td>{ingredient.ingredient_info}</td>
+														{/* <td>{ingredient.ingredient_name}</td>
 											<td>{ingredient.amount}</td> */}
-										</tr>
-									</>
-								);
-							})}
-						</tbody>
-					</table>
-					<h3 className="title is-6">Instruction</h3>
-					<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
-				</div>
+													</tr>
+												</>
+											);
+										})}
+									</tbody>
+								</table>
+							</div>
+						</Col>
+						<Col lg={8} md={4}>
+							<h3 className="title is-6">Description</h3>
+							<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
+							<hr></hr>
+							<h3 className="title is-6">Instructions</h3>
+							<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
+						</Col>
+					</Row>
+				</Container>
 			</Modal.Body>
 			<Modal.Footer>
 				<button
