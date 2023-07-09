@@ -31,6 +31,7 @@ function EditRecipeModal(props) {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			dialogClassName="wideModal"
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
@@ -121,7 +122,7 @@ function EditRecipeModal(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button save-change-button"
+					className="button is-primary"
 					form="edit-recipe-form"
 					onClick={() => {
 						if (recipeDetails.is_fv === true) {
