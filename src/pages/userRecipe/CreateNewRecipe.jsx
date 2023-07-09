@@ -59,7 +59,7 @@ function CreateNewRecipe(props) {
 						<label className="label">Description</label>
 						<div className="control">
 							<input
-								className="input"
+								className="textarea"
 								type="text"
 								onChange={(e) => {
 									setDescription(e.target.value);
