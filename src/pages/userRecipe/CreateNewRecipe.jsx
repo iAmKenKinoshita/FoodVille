@@ -46,71 +46,70 @@ function CreateNewRecipe(props) {
 				<Container>
 					<form id="createrecipe">
 						<Row>
-						<Col lg={4} md={4}>
-							<div className="field">
-								<label className="label">Recipe Name</label>
-								<div className="control">
-									<input
-										className="input"
-										type="text"
-										onChange={(e) => {
-											setName(e.target.value);
-										}}
-									/>
+							<Col lg={6} md={4}>
+								<div className="field">
+									<label className="label">Recipe Name</label>
+									<div className="control">
+										<input
+											className="input"
+											type="text"
+											onChange={(e) => {
+												setName(e.target.value);
+											}}
+										/>
+									</div>
 								</div>
-							</div>
-							<div className="field">
-								<label className="label">Description</label>
-								<div className="control">
-									<input
-										className="textarea"
-										type="text"
-										onChange={(e) => {
-											setDescription(e.target.value);
-										}}
-									/>
+								<div className="field">
+									<label className="label">Description</label>
+									<div className="control">
+										<input
+											className="textarea"
+											type="text"
+											onChange={(e) => {
+												setDescription(e.target.value);
+											}}
+										/>
+									</div>
+									{/* <p className="help is-danger">This field is required</p> */}
 								</div>
-								{/* <p className="help is-danger">This field is required</p> */}
-							</div>
-							<div className="field">
-								<label className="label">Instruction</label>
-								<div className="control">
-									<textarea
-										className="textarea"
-										type="text"
-										onChange={(e) => {
-											setInstruction(e.target.value);
-										}}
-									/>
+								<div className="field">
+									<label className="label">Instruction</label>
+									<div className="control">
+										<textarea
+											className="textarea"
+											type="text"
+											onChange={(e) => {
+												setInstruction(e.target.value);
+											}}
+										/>
+									</div>
 								</div>
-							</div>
-							
-						</Col>
-						<Col lg={8} md={4}>
-						<label className="label">Ingredients</label>
-							{ingredients.map((ingredient, index) => {
-								return (
-									<EditIngredients
-										key={index}
-										ingredient={ingredient}
-										onIngredientChange={UserRecipeUtils.onIngredientChange}
-										index={index}
-										deleteIngredient={UserRecipeUtils.deleteIngredient}
-										setIngredients={setIngredients}
-										ingredients={ingredients}
-									/>
-								);
-							})}
-							<a
-								className="button add-ingredient-button"
-								type="button"
-								onClick={() => {
-									UserRecipeUtils.addIngredient(ingredients, setIngredients);
-								}}
-							>
-								Add Ingredient
-							</a>
-						</Col>
+							</Col>
+							<Col lg={6} md={4}>
+								<label className="label">Ingredients</label>
+								{ingredients.map((ingredient, index) => {
+									return (
+										<EditIngredients
+											key={index}
+											ingredient={ingredient}
+											onIngredientChange={UserRecipeUtils.onIngredientChange}
+											index={index}
+											deleteIngredient={UserRecipeUtils.deleteIngredient}
+											setIngredients={setIngredients}
+											ingredients={ingredients}
+										/>
+									);
+								})}
+								<a
+									className="button is-primary"
+									type="button"
+									onClick={() => {
+										UserRecipeUtils.addIngredient(ingredients, setIngredients);
+									}}
+								>
+									Add Ingredient
+								</a>
+							</Col>
 						</Row>
 					</form>
 				</Container>

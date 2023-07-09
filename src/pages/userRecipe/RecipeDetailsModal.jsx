@@ -45,7 +45,7 @@ function RecipeDetailsModal(props) {
 						<Col lg={8} md={4}></Col>
 					</Row>
 					<Row>
-					<Col lg={8} md={4}>
+						<Col lg={8} md={4}>
 							<h3 className="title is-6">Description</h3>
 							<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
 							<hr></hr>
@@ -54,7 +54,7 @@ function RecipeDetailsModal(props) {
 						</Col>
 						<Col lg={4} md={4}>
 							<div className="table-container">
-								<table className="table is-striped">
+								<table className="table is-striped is-narrow">
 									<thead>
 										{ingredients.length < 1 ? "" : <th>Ingredients</th>}
 									</thead>
@@ -74,7 +74,6 @@ function RecipeDetailsModal(props) {
 								</table>
 							</div>
 						</Col>
-						
 					</Row>
 				</Container>
 			</Modal.Body>
