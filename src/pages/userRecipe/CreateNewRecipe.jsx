@@ -62,7 +62,7 @@ function CreateNewRecipe(props) {
 								<div className="field">
 									<label className="label">Description</label>
 									<div className="control">
-										<input
+										<textarea
 											className="textarea"
 											type="text"
 											onChange={(e) => {
