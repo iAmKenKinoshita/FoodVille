@@ -114,7 +114,7 @@ function EditRecipeModal(props) {
 								);
 							})}
 							<button
-								className="button add-ingredient-button"
+								className="button is-primary"
 								type="button"
 								onClick={() => {
 									UserRecipeUtils.addIngredient(ingredients, setIngredients);
