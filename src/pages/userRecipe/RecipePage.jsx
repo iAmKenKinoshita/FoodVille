@@ -139,7 +139,7 @@ function RecipePage(props) {
 							</ul>
 						</ul>
 						<a
-							className="button new-recipe"
+							className="button is-primary new-recipe"
 							onClick={() => setCreateRecipeShow(true)}
 						>
 							+ New Recipe

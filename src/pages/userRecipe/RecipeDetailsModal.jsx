@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Container, Row, Col } from "react-bootstrap";
 
-//Styling
-import "../../styles/pages/_recipeModal.scss";
-
 function RecipeDetailsModal(props) {
 	const { selectedRecipe, setEditRecipeShow } = props;
 
@@ -23,7 +20,7 @@ function RecipeDetailsModal(props) {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
-			dialogClassName="helloWorld"
+			dialogClassName="wideModal"
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
@@ -48,9 +45,16 @@ function RecipeDetailsModal(props) {
 						<Col lg={8} md={4}></Col>
 					</Row>
 					<Row>
+						<Col lg={8} md={4}>
+							<h3 className="title is-6">Description</h3>
+							<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
+							<hr></hr>
+							<h3 className="title is-6">Instructions</h3>
+							<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
+						</Col>
 						<Col lg={4} md={4}>
 							<div className="table-container">
-								<table className="table is-striped">
+								<table className="table is-striped is-narrow">
 									<thead>
 										{ingredients.length < 1 ? "" : <th>Ingredients</th>}
 									</thead>
@@ -70,19 +74,12 @@ function RecipeDetailsModal(props) {
 								</table>
 							</div>
 						</Col>
-						<Col lg={8} md={4}>
-							<h3 className="title is-6">Description</h3>
-							<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
-							<hr></hr>
-							<h3 className="title is-6">Instructions</h3>
-							<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
-						</Col>
 					</Row>
 				</Container>
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button edit-button"
+					className="button is-primary edit-button"
 					onClick={() => {
 						props.onHide();
 						setEditRecipeShow(true);

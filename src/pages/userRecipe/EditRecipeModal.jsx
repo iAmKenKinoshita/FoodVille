@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Col, Row } from "react-bootstrap";
 
 import EditIngredients from "./EditIngredients";
 
@@ -31,6 +31,7 @@ function EditRecipeModal(props) {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			dialogClassName="wideModal"
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
@@ -39,89 +40,95 @@ function EditRecipeModal(props) {
 			</Modal.Header>
 			<Modal.Body>
 				<form id="edit-recipe-form">
-					<div className="field">
-						<label className="label">Recipe Name</label>
-						<div className="control">
-							<input
-								className="input"
-								type="text"
-								name="name"
-								value={recipeDetails.name}
-								onChange={(e) => {
-									UserRecipeUtils.onRecipeDetailChange(
-										e.target,
-										recipeDetails,
-										setRecipeDetails
-									);
+					<Row>
+						<Col>
+							<div className="field">
+								<label className="label">Recipe Name</label>
+								<div className="control">
+									<input
+										className="input"
+										type="text"
+										name="name"
+										value={recipeDetails.name}
+										onChange={(e) => {
+											UserRecipeUtils.onRecipeDetailChange(
+												e.target,
+												recipeDetails,
+												setRecipeDetails
+											);
+										}}
+									/>
+								</div>
+							</div>
+							<div className="field">
+								<label className="label">Description</label>
+								<div className="control">
+									<input
+										className="input"
+										type="text"
+										value={recipeDetails.description}
+										name="description"
+										onChange={(e) => {
+											UserRecipeUtils.onRecipeDetailChange(
+												e.target,
+												recipeDetails,
+												setRecipeDetails
+											);
+										}}
+									/>
+								</div>
+								{/* <p className="help is-danger">This field is required</p> */}
+							</div>
+							<div className="field">
+								<label className="label">Instruction</label>
+								<div className="control">
+									<textarea
+										className="textarea"
+										type="text"
+										name="instruction"
+										value={recipeDetails.instruction}
+										onChange={(e) => {
+											UserRecipeUtils.onRecipeDetailChange(
+												e.target,
+												recipeDetails,
+												setRecipeDetails
+											);
+										}}
+									/>
+								</div>
+							</div>
+						</Col>
+						<Col>
+							<label className="label">Ingredients</label>
+							{ingredients.map((ingredient, index) => {
+								return (
+									<EditIngredients
+										// key={index}
+										ingredient={ingredient}
+										onIngredientChange={UserRecipeUtils.onIngredientChange}
+										index={index}
+										deleteIngredient={UserRecipeUtils.deleteIngredient}
+										setIngredients={setIngredients}
+										ingredients={ingredients}
+									/>
+								);
+							})}
+							<button
+								className="button add-ingredient-button"
+								type="button"
+								onClick={() => {
+									UserRecipeUtils.addIngredient(ingredients, setIngredients);
 								}}
-							/>
-						</div>
-					</div>
-					<div className="field">
-						<label className="label">Description</label>
-						<div className="control">
-							<input
-								className="input"
-								type="text"
-								value={recipeDetails.description}
-								name="description"
-								onChange={(e) => {
-									UserRecipeUtils.onRecipeDetailChange(
-										e.target,
-										recipeDetails,
-										setRecipeDetails
-									);
-								}}
-							/>
-						</div>
-						{/* <p className="help is-danger">This field is required</p> */}
-					</div>
-					<div className="field">
-						<label className="label">Instruction</label>
-						<div className="control">
-							<textarea
-								className="textarea"
-								type="text"
-								name="instruction"
-								value={recipeDetails.instruction}
-								onChange={(e) => {
-									UserRecipeUtils.onRecipeDetailChange(
-										e.target,
-										recipeDetails,
-										setRecipeDetails
-									);
-								}}
-							/>
-						</div>
-					</div>
-					<label className="label">Ingredients</label>
-					{ingredients.map((ingredient, index) => {
-						return (
-							<EditIngredients
-								// key={index}
-								ingredient={ingredient}
-								onIngredientChange={UserRecipeUtils.onIngredientChange}
-								index={index}
-								deleteIngredient={UserRecipeUtils.deleteIngredient}
-								setIngredients={setIngredients}
-								ingredients={ingredients}
-							/>
-						);
-					})}
-					<button
-						className="button add-ingredient-button"
-						type="button"
-						onClick={() => {
-							UserRecipeUtils.addIngredient(ingredients, setIngredients);
-						}}
-					>
-						Add Ingredient
-					</button>
+							>
+								Add Ingredient
+							</button>
+						</Col>
+					</Row>
 				</form>
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button save-change-button"
+					className="button is-primary"
 					form="edit-recipe-form"
 					onClick={() => {
 						if (recipeDetails.is_fv === true) {

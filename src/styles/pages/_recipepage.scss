@@ -3,6 +3,10 @@
 	margin-top: 1em;
 }
 
+.sidebar li a {
+	color: black !important;
+}
+
 .menu-list {
 	color: white;
 }
@@ -10,10 +14,6 @@
 .menu-label {
 	color: black;
 	font-weight: bold;
-}
-
-.sidebar a {
-	color: black !important;
 }
 
 .recipe-container-recipepage {
@@ -28,7 +28,7 @@
 }
 
 .modal-title {
-	padding-left: 20px;
+	padding-left: 5px;
 }
 
 .modal-content {
@@ -45,12 +45,12 @@
 .new-recipe {
 	margin-top: 1em;
 	background-color: rgb(10, 211, 10);
-	color: white;
+	color: white !important;
 	border: 1px solid;
 }
 
 .card-footer {
-	padding: 0px;
+	padding: 1px;
 }
 
 .card-footer-item {
@@ -83,8 +83,11 @@
 .create-button,
 .edit-button,
 .save-change-button {
-	background-color: #6f6965;
 	color: white;
+}
+
+.wideModal {
+	min-width: 80%;
 }
 
 // .modal-content {
