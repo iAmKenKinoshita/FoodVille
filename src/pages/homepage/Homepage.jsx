@@ -32,7 +32,7 @@ export default function Homepage(props) {
 
 	useEffect(() => {
 		HomepageUtils.getFeaturedRecipes(setFeaturedRecipes);
-	}, [searchRecipes]);
+	}, []);
 
 	return (
 		<div className="homepage-container">

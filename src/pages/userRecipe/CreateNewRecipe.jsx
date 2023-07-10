@@ -73,7 +73,7 @@ function CreateNewRecipe(props) {
 									{/* <p className="help is-danger">This field is required</p> */}
 								</div>
 								<div className="field">
-									<label className="label">Instruction</label>
+									<label className="label">Instructions</label>
 									<div className="control">
 										<textarea
 											className="textarea"
