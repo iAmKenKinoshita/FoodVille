@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Container, Row, Col } from "react-bootstrap";
+import { Modal, Row, Col } from "react-bootstrap";
 
 function RecipeDetailsModal(props) {
 	const { selectedRecipe, setEditRecipeShow } = props;
@@ -28,10 +28,9 @@ function RecipeDetailsModal(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Container>
-					<Row>
-						<Col lg={4} md={4}>
-							{/* <figure className="image is-5by4">
+				<Row>
+					<Col lg={4} md={4}>
+						{/* <figure className="image is-5by4">
 								<img
 									src={
 										selectedRecipe.image_url
@@ -41,41 +40,40 @@ function RecipeDetailsModal(props) {
 									alt="Food Image"
 								/>
 							</figure> */}
-						</Col>
-						<Col lg={8} md={4}></Col>
-					</Row>
-					<Row>
-						<Col lg={8} md={4}>
-							<h3 className="title is-6">Description</h3>
-							<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
-							<hr></hr>
-							<h3 className="title is-6">Instructions</h3>
-							<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
-						</Col>
-						<Col lg={4} md={4}>
-							<div className="table-container">
-								<table className="table is-striped is-narrow">
-									<thead>
-										{ingredients.length < 1 ? "" : <th>Ingredients</th>}
-									</thead>
-									<tbody>
-										{ingredients.map((ingredient) => {
-											return (
-												<>
-													<tr>
-														<td>{ingredient.ingredient_info}</td>
-														{/* <td>{ingredient.ingredient_name}</td>
+					</Col>
+					<Col lg={8} md={4}></Col>
+				</Row>
+				<Row>
+					<Col lg={8} md={4}>
+						<h3 className="title is-6">Description</h3>
+						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
+						<hr></hr>
+						<h3 className="title is-6">Instructions</h3>
+						<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
+					</Col>
+					<Col lg={4} md={4}>
+						<div className="table-container">
+							<table className="table is-striped is-narrow">
+								<thead>
+									{ingredients.length < 1 ? "" : <th>Ingredients</th>}
+								</thead>
+								<tbody>
+									{ingredients.map((ingredient) => {
+										return (
+											<>
+												<tr>
+													<td>{ingredient.ingredient_info}</td>
+													{/* <td>{ingredient.ingredient_name}</td>
 											<td>{ingredient.amount}</td> */}
-													</tr>
-												</>
-											);
-										})}
-									</tbody>
-								</table>
-							</div>
-						</Col>
-					</Row>
-				</Container>
+												</tr>
+											</>
+										);
+									})}
+								</tbody>
+							</table>
+						</div>
+					</Col>
+				</Row>
 			</Modal.Body>
 			<Modal.Footer>
 				<button
