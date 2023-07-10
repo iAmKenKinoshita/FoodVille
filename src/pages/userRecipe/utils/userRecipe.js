@@ -218,7 +218,7 @@ const userRecipeUtils = {
 							Are you sure you want to <strong>delete</strong> this recipe?
 						</div>
 					</div>
-					<div className="card-footer">
+					<div className="card-footer delete-pop">
 						<a
 							type="button"
 							className="card-footer-item popover-button"

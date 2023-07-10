@@ -244,7 +244,7 @@ function RecipePage(props) {
 												>
 													<a href="#" className="card-footer-item">
 														<span className="icon card-footer-item">
-															<i className="fas fa-trash "></i>
+															<i className="fas fa-trash"></i>
 														</span>
 													</a>
 												</OverlayTrigger>
