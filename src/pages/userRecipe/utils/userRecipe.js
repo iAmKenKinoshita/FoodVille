@@ -210,7 +210,7 @@ const userRecipeUtils = {
 	) => {
 		return (
 			<Popover id="popover-basic">
-				<Popover.Header as="h3">Delete confirmation</Popover.Header>
+				<Popover.Header as="h2">Delete confirmation</Popover.Header>
 
 				<div className="card">
 					<div class="card-content popover-content">
