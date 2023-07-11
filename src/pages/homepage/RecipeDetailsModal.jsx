@@ -75,7 +75,7 @@ function RecipeDetailsModal(props) {
 			</Modal.Body>
 			<Modal.Footer>
 				<button
-					className="button save-button"
+					className="button is-primary"
 					onClick={async () => {
 						props.onHide();
 						// setEditRecipeShow(true);
