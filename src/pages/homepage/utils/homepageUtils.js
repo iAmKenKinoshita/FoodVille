@@ -18,8 +18,6 @@ const homepageUtils = {
 					return recipe;
 				}
 			});
-
-			console.log(recipes);
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
@@ -70,7 +68,6 @@ const homepageUtils = {
 				}
 			});
 			return setFeaturedRecipes(recipes);
-			// console.log(dummydata);
 			// return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
