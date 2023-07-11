@@ -41,7 +41,9 @@ export default function Homepage(props) {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
+							document.querySelector(".search").classList.add("is-loading");
 							await HomepageUtils.searchRecipe(setSearchRecipes, query);
+
 							navigate("/search");
 						}}
 					>
