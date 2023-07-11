@@ -98,7 +98,7 @@ export default function Homepage(props) {
 
 			<div className="columns">
 				<div className="column is-offset-1">
-					<h6 className="title is-6 featured">Featured Recipes</h6>
+					<h6 className="title is-5 featured">Featured Recipes</h6>
 				</div>
 			</div>
 
@@ -108,7 +108,7 @@ export default function Homepage(props) {
 						<div className="tile ancestor is-flex-wrap-wrap">
 							{featuredRecipes.map((recipe, index) => {
 								return (
-									<div className="tile is-parent is-3">
+									<div className="tile is-parent is-2">
 										<article className="tile is-child card">
 											<div classNameName="card-image">
 												<figure className="image is-square is-4by3">
@@ -124,6 +124,48 @@ export default function Homepage(props) {
 											</div>
 
 											{/* <p className="subtitle">{recipe.description}</p> */}
+											<footer className="card-footer">
+												<a
+													className="card-footer-item"
+													onClick={() => {
+														setSelectedRecipeShow(true);
+														setSelectedRecipe(recipe.item);
+													}}
+												>
+													Details
+												</a>
+												{user && userId !== null ? (
+													<a
+														className="card-footer-item"
+														disabled={recipe.disabled}
+														onClick={(e) => {
+															if (user && userId !== null) {
+																HomepageUtils.saveApiRecipe(
+																	userId,
+																	recipe.item
+																);
+																e.target.disabled = true;
+																recipe.disabled = true;
+																e.target.innerText = "Saved";
+															}
+															if (!user) {
+															}
+														}}
+													>
+														{recipe.disabled ? "Saved" : "Save"}
+													</a>
+												) : (
+													<OverlayTrigger
+														trigger="focus"
+														placement="top"
+														overlay={HomepageUtils.logInPopover(navigate)}
+													>
+														<a href="#" className="card-footer-item">
+															Save
+														</a>
+													</OverlayTrigger>
+												)}
+											</footer>
 										</article>
 									</div>
 								);
