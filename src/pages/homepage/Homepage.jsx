@@ -102,8 +102,9 @@ export default function Homepage(props) {
 				<div className="column is-offset-1">
 					<h6 className="title is-5 featured">Featured Recipes</h6>
 				</div>
-			</div>
-
+			) : (
+				""
+			)}
 			<div className="columns">
 				{featuredRecipes.length > 0 ? (
 					<div className="recipe-container-homepage column is-10 is-offset-1">
@@ -114,13 +115,14 @@ export default function Homepage(props) {
 										<article className="tile is-child card">
 											<div classNameName="card-image">
 												<figure className="image is-square is-4by3">
-													<img src={recipe.item.thumbnail_url} />
+													<img src={recipe.thumbnail_url} />
 												</figure>
 											</div>
 											<div className="card-content">
 												<div className="media">
 													<div className="media-content">
-														<p className="title is-6">{recipe.item.name}</p>
+														<p className="title is-6">{recipe.name}</p>
+														{/* <p className="subtitle is-6">@johnsmith</p> */}
 													</div>
 												</div>
 											</div>

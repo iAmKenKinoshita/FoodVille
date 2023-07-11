@@ -7,14 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 //Pages
 import Navbar from "./pages/NavBar";
-import CatBar from "./pages/CatBar";
-import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
-import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 import RecipeDetailsModal from "./pages/userRecipe/RecipeDetailsModal";
+
+import Footer from "./pages/Footer";
 
 function App() {
 	//New code from here
@@ -56,23 +55,6 @@ function App() {
 						</>
 					}
 				/>
-				<Route
-					exact
-					path="/search"
-					element={
-						<>
-							<Navbar user={user} setUser={setUser} userName={userName} />
-							<SearchPage
-								user={user}
-								userId={userId}
-								searchRecipes={searchRecipes}
-								setSearchRecipes={setSearchRecipes}
-							/>
-							{/* <Footer /> */}
-						</>
-					}
-				/>
-
 				<Route
 					exact
 					path="/signIn"
