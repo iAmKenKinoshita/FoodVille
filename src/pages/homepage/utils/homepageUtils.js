@@ -53,22 +53,22 @@ const homepageUtils = {
 
 	getFeaturedRecipes: async (setFeaturedRecipes) => {
 		try {
-			let recipes = await fetch("/home", {
-				method: "GET",
-			});
-			recipes = await recipes.json();
-			recipes = await recipes.results.filter((recipe) => {
-				if (Object.keys(recipe).length === 2) {
-					return recipe;
-				}
-			});
-			recipes = await recipes.filter((recipe) => {
-				if (Object.keys(recipe.item).length >= 50) {
-					return recipe;
-				}
-			});
-			return setFeaturedRecipes(recipes);
-			// return setFeaturedRecipes(dummydata);
+			// let recipes = await fetch("/home", {
+			// 	method: "GET",
+			// });
+			// recipes = await recipes.json();
+			// recipes = await recipes.results.filter((recipe) => {
+			// 	if (Object.keys(recipe).length === 2) {
+			// 		return recipe;
+			// 	}
+			// });
+			// recipes = await recipes.filter((recipe) => {
+			// 	if (Object.keys(recipe.item).length >= 50) {
+			// 		return recipe;
+			// 	}
+			// });
+			// return setFeaturedRecipes(recipes);
+			return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
 		}
