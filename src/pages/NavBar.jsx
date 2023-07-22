@@ -180,6 +180,7 @@ export default function NavBar(props) {
 					)}
 				</div>
 			</div>
+			<p className="text-3xl font-bold underline">asdasd</p>
 		</nav>
 	);
 }

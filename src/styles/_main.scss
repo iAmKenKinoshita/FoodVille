@@ -10,6 +10,10 @@ $menu-item-hover-background-color: #fe4a40;
 $menu-item-color: white;
 $label-weight: 550;
 
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 // @forward "./utils/variables";
 // @forward "./utils/components";
 // @forward "./utils/layout";
