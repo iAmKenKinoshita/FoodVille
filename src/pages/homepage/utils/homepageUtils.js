@@ -2,6 +2,8 @@ import { Popover } from "react-bootstrap";
 
 import dummydata from "./dummyfeatured";
 
+import dummytag from "./dummytags";
+
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
@@ -68,6 +70,18 @@ const homepageUtils = {
 			// 	}
 			// });
 			// return setFeaturedRecipes(recipes);
+			const rootTagType = {};
+			// const cuisine;
+
+			for (let i = 0; i < dummytag.results.length; i++) {
+				// console.log(dummytag.results[i]);
+				if (!rootTagType[dummytag.results[i].root_tag_type]) {
+					rootTagType[dummytag.results[i].root_tag_type] = 0;
+				}
+				rootTagType[dummytag.results[i].root_tag_type]++;
+			}
+			console.log("RootTagType", rootTagType);
+
 			return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
