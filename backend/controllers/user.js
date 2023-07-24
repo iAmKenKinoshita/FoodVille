@@ -6,7 +6,6 @@ const userModel = require("../model/user");
 exports.logIn = async (req, res) => {
 	const { userEmail, userPassword } = req.body;
 	let allUsers = [];
-	let refreshTokens = [];
 
 	await userModel.getAllUsers().then((data) => {
 		return (allUsers = data);
@@ -19,7 +18,8 @@ exports.logIn = async (req, res) => {
 	//If no user found
 	if (!user) {
 		res.status(400).send({
-			error: "Invalid credentials",
+			error: "EmailAddrress",
+			message: "Invalid email",
 		});
 	} else {
 		let isMatch = await bcrypt.compare(userPassword, user.userPassword);
@@ -43,14 +43,17 @@ exports.logIn = async (req, res) => {
 				}
 			);
 
-			refreshTokens.push(refreshToken);
-
 			res.send({
 				accessToken,
 				refreshToken,
+				message: "Login successful",
 			});
 		} else {
-			console.log("Wrong password");
+			//If the input password is wrong
+			res.status(400).send({
+				error: "Password",
+				message: "Wrong credentials",
+			});
 		}
 	}
 
