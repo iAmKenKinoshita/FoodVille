@@ -3,19 +3,22 @@ import axios from "axios";
 const userUtils = {
 	//User Verification
 
-	signUp: async (username, email, password) => {
+	signUp: async (data, setError) => {
 		try {
-			let data = await axios.post("/user/signUp", {
-				userName: username,
-				userEmail: email,
-				userPassword: password,
+			const response = await axios.post("/user/signUp", {
+				userName: data.username,
+				userEmail: data.email,
+				userPassword: data.password,
 			});
-			if (data.data.accessToken) {
-				localStorage.setItem("user", JSON.stringify(data));
-				return data.data;
-			}
+			// if (response.data.accessToken) {
+			// 	localStorage.setItem("user", JSON.stringify(response));
+			// 	return response.data;
+			// }
+			return response;
 		} catch (error) {
-			console.log(error);
+			setError(error.response.data.error, {
+				message: error.response.data.message,
+			});
 		}
 	},
 	signIn: async (data, setError) => {
@@ -25,17 +28,13 @@ const userUtils = {
 				userPassword: data.password,
 			});
 			if (response.data.accessToken) {
-				localStorage.setItem("user", JSON.stringify(data));
+				localStorage.setItem("user", JSON.stringify(response));
 				return response.data;
 			}
 		} catch (error) {
-			console.log(error.response.data.error);
-			if (error.response.data.error === "EmailAddrress") {
-				setError("email", { message: error.response.data.message });
-			}
-			if (error.response.data.error === "Password") {
-				setError("password", { message: error.response.data.message });
-			}
+			setError(error.response.data.error, {
+				message: error.response.data.message,
+			});
 		}
 	},
 	getUserData: async (token) => {
