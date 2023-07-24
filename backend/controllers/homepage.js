@@ -16,14 +16,27 @@ const options = {
 const homepageController = {
 	getRecipes: async (req, res) => {
 		const query = req.get("query");
+		const tag = req.get("tag");
+		console.log("This is the tag", tag);
 
 		try {
-			let data = await fetch(
-				`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
-				options
-			);
-			data = await data.json();
-			res.send(data.results);
+			if (query) {
+				let data = await fetch(
+					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
+					options
+				);
+				data = await data.json();
+				res.send(data.results);
+			}
+
+			if (tag) {
+				let data = await fetch(
+					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&tags=${tag}`,
+					options
+				);
+				data = await data.json();
+				res.send(data.results);
+			}
 		} catch (error) {
 			console.log(error);
 		}

@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //Pages
-import Navbar from "./pages/NavBar";
+import Navbar from "./pages/NavBar/NavBar";
 import CatBar from "./pages/CatBar";
 import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
@@ -43,7 +43,12 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} userName={userName} />
+							<Navbar
+								user={user}
+								setUser={setUser}
+								userName={userName}
+								setSearchRecipes={setSearchRecipes}
+							/>
 							<Homepage
 								user={user}
 								userId={userId}
