@@ -10,7 +10,6 @@ const userUtils = {
 				userEmail: email,
 				userPassword: password,
 			});
-			console.log("This is the data.data.acessToken", data.data.accessToken);
 			if (data.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(data));
 				return data.data;
@@ -19,19 +18,24 @@ const userUtils = {
 			console.log(error);
 		}
 	},
-	signIn: async (email, password) => {
+	signIn: async (data, setError) => {
 		try {
-			let data = await axios.post("/user/logIn", {
-				userEmail: email,
-				userPassword: password,
+			const response = await axios.post("/user/logIn", {
+				userEmail: data.email,
+				userPassword: data.password,
 			});
-			console.log(data.data);
-			if (data.data.accessToken) {
+			if (response.data.accessToken) {
 				localStorage.setItem("user", JSON.stringify(data));
-				return data.data;
+				return response.data;
 			}
 		} catch (error) {
-			console.log(error);
+			console.log(error.response.data.error);
+			if (error.response.data.error === "EmailAddrress") {
+				setError("email", { message: error.response.data.message });
+			}
+			if (error.response.data.error === "Password") {
+				setError("password", { message: error.response.data.message });
+			}
 		}
 	},
 	getUserData: async (token) => {
