@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 //UserUtils
 import UserUtils from "../user/utils/userUtils";
 
+//HomapageUtils
+import HomepageUtils from "../homepage/utils/homepageUtils";
+
 //Categories
 import categories from "./categories";
 
@@ -44,21 +47,29 @@ const DropdownMenu = ({ title, children }) => {
 
 export default function NavBar(props) {
 	const navigate = useNavigate();
-	const { user, setUser, userName } = props;
-
+	const { user, setUser, userName, setSearchRecipes } = props;
 	return (
 		<nav className="bg-white py-4">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
-						<img src={FVLogo} alt="Your Logo" className="h-8 w-auto" />
-						{/* Navigation Links - Dropdown Menus */}
+						<a onClick={() => navigate("/")}>
+							<img src={FVLogo} alt="Your Logo" className="h-8 w-auto" />
+						</a>
+
 						<div className="hidden md:flex ml-4 space-x-4">
-							<DropdownMenu title="Meals">
+							<DropdownMenu title="Meal">
 								{categories.MEALS.map((meal) => {
 									return (
 										<li>
 											<a
+												onClick={() => {
+													HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														meal.name
+													);
+													navigate("/search");
+												}}
 												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
@@ -74,6 +85,13 @@ export default function NavBar(props) {
 									return (
 										<li>
 											<a
+												onClick={() => {
+													HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														cuisine.name
+													);
+													navigate("/search");
+												}}
 												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
@@ -88,6 +106,13 @@ export default function NavBar(props) {
 									return (
 										<li>
 											<a
+												onClick={() => {
+													HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														diet.name
+													);
+													navigate("/search");
+												}}
 												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
@@ -102,6 +127,13 @@ export default function NavBar(props) {
 									return (
 										<li>
 											<a
+												onClick={() => {
+													HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														method.name
+													);
+													navigate("/search");
+												}}
 												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
@@ -116,6 +148,13 @@ export default function NavBar(props) {
 									return (
 										<li>
 											<a
+												onClick={async () => {
+													await HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														seasonal.name
+													);
+													navigate("/search");
+												}}
 												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
@@ -128,14 +167,52 @@ export default function NavBar(props) {
 						</div>
 					</div>
 
-					{/* Sign In Button */}
 					<div className="hidden md:block">
-						<a
-							href="#"
-							className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
-						>
-							Sign In
-						</a>
+						{user === true ? (
+							<a
+								onClick={() => {
+									navigate("/recipes");
+								}}
+								href="#"
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+							>
+								Saved Recipes
+							</a>
+						) : (
+							""
+						)}
+						{user === true ||
+						window.location.pathname === "/signIn" ||
+						window.location.pathname === "/signUp" ? (
+							""
+						) : (
+							<a
+								href="#"
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+								onClick={() => {
+									navigate("/signIn");
+								}}
+							>
+								Sign In
+							</a>
+						)}
+
+						{user === true ? (
+							<a
+								onClick={async () => {
+									await UserUtils.signOut();
+									console.log("log out button");
+									setUser(false);
+									navigate("/");
+								}}
+								href="#"
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+							>
+								Log Out
+							</a>
+						) : (
+							""
+						)}
 					</div>
 				</div>
 			</div>

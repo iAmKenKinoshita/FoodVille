@@ -2,8 +2,6 @@ import { Popover } from "react-bootstrap";
 
 import dummydata from "./dummyfeatured";
 
-import dummytag from "./dummytags";
-
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
@@ -24,6 +22,25 @@ const homepageUtils = {
 		} catch (error) {
 			console.log(error);
 		}
+	},
+	searchRecipeByCategory: async (setSearchRecipes, tag) => {
+		try {
+			let recipes = await fetch("/home", {
+				method: "POST",
+				headers: {
+					tag,
+				},
+			});
+
+			recipes = await recipes.json();
+			recipes = await recipes.filter((recipe) => {
+				if (Object.keys(recipe).length >= 50) {
+					return recipe;
+				}
+			});
+			// console.log(recipes);
+			return setSearchRecipes(recipes);
+		} catch (error) {}
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
 		try {
@@ -70,18 +87,6 @@ const homepageUtils = {
 			// 	}
 			// });
 			// return setFeaturedRecipes(recipes);
-			const rootTagType = {};
-			// const cuisine;
-
-			for (let i = 0; i < dummytag.results.length; i++) {
-				// console.log(dummytag.results[i]);
-				if (!rootTagType[dummytag.results[i].root_tag_type]) {
-					rootTagType[dummytag.results[i].root_tag_type] = 0;
-				}
-				rootTagType[dummytag.results[i].root_tag_type]++;
-			}
-			console.log("RootTagType", rootTagType);
-
 			return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);

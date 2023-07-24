@@ -43,7 +43,12 @@ function App() {
 					path="/"
 					element={
 						<>
-							<Navbar user={user} setUser={setUser} userName={userName} />
+							<Navbar
+								user={user}
+								setUser={setUser}
+								userName={userName}
+								setSearchRecipes={setSearchRecipes}
+							/>
 							<Homepage
 								user={user}
 								userId={userId}
