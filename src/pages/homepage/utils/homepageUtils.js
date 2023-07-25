@@ -87,6 +87,7 @@ const homepageUtils = {
 			// 	}
 			// });
 			// return setFeaturedRecipes(recipes);
+			console.log(dummydata);
 			return setFeaturedRecipes(dummydata);
 		} catch (error) {
 			console.log(error);

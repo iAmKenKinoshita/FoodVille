@@ -17,12 +17,11 @@ const homepageController = {
 	getRecipes: async (req, res) => {
 		const query = req.get("query");
 		const tag = req.get("tag");
-		console.log("This is the tag", tag);
 
 		try {
 			if (query) {
 				let data = await fetch(
-					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
+					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=100&q=${query}`,
 					options
 				);
 				data = await data.json();

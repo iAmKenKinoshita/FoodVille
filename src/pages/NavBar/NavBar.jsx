@@ -168,6 +168,12 @@ export default function NavBar(props) {
 					</div>
 
 					<div className="hidden md:block">
+						<input
+							type="text"
+							placeholder="Search..."
+							class="px-4 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring focus:ring-red-400 border border-gray-300"
+						/>
+
 						{user === true ? (
 							<a
 								onClick={() => {

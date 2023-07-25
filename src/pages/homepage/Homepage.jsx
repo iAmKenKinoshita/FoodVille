@@ -5,8 +5,10 @@ import { OverlayTrigger } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
+import FVLogo from "../../images/FoodVille.png";
+
 //Styling
-import "../../styles/pages/_homepage.scss";
+// import "../../styles/pages/_homepage.scss";
 
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
@@ -35,8 +37,121 @@ export default function Homepage(props) {
 	}, []);
 
 	return (
-		<div className="homepage-container">
-			<div className="columns is-mobile">
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8">
+			<div className="text-center p-2">
+				<h1 className="text-4xl font-bold mb-2">Quick Meal Recipes</h1>
+				<p className="italic">
+					"Effortless and Flavorful: Discover a Delectable Array of Quick Meals
+					for Your Busy Days! From Sizzling Stir-Fries to Savory One-Pot
+					Wonders, Embrace the Culinary Magic of Fast and Easy Cooking"
+				</p>
+			</div>
+
+			<div className="flex flex-col md:flex-row py-3">
+				{/* Horizontal tiles */}
+				<div className="flex-1 flex-row mr-4">
+					<div className="flex-1 h-48 flex flex-row hover:border-2 border-red-500 ">
+						<div className="flex-1 max-w-md mx-auto p-4">
+							<img
+								src={
+									"https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/e9b0deddea1544129967ec01ea3a1624.jpeg"
+								}
+								alt="foodimage"
+								className="w-full h-auto rounded-lg shadow-md"
+							/>
+						</div>
+						<div className="flex-1 pt-5 flex flex-col">
+							<div className="flex-1 grow">
+								<h1 className="text-red-600 pb-">Dinner</h1>
+								<h1 className="text-3xl font-bold mb-2">BLTA Hotdogs</h1>
+							</div>
+
+							<div className="flex flex-1">
+								<svg
+									className="meta-text__icon h-6 w-6 mr-2"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<circle cx="12" cy="12" r="10" />
+									<path d="M12 6v6l4 2" />
+								</svg>
+								<span className="text-gray-600">45 mins</span>
+							</div>
+						</div>
+					</div>
+					<div className="flex-1 h-48 flex flex-row hover:border-2 border-red-500">
+						<div className="flex-1 max-w-md mx-auto p-4">
+							<img
+								src={
+									"https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/e9b0deddea1544129967ec01ea3a1624.jpeg"
+								}
+								alt="foodimage"
+								className="w-full h-auto rounded-lg shadow-md"
+							/>
+						</div>
+						<div className="flex-1 pt-5 flex flex-col">
+							<div className="flex-1 grow">
+								<h1 className="text-red-600 pb-">Dinner</h1>
+								<h1 className="text-3xl font-bold mb-2">BLTA Hotdogsdddddd</h1>
+							</div>
+
+							<div className="flex flex-1">
+								<svg
+									className="meta-text__icon h-6 w-6 mr-2"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<circle cx="12" cy="12" r="10" />
+									<path d="M12 6v6l4 2" />
+								</svg>
+								<span className="text-gray-600">45 mins</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{/* Vertical tile */}
+				<div className="flex-1 flex-initial w-80 flex flex-col hover:border-2 border-red-500 pt-4">
+					<div className="flex-1 max-w-md mx-auto px-3">
+						<img
+							src={
+								"https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/e9b0deddea1544129967ec01ea3a1624.jpeg"
+							}
+							alt="foodimage"
+							className="w-full h-auto rounded-lg shadow-md"
+						/>
+					</div>
+					<div className="flex-1 pl-2 grow">
+						<h1 className="text-red-600 pb-">Dinner</h1>
+						<h1 className="text-3xl font-bold mb-2">BLTA Hotdogsdddddd</h1>
+						<div className="flex flex-1">
+							<svg
+								className="meta-text__icon h-6 w-6 mr-2"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<circle cx="12" cy="12" r="10" />
+								<path d="M12 6v6l4 2" />
+							</svg>
+							<span className="text-gray-600">45 mins</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{/* <div className="columns is-mobile">
 				<div className="column is-6 is-offset-3  box search-bar">
 					<form
 						onSubmit={async (e) => {
@@ -66,42 +181,55 @@ export default function Homepage(props) {
 								""
 							)}
 						</div>
+					</form>
+				</div>
+			</div> */}
 
-						{/*For Filter Features */}
-						{/* <div className="field is-grouped">
-							<div className="dropdown is-hoverable">
-								<div className="dropdown-trigger">
-									<button
-										className="button"
-										aria-haspopup="true"
-										aria-controls="dropdown-menu4"
-									>
-										<span>Hover me</span>
-										<span className="icon is-small">
-											<i className="fas fa-angle-down" aria-hidden="true"></i>
-										</span>
-									</button>
-								</div>
-								<div className="dropdown-menu" id="dropdown-menu4" role="menu">
-									<div className="dropdown-content">
-										<div className="dropdown-item">
-											<p>
-												You can insert <strong>any type of content</strong>{" "}
-												within the dropdown menu.
-											</p>
+			<div className="grid grid-cols-3 pl-1">
+				{featuredRecipes.length > 0
+					? featuredRecipes.map((recipe, index) => {
+							return (
+								<div
+									className="hover:border-2 border-red-500 p-2"
+									onClick={() => {
+										setSelectedRecipeShow(true);
+										setSelectedRecipe(recipe.item);
+									}}
+								>
+									<div className="p-2">
+										<img
+											src={recipe.item.thumbnail_url}
+											alt="foodimage"
+											className="w-full h-36 object-cover rounded-t-lgr"
+										/>
+										<div className="mt-2">
+											<h1 className="text-red-600 pb-">Dinner</h1>
+											<h1 className="text-3xl font-bold mb-2">
+												{recipe.item.name}
+											</h1>
+											<div className="flex">
+												<svg
+													className="meta-text__icon h-6 w-6 mr-2"
+													viewBox="0 0 24 24"
+													fill="none"
+													stroke="currentColor"
+													strokeWidth="2"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+												>
+													<circle cx="12" cy="12" r="10" />
+													<path d="M12 6v6l4 2" />
+												</svg>
+												<span className="text-gray-600">45 mins</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div> */}
-					</form>
-				</div>
-			</div>
+							);
+					  })
+					: ""}
 
-			<div className="columns">
-				<div className="column is-offset-1">
-					<h6 className="title is-5 featured">Featured Recipes</h6>
-				</div>
+				{/**Diffrent */}
 			</div>
 
 			<div className="columns">
@@ -110,7 +238,7 @@ export default function Homepage(props) {
 						<div className="tile ancestor is-flex-wrap-wrap">
 							{featuredRecipes.map((recipe, index) => {
 								return (
-									<div className="tile is-parent is-2">
+									<div className="tile is-parent is-4">
 										<article className="tile is-child card">
 											<div classNameName="card-image">
 												<figure className="image is-square is-4by3">
@@ -126,7 +254,7 @@ export default function Homepage(props) {
 											</div>
 
 											{/* <p className="subtitle">{recipe.description}</p> */}
-											<footer className="card-footer">
+											{/* <footer className="card-footer">
 												<a
 													className="card-footer-item"
 													onClick={() => {
@@ -167,7 +295,7 @@ export default function Homepage(props) {
 														</a>
 													</OverlayTrigger>
 												)}
-											</footer>
+											</footer> */}
 										</article>
 									</div>
 								);
