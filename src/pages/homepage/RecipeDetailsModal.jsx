@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Row, Col } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 import HomepageUtils from "./utils/homepageUtils";
 
@@ -14,54 +14,44 @@ function RecipeDetailsModal(props) {
 			centered
 			dialogClassName="wideModal"
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					{selectedRecipe.name}
-				</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<Row>
-					<Col lg={8} md={4}>
-						{selectedRecipe.description ? (
-							<>
-								<h3 className="title is-6">Description</h3>
-								<h5 className="is-5">{selectedRecipe.description}</h5>
-							</>
-						) : (
-							""
-						)}
-						<br></br>
-						<h3 className="title is-6">Instructions</h3>
-						{selectedRecipe.instructions &&
-							selectedRecipe.instructions.map((instruction, index) => {
-								return (
-									<>
-										<p className="is-6">
-											{index + 1 + ". "}
-											{instruction.display_text}
-										</p>
-									</>
-								);
-							})}
-					</Col>
-					<Col lg={4} md={4}>
-						<div className="table-container">
-							<table className="table is-striped is-narrow">
+			<Modal.Body className="font-serif">
+				<h1 className="text-4xl text-center mb-2">{selectedRecipe.name}</h1>
+
+				<div className="border-b border-gray-600 my-2"></div>
+
+				<div className="flex flex-row ">
+					<div className="flex-2 bg-white">
+						<img
+							src={selectedRecipe.thumbnail_url}
+							alt="foodimage"
+							className="w-full h-full object-cover rounded-t-lgr flex-1"
+						/>
+					</div>
+					<div className="flex-1 pl-2 ">
+						<div className="flex justify-center">
+							<table className="table-auto w-44">
 								<thead>
-									<th>Ingredients</th>
+									<tr>
+										<th className="border-b border-dotted font-semibold">
+											Ingredients
+										</th>
+									</tr>
 								</thead>
 								<tbody>
 									{selectedRecipe &&
-										selectedRecipe.sections.map((section) => {
+										selectedRecipe.sections.map((item) => {
 											return (
 												<>
-													{section.components.map((ingredient) => {
+													{item.components.map((ingredient, index) => {
 														return (
-															<>
-																<tr>
-																	<td>{ingredient.raw_text}</td>
-																</tr>
-															</>
+															<tr
+																key={index}
+																className={
+																	index % 2 === 0 ? "bg-gray-100" : "bg-white"
+																}
+															>
+																<td className="">{ingredient.raw_text}</td>
+															</tr>
 														);
 													})}
 												</>
@@ -70,23 +60,46 @@ function RecipeDetailsModal(props) {
 								</tbody>
 							</table>
 						</div>
-					</Col>
-				</Row>
-			</Modal.Body>
-			<Modal.Footer>
+					</div>
+				</div>
+
+				<div className="border-b border-gray-600 my-2"></div>
+
+				<div>
+					<h1 className="font-semibold mb-1">Description</h1>
+					<p>{selectedRecipe.description}</p>
+				</div>
+
+				<div className="border-b border-gray-500 my-2"></div>
+
+				<div className="flex flex-col">
+					<h1 className="font-semibold mb-1">Instructions</h1>
+					{selectedRecipe.instructions &&
+						selectedRecipe.instructions.map((instruction, index) => {
+							return (
+								<div key={index} className="flex items-start">
+									<span className="">{index + 1 + ". "} </span>
+									<span className="">{instruction.display_text}</span>
+								</div>
+							);
+						})}
+				</div>
+
+				<div className="border-b border-gray-500 my-2"></div>
 				<button
-					className="button is-primary"
+					className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
 					onClick={async () => {
 						props.onHide();
 						// setEditRecipeShow(true);
 						if (user && userId !== null) {
 							HomepageUtils.saveApiRecipe(userId, selectedRecipe);
 						}
+						console.log("Not user");
 					}}
 				>
-					Save
+					Save this recipe!
 				</button>
-			</Modal.Footer>
+			</Modal.Body>
 		</Modal>
 	);
 }

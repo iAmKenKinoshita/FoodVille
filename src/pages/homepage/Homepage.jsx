@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 //Bootstrap
-import { OverlayTrigger } from "react-bootstrap";
-
 import { useNavigate } from "react-router-dom";
-
-import FVLogo from "../../images/FoodVille.png";
 
 //Styling
 // import "../../styles/pages/_homepage.scss";
@@ -69,7 +65,11 @@ export default function Homepage(props) {
 											</div>
 											<div className="flex-1 pt-3 flex flex-col">
 												<div className="flex-1 grow">
-													<h1 className="text-red-600 pb-">Dinner</h1>
+													<h1 className="text-red-600 pb-">
+														{recipe.tags.find(
+															(tagname) => tagname.type === "meal"
+														)?.display_name || ""}
+													</h1>
 													<h1 className="text-3xl mb-2">{recipe.name}</h1>
 												</div>
 
@@ -116,7 +116,11 @@ export default function Homepage(props) {
 												className="w-full h-36 object-cover rounded-t-lgr"
 											/>
 											<div className="mt-2">
-												<h1 className="text-red-600 pb-">Dinner</h1>
+												<h1 className="text-red-600 pb-">
+													{recipe.tags.find(
+														(tagname) => tagname.type === "meal"
+													)?.display_name || ""}
+												</h1>
 												<h1 className="text-3xl mb-2">{recipe.name}</h1>
 												{recipe.total_time_minutes &&
 												recipe.total_time_minutes < 60 ? (
@@ -168,7 +172,7 @@ export default function Homepage(props) {
 												className="w-full h-36 object-cover rounded-t-lgr"
 											/>
 											<div className="mt-2">
-												<h1 className="text-red-600 pb-">
+												<h1 className="text-red-600">
 													{recipe.tags.find(
 														(tagname) => tagname.type === "meal"
 													)?.display_name || ""}

@@ -5,9 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import UserUtils from "./utils/userUtils";
 
-//Styling
-import "../../styles/pages/_signInUp.scss";
-
 const schema = yup.object().shape({
 	email: yup
 		.string()
