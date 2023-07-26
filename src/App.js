@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 //Pages
 import Navbar from "./pages/NavBar/NavBar";
-import CatBar from "./pages/CatBar";
 import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
 import SearchPage from "./pages/homepage/SearchPage";

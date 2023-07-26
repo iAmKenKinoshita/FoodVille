@@ -14,7 +14,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-#root {
+#root,
+body {
 	background-color: #f0f9f9;
 }
 
