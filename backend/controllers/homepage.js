@@ -17,25 +17,25 @@ const homepageController = {
 	getRecipes: async (req, res) => {
 		const query = req.get("query");
 		const tag = req.get("tag");
-		console.log("This is the tag", tag);
+		let response;
 
 		try {
 			if (query) {
-				let data = await fetch(
-					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&q=${query}`,
+				response = await fetch(
+					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=100&q=${query}`,
 					options
 				);
-				data = await data.json();
-				res.send(data.results);
+				response = await response.json();
+				res.send(response.results);
 			}
 
 			if (tag) {
-				let data = await fetch(
+				response = await fetch(
 					`https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&tags=${tag}`,
 					options
 				);
-				data = await data.json();
-				res.send(data.results);
+				response = await response.json();
+				res.send(response.results);
 			}
 		} catch (error) {
 			console.log(error);
@@ -53,12 +53,12 @@ const homepageController = {
 	},
 	getFeaturedRecipes: async (req, res) => {
 		try {
-			const response = await fetch(
-				"https://tasty.p.rapidapi.com/feeds/list?size=10&timezone=%2B0700&vegetarian=false&from=0",
+			let response = await fetch(
+				"https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&tags=under_45_minutes",
 				options
 			);
-			const result = await response.text();
-			res.send(result);
+			response = await response.json();
+			res.send(response.results);
 		} catch (error) {
 			console.error(error);
 		}

@@ -5,8 +5,10 @@ import { OverlayTrigger } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
 
+import FVLogo from "../../images/FoodVille.png";
+
 //Styling
-import "../../styles/pages/_homepage.scss";
+// import "../../styles/pages/_homepage.scss";
 
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
@@ -35,8 +37,120 @@ export default function Homepage(props) {
 	}, []);
 
 	return (
-		<div className="homepage-container">
-			<div className="columns is-mobile">
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24">
+			<div className="text-center p-2">
+				<h1 className="text-4xl mb-2">Quick Meal Recipes</h1>
+				<p className="italic">
+					"Effortless and Flavorful: Discover a Delectable Array of Quick Meals
+					for Your Busy Days! From Sizzling Stir-Fries to Savory One-Pot
+					Wonders, Embrace the Culinary Magic of Fast and Easy Cooking"
+				</p>
+			</div>
+
+			<div className="grid grid-rows-2 grid-flow-col gap-3 md:flex-row py-3">
+				{/* Horizontal tiles */}
+				{featuredRecipes
+					? featuredRecipes.map((recipe, index) => {
+							if (index <= 1) {
+								return (
+									<div
+										className="row-span-1 mr-4 bg-white"
+										onClick={() => {
+											setSelectedRecipeShow(true);
+											setSelectedRecipe(recipe);
+										}}
+									>
+										<div className="flex flex-row hover:border-2 border-red-500 ">
+											<div className="flex-1 max-w-md mx-auto p-4">
+												<img
+													src={recipe.thumbnail_url}
+													alt="foodimage"
+													className="w-full h-36 object-cover rounded-t-lgr"
+												/>
+											</div>
+											<div className="flex-1 pt-3 flex flex-col">
+												<div className="flex-1 grow">
+													<h1 className="text-red-600 pb-">Dinner</h1>
+													<h1 className="text-3xl mb-2">{recipe.name}</h1>
+												</div>
+
+												{recipe.total_time_minutes &&
+												recipe.total_time_minutes < 60 ? (
+													<div className="flex flex-1">
+														<svg
+															className="meta-text__icon h-6 w-6 mr-2"
+															viewBox="0 0 24 24"
+															fill="none"
+															stroke="currentColor"
+															strokeWidth="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<circle cx="12" cy="12" r="10" />
+															<path d="M12 6v6l4 2" />
+														</svg>
+														<span className="text-gray-600">
+															{recipe.total_time_minutes} minutes
+														</span>
+													</div>
+												) : (
+													""
+												)}
+											</div>
+										</div>
+									</div>
+								);
+							}
+							if (index === 2) {
+								return (
+									<div
+										className="row-span-2 hover:border-2 border-red-500 p-2 bg-white"
+										onClick={() => {
+											setSelectedRecipeShow(true);
+											setSelectedRecipe(recipe);
+										}}
+									>
+										<div className="p-2">
+											<img
+												src={recipe.thumbnail_url}
+												alt="foodimage"
+												className="w-full h-36 object-cover rounded-t-lgr"
+											/>
+											<div className="mt-2">
+												<h1 className="text-red-600 pb-">Dinner</h1>
+												<h1 className="text-3xl mb-2">{recipe.name}</h1>
+												{recipe.total_time_minutes &&
+												recipe.total_time_minutes < 60 ? (
+													<div className="flex">
+														<svg
+															className="meta-text__icon h-6 w-6 mr-2"
+															viewBox="0 0 24 24"
+															fill="none"
+															stroke="currentColor"
+															strokeWidth="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<circle cx="12" cy="12" r="10" />
+															<path d="M12 6v6l4 2" />
+														</svg>
+														<span className="text-gray-600">
+															{recipe.total_time_minutes} minutes
+														</span>
+													</div>
+												) : (
+													""
+												)}
+											</div>
+										</div>
+									</div>
+								);
+							}
+					  })
+					: ""}
+			</div>
+
+			{/* <div className="columns is-mobile">
 				<div className="column is-6 is-offset-3  box search-bar">
 					<form
 						onSubmit={async (e) => {
@@ -66,118 +180,66 @@ export default function Homepage(props) {
 								""
 							)}
 						</div>
-
-						{/*For Filter Features */}
-						{/* <div className="field is-grouped">
-							<div className="dropdown is-hoverable">
-								<div className="dropdown-trigger">
-									<button
-										className="button"
-										aria-haspopup="true"
-										aria-controls="dropdown-menu4"
-									>
-										<span>Hover me</span>
-										<span className="icon is-small">
-											<i className="fas fa-angle-down" aria-hidden="true"></i>
-										</span>
-									</button>
-								</div>
-								<div className="dropdown-menu" id="dropdown-menu4" role="menu">
-									<div className="dropdown-content">
-										<div className="dropdown-item">
-											<p>
-												You can insert <strong>any type of content</strong>{" "}
-												within the dropdown menu.
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> */}
 					</form>
 				</div>
-			</div>
+			</div> */}
 
-			<div className="columns">
-				<div className="column is-offset-1">
-					<h6 className="title is-5 featured">Featured Recipes</h6>
-				</div>
-			</div>
-
-			<div className="columns">
-				{featuredRecipes.length > 0 ? (
-					<div className="recipe-container-homepage column is-10 is-offset-1">
-						<div className="tile ancestor is-flex-wrap-wrap">
-							{featuredRecipes.map((recipe, index) => {
+			<div className="grid grid-cols-3 gap-3 py-5">
+				{featuredRecipes
+					? featuredRecipes.map((recipe, index) => {
+							if (index >= 3) {
 								return (
-									<div className="tile is-parent is-2">
-										<article className="tile is-child card">
-											<div classNameName="card-image">
-												<figure className="image is-square is-4by3">
-													<img src={recipe.item.thumbnail_url} />
-												</figure>
-											</div>
-											<div className="card-content">
-												<div className="media">
-													<div className="media-content">
-														<p className="title is-6">{recipe.item.name}</p>
+									<div
+										className="hover:border-2 border-red-500 p-2 bg-white"
+										onClick={() => {
+											setSelectedRecipeShow(true);
+											setSelectedRecipe(recipe);
+										}}
+									>
+										<div className="p-2">
+											<img
+												src={recipe.thumbnail_url}
+												alt="foodimage"
+												className="w-full h-36 object-cover rounded-t-lgr"
+											/>
+											<div className="mt-2">
+												<h1 className="text-red-600 pb-">
+													{recipe.tags.find(
+														(tagname) => tagname.type === "meal"
+													)?.display_name || ""}
+												</h1>
+												<h1 className="text-3xl mb-2">{recipe.name}</h1>
+												{recipe.total_time_minutes &&
+												recipe.total_time_minutes < 60 ? (
+													<div className="flex">
+														<svg
+															className="meta-text__icon h-6 w-6 mr-2"
+															viewBox="0 0 24 24"
+															fill="none"
+															stroke="currentColor"
+															strokeWidth="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<circle cx="12" cy="12" r="10" />
+															<path d="M12 6v6l4 2" />
+														</svg>
+														<span className="text-gray-600">
+															{recipe.total_time_minutes} minutes
+														</span>
 													</div>
-												</div>
-											</div>
-
-											{/* <p className="subtitle">{recipe.description}</p> */}
-											<footer className="card-footer">
-												<a
-													className="card-footer-item"
-													onClick={() => {
-														setSelectedRecipeShow(true);
-														setSelectedRecipe(recipe.item);
-													}}
-												>
-													Details
-												</a>
-												{user && userId !== null ? (
-													<a
-														className="card-footer-item"
-														disabled={recipe.disabled}
-														onClick={(e) => {
-															if (user && userId !== null) {
-																HomepageUtils.saveApiRecipe(
-																	userId,
-																	recipe.item
-																);
-																e.target.disabled = true;
-																recipe.disabled = true;
-																e.target.innerText = "Saved";
-															}
-															if (!user) {
-															}
-														}}
-													>
-														{recipe.disabled ? "Saved" : "Save"}
-													</a>
 												) : (
-													<OverlayTrigger
-														trigger="focus"
-														placement="top"
-														overlay={HomepageUtils.logInPopover(navigate)}
-													>
-														<a href="#" className="card-footer-item">
-															Save
-														</a>
-													</OverlayTrigger>
+													""
 												)}
-											</footer>
-										</article>
+											</div>
+										</div>
 									</div>
 								);
-							})}
-						</div>
-					</div>
-				) : (
-					""
-				)}
+							}
+					  })
+					: ""}
 			</div>
+
 			<RecipeDetailsModal
 				show={selectedRecipeShow}
 				onHide={() => setSelectedRecipeShow(false)}
