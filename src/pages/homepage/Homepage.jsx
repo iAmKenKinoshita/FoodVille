@@ -207,6 +207,7 @@ export default function Homepage(props) {
 							}
 					  })
 					: ""}
+					
 			</div>
 
 			<RecipeDetailsModal

@@ -57,21 +57,6 @@ const homepageUtils = {
 			console.log(error);
 		}
 	},
-	logInPopover: (navigate) => {
-		return (
-			<Popover id="popover-basic">
-				<Popover.Header as="h3">Wanna save this recipe?</Popover.Header>
-				<Popover.Body>
-					Click{" "}
-					<a href="javascript:void(0);" onClick={() => navigate("/signIn")}>
-						<strong>here</strong>
-					</a>{" "}
-					to sign-in and save this recipe!
-				</Popover.Body>
-			</Popover>
-		);
-	},
-
 	getFeaturedRecipes: async (setFeaturedRecipes) => {
 		try {
 			// let recipes = await fetch("/home", {
