@@ -54,7 +54,7 @@ const homepageController = {
 	getFeaturedRecipes: async (req, res) => {
 		try {
 			let response = await fetch(
-				"https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&tags=under_45_minutes",
+				"https://tasty.p.rapidapi.com/recipes/list?from=0&size=40&tags=under_30_minutes",
 				options
 			);
 			response = await response.json();
