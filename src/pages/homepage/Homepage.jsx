@@ -30,7 +30,6 @@ export default function Homepage(props) {
 	// const [featuredRecipes, setFeaturedRecipes] = useState("");
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
-	const [query, setQuery] = useState("");
 
 	useEffect(() => {
 		HomepageUtils.getFeaturedRecipes(setFeaturedRecipes);
