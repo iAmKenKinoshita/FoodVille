@@ -52,7 +52,6 @@ export default function NavBar(props) {
 
 	const handleKeyPress = async (event) => {
 		if (event.key === "Enter") {
-			console.log("this is the query", query);
 			await HomepageUtils.searchRecipe(setSearchRecipes, query);
 			navigate("/search");
 		}

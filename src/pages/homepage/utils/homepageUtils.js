@@ -5,20 +5,22 @@ import dummydata from "./dummydata";
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
-			let recipes = await fetch("/home", {
-				method: "POST",
-				headers: {
-					query: keywords,
-				},
-			});
+			// let recipes = await fetch("/home", {
+			// 	method: "POST",
+			// 	headers: {
+			// 		query: keywords,
+			// 	},
+			// });
 
-			recipes = await recipes.json();
-			recipes = await recipes.filter((recipe) => {
-				if (Object.keys(recipe).length >= 50) {
-					return recipe;
-				}
-			});
-			return setSearchRecipes(recipes);
+			// recipes = await recipes.json();
+			// recipes = await recipes.filter((recipe) => {
+			// 	if (Object.keys(recipe).length >= 50) {
+			// 		return recipe;
+			// 	}
+			// });
+			// return setSearchRecipes(recipes);
+			console.log(dummydata);
+			return setSearchRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
 		}
