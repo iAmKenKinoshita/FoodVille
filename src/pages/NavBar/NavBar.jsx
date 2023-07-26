@@ -49,7 +49,7 @@ export default function NavBar(props) {
 	const navigate = useNavigate();
 	const { user, setUser, userName, setSearchRecipes } = props;
 	return (
-		<nav className="bg-white py-4">
+		<nav className="py-4 fixed top-0 left-0 w-full z-10">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">

@@ -1,6 +1,6 @@
 import { Popover } from "react-bootstrap";
 
-import dummydata from "./dummyfeatured";
+import dummydata from "./dummydata";
 
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
@@ -75,14 +75,10 @@ const homepageUtils = {
 			// let recipes = await fetch("/home", {
 			// 	method: "GET",
 			// });
+
 			// recipes = await recipes.json();
-			// recipes = await recipes.results.filter((recipe) => {
-			// 	if (Object.keys(recipe).length === 2) {
-			// 		return recipe;
-			// 	}
-			// });
 			// recipes = await recipes.filter((recipe) => {
-			// 	if (Object.keys(recipe.item).length >= 50) {
+			// 	if (Object.keys(recipe).length >= 50) {
 			// 		return recipe;
 			// 	}
 			// });
