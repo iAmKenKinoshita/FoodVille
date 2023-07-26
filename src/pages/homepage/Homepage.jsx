@@ -149,40 +149,6 @@ export default function Homepage(props) {
 					: ""}
 			</div>
 
-			{/* <div className="columns is-mobile">
-				<div className="column is-6 is-offset-3  box search-bar">
-					<form
-						onSubmit={async (e) => {
-							e.preventDefault();
-							document.querySelector(".search").classList.add("is-loading");
-							await HomepageUtils.searchRecipe(setSearchRecipes, query);
-
-							navigate("/search");
-						}}
-					>
-						<div className="field is-grouped">
-							<p className="control is-expanded">
-								<input
-									className="input"
-									type="text"
-									placeholder={"Search recipe"}
-									onChange={(e) => {
-										setQuery(e.target.value);
-									}}
-								/>
-							</p>
-							{window.screen.width > 1026 ? (
-								<p className="control">
-									<button className="button search">Search</button>
-								</p>
-							) : (
-								""
-							)}
-						</div>
-					</form>
-				</div>
-			</div> */}
-
 			<div className="grid grid-cols-3 gap-3 py-5">
 				{featuredRecipes
 					? featuredRecipes.map((recipe, index) => {
