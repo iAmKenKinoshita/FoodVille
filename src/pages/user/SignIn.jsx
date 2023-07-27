@@ -36,66 +36,68 @@ const SignIn = (props) => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="max-w-md mx-auto mt-8 p-5 border rounded-lg shadow-md">
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className="mb-4">
-					<label htmlFor="email" className="block font-medium mb-2">
-						Email
-					</label>
-					<Controller
-						name="email"
-						control={control}
-						defaultValue=""
-						render={({ field }) => (
-							<input
-								{...field}
-								type="text"
-								id="email"
-								className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-							/>
-						)}
-					/>
-					<p className="text-red-500 mt-1">{errors.email?.message}</p>
-				</div>
-				<div className="mb-4">
-					<label htmlFor="password" className="block font-medium mb-2">
-						Password
-					</label>
-					<Controller
-						name="password"
-						control={control}
-						defaultValue=""
-						render={({ field }) => (
-							<input
-								{...field}
-								type="password"
-								id="password"
-								className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-							/>
-						)}
-					/>
-					<p className="text-red-500 mt-1">{errors.password?.message}</p>
-				</div>
-				<div>
-					<button
-						type="submit"
-						className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
-					>
-						Sign In
-					</button>
-					<p className="text-gray-600 mt-4 text-center">
-						Don't have an account?{" "}
-						<a
-							onClick={() => {
-								navigate("/signUp");
-							}}
-							className="text-blue-500"
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 pt-20">
+			<div className="max-w-md mx-auto mt-8 p-5 border rounded-lg shadow-md">
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<div className="mb-4">
+						<label htmlFor="email" className="block font-medium mb-2">
+							Email
+						</label>
+						<Controller
+							name="email"
+							control={control}
+							defaultValue=""
+							render={({ field }) => (
+								<input
+									{...field}
+									type="text"
+									id="email"
+									className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+								/>
+							)}
+						/>
+						<p className="text-red-500 mt-1">{errors.email?.message}</p>
+					</div>
+					<div className="mb-4">
+						<label htmlFor="password" className="block font-medium mb-2">
+							Password
+						</label>
+						<Controller
+							name="password"
+							control={control}
+							defaultValue=""
+							render={({ field }) => (
+								<input
+									{...field}
+									type="password"
+									id="password"
+									className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+								/>
+							)}
+						/>
+						<p className="text-red-500 mt-1">{errors.password?.message}</p>
+					</div>
+					<div>
+						<button
+							type="submit"
+							className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
 						>
-							Sign Up
-						</a>
-					</p>
-				</div>
-			</form>
+							Sign In
+						</button>
+						<p className="text-gray-600 mt-4 text-center">
+							Don't have an account?{" "}
+							<a
+								onClick={() => {
+									navigate("/signUp");
+								}}
+								className="text-blue-500"
+							>
+								Sign Up
+							</a>
+						</p>
+					</div>
+				</form>
+			</div>
 		</div>
 		// <>
 		// 	<div className="columns signInUp">

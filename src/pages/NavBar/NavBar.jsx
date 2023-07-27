@@ -191,7 +191,7 @@ export default function NavBar(props) {
 									navigate("/recipes");
 								}}
 								href="#"
-								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
 							>
 								Saved Recipes
 							</a>
@@ -205,7 +205,7 @@ export default function NavBar(props) {
 						) : (
 							<a
 								href="#"
-								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
 								onClick={() => {
 									navigate("/signIn");
 								}}
