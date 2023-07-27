@@ -43,13 +43,12 @@ export default function Homepage(props) {
 			</div>
 
 			<div className="grid grid-rows-2 grid-flow-col gap-3 md:flex-row py-3">
-				{/* Horizontal tiles */}
 				{featuredRecipes
 					? featuredRecipes.map((recipe, index) => {
 							if (index <= 1) {
 								return (
 									<div
-										className="row-span-1 mr-4 bg-white"
+										className="row-span-1 mr-4 bg-white shadow-md"
 										onClick={() => {
 											setSelectedRecipeShow(true);
 											setSelectedRecipe(recipe);
@@ -103,7 +102,7 @@ export default function Homepage(props) {
 							if (index === 2) {
 								return (
 									<div
-										className="row-span-2 hover:border-2 border-red-500 p-2 bg-white"
+										className="row-span-2 hover:border-2 border-red-500 p-2 bg-white shadow-md"
 										onClick={() => {
 											setSelectedRecipeShow(true);
 											setSelectedRecipe(recipe);
@@ -159,7 +158,7 @@ export default function Homepage(props) {
 							if (index >= 3) {
 								return (
 									<div
-										className="hover:border-2 border-red-500 p-2 bg-white"
+										className="hover:border-2 border-red-500 p-2 bg-white shadow-md"
 										onClick={() => {
 											setSelectedRecipeShow(true);
 											setSelectedRecipe(recipe);
@@ -207,7 +206,6 @@ export default function Homepage(props) {
 							}
 					  })
 					: ""}
-					
 			</div>
 
 			<RecipeDetailsModal
