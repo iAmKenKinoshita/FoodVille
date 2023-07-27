@@ -16,6 +16,9 @@ import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 
+//Test Page
+import RecipePageTest from "./pages/userRecipe/RecipePageTest";
+
 function App() {
 	//New code from here
 	const [user, setUser] = useState(null);
@@ -146,6 +149,21 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							<RecipePage user={user} />
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/test"
+					element={
+						<>
+							<Navbar
+								user={user}
+								setUser={setUser}
+								userName={userName}
+								setSearchRecipes={setSearchRecipes}
+							/>
+							<RecipePageTest user={user} />
 						</>
 					}
 				/>
