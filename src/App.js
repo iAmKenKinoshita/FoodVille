@@ -63,7 +63,28 @@ function App() {
 				/>
 				<Route
 					exact
-					path="/search"
+					path="/search/:keyword"
+					element={
+						<>
+							<Navbar
+								user={user}
+								setUser={setUser}
+								userName={userName}
+								setSearchRecipes={setSearchRecipes}
+							/>
+							<SearchPage
+								user={user}
+								userId={userId}
+								searchRecipes={searchRecipes}
+								setSearchRecipes={setSearchRecipes}
+							/>
+							{/* <Footer /> */}
+						</>
+					}
+				/>
+				<Route
+					exact
+					path="/search-by-tag/:tag"
 					element={
 						<>
 							<Navbar
@@ -115,7 +136,7 @@ function App() {
 				/>
 				<Route
 					exact
-					path="/recipes"
+					path="/savedrecipes"
 					element={
 						<>
 							<Navbar
