@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import "./styles/_main.scss";
+
 //Pages
 import Navbar from "./pages/NavBar/NavBar";
 import Footer from "./pages/Footer";
@@ -13,7 +15,6 @@ import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
-import RecipeDetailsModal from "./pages/userRecipe/RecipeDetailsModal";
 
 function App() {
 	//New code from here
