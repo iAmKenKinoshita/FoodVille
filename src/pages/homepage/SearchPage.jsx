@@ -19,7 +19,7 @@ export default function Homepage(props) {
 					? searchRecipes.map((recipe, index) => {
 							return (
 								<div
-									className="hover:border-2 border-red-500 p-2 bg-white"
+									className="hover:border-2 border-red-500 p-2 bg-white shadow-md"
 									onClick={() => {
 										setSelectedRecipeShow(true);
 										setSelectedRecipe(recipe);
