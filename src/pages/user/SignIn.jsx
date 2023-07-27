@@ -29,7 +29,7 @@ const SignIn = (props) => {
 		const userData = await UserUtils.getUserData(response.accessToken);
 		localStorage.setItem("userData", JSON.stringify(userData));
 		setUser(true);
-		navigate("/recipes");
+		navigate("/savedrecipes");
 	};
 
 	const { user, setUser } = props;

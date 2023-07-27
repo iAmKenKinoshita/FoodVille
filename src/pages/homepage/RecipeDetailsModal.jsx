@@ -84,10 +84,8 @@ function RecipeDetailsModal(props) {
 					</div>
 				</div>
 
-				<div className="border-b border-gray-600 my-2"></div>
-
-				<div>
-					<h1 className="font-semibold mb-1">Description</h1>
+				<div className="pt-2">
+					{/* <h1 className="font-semibold mb-1">Description</h1> */}
 					<p>{selectedRecipe.description}</p>
 				</div>
 

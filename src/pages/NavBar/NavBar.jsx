@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 
 //UserUtils
 import UserUtils from "../user/utils/userUtils";
@@ -9,9 +9,6 @@ import HomepageUtils from "../homepage/utils/homepageUtils";
 
 //Categories
 import categories from "./categories";
-
-//Styling
-// import "../styles/pages/_navBar.scss";
 
 //Logo
 import FVLogo from "../../images/FoodVille.png";
@@ -51,9 +48,9 @@ export default function NavBar(props) {
 	const [query, setQuery] = useState("");
 
 	const handleKeyPress = async (event) => {
-		if (event.key === "Enter") {
+		if (event.key === "Enter" && query) {
 			await HomepageUtils.searchRecipe(setSearchRecipes, query);
-			navigate("/search");
+			navigate(`/search/${query}`);
 		}
 	};
 
@@ -62,28 +59,27 @@ export default function NavBar(props) {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
-						<a onClick={() => navigate("/")}>
-							<img src={FVLogo} alt="Your Logo" className="h-8 w-auto" />
-						</a>
+						<Link to="/">
+							<img src={FVLogo} alt="Food Ville Logo" className="h-8 w-auto" />
+						</Link>
 
 						<div className="hidden md:flex ml-4 space-x-4">
 							<DropdownMenu title="Meal">
 								{categories.MEALS.map((meal) => {
 									return (
 										<li>
-											<a
+											<Link
+												to={`/search-by-tag/${meal.name}`}
 												onClick={() => {
 													HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														meal.name
 													);
-													navigate("/search");
 												}}
-												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
 												{meal.display_name}
-											</a>
+											</Link>
 										</li>
 									);
 								})}
@@ -93,19 +89,18 @@ export default function NavBar(props) {
 								{categories.CUISINE.map((cuisine) => {
 									return (
 										<li>
-											<a
+											<Link
+												to={`/search-by-tag/${cuisine.name}`}
 												onClick={() => {
 													HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														cuisine.name
 													);
-													navigate("/search");
 												}}
-												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
 												{cuisine.display_name}
-											</a>
+											</Link>
 										</li>
 									);
 								})}
@@ -114,19 +109,18 @@ export default function NavBar(props) {
 								{categories.DIET.map((diet) => {
 									return (
 										<li>
-											<a
+											<Link
+												to={`/search-by-tag/${diet.name}`}
 												onClick={() => {
 													HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														diet.name
 													);
-													navigate("/search");
 												}}
-												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
 												{diet.display_name}
-											</a>
+											</Link>
 										</li>
 									);
 								})}
@@ -135,19 +129,18 @@ export default function NavBar(props) {
 								{categories.METHOD.map((method) => {
 									return (
 										<li>
-											<a
+											<Link
+												to={`/search-by-tag/${method.name}`}
 												onClick={() => {
 													HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														method.name
 													);
-													navigate("/search");
 												}}
-												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
 												{method.display_name}
-											</a>
+											</Link>
 										</li>
 									);
 								})}
@@ -156,19 +149,18 @@ export default function NavBar(props) {
 								{categories.SEASONAL.map((seasonal) => {
 									return (
 										<li>
-											<a
+											<Link
+												to={`/search-by-tag/${seasonal.name}`}
 												onClick={async () => {
 													await HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														seasonal.name
 													);
-													navigate("/search");
 												}}
-												href="#"
 												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 											>
 												{seasonal.display_name}
-											</a>
+											</Link>
 										</li>
 									);
 								})}
@@ -186,15 +178,12 @@ export default function NavBar(props) {
 						/>
 
 						{user === true ? (
-							<a
-								onClick={() => {
-									navigate("/recipes");
-								}}
-								href="#"
+							<Link
+								to={"/savedrecipes"}
 								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
 							>
 								Saved Recipes
-							</a>
+							</Link>
 						) : (
 							""
 						)}
@@ -203,30 +192,28 @@ export default function NavBar(props) {
 						window.location.pathname === "/signUp" ? (
 							""
 						) : (
-							<a
-								href="#"
+							<button
 								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
 								onClick={() => {
 									navigate("/signIn");
 								}}
 							>
 								Sign In
-							</a>
+							</button>
 						)}
 
 						{user === true ? (
-							<a
+							<button
 								onClick={async () => {
 									await UserUtils.signOut();
 									console.log("log out button");
 									setUser(false);
 									navigate("/");
 								}}
-								href="#"
 								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
 							>
 								Log Out
-							</a>
+							</button>
 						) : (
 							""
 						)}
