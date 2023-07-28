@@ -22,6 +22,8 @@ const schema = yup.object().shape({
 });
 
 function CreateNewRecipe(props) {
+	const navigate = useNavigate();
+
 	const {
 		handleSubmit,
 		control,
@@ -45,6 +47,25 @@ function CreateNewRecipe(props) {
 
 	const onSubmit = async (data) => {
 		console.log("This is the data", data);
+		await UserRecipeUtils.addNewRecipe(userId, data);
+
+		await UserRecipeUtils.getRecipes(
+			userId,
+			setSelectedRecipes,
+			setAllRecipes,
+			setAllFavoriteRecipes,
+			setFoodVilleRecipes,
+			setFoodVilleFavoriteRecipes,
+			setUserRecipes,
+			setUserFavoriteRecipes
+		);
+
+		setValue("recipeName", "");
+		setValue("description", "");
+		setValue("instructions", "");
+		setValue("ingredients", [{ ingredient_info: "" }]);
+
+		setCreateRecipeShow(false);
 	};
 
 	const {
@@ -58,11 +79,6 @@ function CreateNewRecipe(props) {
 		setUserFavoriteRecipes,
 		setCreateRecipeShow,
 	} = props;
-
-	const [ingredients, setIngredients] = useState([]);
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [instruction, setInstruction] = useState("");
 
 	// const userData = JSON.parse(localStorage.getItem("userData"));
 	// const userId = userData[0].userId;
@@ -218,117 +234,13 @@ function CreateNewRecipe(props) {
 
 					<button
 						type="submit"
-						onClick={() => handleSubmit(onSubmit)}
 						form="create"
 						className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2"
 					>
 						Submit
 					</button>
 				</form>
-				<Container>
-					<form id="createrecipe">
-						<div></div>
-
-						<Row>
-							<Col lg={6} md={4}>
-								<div className="field">
-									<label className="label">Recipe Name</label>
-									<div className="control">
-										<input
-											className="input"
-											type="text"
-											onChange={(e) => {
-												setName(e.target.value);
-											}}
-										/>
-									</div>
-								</div>
-								<div className="border-b border-gray-500 my-2"></div>
-								<div className="field">
-									<label className="label">Description</label>
-									<div className="control">
-										<textarea
-											className="textarea"
-											type="text"
-											onChange={(e) => {
-												setDescription(e.target.value);
-											}}
-										/>
-									</div>
-									{/* <p className="help is-danger">This field is required</p> */}
-								</div>
-								<div className="field">
-									<label className="label">Instructions</label>
-									<div className="control">
-										<textarea
-											className="textarea"
-											type="text"
-											onChange={(e) => {
-												setInstruction(e.target.value);
-											}}
-										/>
-									</div>
-								</div>
-							</Col>
-							<Col lg={6} md={4}>
-								<label className="label">Ingredients</label>
-								{ingredients.map((ingredient, index) => {
-									return (
-										<EditIngredients
-											key={index}
-											ingredient={ingredient}
-											onIngredientChange={UserRecipeUtils.onIngredientChange}
-											index={index}
-											deleteIngredient={UserRecipeUtils.deleteIngredient}
-											setIngredients={setIngredients}
-											ingredients={ingredients}
-										/>
-									);
-								})}
-								<a
-									className="button is-primary"
-									type="button"
-									onClick={() => {
-										UserRecipeUtils.addIngredient(ingredients, setIngredients);
-									}}
-								>
-									Add Ingredient
-								</a>
-							</Col>
-						</Row>
-					</form>
-				</Container>
 			</Modal.Body>
-			<Modal.Footer>
-				<button
-					form="createrecipe"
-					className="button is-primary create-button"
-					onClick={async (e) => {
-						e.preventDefault();
-						console.log(name, description, instruction, ingredients);
-						await UserRecipeUtils.addNewRecipe(userId, {
-							name,
-							description,
-							instruction,
-							ingredients,
-						});
-
-						await UserRecipeUtils.getRecipes(
-							userId,
-							setSelectedRecipes,
-							setAllRecipes,
-							setAllFavoriteRecipes,
-							setFoodVilleRecipes,
-							setFoodVilleFavoriteRecipes,
-							setUserRecipes,
-							setUserFavoriteRecipes
-						);
-						setCreateRecipeShow(false);
-					}}
-				>
-					Create
-				</button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

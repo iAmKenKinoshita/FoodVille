@@ -51,22 +51,31 @@ const userRecipeUtils = {
 			console.log(error);
 		}
 	},
-	addNewRecipe: async (
-		userId,
-		{ name, description, instruction, ingredients }
-	) => {
+	addNewRecipe: async (userId, data) => {
 		try {
+			console.log("This is from the utils", data);
 			await fetch(`userRecipe/createNewRecipe/${userId}`, {
 				method: "POST",
 				headers: {
-					name: name,
-					description: description,
-					instruction: instruction,
-					ingredients: JSON.stringify(ingredients),
+					name: data.recipeName,
+					description: data.description,
+					instruction: data.instructions,
+					ingredients: JSON.stringify(data.ingredients),
 					is_fv: false,
 					is_favorite: false,
 				},
 			});
+			// await fetch(`userRecipe/createNewRecipe/${userId}`, {
+			// 	method: "POST",
+			// 	headers: {
+			// 		name: name,
+			// 		description: description,
+			// 		instruction: instruction,
+			// 		ingredients: JSON.stringify(ingredients),
+			// 		is_fv: false,
+			// 		is_favorite: false,
+			// 	},
+			// });
 		} catch (error) {
 			console.log(error);
 		}
