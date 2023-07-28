@@ -156,11 +156,21 @@ function RecipePageTest(props) {
 				onHide={() => setSingleRecipeShow(false)}
 				selectedRecipe={selectedRecipe}
 				setEditRecipeShow={setEditRecipeShow}
+				currentRecipes={currentRecipes}
+				selectedRecipes={selectedRecipes}
+				allRecipes={allRecipes}
+				setAllRecipes={setAllRecipes}
+				setAllFavoriteRecipes={setAllFavoriteRecipes}
+				setFoodVilleRecipes={setFoodVilleRecipes}
+				setFoodVilleFavoriteRecipes={setFoodVilleFavoriteRecipes}
+				setUserRecipes={setUserRecipes}
+				setUserFavoriteRecipes={setUserFavoriteRecipes}
 			/>
 			<EditRecipeModal
 				show={editRecipeShow}
 				onHide={() => setEditRecipeShow(false)}
 				selectedRecipe={selectedRecipe}
+				setEditRecipeShow={setEditRecipeShow}
 			/>
 		</div>
 	);

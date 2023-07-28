@@ -53,7 +53,6 @@ const userRecipeUtils = {
 	},
 	addNewRecipe: async (userId, data) => {
 		try {
-			console.log("This is from the utils", data);
 			await fetch(`userRecipe/createNewRecipe/${userId}`, {
 				method: "POST",
 				headers: {
@@ -65,27 +64,16 @@ const userRecipeUtils = {
 					is_favorite: false,
 				},
 			});
-			// await fetch(`userRecipe/createNewRecipe/${userId}`, {
-			// 	method: "POST",
-			// 	headers: {
-			// 		name: name,
-			// 		description: description,
-			// 		instruction: instruction,
-			// 		ingredients: JSON.stringify(ingredients),
-			// 		is_fv: false,
-			// 		is_favorite: false,
-			// 	},
-			// });
 		} catch (error) {
 			console.log(error);
 		}
 	},
-	saveRecipeChanges: async (id, ingredients, recipeDetails) => {
+	saveRecipeChanges: async (id, recipeDetails) => {
 		try {
 			await fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
-					ingredients: JSON.stringify(ingredients),
+					ingredients: JSON.stringify(recipeDetails.ingredients),
 					recipeDetails: JSON.stringify(recipeDetails),
 				},
 			});
