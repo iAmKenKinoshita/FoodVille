@@ -12,7 +12,7 @@ const logInPopover = (navigate) => {
 			{/* <Popover.Header className="text-center bg-gray-200">
 				<p className="text-xl font-semibold">Click here to sign and save this recipe!</p>
 			</Popover.Header> */}
-			<Popover.Body className="p-2 bg-gray-200">
+			<Popover.Body className="p-2 bg-gray-100">
 				<p className="font-md">
 					Click{" "}
 					<Link to={"/signIn"}>

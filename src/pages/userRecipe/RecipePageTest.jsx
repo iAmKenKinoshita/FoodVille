@@ -89,8 +89,6 @@ function RecipePageTest(props) {
 							return (
 								<div
 									onClick={() => {
-										console.log("Clicked");
-										console.log(selectedRecipes);
 										setSingleRecipeShow(true);
 										setSelectedRecipe(selectedRecipes[index]);
 									}}
