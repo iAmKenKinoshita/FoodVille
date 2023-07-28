@@ -12,13 +12,13 @@ import EditIngredients from "./EditIngredients";
 import UserRecipeUtils from "./utils/userRecipe";
 
 const schema = yup.object().shape({
-	recipe_name: yup
+	recipeName: yup
 		.string()
 		.min(3, "Recipe name must be at least 3 letters")
 		.required("Name is required"),
-	description: yup.string(),
-	instruction: yup.string(),
-	ingredients: yup.array().of(yup.string()),
+	// description: yup.string(),
+	// instruction: yup.string(),
+	// ingredients: yup.array().of(yup.string()),
 });
 
 function CreateNewRecipe(props) {
@@ -34,7 +34,7 @@ function CreateNewRecipe(props) {
 			recipeName: "",
 			description: "",
 			instructions: "",
-			ingredients: [{ value: "" }],
+			ingredients: [{ ingredient_info: "" }],
 		},
 	});
 
@@ -81,9 +81,12 @@ function CreateNewRecipe(props) {
 				</Modal.Title>
 			</Modal.Header> */}
 			<Modal.Body className="font-serif">
-				<form className="p-4" onSubmit={handleSubmit(onSubmit)}>
+				<form className="p-4" id="create" onSubmit={handleSubmit(onSubmit)}>
 					<div className="mb-4">
-						<label htmlFor="recipeName" className="block font-medium mb-2">
+						<label
+							htmlFor="recipeName"
+							className="block font-medium font-semibold mb-2"
+						>
 							Recipe Name
 						</label>
 						<Controller
@@ -106,7 +109,10 @@ function CreateNewRecipe(props) {
 					<div className="flex flex-row">
 						<div className="flex-1 pr-4">
 							<div className="">
-								<label htmlFor="description" className="block font-medium mb-2">
+								<label
+									htmlFor="description"
+									className="block font-medium font-semibold mb-2"
+								>
 									Description
 								</label>
 								<Controller
@@ -121,15 +127,15 @@ function CreateNewRecipe(props) {
 										/>
 									)}
 								/>
-								{errors.description && (
+								{/* {errors.description && (
 									<p className="text-red-500">{errors.description.message}</p>
-								)}
+								)} */}
 							</div>
 
 							<div className="mb-4">
 								<label
 									htmlFor="instructions"
-									className="block font-medium mb-2"
+									className="block font-medium font-semibold mb-2"
 								>
 									Instructions
 								</label>
@@ -145,15 +151,18 @@ function CreateNewRecipe(props) {
 										/>
 									)}
 								/>
-								{errors.instructions && (
+								{/* {errors.instructions && (
 									<p className="text-red-500">{errors.instructions.message}</p>
-								)}
+								)} */}
 							</div>
 						</div>
 
 						<div className="flex-1">
 							{" "}
-							<label htmlFor="ingredients" className="block font-medium mb-2">
+							<label
+								htmlFor="ingredients"
+								className="block font-medium font-semibold mb-2"
+							>
 								Ingredients
 							</label>
 							{fields.map((ingredient, index) => (
@@ -161,8 +170,8 @@ function CreateNewRecipe(props) {
 									<div className="flex">
 										<Controller
 											control={control}
-											name={`ingredients[${index}].value`}
-											defaultValue={ingredient.value}
+											name={`ingredients[${index}].ingredient_info`}
+											defaultValue={ingredient.ingredient_info}
 											render={({ field }) => (
 												<input
 													type="text"
@@ -171,7 +180,7 @@ function CreateNewRecipe(props) {
 													placeholder="i.e. 1 kg potatoes, sliced"
 													onChange={(e) =>
 														setValue(
-															`ingredients[${index}].value`,
+															`ingredients[${index}].ingredient_info`,
 															e.target.value
 														)
 													}
@@ -193,7 +202,7 @@ function CreateNewRecipe(props) {
 											<button
 												type="button"
 												className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
-												onClick={() => append({ value: "" })}
+												onClick={() => append({ ingredient_info: "" })}
 											>
 												Add more ingredient
 											</button>
@@ -201,21 +210,23 @@ function CreateNewRecipe(props) {
 									</div>
 								</div>
 							))}
-							{errors.ingredients && (
+							{/* {errors.ingredients && (
 								<p className="text-red-500">{errors.ingredients.message}</p>
-							)}
+							)} */}
 						</div>
 					</div>
 
 					<button
 						type="submit"
+						onClick={() => handleSubmit(onSubmit)}
+						form="create"
 						className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2"
 					>
 						Submit
 					</button>
 				</form>
 				<Container>
-					<form id="createrecipe" onSubmit={handleSubmit(onSubmit)}>
+					<form id="createrecipe">
 						<div></div>
 
 						<Row>
@@ -294,6 +305,7 @@ function CreateNewRecipe(props) {
 					className="button is-primary create-button"
 					onClick={async (e) => {
 						e.preventDefault();
+						console.log(name, description, instruction, ingredients);
 						await UserRecipeUtils.addNewRecipe(userId, {
 							name,
 							description,
