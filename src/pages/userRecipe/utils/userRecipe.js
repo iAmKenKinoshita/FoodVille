@@ -70,6 +70,7 @@ const userRecipeUtils = {
 	},
 	saveRecipeChanges: async (id, recipeDetails) => {
 		try {
+			console.log("This is saved recipe chjanges", recipeDetails);
 			await fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {

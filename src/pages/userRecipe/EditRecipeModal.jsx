@@ -46,6 +46,7 @@ function EditRecipeModal(props) {
 
 	const onSubmit = async (data) => {
 		await UserRecipeUtils.saveRecipeChanges(ID, data);
+		// window.location.reload();
 		setEditRecipeShow(false);
 	};
 

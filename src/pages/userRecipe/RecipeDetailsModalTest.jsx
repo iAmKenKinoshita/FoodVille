@@ -32,18 +32,19 @@ const deletePopover = (
 						className="card-footer-item popover-button"
 						onClick={() => {
 							UserRecipeUtils.deleteRecipe(ID);
-							UserRecipeUtils.handleDelete(
-								ID,
-								currentRecipes,
-								setSelectedRecipes,
-								allRecipes,
-								setAllRecipes,
-								setAllFavoriteRecipes,
-								setFoodVilleRecipes,
-								setFoodVilleFavoriteRecipes,
-								setUserRecipes,
-								setUserFavoriteRecipes
-							);
+							window.location.reload();
+							// UserRecipeUtils.handleDelete(
+							// 	ID,
+							// 	currentRecipes,
+							// 	setSelectedRecipes,
+							// 	allRecipes,
+							// 	setAllRecipes,
+							// 	setAllFavoriteRecipes,
+							// 	setFoodVilleRecipes,
+							// 	setFoodVilleFavoriteRecipes,
+							// 	setUserRecipes,
+							// 	setUserFavoriteRecipes
+							// );
 						}}
 					>
 						Yes
