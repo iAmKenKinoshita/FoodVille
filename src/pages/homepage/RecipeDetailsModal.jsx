@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { OverlayTrigger, Popover } from "react-bootstrap";
 
@@ -9,15 +9,19 @@ import HomepageUtils from "./utils/homepageUtils";
 const logInPopover = (navigate) => {
 	return (
 		<Popover className="font-serif" id="popover-basic">
-			<Popover.Header className=" bg-white text-center">
-				<p className="font-semibold">Wanna save this recipe?</p>
-			</Popover.Header>
-			<Popover.Body className="p-3">
-				Click{" "}
-				<a onClick={() => navigate("/signIn")}>
-					<strong className="text-lg text-blue-500">here</strong>
-				</a>{" "}
-				to sign-in and save this recipe!
+			{/* <Popover.Header className="text-center bg-gray-200">
+				<p className="text-xl font-semibold">Click here to sign and save this recipe!</p>
+			</Popover.Header> */}
+			<Popover.Body className="p-2 bg-gray-100">
+				<p className="font-md">
+					Click{" "}
+					<Link to={"/signIn"}>
+						<strong className="text-lg text-blue-500 underline decoration-blue-500">
+							here
+						</strong>
+					</Link>{" "}
+					to sign-in and save this recipe!
+				</p>
 			</Popover.Body>
 		</Popover>
 	);

@@ -54,7 +54,7 @@ function RecipePage(props) {
 	}, []);
 
 	return (
-		<div>
+		<div className="pt-24">
 			<div className="columns">
 				<div className="column is-1 sidebar">
 					<aside className="menu">
