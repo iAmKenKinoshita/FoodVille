@@ -109,8 +109,8 @@ function EditRecipeModal(props) {
 					</div>
 
 					<div className="flex flex-row">
-						<div className="flex-1 pr-4">
-							<div className="">
+						<div className="flex-1 pr-4 flex flex-col">
+							<div className="h-1/2">
 								<label
 									htmlFor="description"
 									className="block font-medium font-semibold mb-2"
@@ -124,7 +124,7 @@ function EditRecipeModal(props) {
 										<textarea
 											id="description"
 											rows="4"
-											className="w-full p-2 border rounded-md"
+											className="h-2/3 w-full p-2 border rounded-md"
 											{...field}
 										/>
 									)}
@@ -134,7 +134,7 @@ function EditRecipeModal(props) {
 								)} */}
 							</div>
 
-							<div className="mb-4">
+							<div className="mb-4 h-2/3">
 								<label
 									htmlFor="instructions"
 									className="block font-medium font-semibold mb-2"
@@ -148,7 +148,7 @@ function EditRecipeModal(props) {
 										<textarea
 											id="instructions"
 											rows="6"
-											className="w-full p-2 border rounded-md"
+											className="h-1/2 w-full p-2 border rounded-md"
 											{...field}
 										/>
 									)}
@@ -177,7 +177,7 @@ function EditRecipeModal(props) {
 											render={({ field }) => (
 												<input
 													type="text"
-													className="w-full p-2 border rounded-md"
+													className="w-full p-1 border rounded-md"
 													{...field}
 													placeholder="i.e. 1 kg potatoes, sliced"
 													onChange={(e) =>
