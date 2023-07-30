@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-//Styling
-import "../../styles/pages/_search.scss";
-
 //Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
 
