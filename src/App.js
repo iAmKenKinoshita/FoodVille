@@ -17,7 +17,6 @@ import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 
 //Test Page
-import RecipePageTest from "./pages/userRecipe/RecipePageTest";
 
 function App() {
 	//New code from here
@@ -163,7 +162,6 @@ function App() {
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
 							/>
-							<RecipePageTest user={user} />
 						</>
 					}
 				/>

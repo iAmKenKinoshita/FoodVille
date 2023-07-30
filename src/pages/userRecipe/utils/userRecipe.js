@@ -105,7 +105,6 @@ const userRecipeUtils = {
 		setUserRecipes,
 		setUserFavoriteRecipes
 	) => {
-		console.log(recipe);
 		recipe.is_favorite = !recipe.is_favorite;
 		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
 		setAllFavoriteRecipes(AllFavoriteRecipes);
@@ -126,15 +125,29 @@ const userRecipeUtils = {
 		);
 		setUserFavoriteRecipes(userFavoriteRecipes);
 
-		if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+		if (currentRecipes === "allFavorites") {
 			setSelectedRecipes(AllFavoriteRecipes);
 		}
-		if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
+		if (currentRecipes === "foodVilleFavorites") {
 			setSelectedRecipes(foodVilleFavoriteRecipes);
 		}
-		if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
+
+		if (currentRecipes === "userFavorites") {
 			setSelectedRecipes(userFavoriteRecipes);
 		}
+
+		//Old Codes
+		// if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+		// 	setSelectedRecipes(AllFavoriteRecipes);
+		// }
+		// if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
+		// 	console.log("here");
+		// 	setSelectedRecipes(foodVilleFavoriteRecipes);
+		// }
+
+		// if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
+		// 	setSelectedRecipes(userFavoriteRecipes);
+		// }
 	},
 	handleDelete: (
 		recipeId,

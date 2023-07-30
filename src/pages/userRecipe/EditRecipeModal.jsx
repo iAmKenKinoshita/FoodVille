@@ -221,7 +221,7 @@ function EditRecipeModal(props) {
 					<button
 						type="submit"
 						form="create"
-						className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2"
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2"
 					>
 						Save Changes
 					</button>
