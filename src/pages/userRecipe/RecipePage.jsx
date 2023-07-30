@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 
-//Styling
-import "../../styles/pages/_recipepage.scss";
-
 //Icons
 import FVIcon from "../../images/FVIcon.png";
 
@@ -16,7 +13,9 @@ import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";
 
-function RecipePage(props) {
+function RecipePageTest(props) {
+	const [sideBarActive, setSideBarActive] = useState(0);
+
 	const [createRecipeShow, setCreateRecipeShow] = useState(false);
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
@@ -54,206 +53,175 @@ function RecipePage(props) {
 	}, []);
 
 	return (
-		<div className="pt-24">
-			<div className="columns">
-				<div className="column is-1 sidebar">
-					<aside className="menu">
-						<p className="menu-label">Recipes</p>
-						<ul className="menu-list">
-							<li>
-								<a
-									className="is-active"
-									onClick={(e) => {
-										UserRecipeUtils.toggleSideBarIsActive(e);
-										setSelectedRecipes(allRecipes);
-										setCurrentRecipes("allRecipes");
-									}}
-								>
-									All
-								</a>
-							</li>
-							<li>
-								<a
-									onClick={(e) => {
-										UserRecipeUtils.toggleSideBarIsActive(e);
-										setSelectedRecipes(allFavoriteRecipes);
-										setCurrentRecipes("allFavorites");
-									}}
-								>
-									Favorites
-								</a>
-							</li>
-						</ul>
-						<p className="menu-label">Food Ville's</p>
-						<ul className="menu-list">
-							<ul className="menu-list">
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(foodVilleRecipes);
-											setCurrentRecipes("foodVilleRecipes");
-										}}
-									>
-										All
-									</a>
-								</li>
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(foodVilleFavoriteRecipes);
-											setCurrentRecipes("foodVilleFavorites");
-										}}
-									>
-										Favorites
-									</a>
-								</li>
-							</ul>
-						</ul>
-						<p className="menu-label">Your Recipes</p>
-						<ul className="menu-list">
-							<ul className="menu-list">
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(userRecipes);
-											setCurrentRecipes("userRecipes");
-										}}
-									>
-										All
-									</a>
-								</li>
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(userFavoriteRecipes);
-											setCurrentRecipes("userFavorites");
-										}}
-									>
-										Favorites
-									</a>
-								</li>
-							</ul>
-						</ul>
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24 flex">
+			<div className="h-screen p-4 sticky top-0">
+				{/* Sidebar content */}
+				<div className="py-2">
+					<h1 className="text-gray-400 text-2xl font-semibold">Recipes</h1>
+					<ul className="pl-4 text-center">
 						<a
-							className="button is-primary new-recipe"
-							onClick={() => setCreateRecipeShow(true)}
+							onClick={() => {
+								setSideBarActive(0);
+								setSelectedRecipes(allRecipes);
+								setCurrentRecipes("allRecipes");
+							}}
 						>
-							+ New Recipe
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 0 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
 						</a>
-					</aside>
+						<a
+							onClick={() => {
+								setSideBarActive(1);
+								setSelectedRecipes(allFavoriteRecipes);
+								setCurrentRecipes("allFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 1 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+					</ul>
 				</div>
-				<div className="column recipe-container-recipepage">
-					<div className="tile is-ancestor is-flex-wrap-wrap">
-						{selectedRecipes &&
-							selectedRecipes.map((recipe, index) => {
-								return (
-									<div className="tile is-parent is-3">
-										<article className="tile is-child card">
-											<div className="card-image">
-												<figure className="image is-4by3">
-													<img
-														src={
-															recipe.image_url
-																? recipe.image_url
-																: "https://bulma.io/images/placeholders/256x256.png"
-														}
-														alt="Food Image"
-													/>
-												</figure>
-											</div>
-											<div className="card-content">
-												<div className="media">
-													<div className="media-content">
-														<p className="title is-6">{recipe.name}</p>
-														{/* <p class="subtitle is-6">@johnsmith</p> */}
-													</div>
-													<div className="media-left">
-														{recipe.is_fv ? (
-															<figure className="image is-48x48">
-																<img src={FVIcon} alt="Placeholder image" />
-															</figure>
-														) : (
-															""
-														)}
-													</div>
+				<div className="py-2">
+					<h1 className="text-gray-400 text-2xl font-semibold">Food Ville's</h1>
+					<ul className="pl-4 text-center">
+						<a
+							onClick={() => {
+								setSideBarActive(2);
+								setSelectedRecipes(foodVilleRecipes);
+								setCurrentRecipes("foodVilleRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 2 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(3);
+								setSelectedRecipes(foodVilleFavoriteRecipes);
+								setCurrentRecipes("foodVilleFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 3 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+					</ul>
+				</div>
+				<div className="pt-2 pb-5">
+					<h1 className="text-gray-400 text-2xl font-semibold">Your Recipes</h1>
+					<ul className="pl-4 text-center">
+						<a
+							onClick={() => {
+								setSideBarActive(4);
+								setSelectedRecipes(userRecipes);
+								setCurrentRecipes("userRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 4 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(5);
+								setSelectedRecipes(userFavoriteRecipes);
+								setCurrentRecipes("userFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 5 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+					</ul>
+				</div>
+				<button
+					onClick={() => setCreateRecipeShow(true)}
+					className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+				>
+					Add New Recipe
+				</button>
+			</div>
+			<div className="flex-1 p-4">
+				<div className="grid grid-cols-3 gap-3 py-3">
+					{selectedRecipes &&
+						selectedRecipes.map((recipe, index) => {
+							return (
+								<div
+									onClick={() => {
+										setSingleRecipeShow(true);
+										setSelectedRecipe(selectedRecipes[index]);
+									}}
+									className="hover:border-2 border-red-500 p-2 bg-white shadow-md"
+								>
+									<div className="p-2">
+										<img
+											src={
+												recipe.image_url ||
+												"https://bulma.io/images/placeholders/256x256.png"
+											}
+											alt="foodimage"
+											className="w-full h-36 object-cover rounded-t-lgr"
+										/>
+										<div className="mt-2">
+											<h1 className="text-red-600 pb-">
+												{/* {recipe.tags.find((tagname) => tagname.type === "meal")
+													?.display_name || ""} */}
+											</h1>
+											<h1 className="text-3xl mb-2">{recipe.name}</h1>
+											{/* {recipe.total_time_minutes &&
+											recipe.total_time_minutes < 60 ? (
+												<div className="flex">
+													<svg
+														className="meta-text__icon h-6 w-6 mr-2"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														strokeWidth="2"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													>
+														<circle cx="12" cy="12" r="10" />
+														<path d="M12 6v6l4 2" />
+													</svg>
+													<span className="text-gray-600">
+														{recipe.total_time_minutes} minutes
+													</span>
 												</div>
-											</div>
-
-											<footer className="card-footer">
-												<a
-													onClick={() => {
-														setSingleRecipeShow(true);
-														setSelectedRecipe(selectedRecipes[index]);
-													}}
-													className="card-footer-item"
-												>
-													Details
-												</a>
-												<a
-													onClick={async () => {
-														await UserRecipeUtils.addOrRemoveFavorite(
-															recipe.id,
-															recipe.is_favorite
-														);
-														UserRecipeUtils.handleFavorite(
-															recipe,
-															currentRecipes,
-															setSelectedRecipes,
-															allRecipes,
-															setAllFavoriteRecipes,
-															setFoodVilleRecipes,
-															setFoodVilleFavoriteRecipes,
-															setUserRecipes,
-															setUserFavoriteRecipes
-														);
-													}}
-													className="card-footer-item favorite"
-												>
-													{/* {!recipe.is_favorite ? (
-														<span class="icon">
-															<i class="fas fa-star favorite"></i>
-														</span>
-													) : (
-														<span class="icon">
-															Add <i class="fas fa-star"></i>
-														</span>
-													)} */}
-													{!recipe.is_favorite
-														? "Add to favorite"
-														: "Remove from favorite"}
-												</a>
-												<OverlayTrigger
-													trigger="focus"
-													placement="top"
-													overlay={UserRecipeUtils.deletePopover(
-														recipe.id,
-														currentRecipes,
-														setSelectedRecipes,
-														allRecipes,
-														setAllRecipes,
-														setAllFavoriteRecipes,
-														setFoodVilleRecipes,
-														setFoodVilleFavoriteRecipes,
-														setUserRecipes,
-														setUserFavoriteRecipes
-													)}
-												>
-													<a href="#" className="card-footer-item">
-														<span className="icon card-footer-item">
-															<i className="fas fa-trash"></i>
-														</span>
-													</a>
-												</OverlayTrigger>
-											</footer>
-										</article>
+											) : (
+												""
+											)} */}
+										</div>
 									</div>
-								);
-							})}
-					</div>
+								</div>
+							);
+						})}
 				</div>
 			</div>
 			<CreateNewRecipe
@@ -272,16 +240,27 @@ function RecipePage(props) {
 			<RecipeDetailsModal
 				show={singleRecipeShow}
 				onHide={() => setSingleRecipeShow(false)}
-				selectedRecipe={selectedRecipe}
 				setEditRecipeShow={setEditRecipeShow}
+				selectedRecipe={selectedRecipe}
+				currentRecipes={currentRecipes}
+				setSelectedRecipes={setSelectedRecipes}
+				allRecipes={allRecipes}
+				setAllFavoriteRecipes={setAllFavoriteRecipes}
+				setFoodVilleRecipes={setFoodVilleRecipes}
+				setAllRecipes={setAllRecipes}
+				setFoodVilleFavoriteRecipes={setFoodVilleFavoriteRecipes}
+				setUserRecipes={setUserRecipes}
+				setUserFavoriteRecipes={setUserFavoriteRecipes}
+				setSingleRecipeShow={setSingleRecipeShow}
 			/>
 			<EditRecipeModal
 				show={editRecipeShow}
 				onHide={() => setEditRecipeShow(false)}
 				selectedRecipe={selectedRecipe}
+				setEditRecipeShow={setEditRecipeShow}
 			/>
 		</div>
 	);
 }
 
-export default RecipePage;
+export default RecipePageTest;
