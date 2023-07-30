@@ -134,7 +134,7 @@ const SignUp = (props) => {
 					<div>
 						<button
 							type="submit"
-							className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
+							className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
 						>
 							Sign Up
 						</button>

@@ -206,7 +206,6 @@ export default function NavBar(props) {
 							<button
 								onClick={async () => {
 									await UserUtils.signOut();
-									console.log("log out button");
 									setUser(false);
 									navigate("/");
 								}}

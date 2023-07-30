@@ -203,7 +203,7 @@ function EditRecipeModal(props) {
 										{index === fields.length - 1 && (
 											<button
 												type="button"
-												className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+												className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
 												onClick={() => append({ ingredient_info: "" })}
 											>
 												Add more ingredient

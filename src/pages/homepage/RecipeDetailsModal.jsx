@@ -111,7 +111,7 @@ function RecipeDetailsModal(props) {
 				<div className="border-b border-gray-500 my-2"></div>
 				{user && userId ? (
 					<button
-						className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
 						onClick={async () => {
 							props.onHide();
 							// setEditRecipeShow(true);
@@ -123,7 +123,7 @@ function RecipeDetailsModal(props) {
 						Save this recipe!
 					</button>
 				) : (
-					<button className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none">
+					<button className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none">
 						<OverlayTrigger
 							trigger="focus"
 							placement="right"
@@ -131,7 +131,7 @@ function RecipeDetailsModal(props) {
 						>
 							<button
 								href="#"
-								className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2"
+								className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2"
 							>
 								Save this recipe!
 							</button>
