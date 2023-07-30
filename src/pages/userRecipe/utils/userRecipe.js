@@ -105,6 +105,7 @@ const userRecipeUtils = {
 		setUserRecipes,
 		setUserFavoriteRecipes
 	) => {
+		console.log(recipe);
 		recipe.is_favorite = !recipe.is_favorite;
 		let AllFavoriteRecipes = allRecipes.filter((recipe) => recipe.is_favorite);
 		setAllFavoriteRecipes(AllFavoriteRecipes);

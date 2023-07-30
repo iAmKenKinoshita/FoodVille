@@ -196,6 +196,7 @@ function RecipeDetailsModal(props) {
 								selectedRecipe.id,
 								selectedRecipe.is_favorite
 							);
+							// window.location.reload();
 							console.log("Added to favorite");
 							await UserRecipeUtils.handleFavorite(
 								selectedRecipe,
@@ -209,7 +210,7 @@ function RecipeDetailsModal(props) {
 								setUserFavoriteRecipes
 							);
 						}}
-						className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
 					>
 						{selectedRecipe.is_favorite
 							? "Remove from Favorites"

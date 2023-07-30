@@ -14,6 +14,8 @@ import RecipeDetailsModal from "./RecipeDetailsModalTest";
 import EditRecipeModal from "./EditRecipeModal";
 
 function RecipePageTest(props) {
+	const [sideBarActive, setSideBarActive] = useState(0);
+
 	const [createRecipeShow, setCreateRecipeShow] = useState(false);
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
@@ -57,22 +59,106 @@ function RecipePageTest(props) {
 				<div className="py-2">
 					<h1 className="text-gray-400 text-2xl font-semibold">Recipes</h1>
 					<ul className="pl-4 text-center">
-						<li className="text-xl text-gray-400 bg-gray-200">All</li>
-						<li className="text-xl text-gray-400">Favorites</li>
+						<a
+							onClick={() => {
+								setSideBarActive(0);
+								setSelectedRecipes(allRecipes);
+								setCurrentRecipes("allRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 0 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(1);
+								setSelectedRecipes(allFavoriteRecipes);
+								setCurrentRecipes("allFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 1 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
 					</ul>
 				</div>
 				<div className="py-2">
 					<h1 className="text-gray-400 text-2xl font-semibold">Food Ville's</h1>
 					<ul className="pl-4 text-center">
-						<li className="text-xl text-gray-400">All</li>
-						<li className="text-xl text-gray-400">Favorites</li>
+						<a
+							onClick={() => {
+								setSideBarActive(2);
+								setSelectedRecipes(foodVilleRecipes);
+								setCurrentRecipes("foodVilleRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 2 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(3);
+								setSelectedRecipes(foodVilleFavoriteRecipes);
+								setCurrentRecipes("foodVilleFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 3 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
 					</ul>
 				</div>
 				<div className="pt-2 pb-5">
 					<h1 className="text-gray-400 text-2xl font-semibold">Your Recipes</h1>
 					<ul className="pl-4 text-center">
-						<li className="text-xl text-gray-400">All</li>
-						<li className="text-xl text-gray-400">Favorites</li>
+						<a
+							onClick={() => {
+								setSideBarActive(4);
+								setSelectedRecipes(userRecipes);
+								setCurrentRecipes("userRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 4 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(5);
+								setSelectedRecipes(userFavoriteRecipes);
+								setCurrentRecipes("userFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 5 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
 					</ul>
 				</div>
 				<button
