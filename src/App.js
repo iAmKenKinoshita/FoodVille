@@ -44,7 +44,7 @@ function App() {
 					exact
 					path="/"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -60,14 +60,14 @@ function App() {
 								setFeaturedRecipes={setFeaturedRecipes}
 							/>
 							{/* <Footer /> */}
-						</>
+						</div>
 					}
 				/>
 				<Route
 					exact
 					path="/search/:keyword"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -81,14 +81,14 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							{/* <Footer /> */}
-						</>
+						</div>
 					}
 				/>
 				<Route
 					exact
 					path="/search-by-tag/:tag"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -102,7 +102,7 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							{/* <Footer /> */}
-						</>
+						</div>
 					}
 				/>
 
@@ -110,7 +110,7 @@ function App() {
 					exact
 					path="/signIn"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -118,14 +118,14 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							<SignIn user={user} setUser={setUser} />
-						</>
+						</div>
 					}
 				/>
 				<Route
 					exact
 					path="/signUp"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -133,14 +133,14 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							<SignUp user={user} setUser={setUser} />
-						</>
+						</div>
 					}
 				/>
 				<Route
 					exact
 					path="/savedrecipes"
 					element={
-						<>
+						<div className="min-h-screen bg-gray-100">
 							<Navbar
 								user={user}
 								setUser={setUser}
@@ -148,7 +148,7 @@ function App() {
 								setSearchRecipes={setSearchRecipes}
 							/>
 							<RecipePage user={user} />
-						</>
+						</div>
 					}
 				/>
 				<Route

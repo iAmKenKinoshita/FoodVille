@@ -32,7 +32,7 @@ export default function Homepage(props) {
 	}, []);
 
 	return (
-		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24">
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-20">
 			<div className="text-center p-2">
 				<h1 className="text-4xl mb-2">Quick Meal Recipes</h1>
 				<p className="italic">

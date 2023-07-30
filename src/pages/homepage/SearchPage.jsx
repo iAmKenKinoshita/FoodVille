@@ -10,7 +10,7 @@ export default function Homepage(props) {
 
 	useEffect(() => {}, [searchRecipes]);
 	return (
-		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24">
+		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-20">
 			<div className="grid grid-cols-3 gap-3 py-5">
 				{searchRecipes
 					? searchRecipes.map((recipe, index) => {
