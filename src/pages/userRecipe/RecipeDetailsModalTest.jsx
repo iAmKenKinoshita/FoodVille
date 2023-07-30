@@ -18,18 +18,16 @@ const deletePopover = (
 ) => {
 	return (
 		<Popover id="popover-basic">
-			<Popover.Header as="h2">Delete confirmation</Popover.Header>
+			{/* <Popover.Header as="h2">Delete confirmation</Popover.Header> */}
+			<Popover.Body className="p-2 bg-gray-100 font-serif">
+				{/* <p className="font-semibold">Delete Recipe?</p> */}
+				<p className="font-xl font-thin p-1">
+					This will permanently delete your recipe. Proceed deleting this
+					recipe?
+				</p>
 
-			<div className="card">
-				<div class="card-content popover-content">
-					<div class="content">
-						Are you sure you want to <strong>delete</strong> this recipe?
-					</div>
-				</div>
-				<div className="card-footer delete-pop">
-					<a
-						type="button"
-						className="card-footer-item popover-button"
+				<div className="grid grid-cols-2 gap-1">
+					<button
 						onClick={() => {
 							UserRecipeUtils.deleteRecipe(ID);
 							window.location.reload();
@@ -46,12 +44,15 @@ const deletePopover = (
 							// 	setUserFavoriteRecipes
 							// );
 						}}
+						className="grid-1 bg-emerald-300 hover:bg-emerald-400 rounded-md focus:outline-none text-white p-2"
 					>
 						Yes
-					</a>{" "}
-					<a className="card-footer-item popover-button">No</a>{" "}
+					</button>
+					<button className="grid-1 bg-emerald-300 hover:bg-emerald-400 rounded-md focus:outline-none text-white p-2">
+						No
+					</button>
 				</div>
-			</div>
+			</Popover.Body>
 		</Popover>
 	);
 };
@@ -208,7 +209,7 @@ function RecipeDetailsModal(props) {
 								setUserFavoriteRecipes
 							);
 						}}
-						className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+						className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
 					>
 						{selectedRecipe.is_favorite
 							? "Remove from Favorites"

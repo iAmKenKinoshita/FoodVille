@@ -77,7 +77,7 @@ function RecipePageTest(props) {
 				</div>
 				<button
 					onClick={() => setCreateRecipeShow(true)}
-					className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2"
+					className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
 				>
 					Add New Recipe
 				</button>
