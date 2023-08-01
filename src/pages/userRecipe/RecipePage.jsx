@@ -53,7 +53,7 @@ function RecipePageTest(props) {
 	}, []);
 
 	return (
-		<div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24 flex">
+		<div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24 flex">
 			<div className="h-screen p-4 sticky top-0">
 				{/* Sidebar content */}
 				<div className="py-2">
