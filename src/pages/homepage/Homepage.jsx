@@ -42,27 +42,27 @@ export default function Homepage(props) {
 				</p>
 			</div>
 
-			<div className="grid grid-rows-2 grid-flow-col gap-3 md:flex-row py-3">
+			<div className="grid md:grid-rows-2 md:grid-flow-col gap-3 py-3">
 				{featuredRecipes
 					? featuredRecipes.map((recipe, index) => {
 							if (index <= 1) {
 								return (
 									<div
-										className="row-span-1 mr-4 bg-white shadow-md"
+										className="row-span-1 md:mr-4 bg-white shadow-md hover:border-2 border-red-500"
 										onClick={() => {
 											setSelectedRecipeShow(true);
 											setSelectedRecipe(recipe);
 										}}
 									>
-										<div className="flex flex-row hover:border-2 border-red-500 ">
-											<div className="flex-1 max-w-md mx-auto p-4">
+										<div className="md:flex md:flex-row p-2">
+											<div className="flex-1 max-w-md mx-auto p-2 md:p-4">
 												<img
 													src={recipe.thumbnail_url}
 													alt="foodimage"
 													className="w-full h-36 object-cover rounded-t-lgr"
 												/>
 											</div>
-											<div className="flex-1 pt-3 flex flex-col">
+											<div className="flex-1 md:pt-3 flex flex-col ml-2">
 												<div className="flex-1 grow">
 													<h1 className="text-red-600 pb-">
 														{recipe.tags.find(
@@ -102,7 +102,7 @@ export default function Homepage(props) {
 							if (index === 2) {
 								return (
 									<div
-										className="row-span-2 hover:border-2 border-red-500 p-2 bg-white shadow-md"
+										className="md:row-span-2 hover:border-2 border-red-500 p-2 bg-white shadow-md"
 										onClick={() => {
 											setSelectedRecipeShow(true);
 											setSelectedRecipe(recipe);
@@ -152,7 +152,7 @@ export default function Homepage(props) {
 					: ""}
 			</div>
 
-			<div className="grid grid-cols-3 gap-3 py-5">
+			<div className="grid md:grid-cols-3 gap-3 py-5">
 				{featuredRecipes
 					? featuredRecipes.map((recipe, index) => {
 							if (index >= 3) {
