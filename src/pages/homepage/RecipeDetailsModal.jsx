@@ -44,7 +44,7 @@ function RecipeDetailsModal(props) {
 
 				<div className="border-b border-gray-600 my-2"></div>
 
-				<div className="flex flex-row ">
+				<div className="md:flex flex-row">
 					<div className="flex-2 bg-white">
 						<img
 							src={selectedRecipe.thumbnail_url}
@@ -109,6 +109,7 @@ function RecipeDetailsModal(props) {
 				</div>
 
 				<div className="border-b border-gray-500 my-2"></div>
+
 				{user && userId ? (
 					<button
 						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
@@ -126,7 +127,7 @@ function RecipeDetailsModal(props) {
 					<button className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none">
 						<OverlayTrigger
 							trigger="focus"
-							placement="right"
+							placement="top"
 							overlay={logInPopover(navigate)}
 						>
 							<button
