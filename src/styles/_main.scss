@@ -15,6 +15,23 @@ nav {
 // 	z-index: 1100 !important;
 // }
 
+.arrow {
+	width: 0;
+	height: 0;
+}
+
+.arrow-up {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid black;
+}
+
+.arrow-down {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 6px solid black;
+}
+
 .modal-backdrop {
 	display: none;
 	z-index: 1040 !important;
