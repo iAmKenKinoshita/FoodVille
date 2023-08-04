@@ -30,13 +30,42 @@ const DropdownMenu = ({ title, children }) => {
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			<button className="text-gray-800 hover:underline px-3 py-2 rounded-md text-sm font-medium">
+			<button className="text-gray-800 hover:underline px-3 py-2 rounded-md text-sm font-semibold">
 				{title}
 			</button>
 			{isOpen && (
 				<ul className="absolute z-10 top-8 left-0 bg-white border border-gray-300 rounded-md">
 					{children}
 				</ul>
+			)}
+		</div>
+	);
+};
+
+const DropdownMenuMobile = ({ title, children }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleClick = () => {
+		setIsOpen(!isOpen);
+	};
+
+	const handleLinkClick = (event) => {
+		event.stopPropagation();
+	};
+
+	return (
+		<div onClick={handleClick} className="text-center font-serif">
+			<div className="grid place-content-center ">
+				<button className="text-gray-800 hover:underline rounded-md font-semibold">
+					{title}
+				</button>
+				{/* <div className={`arrow ${isOpen ? "arrow-down" : "arrow-up"}`} /> */}
+			</div>
+
+			{isOpen && (
+				<div>
+					<ul className="">{children}</ul>
+				</div>
 			)}
 		</div>
 	);
@@ -54,129 +83,65 @@ export default function NavBar(props) {
 		}
 	};
 
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	const toggleMobileMenu = () => {
+		setIsMobileMenuOpen(!isMobileMenuOpen);
+	};
+
+	const [isListOpen, setIsListOpen] = useState(false);
+
+	const toggleList = () => {
+		setIsListOpen(!isListOpen);
+	};
+
 	return (
-		<nav className="fixed top-0 left-0 w-full z-10">
+		<nav className="pt-2  fixed top-0 left-0 w-full z-10">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
-						<Link to="/">
+						<Link to="/" className="">
 							<img src={FVLogo} alt="Food Ville Logo" className="h-8 w-auto" />
 						</Link>
 
 						<div className="hidden md:flex ml-4 space-x-4">
-							<DropdownMenu title="Meal">
-								{categories.MEALS.map((meal) => {
-									return (
-										<li>
-											<Link
-												to={`/search-by-tag/${meal.name}`}
-												onClick={() => {
-													HomepageUtils.searchRecipeByCategory(
-														setSearchRecipes,
-														meal.name
-													);
-												}}
-												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-											>
-												{meal.display_name}
-											</Link>
-										</li>
-									);
-								})}
-							</DropdownMenu>
-
-							<DropdownMenu title="Cuisine">
-								{categories.CUISINE.map((cuisine) => {
-									return (
-										<li>
-											<Link
-												to={`/search-by-tag/${cuisine.name}`}
-												onClick={() => {
-													HomepageUtils.searchRecipeByCategory(
-														setSearchRecipes,
-														cuisine.name
-													);
-												}}
-												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-											>
-												{cuisine.display_name}
-											</Link>
-										</li>
-									);
-								})}
-							</DropdownMenu>
-							<DropdownMenu title="Diet">
-								{categories.DIET.map((diet) => {
-									return (
-										<li>
-											<Link
-												to={`/search-by-tag/${diet.name}`}
-												onClick={() => {
-													HomepageUtils.searchRecipeByCategory(
-														setSearchRecipes,
-														diet.name
-													);
-												}}
-												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-											>
-												{diet.display_name}
-											</Link>
-										</li>
-									);
-								})}
-							</DropdownMenu>
-							<DropdownMenu title="Method">
-								{categories.METHOD.map((method) => {
-									return (
-										<li>
-											<Link
-												to={`/search-by-tag/${method.name}`}
-												onClick={() => {
-													HomepageUtils.searchRecipeByCategory(
-														setSearchRecipes,
-														method.name
-													);
-												}}
-												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-											>
-												{method.display_name}
-											</Link>
-										</li>
-									);
-								})}
-							</DropdownMenu>
-							<DropdownMenu title="Seasonal">
-								{categories.SEASONAL.map((seasonal) => {
-									return (
-										<li>
-											<Link
-												to={`/search-by-tag/${seasonal.name}`}
-												onClick={async () => {
-													await HomepageUtils.searchRecipeByCategory(
-														setSearchRecipes,
-														seasonal.name
-													);
-												}}
-												className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-											>
-												{seasonal.display_name}
-											</Link>
-										</li>
-									);
-								})}
-							</DropdownMenu>
+							{categories.map((category) => {
+								return (
+									<DropdownMenu title={category.TITLE}>
+										{category.ITEMS.map((item) => {
+											return (
+												<li>
+													<Link
+														to={`/search-by-tag/${item.name}`}
+														onClick={() => {
+															HomepageUtils.searchRecipeByCategory(
+																setSearchRecipes,
+																item.name
+															);
+														}}
+														className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+													>
+														{item.display_name}
+													</Link>
+												</li>
+											);
+										})}
+									</DropdownMenu>
+								);
+							})}
 						</div>
 					</div>
-
-					<div className="hidden md:block">
+					<div className="block m-3">
 						<input
 							type="text"
 							placeholder="Search..."
-							class="px-4 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300"
+							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 "
 							onChange={(e) => setQuery(e.target.value)}
 							onKeyUp={handleKeyPress}
 						/>
+					</div>
 
+					<div className="hidden md:block">
 						{user === true ? (
 							<Link
 								to={"/savedrecipes"}
@@ -217,8 +182,131 @@ export default function NavBar(props) {
 							""
 						)}
 					</div>
+					<div className="md:hidden flex items-center">
+						<button
+							className="text-gray-800 focus:outline-none"
+							onClick={toggleMobileMenu}
+						>
+							<svg
+								className="w-6 h-6"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								{isMobileMenuOpen ? (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								) : (
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M4 6h16M4 12h16m-7 6h7"
+									/>
+								)}
+							</svg>
+						</button>
+					</div>
 				</div>
 			</div>
+
+			{isMobileMenuOpen && (
+				<div className="md:hidden">
+					{categories.map((category) => {
+						return (
+							<DropdownMenuMobile title={category.TITLE}>
+								<div className="border-b border-gray-500 my-2 mx-20"></div>
+								{category.ITEMS.map((item) => {
+									return (
+										<li>
+											<Link
+												to={`/search-by-tag/${item.name}`}
+												onClick={() => {
+													toggleMobileMenu();
+													// HomepageUtils.searchRecipeByCategory(
+													// 	setSearchRecipes,
+													// 	item.name
+													// );
+												}}
+												className="block text-gray-800 hover:bg-gray-200"
+											>
+												{item.display_name}
+											</Link>
+										</li>
+									);
+								})}
+								<div className="border-b border-gray-500 my-2 mx-20"></div>
+							</DropdownMenuMobile>
+						);
+					})}
+
+					<div className="border-b border-gray-500 my-2 mx-3"></div>
+
+					<div>
+						{user === true ? (
+							<Link
+								to={"/savedrecipes"}
+								onClick={() => {
+									toggleMobileMenu();
+								}}
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+							>
+								Saved Recipes
+							</Link>
+						) : (
+							""
+						)}
+						{user === true ||
+						window.location.pathname === "/signIn" ||
+						window.location.pathname === "/signUp" ? (
+							""
+						) : (
+							<button
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md  font-medium"
+								onClick={() => {
+									toggleMobileMenu();
+									navigate("/signIn");
+								}}
+							>
+								Sign In
+							</button>
+						)}
+					</div>
+
+					<div>
+						{user === true ? (
+							<button
+								onClick={async () => {
+									await UserUtils.signOut();
+									setUser(false);
+									toggleMobileMenu();
+									navigate("/");
+								}}
+								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+							>
+								Log Out
+							</button>
+						) : (
+							""
+						)}
+					</div>
+
+					{/* <a href="/" className="block p-4">
+						Home
+					</a>
+					<a href="/about" className="block p-4">
+						About
+					</a>
+					<a href="/contact" className="block p-4">
+						Contact
+					</a> */}
+				</div>
+			)}
 		</nav>
 	);
 
