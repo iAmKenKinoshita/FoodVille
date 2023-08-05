@@ -89,22 +89,15 @@ export default function NavBar(props) {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
 
-	const [isListOpen, setIsListOpen] = useState(false);
-
-	const toggleList = () => {
-		setIsListOpen(!isListOpen);
-	};
-
 	return (
 		<nav className="pt-2  fixed top-0 left-0 w-full z-10">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
-						<Link to="/" className="">
+						<Link to="/" className="flex-1">
 							<img src={FVLogo} alt="Food Ville Logo" className="h-8 w-auto" />
 						</Link>
-
-						<div className="hidden md:flex ml-4 space-x-4">
+						<div className="hidden md:flex pl-3 space-x-4">
 							{categories.map((category) => {
 								return (
 									<DropdownMenu title={category.TITLE}>
@@ -135,7 +128,7 @@ export default function NavBar(props) {
 						<input
 							type="text"
 							placeholder="Search..."
-							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 "
+							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 w-11/12 md:w-full"
 							onChange={(e) => setQuery(e.target.value)}
 							onKeyUp={handleKeyPress}
 						/>
@@ -182,6 +175,9 @@ export default function NavBar(props) {
 							""
 						)}
 					</div>
+
+					{/* Mobile */}
+
 					<div className="md:hidden flex items-center">
 						<button
 							className="text-gray-800 focus:outline-none"
@@ -215,8 +211,10 @@ export default function NavBar(props) {
 				</div>
 			</div>
 
+			{/* Mobile */}
 			{isMobileMenuOpen && (
 				<div className="md:hidden">
+					<div className="border-b border-gray-500 my-2 mx-3"></div>
 					{categories.map((category) => {
 						return (
 							<DropdownMenuMobile title={category.TITLE}>
@@ -228,10 +226,10 @@ export default function NavBar(props) {
 												to={`/search-by-tag/${item.name}`}
 												onClick={() => {
 													toggleMobileMenu();
-													// HomepageUtils.searchRecipeByCategory(
-													// 	setSearchRecipes,
-													// 	item.name
-													// );
+													HomepageUtils.searchRecipeByCategory(
+														setSearchRecipes,
+														item.name
+													);
 												}}
 												className="block text-gray-800 hover:bg-gray-200"
 											>
@@ -266,6 +264,7 @@ export default function NavBar(props) {
 						window.location.pathname === "/signUp" ? (
 							""
 						) : (
+							<div>
 							<button
 								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md  font-medium"
 								onClick={() => {
@@ -275,6 +274,8 @@ export default function NavBar(props) {
 							>
 								Sign In
 							</button>
+							<div className="border-b border-gray-500 my-2 mx-3"></div>
+							</div>
 						)}
 					</div>
 
@@ -295,16 +296,6 @@ export default function NavBar(props) {
 							""
 						)}
 					</div>
-
-					{/* <a href="/" className="block p-4">
-						Home
-					</a>
-					<a href="/about" className="block p-4">
-						About
-					</a>
-					<a href="/contact" className="block p-4">
-						Contact
-					</a> */}
 				</div>
 			)}
 		</nav>
