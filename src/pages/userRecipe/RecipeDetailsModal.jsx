@@ -100,7 +100,7 @@ function RecipeDetailsModal(props) {
 			<Modal.Body className="font-serif">
 				<h1 className="text-4xl text-center mb-2">{selectedRecipe.name}</h1>
 				<div className="border-b border-gray-600 my-2"></div>
-				<div className="flex flex-row ">
+				<div className="md:flex flex-row ">
 					<div className="flex-2 bg-white">
 						<img
 							src={
@@ -180,7 +180,7 @@ function RecipeDetailsModal(props) {
 							setSingleRecipeShow
 						)}
 					>
-						<button className="bg-rose-400 hover:bg-rose-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4 mr-2">
+						<button className="bg-rose-400 hover:bg-rose-600 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4 mr-2">
 							Delete
 						</button>
 					</OverlayTrigger>
@@ -189,7 +189,7 @@ function RecipeDetailsModal(props) {
 							props.onHide();
 							setEditRecipeShow(true);
 						}}
-						className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4 mr-2"
+						className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4 mr-2"
 					>
 						Edit
 					</button>
@@ -211,7 +211,7 @@ function RecipeDetailsModal(props) {
 								setUserFavoriteRecipes
 							);
 						}}
-						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4"
 					>
 						{selectedRecipe.is_favorite
 							? "Remove from Favorites"
