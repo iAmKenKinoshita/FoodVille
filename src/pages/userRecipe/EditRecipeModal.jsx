@@ -108,7 +108,7 @@ function EditRecipeModal(props) {
 						)}
 					</div>
 
-					<div className="flex flex-row">
+					<div className="md:flex flex-row">
 						<div className="flex-1 pr-4 flex flex-col">
 							<div className="h-1/2">
 								<label
@@ -217,7 +217,7 @@ function EditRecipeModal(props) {
 							)} */}
 						</div>
 					</div>
-
+					<div className="border-b border-gray-600 my-2"></div>
 					<button
 						type="submit"
 						form="create"
