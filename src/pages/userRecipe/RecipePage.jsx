@@ -27,7 +27,7 @@ const DropdownMenuMobile = ({ title, children }) => {
 	return (
 		<div onClick={handleClick} className="text-center font-serif">
 			<div className="grid place-content-center ">
-				<button className="text-gray-800 hover:underline rounded-md font-semibold inline-flex justify-center items-center">
+				<button className="text-gray-800 rounded-md font-semibold inline-flex justify-center items-center">
 					{title}
 					<svg
 						className={`ml-1 ${isOpen ? "transform rotate-180" : ""}`}
@@ -94,8 +94,9 @@ function RecipePage(props) {
 		<div className="max-w-5xl md:max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-20 md:flex">
 			<nav className="md:hidden">
 				<div className="mx-auto justify-between items-center space-x-4 font-serif">
-					<DropdownMenuMobile title="Recipes">
+					<DropdownMenuMobile title="Filter by:">
 						<div className="border-b border-gray-500 md:hidden"></div>
+						<p className="text-gray-400 text-2xl font-semibold">Recipes</p>
 						<a
 							onClick={() => {
 								setSideBarActive(0);
@@ -126,7 +127,7 @@ function RecipePage(props) {
 								Favorites
 							</li>
 						</a>
-						<p className="text-lg font-semibold">Food Ville's</p>
+						<p className="text-gray-400 text-2xl font-semibold">Food Ville's</p>
 						<a
 							onClick={() => {
 								setSideBarActive(2);
@@ -157,7 +158,7 @@ function RecipePage(props) {
 								Favorites
 							</li>
 						</a>
-						<p className="text-lg font-semibold">Your Recipes</p>
+						<p className="text-gray-400 text-2xl font-semibold">Your Recipes</p>
 						<a
 							onClick={() => {
 								setSideBarActive(4);
@@ -190,7 +191,7 @@ function RecipePage(props) {
 						</a>
 						<button
 							onClick={() => setCreateRecipeShow(true)}
-							className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+							className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-2"
 						>
 							Add New Recipe
 						</button>
