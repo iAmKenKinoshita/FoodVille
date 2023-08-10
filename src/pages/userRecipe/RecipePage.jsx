@@ -13,7 +13,45 @@ import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";
 
-function RecipePageTest(props) {
+const DropdownMenuMobile = ({ title, children }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleClick = () => {
+		setIsOpen(!isOpen);
+	};
+
+	const handleLinkClick = (event) => {
+		event.stopPropagation();
+	};
+
+	return (
+		<div onClick={handleClick} className="text-center font-serif">
+			<div className="grid place-content-center ">
+				<button className="text-gray-800 hover:underline rounded-md font-semibold inline-flex justify-center items-center">
+					{title}
+					<svg
+						className={`ml-1 ${isOpen ? "transform rotate-180" : ""}`}
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						viewBox="0 0 16 16"
+					>
+						<path d="M8 11.293l4.646-4.647a1 1 0 111.414 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L8 11.293z" />
+					</svg>
+				</button>
+			</div>
+
+			{isOpen && (
+				<div>
+					<ul className="">{children}</ul>
+				</div>
+			)}
+		</div>
+	);
+};
+
+function RecipePage(props) {
 	const [sideBarActive, setSideBarActive] = useState(0);
 
 	const [createRecipeShow, setCreateRecipeShow] = useState(false);
@@ -53,9 +91,131 @@ function RecipePageTest(props) {
 	}, []);
 
 	return (
-		<div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-24 flex">
-			<div className="h-screen p-4 sticky top-0">
-				{/* Sidebar content */}
+		<div className="max-w-5xl md:max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-20 md:flex">
+			<nav className="md:hidden">
+				<div className="mx-auto justify-between items-center space-x-4 font-serif">
+					<DropdownMenuMobile title="Recipes">
+						<div className="border-b border-gray-500 md:hidden"></div>
+						<a
+							onClick={() => {
+								setSideBarActive(0);
+								setSelectedRecipes(allRecipes);
+								setCurrentRecipes("allRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 pt-2 hover:bg-gray-300 ${
+									sideBarActive === 0 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(1);
+								setSelectedRecipes(allFavoriteRecipes);
+								setCurrentRecipes("allFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 1 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+						<p className="text-lg font-semibold">Food Ville's</p>
+						<a
+							onClick={() => {
+								setSideBarActive(2);
+								setSelectedRecipes(foodVilleRecipes);
+								setCurrentRecipes("foodVilleRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 2 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(3);
+								setSelectedRecipes(foodVilleFavoriteRecipes);
+								setCurrentRecipes("foodVilleFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 3 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+						<p className="text-lg font-semibold">Your Recipes</p>
+						<a
+							onClick={() => {
+								setSideBarActive(4);
+								setSelectedRecipes(userRecipes);
+								setCurrentRecipes("userRecipes");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 4 ? "bg-gray-200" : ""
+								}`}
+							>
+								All
+							</li>
+						</a>
+						<a
+							onClick={() => {
+								setSideBarActive(5);
+								setSelectedRecipes(userFavoriteRecipes);
+								setCurrentRecipes("userFavorites");
+							}}
+						>
+							<li
+								className={`text-xl text-gray-400 hover:bg-gray-300 ${
+									sideBarActive === 5 ? "bg-gray-200" : ""
+								}`}
+							>
+								Favorites
+							</li>
+						</a>
+						<button
+							onClick={() => setCreateRecipeShow(true)}
+							className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+						>
+							Add New Recipe
+						</button>
+					</DropdownMenuMobile>
+					{/* <DropdownMenuMobile title="Food Ville's">
+						<div className="border-b border-gray-500 my-2  md:hidden"></div>
+						<a>
+							<li>All</li>
+						</a>
+						<a>
+							<li>Favorites</li>
+						</a>
+					</DropdownMenuMobile>
+					<DropdownMenuMobile title="Your Recipes">
+						<div className="border-b border-gray-500 my-2  md:hidden"></div>
+						<a>
+							<li>asdas</li>
+						</a>
+					</DropdownMenuMobile> */}
+				</div>
+			</nav>
+
+			<div className="border-b border-gray-500 my-2  md:hidden"></div>
+
+			<div className="h-screen p-4 sticky top-0 hidden md:block">
 				<div className="py-2">
 					<h1 className="text-gray-400 text-2xl font-semibold">Recipes</h1>
 					<ul className="pl-4 text-center">
@@ -168,8 +328,9 @@ function RecipePageTest(props) {
 					Add New Recipe
 				</button>
 			</div>
+
 			<div className="flex-1 p-4">
-				<div className="grid grid-cols-3 gap-3 py-3">
+				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:py-3 py-5">
 					{selectedRecipes &&
 						selectedRecipes.map((recipe, index) => {
 							return (
@@ -263,4 +424,4 @@ function RecipePageTest(props) {
 	);
 }
 
-export default RecipePageTest;
+export default RecipePage;
