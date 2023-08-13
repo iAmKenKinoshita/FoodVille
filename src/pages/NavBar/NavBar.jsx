@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 //UserUtils
 import UserUtils from "../user/utils/userUtils";
@@ -30,7 +30,7 @@ const DropdownMenu = ({ title, children }) => {
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
-			<button className="text-gray-800 hover:underline px-3 py-2 rounded-md text-sm font-semibold">
+			<button className="text-gray-800 hover:underline py-2 rounded-md text-sm font-semibold">
 				{title}
 			</button>
 			{isOpen && (
@@ -49,15 +49,25 @@ const DropdownMenuMobile = ({ title, children }) => {
 		setIsOpen(!isOpen);
 	};
 
-	const handleLinkClick = (event) => {
-		event.stopPropagation();
-	};
+	// const handleLinkClick = (event) => {
+	// 	event.stopPropagation();
+	// };
 
 	return (
-		<div onClick={handleClick} className="text-center font-serif">
+		<div onClick={handleClick} className="text-center font-serif p-1">
 			<div className="grid place-content-center ">
-				<button className="text-gray-800 hover:underline rounded-md font-semibold">
+				<button className="text-gray-800 hover:underline rounded-md font-semibold inline-flex">
 					{title}
+					<svg
+						className={`ml-1 ${isOpen ? "transform rotate-180" : ""}`}
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						viewBox="0 0 16 16"
+					>
+						<path d="M8 11.293l4.646-4.647a1 1 0 111.414 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L8 11.293z" />
+					</svg>
 				</button>
 				{/* <div className={`arrow ${isOpen ? "arrow-down" : "arrow-up"}`} /> */}
 			</div>
@@ -93,52 +103,49 @@ export default function NavBar(props) {
 		<nav className="pt-2  fixed top-0 left-0 w-full z-10">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
-					<div className="flex items-center">
-						<Link to="/" className="flex-1">
-							<img src={FVLogo} alt="Food Ville Logo" className="h-8 w-auto" />
-						</Link>
-						<div className="hidden md:flex pl-3 space-x-4">
-							{categories.map((category) => {
-								return (
-									<DropdownMenu title={category.TITLE}>
-										{category.ITEMS.map((item) => {
-											return (
-												<li>
-													<Link
-														to={`/search-by-tag/${item.name}`}
-														onClick={() => {
-															HomepageUtils.searchRecipeByCategory(
-																setSearchRecipes,
-																item.name
-															);
-														}}
-														className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-													>
-														{item.display_name}
-													</Link>
-												</li>
-											);
-										})}
-									</DropdownMenu>
-								);
-							})}
-						</div>
+					<Link to="/" className="">
+						<img src={FVLogo} alt="Food Ville Logo" className="h-8 w-auto" />
+					</Link>
+					<div className="hidden md:flex pl-3 space-x-9">
+						{categories.map((category) => {
+							return (
+								<DropdownMenu title={category.TITLE}>
+									{category.ITEMS.map((item) => {
+										return (
+											<li>
+												<Link
+													to={`/search-by-tag/${item.name}`}
+													onClick={() => {
+														HomepageUtils.searchRecipeByCategory(
+															setSearchRecipes,
+															item.name
+														);
+													}}
+													className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+												>
+													{item.display_name}
+												</Link>
+											</li>
+										);
+									})}
+								</DropdownMenu>
+							);
+						})}
 					</div>
-					<div className="block m-3">
+					<div className="block my-3">
 						<input
 							type="text"
 							placeholder="Search..."
-							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 w-11/12 md:w-full"
+							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 w-11/12 md:full"
 							onChange={(e) => setQuery(e.target.value)}
 							onKeyUp={handleKeyPress}
 						/>
 					</div>
-
-					<div className="hidden md:block">
+					<div className="hidden md:flex text-center">
 						{user === true ? (
 							<Link
 								to={"/savedrecipes"}
-								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 py-2 rounded-md text-sm font-medium"
 							>
 								Saved Recipes
 							</Link>
@@ -151,7 +158,7 @@ export default function NavBar(props) {
 							""
 						) : (
 							<button
-								className="text-gray-800 hover:bg-gray-200 mx-1 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 py-2 rounded-md text-sm font-medium"
 								onClick={() => {
 									navigate("/signIn");
 								}}
@@ -167,7 +174,7 @@ export default function NavBar(props) {
 									setUser(false);
 									navigate("/");
 								}}
-								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 pl-3 py-2 rounded-md text-sm font-medium"
 							>
 								Log Out
 							</button>
@@ -211,7 +218,6 @@ export default function NavBar(props) {
 				</div>
 			</div>
 
-			{/* Mobile */}
 			{isMobileMenuOpen && (
 				<div className="md:hidden">
 					<div className="border-b border-gray-500 my-2 mx-3"></div>
@@ -265,33 +271,36 @@ export default function NavBar(props) {
 							""
 						) : (
 							<div>
-							<button
-								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md  font-medium"
-								onClick={() => {
-									toggleMobileMenu();
-									navigate("/signIn");
-								}}
-							>
-								Sign In
-							</button>
-							<div className="border-b border-gray-500 my-2 mx-3"></div>
+								<button
+									className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md  font-medium"
+									onClick={() => {
+										toggleMobileMenu();
+										navigate("/signIn");
+									}}
+								>
+									Sign In
+								</button>
+								<div className="border-b border-gray-500 my-2 mx-3"></div>
 							</div>
 						)}
 					</div>
 
 					<div>
 						{user === true ? (
-							<button
-								onClick={async () => {
-									await UserUtils.signOut();
-									setUser(false);
-									toggleMobileMenu();
-									navigate("/");
-								}}
-								className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
-							>
-								Log Out
-							</button>
+							<div>
+								<button
+									onClick={async () => {
+										await UserUtils.signOut();
+										setUser(false);
+										toggleMobileMenu();
+										navigate("/");
+									}}
+									className="text-gray-800 hover:bg-gray-200 px-3 py-2 rounded-md text-sm font-medium"
+								>
+									Log Out
+								</button>
+								<div className="border-b border-gray-500 my-2 mx-3"></div>
+							</div>
 						) : (
 							""
 						)}
@@ -300,163 +309,4 @@ export default function NavBar(props) {
 			)}
 		</nav>
 	);
-
-	// <nav className="is-primary" role="navigation" aria-label="main navigation">
-	// 	<div className="navbar-brand">
-	// 		<a className="navbar-item" onClick={() => navigate("/")}>
-	// 			<img src={FVLogo} width="190px" />
-	// 		</a>
-
-	// 		<a
-	// 			role="button"
-	// 			className="navbar-burger"
-	// 			aria-label="menu"
-	// 			aria-expanded="false"
-	// 			data-target="navbarBasicExample"
-	// 			onClick={() => {
-	// 				let navBurger = document.querySelector(".navbar-burger");
-	// 				navBurger.classList.toggle("is-active");
-	// 				let navBar = document.querySelector("#navbarBasicExample");
-	// 				navBar.classList.toggle("is-active");
-	// 			}}
-	// 		>
-	// 			<span aria-hidden="true"></span>
-	// 			<span aria-hidden="true"></span>
-	// 			<span aria-hidden="true"></span>
-	// 		</a>
-	// 	</div>
-
-	// 	<div id="navbarBasicExample" className="navbar-menu">
-	// 		<div className="navbar-start">
-	// 			<a
-	// 				className="navbar-item"
-	// 				onClick={() => {
-	// 					navigate("/");
-	// 					let width = window.innerWidth;
-	// 					if (width <= 1023) {
-	// 						let navBurger = document.querySelector(".navbar-burger");
-	// 						navBurger.classList.toggle("is-active");
-	// 						let navBar = document.querySelector("#navbarBasicExample");
-	// 						navBar.classList.toggle("is-active");
-	// 					}
-	// 				}}
-	// 			>
-	// 				<span class="icon">
-	// 					<i class="fas fa-home"></i>
-	// 				</span>
-	// 				<strong>Home</strong>
-	// 			</a>
-
-	// 			{user === true ? (
-	// 				<a
-	// 					class="navbar-item"
-	// 					onClick={() => {
-	// 						navigate("/recipes");
-	// 						let width = window.innerWidth;
-	// 						if (width <= 1023) {
-	// 							let navBurger = document.querySelector(".navbar-burger");
-	// 							navBurger.classList.toggle("is-active");
-	// 							let navBar = document.querySelector("#navbarBasicExample");
-	// 							navBar.classList.toggle("is-active");
-	// 						}
-	// 					}}
-	// 				>
-	// 					<span class="icon">
-	// 						<i class="fas fa-utensils"></i>
-	// 					</span>
-	// 					<strong>Recipes</strong>
-	// 				</a>
-	// 			) : (
-	// 				""
-	// 			)}
-	// 		</div>
-
-	// 		<div className="navbar-end">
-	// 			{user === true ||
-	// 			window.location.pathname === "/signIn" ||
-	// 			window.location.pathname === "/signUp" ? (
-	// 				""
-	// 			) : (
-	// 				<>
-	// 					<div className="navbar-item">
-	// 						<a
-	// 							className="button is-primary"
-	// 							onClick={() => {
-	// 								navigate("/signIn");
-	// 								let width = window.innerWidth;
-	// 								if (width <= 1023) {
-	// 									let navBurger = document.querySelector(".navbar-burger");
-	// 									navBurger.classList.toggle("is-active");
-	// 									let navBar = document.querySelector(
-	// 										"#navbarBasicExample"
-	// 									);
-	// 									navBar.classList.toggle("is-active");
-	// 								}
-	// 							}}
-	// 						>
-	// 							<strong>Sign In</strong>
-	// 						</a>
-	// 					</div>
-	// 				</>
-	// 			)}
-
-	// 			{user === true ? (
-	// 				//With hover
-	// 				// <div className="navbar-item has-dropdown is-hoverable">
-	// 				// 	<a className="navbar-link">
-	// 				// 		<span class="icon">
-	// 				// 			<i class="fas fa-user"></i>
-	// 				// 		</span>
-	// 				// 		<strong>{userName}</strong>
-	// 				// 	</a>
-
-	// 				// 	<div className="navbar-dropdown is-right">
-	// 				// 		{/* <a className="navbar-item">My Profile</a> */}
-	// 				// 		<a
-	// 				// 			className="navbar-item"
-	// 				// 			onClick={() => {
-	// 				// 				UserUtils.signOut();
-	// 				// 				setUser(false);
-	// 				// 				navigate("/");
-	// 				// 				let width = window.innerWidth;
-	// 				// 				if (width <= 1023) {
-	// 				// 					let navBurger = document.querySelector(".navbar-burger");
-	// 				// 					navBurger.classList.toggle("is-active");
-	// 				// 					let navBar = document.querySelector(
-	// 				// 						"#navbarBasicExample"
-	// 				// 					);
-	// 				// 					navBar.classList.toggle("is-active");
-	// 				// 				}
-	// 				// 			}}
-	// 				// 		>
-	// 				// 			Log Out
-	// 				// 		</a>
-	// 				// 	</div>
-	// 				// </div>
-
-	// 				<div className="navbar-item">
-	// 					<a
-	// 						className="navbar-item logout"
-	// 						onClick={() => {
-	// 							UserUtils.signOut();
-	// 							setUser(false);
-	// 							navigate("/");
-	// 							let width = window.innerWidth;
-	// 							if (width <= 1023) {
-	// 								let navBurger = document.querySelector(".navbar-burger");
-	// 								navBurger.classList.toggle("is-active");
-	// 								let navBar = document.querySelector("#navbarBasicExample");
-	// 								navBar.classList.toggle("is-active");
-	// 							}
-	// 						}}
-	// 					>
-	// 						<strong>Log Out</strong>
-	// 					</a>
-	// 				</div>
-	// 			) : (
-	// 				""
-	// 			)}
-	// 		</div>
-	// 	</div>
-	// </nav>
 }
