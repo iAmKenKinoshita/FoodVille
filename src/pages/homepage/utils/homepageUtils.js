@@ -13,36 +13,38 @@ const homepageUtils = {
 			// });
 
 			// recipes = await recipes.json();
-			// recipes = await recipes.filter((recipe) => {
+
+			// recipes.results = await recipes.results.filter((recipe) => {
 			// 	if (Object.keys(recipe).length >= 50) {
 			// 		return recipe;
 			// 	}
 			// });
+
 			// return setSearchRecipes(recipes);
-			console.log(dummydata);
 			return setSearchRecipes(dummydata);
 		} catch (error) {
 			console.log(error);
 		}
 	},
-	searchRecipeByCategory: async (setSearchRecipes, tag) => {
+	searchRecipeByCategory: async (setSearchRecipes, tag, from) => {
 		try {
 			let recipes = await fetch("/home", {
 				method: "POST",
 				headers: {
 					tag,
+					from,
 				},
 			});
-
 			recipes = await recipes.json();
-			recipes = await recipes.filter((recipe) => {
+			recipes.results = await recipes.results.filter((recipe) => {
 				if (Object.keys(recipe).length >= 50) {
 					return recipe;
 				}
 			});
-			// console.log(recipes);
 			return setSearchRecipes(recipes);
-		} catch (error) {}
+		} catch (error) {
+			console.error(error);
+		}
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
 		try {
@@ -70,8 +72,7 @@ const homepageUtils = {
 			// 	}
 			// });
 			// return setFeaturedRecipes(recipes);
-			console.log(dummydata);
-			return setFeaturedRecipes(dummydata);
+			return setFeaturedRecipes(dummydata.results);
 		} catch (error) {
 			console.log(error);
 		}
