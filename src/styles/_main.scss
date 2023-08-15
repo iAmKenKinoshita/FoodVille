@@ -20,6 +20,49 @@ nav {
 	z-index: 1040 !important;
 }
 
+.search_pagination {
+	margin-bottom: 5px;
+	display: flex;
+	gap: 9px;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 5px;
+	li {
+		border-radius: 8px;
+		border-width: 1px;
+		height: 32px;
+		width: 32px;
+		border-color: #dce3f1;
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.selected {
+		background-color: #6ee7b7;
+		color: white;
+	}
+
+	.previous,
+	.next {
+		font-size: 15px;
+		line-height: 17.7px;
+		border: none;
+		a {
+			color: black;
+			text-decoration-line: underline;
+		}
+	}
+
+	.disabled {
+		color: #cccccc;
+	}
+}
+
 // @forward "./utils/variables";
 // @forward "./utils/components";
 // @forward "./utils/layout";
