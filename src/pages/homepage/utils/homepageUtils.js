@@ -36,11 +36,11 @@ const homepageUtils = {
 				},
 			});
 			recipes = await recipes.json();
-			recipes.results = await recipes.results.filter((recipe) => {
-				if (Object.keys(recipe).length >= 50) {
-					return recipe;
-				}
-			});
+			// recipes.results = await recipes.results.filter((recipe) => {
+			// 	if (Object.keys(recipe).length >= 50) {
+			// 		return recipe;
+			// 	}
+			// });
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.error(error);
