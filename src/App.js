@@ -25,6 +25,9 @@ function App() {
 	const [searchRecipes, setSearchRecipes] = useState([]);
 	const [featuredRecipes, setFeaturedRecipes] = useState([]);
 
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(0);
+
 	const userData = JSON.parse(localStorage.getItem("userData"));
 	const [userName, setUserName] = useState(null);
 	const [userId, setUserId] = useState(null);
@@ -50,6 +53,8 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<Homepage
 								user={user}
@@ -73,12 +78,18 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<SearchPage
 								user={user}
 								userId={userId}
 								searchRecipes={searchRecipes}
 								setSearchRecipes={setSearchRecipes}
+								loading={loading}
+								setLoading={setLoading}
+								currentPage={currentPage}
+								setCurrentPage={setCurrentPage}
 							/>
 							{/* <Footer /> */}
 						</div>
@@ -94,12 +105,18 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<SearchPage
 								user={user}
 								userId={userId}
 								searchRecipes={searchRecipes}
 								setSearchRecipes={setSearchRecipes}
+								loading={loading}
+								setLoading={setLoading}
+								currentPage={currentPage}
+								setCurrentPage={setCurrentPage}
 							/>
 							{/* <Footer /> */}
 						</div>
@@ -116,6 +133,8 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<SignIn user={user} setUser={setUser} />
 						</div>
@@ -131,6 +150,8 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<SignUp user={user} setUser={setUser} />
 						</div>
@@ -146,6 +167,8 @@ function App() {
 								setUser={setUser}
 								userName={userName}
 								setSearchRecipes={setSearchRecipes}
+								setLoading={setLoading}
+								setCurrentPage={setCurrentPage}
 							/>
 							<RecipePage user={user} />
 						</div>

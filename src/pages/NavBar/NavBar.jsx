@@ -83,13 +83,23 @@ const DropdownMenuMobile = ({ title, children }) => {
 
 export default function NavBar(props) {
 	const navigate = useNavigate();
-	const { user, setUser, userName, setSearchRecipes } = props;
+	const {
+		user,
+		setUser,
+		userName,
+		setSearchRecipes,
+		setLoading,
+		setCurrentPage,
+	} = props;
 	const [query, setQuery] = useState("");
 
 	const handleKeyPress = async (event) => {
 		if (event.key === "Enter" && query) {
-			await HomepageUtils.searchRecipe(setSearchRecipes, query);
+			setCurrentPage(0);
+			setLoading(true);
 			navigate(`/search/${query}`);
+			await HomepageUtils.searchRecipe(setSearchRecipes, query);
+			setLoading(false);
 		}
 	};
 
@@ -115,11 +125,14 @@ export default function NavBar(props) {
 											<li>
 												<Link
 													to={`/search-by-tag/${item.name}`}
-													onClick={() => {
-														HomepageUtils.searchRecipeByCategory(
+													onClick={async () => {
+														setCurrentPage(0);
+														setLoading(true);
+														await HomepageUtils.searchRecipeByCategory(
 															setSearchRecipes,
 															item.name
 														);
+														setLoading(false);
 													}}
 													className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
 												>
