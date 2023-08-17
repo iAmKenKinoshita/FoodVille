@@ -331,9 +331,12 @@ function RecipePage(props) {
 			</div>
 
 			<div className="flex-1 p-4">
-				<h1 className="text-gray-400 text-2xl font-semibold">
-					{`You have  ${selectedRecipes.length} saved recipes`}
-				</h1>
+				{!selectedRecipe && (
+					<h1 className="text-gray-400 text-2xl font-semibold">
+						You have 0 saved recipe
+					</h1>
+				)}
+
 				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:py-3 py-5">
 					{selectedRecipes &&
 						selectedRecipes.map((recipe, index) => {
