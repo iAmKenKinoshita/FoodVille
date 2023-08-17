@@ -187,7 +187,7 @@ export default function NavBar(props) {
 									setUser(false);
 									navigate("/");
 								}}
-								className="text-gray-800 hover:bg-gray-200 pl-3 py-2 rounded-md text-sm font-medium"
+								className="text-gray-800 hover:bg-gray-200 ml-3 py-2 rounded-md text-sm font-medium"
 							>
 								Log Out
 							</button>
