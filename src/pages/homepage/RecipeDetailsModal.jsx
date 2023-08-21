@@ -38,6 +38,7 @@ function RecipeDetailsModal(props) {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 			dialogClassName="wideModal"
+			className="bg-[#C7C7C7] fixed w-full h-screen top-0 left-0 z-50 md:z-50 bg-opacity-50"
 		>
 			<Modal.Body className="font-serif">
 				<h1 className="text-4xl text-center mb-2">{selectedRecipe.name}</h1>
