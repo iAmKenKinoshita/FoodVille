@@ -6,8 +6,7 @@ import FVIcon from "../../images/FVIcon.png";
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
-//Bootstrap
-import { OverlayTrigger } from "react-bootstrap";
+import sidebarFilters from "./utils/sidebarFilters";
 
 import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
@@ -96,99 +95,54 @@ function RecipePage(props) {
 				<div className="mx-auto justify-between items-center space-x-4 font-serif">
 					<DropdownMenuMobile title="Filter by:">
 						<div className="border-b border-gray-500 md:hidden"></div>
-						<p className="text-gray-400 text-2xl font-semibold">Recipes</p>
-						<a
-							onClick={() => {
-								setSideBarActive(0);
-								setSelectedRecipes(allRecipes);
-								setCurrentRecipes("allRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 pt-2 hover:bg-gray-300 ${
-									sideBarActive === 0 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(1);
-								setSelectedRecipes(allFavoriteRecipes);
-								setCurrentRecipes("allFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 1 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
-						<p className="text-gray-400 text-2xl font-semibold">Food Ville's</p>
-						<a
-							onClick={() => {
-								setSideBarActive(2);
-								setSelectedRecipes(foodVilleRecipes);
-								setCurrentRecipes("foodVilleRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 2 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(3);
-								setSelectedRecipes(foodVilleFavoriteRecipes);
-								setCurrentRecipes("foodVilleFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 3 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
-						<p className="text-gray-400 text-2xl font-semibold">Your Recipes</p>
-						<a
-							onClick={() => {
-								setSideBarActive(4);
-								setSelectedRecipes(userRecipes);
-								setCurrentRecipes("userRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 4 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(5);
-								setSelectedRecipes(userFavoriteRecipes);
-								setCurrentRecipes("userFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 5 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
+						{sidebarFilters &&
+							sidebarFilters.map((item) => {
+								return (
+									<>
+										<p className="text-gray-400 text-2xl font-semibold">
+											{item.TITLE}
+										</p>
+										{item.filters &&
+											item.filters.map((filter) => {
+												return (
+													<a
+														onClick={() => {
+															setCurrentRecipes(filter.SELECT_RECIPE);
+															setSideBarActive(filter.INDEX);
+															setSelectedRecipes(
+																filter.SELECT_RECIPE === "allRecipes"
+																	? allRecipes
+																	: filter.SELECT_RECIPE === "allFavorites"
+																	? allFavoriteRecipes
+																	: filter.SELECT_RECIPE === "foodVilleRecipes"
+																	? foodVilleRecipes
+																	: filter.SELECT_RECIPE ===
+																	  "foodVilleFavorites"
+																	? foodVilleFavoriteRecipes
+																	: filter.SELECT_RECIPE === "userRecipes"
+																	? userRecipes
+																	: filter.SELECT_RECIPE === "userFavorites"
+																	? userFavoriteRecipes
+																	: ""
+															);
+														}}
+													>
+														<li
+															className={`text-xl text-gray-400 hover:bg-gray-300 ${
+																sideBarActive === filter.INDEX
+																	? "bg-gray-200"
+																	: ""
+															}`}
+														>
+															{filter.TITLE}
+														</li>
+													</a>
+												);
+											})}
+									</>
+								);
+							})}
+
 						<button
 							onClick={() => setCreateRecipeShow(true)}
 							className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-2"
@@ -196,132 +150,60 @@ function RecipePage(props) {
 							Add New Recipe
 						</button>
 					</DropdownMenuMobile>
-					{/* <DropdownMenuMobile title="Food Ville's">
-						<div className="border-b border-gray-500 my-2  md:hidden"></div>
-						<a>
-							<li>All</li>
-						</a>
-						<a>
-							<li>Favorites</li>
-						</a>
-					</DropdownMenuMobile>
-					<DropdownMenuMobile title="Your Recipes">
-						<div className="border-b border-gray-500 my-2  md:hidden"></div>
-						<a>
-							<li>asdas</li>
-						</a>
-					</DropdownMenuMobile> */}
 				</div>
 			</nav>
 
 			<div className="border-b border-gray-500 my-2  md:hidden"></div>
 
 			<div className="h-screen p-4 sticky top-0 hidden md:block">
-				<div className="py-2">
-					<h1 className="text-gray-400 text-2xl font-semibold">Recipes</h1>
-					<ul className="pl-4 text-center">
-						<a
-							onClick={() => {
-								setSideBarActive(0);
-								setSelectedRecipes(allRecipes);
-								setCurrentRecipes("allRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 0 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(1);
-								setSelectedRecipes(allFavoriteRecipes);
-								setCurrentRecipes("allFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 1 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
-					</ul>
-				</div>
-				<div className="py-2">
-					<h1 className="text-gray-400 text-2xl font-semibold">Food Ville's</h1>
-					<ul className="pl-4 text-center">
-						<a
-							onClick={() => {
-								setSideBarActive(2);
-								setSelectedRecipes(foodVilleRecipes);
-								setCurrentRecipes("foodVilleRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 2 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(3);
-								setSelectedRecipes(foodVilleFavoriteRecipes);
-								setCurrentRecipes("foodVilleFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 3 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
-					</ul>
-				</div>
-				<div className="pt-2 pb-5">
-					<h1 className="text-gray-400 text-2xl font-semibold">Your Recipes</h1>
-					<ul className="pl-4 text-center">
-						<a
-							onClick={() => {
-								setSideBarActive(4);
-								setSelectedRecipes(userRecipes);
-								setCurrentRecipes("userRecipes");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 4 ? "bg-gray-200" : ""
-								}`}
-							>
-								All
-							</li>
-						</a>
-						<a
-							onClick={() => {
-								setSideBarActive(5);
-								setSelectedRecipes(userFavoriteRecipes);
-								setCurrentRecipes("userFavorites");
-							}}
-						>
-							<li
-								className={`text-xl text-gray-400 hover:bg-gray-300 ${
-									sideBarActive === 5 ? "bg-gray-200" : ""
-								}`}
-							>
-								Favorites
-							</li>
-						</a>
-					</ul>
-				</div>
+				{sidebarFilters &&
+					sidebarFilters.map((item) => {
+						return (
+							<div className="py-2">
+								<h1 className="text-gray-400 text-2xl font-semibold">
+									{item.TITLE}
+								</h1>
+								<ul className="pl-4 text-center">
+									{item.filters &&
+										item.filters.map((filter) => {
+											return (
+												<a
+													onClick={() => {
+														setCurrentRecipes(filter.SELECT_RECIPE);
+														setSideBarActive(filter.INDEX);
+														setSelectedRecipes(
+															filter.SELECT_RECIPE === "allRecipes"
+																? allRecipes
+																: filter.SELECT_RECIPE === "allFavorites"
+																? allFavoriteRecipes
+																: filter.SELECT_RECIPE === "foodVilleRecipes"
+																? foodVilleRecipes
+																: filter.SELECT_RECIPE === "foodVilleFavorites"
+																? foodVilleFavoriteRecipes
+																: filter.SELECT_RECIPE === "userRecipes"
+																? userRecipes
+																: filter.SELECT_RECIPE === "userFavorites"
+																? userFavoriteRecipes
+																: ""
+														);
+													}}
+												>
+													<li
+														className={`text-xl text-gray-400 hover:bg-gray-300 ${
+															sideBarActive === filter.INDEX
+																? "bg-gray-200"
+																: ""
+														}`}
+													>
+														{filter.TITLE}
+													</li>
+												</a>
+											);
+										})}
+								</ul>
+							</div>
+						);
+					})}
 				<button
 					onClick={() => setCreateRecipeShow(true)}
 					className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
@@ -331,12 +213,6 @@ function RecipePage(props) {
 			</div>
 
 			<div className="flex-1 p-4">
-				{!selectedRecipe && (
-					<h1 className="text-gray-400 text-2xl font-semibold">
-						You have 0 saved recipe
-					</h1>
-				)}
-
 				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:py-3 py-5">
 					{selectedRecipes &&
 						selectedRecipes.map((recipe, index) => {
