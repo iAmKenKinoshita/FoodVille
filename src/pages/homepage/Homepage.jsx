@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import RecipeListLoader from "./RecipeListLoader";
+
 //Bootstrap
 import { useNavigate } from "react-router-dom";
 
@@ -26,9 +28,14 @@ export default function Homepage(props) {
 	// const [featuredRecipes, setFeaturedRecipes] = useState("");
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		HomepageUtils.getFeaturedRecipes(setFeaturedRecipes);
+		const fetchData = async () => {
+			await HomepageUtils.getFeaturedRecipes(setFeaturedRecipes);
+			setIsLoading(false);
+		};
+		fetchData();
 	}, []);
 
 	return (
@@ -41,6 +48,7 @@ export default function Homepage(props) {
 					Wonders, Embrace the Culinary Magic of Fast and Easy Cooking"
 				</p>
 			</div>
+			{isLoading && <RecipeListLoader home={true} />}
 
 			<div className="grid md:grid-rows-2 md:grid-flow-col gap-3 py-3">
 				{featuredRecipes
