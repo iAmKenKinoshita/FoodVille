@@ -22,6 +22,7 @@ function EditRecipeModal(props) {
 
 	const [ingredients, setIngredients] = useState([]);
 	const [recipeDetails, setRecipeDetails] = useState("");
+	const [save, setSave] = useState("Save Changes");
 
 	const {
 		handleSubmit,
@@ -45,20 +46,27 @@ function EditRecipeModal(props) {
 	});
 
 	const onSubmit = async (data) => {
+		setSave("Saving...");
 		await UserRecipeUtils.saveRecipeChanges(ID, data);
-		// window.location.reload();
-		setEditRecipeShow(false);
+		setTimeout(() => {
+			setSave("Saved");
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000);
+		}, 1000);
+
+		// setEditRecipeShow(false);
 	};
 
 	const ID = selectedRecipe.id;
 
-	const fetchIngredients = async () => {
-		let response = await fetch(`userRecipe/ingredients/${ID}`);
-		response = await response.json();
-		setValue("ingredients", response);
-	};
-
 	useEffect(() => {
+		const fetchIngredients = async () => {
+			let response = await fetch(`userRecipe/ingredients/${ID}`);
+			response = await response.json();
+			setValue("ingredients", response);
+		};
+
 		if (selectedRecipe !== "") {
 			fetch(`userRecipe/ingredients/${selectedRecipe.id}`)
 				.then((result) => result.json())
@@ -222,8 +230,9 @@ function EditRecipeModal(props) {
 						type="submit"
 						form="create"
 						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2"
+						disabled={save === "Saving..." || save === "Saved"}
 					>
-						Save Changes
+						{save}
 					</button>
 				</form>
 			</Modal.Body>

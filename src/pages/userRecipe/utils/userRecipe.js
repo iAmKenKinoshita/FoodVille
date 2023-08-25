@@ -70,13 +70,12 @@ const userRecipeUtils = {
 	},
 	saveRecipeChanges: async (id, recipeDetails) => {
 		try {
-			console.log("This is saved recipe chjanges", recipeDetails);
 			await fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
-					ingredients: JSON.stringify(recipeDetails.ingredients),
-					recipeDetails: JSON.stringify(recipeDetails),
+					"Content-Type": "application/json",
 				},
+				body: JSON.stringify(recipeDetails),
 			});
 		} catch (error) {
 			console.log(error);
@@ -225,8 +224,8 @@ const userRecipeUtils = {
 				<Popover.Header as="h2">Delete confirmation</Popover.Header>
 
 				<div className="card">
-					<div class="card-content popover-content">
-						<div class="content">
+					<div className="card-content popover-content">
+						<div className="content">
 							Are you sure you want to <strong>delete</strong> this recipe?
 						</div>
 					</div>

@@ -149,7 +149,7 @@ export default function NavBar(props) {
 						<input
 							type="text"
 							placeholder="Search..."
-							class="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 w-11/12 md:full"
+							className="ml-2 px-3 py-2 text-gray-800 bg-white bg-opacity-30 rounded-full focus:outline-none focus:ring-2 focus:ring-red-400 border border-gray-300 w-11/12 md:full"
 							onChange={(e) => setQuery(e.target.value)}
 							onKeyUp={handleKeyPress}
 						/>

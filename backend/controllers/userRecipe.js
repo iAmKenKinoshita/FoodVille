@@ -50,8 +50,8 @@ exports.createNewRecipe = async (req, res) => {
 exports.editRecipe = async (req, res) => {
 	try {
 		const ID = req.params.listId;
-		const ingredients = JSON.parse(req.get("ingredients"));
-		const recipeDetails = JSON.parse(req.get("recipeDetails"));
+		const { recipeName, description, instructions, ingredients } = req.body;
+		const recipeDetails = { recipeName, description, instructions };
 
 		await userRecipeModel.editRecipeDetails(recipeDetails, ID);
 		await userRecipeModel.deleteIngredients(ID);
