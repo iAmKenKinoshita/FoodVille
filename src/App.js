@@ -15,6 +15,7 @@ import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
+import PageNotFound from "./pages/PageNotFound";
 
 //Test Page
 
@@ -171,6 +172,20 @@ function App() {
 								setCurrentPage={setCurrentPage}
 							/>
 							<RecipePage user={user} />
+						</div>
+					}
+				/>
+				<Route
+					path="*"
+					element={
+						<div className="min-h-screen bg-gray-100">
+							<Navbar
+								user={user}
+								setUser={setUser}
+								userName={userName}
+								setSearchRecipes={setSearchRecipes}
+							/>
+							<PageNotFound />
 						</div>
 					}
 				/>
