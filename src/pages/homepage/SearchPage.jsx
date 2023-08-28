@@ -46,12 +46,15 @@ export default function SearchPage(props) {
 				<RecipeListLoader />
 			) : (
 				<>
-					{searchRecipes.count && (
+					{searchRecipes.count >= 0 ? (
 						<h1 className="text-xl">
 							{searchRecipes.count} matching results for "
 							<span className="italic">{tag ? tag : keyword}</span>"
 						</h1>
+					) : (
+						""
 					)}
+
 					<div className="grid md:grid-cols-4 gap-3 py-5">
 						{searchRecipes.results &&
 							searchRecipes.results.map((recipe, index) => {
