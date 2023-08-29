@@ -155,8 +155,10 @@ function RecipeDetailsModal(props) {
 						selectedRecipe.instruction.split(".").map((instruction, index) => {
 							return (
 								<div key={index} className="flex items-start">
-									<span className="">{index + 1 + ". "} </span>
-									<span className="">{instruction}</span>
+									<p>
+										<span className="font-semibold">{`${index + 1}. `}</span>
+										{`${instruction}`}
+									</p>
 								</div>
 							);
 						})}

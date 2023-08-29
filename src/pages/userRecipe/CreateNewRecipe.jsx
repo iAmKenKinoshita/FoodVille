@@ -90,6 +90,7 @@ function CreateNewRecipe(props) {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 			dialogClassName="wideModal"
+			className="bg-[#C7C7C7] fixed w-full h-screen top-0 left-0 z-50 md:z-50 bg-opacity-50"
 		>
 			{/* <Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
@@ -203,29 +204,24 @@ function CreateNewRecipe(props) {
 												/>
 											)}
 										/>
-										{index > 0 && (
-											<button
-												type="button"
-												className="ml-2 px-4 py-2 text-sm rounded-full bg-gray-100"
-												onClick={() => remove(index)}
-											>
-												X
-											</button>
-										)}
-									</div>
-									<div className="flex-1 ">
-										{index === fields.length - 1 && (
-											<button
-												type="button"
-												className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
-												onClick={() => append({ ingredient_info: "" })}
-											>
-												Add more ingredient
-											</button>
-										)}
+
+										<button
+											type="button"
+											className="ml-2 px-4 py-2 text-sm rounded-full bg-gray-100"
+											onClick={() => remove(index)}
+										>
+											X
+										</button>
 									</div>
 								</div>
 							))}
+							<button
+								type="button"
+								className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+								onClick={() => append({ ingredient_info: "" })}
+							>
+								Add ingredient
+							</button>
 							{/* {errors.ingredients && (
 								<p className="text-red-500">{errors.ingredients.message}</p>
 							)} */}
