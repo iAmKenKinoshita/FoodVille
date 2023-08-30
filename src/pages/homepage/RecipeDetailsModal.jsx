@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 import { OverlayTrigger, Popover } from "react-bootstrap";
 
 import HomepageUtils from "./utils/homepageUtils";
+import { set } from "react-hook-form";
 
 const logInPopover = (navigate) => {
 	return (
@@ -28,12 +29,15 @@ const logInPopover = (navigate) => {
 };
 
 function RecipeDetailsModal(props) {
-	const { selectedRecipe, user, userId } = props;
+	const { selectedRecipe, user, userId, setSelectedRecipeShow } = props;
+	const [saveText, setSaveText] = useState("Save this recipe!");
+	const [backdrop, setBackDrop] = useState(false);
 	const navigate = useNavigate();
 
 	return (
 		<Modal
 			{...props}
+			backdrop={backdrop}
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
@@ -115,14 +119,22 @@ function RecipeDetailsModal(props) {
 					<button
 						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
 						onClick={async () => {
-							props.onHide();
-							// setEditRecipeShow(true);
-							if (user && userId !== null) {
-								HomepageUtils.saveApiRecipe(userId, selectedRecipe);
-							}
+							setBackDrop(false);
+							setSaveText("Saving...");
+							// await HomepageUtils.saveApiRecipe(userId, selectedRecipe);
+
+							setTimeout(() => {
+								setSaveText("Saved");
+								setTimeout(() => {
+									setBackDrop(true);
+									props.onHide();
+									setSaveText("Save this recipe!");
+								}, 1000);
+							}, 2000);
 						}}
 					>
-						Save this recipe!
+						{/* Save this recipe! */}
+						{saveText}
 					</button>
 				) : (
 					<button className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none">
