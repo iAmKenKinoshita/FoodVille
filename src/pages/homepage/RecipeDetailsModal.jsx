@@ -29,9 +29,9 @@ const logInPopover = (navigate) => {
 };
 
 function RecipeDetailsModal(props) {
-	const { selectedRecipe, user, userId, setSelectedRecipeShow } = props;
+	const { selectedRecipe, user, userId } = props;
 	const [saveText, setSaveText] = useState("Save this recipe!");
-	const [backdrop, setBackDrop] = useState(false);
+	const [backdrop, setBackDrop] = useState(true);
 	const navigate = useNavigate();
 
 	return (
@@ -121,7 +121,7 @@ function RecipeDetailsModal(props) {
 						onClick={async () => {
 							setBackDrop(false);
 							setSaveText("Saving...");
-							// await HomepageUtils.saveApiRecipe(userId, selectedRecipe);
+							await HomepageUtils.saveApiRecipe(userId, selectedRecipe);
 
 							setTimeout(() => {
 								setSaveText("Saved");
