@@ -56,13 +56,8 @@ export default function RecipeListLoader(props) {
 	} else {
 		return (
 			<>
-				{home && (
-					<h1 className="text-xl">
-						<Skeleton width={300} />
-					</h1>
-				)}
 				<h1 className="text-xl">
-					<Skeleton width={300} />
+					<Skeleton width={280} />
 				</h1>
 				<div className="grid md:grid-cols-4 gap-3 py-5">
 					{[...Array(40)].map((item, index) => {
