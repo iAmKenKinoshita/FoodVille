@@ -243,12 +243,14 @@ export default function NavBar(props) {
 										<li>
 											<Link
 												to={`/search-by-tag/${item.name}`}
-												onClick={() => {
+												onClick={async () => {
 													toggleMobileMenu();
-													HomepageUtils.searchRecipeByCategory(
+													setLoading(true);
+													await HomepageUtils.searchRecipeByCategory(
 														setSearchRecipes,
 														item.name
 													);
+													setLoading(false);
 												}}
 												className="block text-gray-800 hover:bg-gray-200"
 											>
