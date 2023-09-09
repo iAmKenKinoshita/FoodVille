@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
 import { OverlayTrigger, Popover } from "react-bootstrap";
-
 import HomepageUtils from "./utils/homepageUtils";
-import { set } from "react-hook-form";
 
 const logInPopover = (navigate) => {
 	return (
 		<Popover className="font-serif" id="popover-basic">
-			{/* <Popover.Header className="text-center bg-gray-200">
-				<p className="text-xl font-semibold">Click here to sign and save this recipe!</p>
-			</Popover.Header> */}
 			<Popover.Body className="p-2 bg-gray-100">
 				<p className="font-md">
 					Click{" "}
