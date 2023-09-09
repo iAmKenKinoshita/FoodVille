@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import homepageUtils from "./utils/homepageUtils";
 import { useParams } from "react-router-dom";
-
 import ReactPaginate from "react-paginate";
-
-//Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import RecipeListLoader from "./RecipeListLoader";
 

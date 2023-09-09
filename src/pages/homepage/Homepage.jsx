@@ -1,31 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import RecipeListLoader from "./RecipeListLoader";
-
-//Bootstrap
-import { useNavigate } from "react-router-dom";
-
-//Styling
-// import "../../styles/pages/_homepage.scss";
-
-//Modal
 import RecipeDetailsModal from "./RecipeDetailsModal";
-
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
-	const navigate = useNavigate();
-
 	const {
 		user,
 		userId,
-		searchRecipes,
-		setSearchRecipes,
 		featuredRecipes,
 		setFeaturedRecipes,
 	} = props;
 
-	// const [featuredRecipes, setFeaturedRecipes] = useState("");
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
