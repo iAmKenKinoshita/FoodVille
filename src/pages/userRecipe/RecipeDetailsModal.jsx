@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Modal, Popover, OverlayTrigger } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-
 import UserRecipeUtils from "./utils/userRecipe";
 
 const deletePopover = (
@@ -19,14 +17,11 @@ const deletePopover = (
 ) => {
 	return (
 		<Popover id="popover-basic">
-			{/* <Popover.Header as="h2">Delete confirmation</Popover.Header> */}
 			<Popover.Body className="p-2 bg-gray-100 font-serif">
-				{/* <p className="font-semibold">Delete Recipe?</p> */}
 				<p className="font-xl font-thin p-1">
 					This will permanently delete your recipe. Proceed deleting this
 					recipe?
 				</p>
-
 				<div className="grid grid-cols-2 gap-1">
 					<button
 						onClick={() => {
@@ -75,7 +70,6 @@ function RecipeDetailsModal(props) {
 		setEditRecipeShow,
 		setSingleRecipeShow,
 	} = props;
-	const navigate = useNavigate();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [instructions, setInstructions] = useState([]);

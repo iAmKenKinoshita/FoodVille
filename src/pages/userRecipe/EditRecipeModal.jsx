@@ -3,8 +3,6 @@ import { Modal, Col, Row } from "react-bootstrap";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-//UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
 
 const schema = yup.object().shape({
@@ -18,7 +16,7 @@ const schema = yup.object().shape({
 });
 
 function EditRecipeModal(props) {
-	const { selectedRecipe, setEditRecipeShow } = props;
+	const { selectedRecipe } = props;
 
 	const [ingredients, setIngredients] = useState([]);
 	const [recipeDetails, setRecipeDetails] = useState("");
@@ -56,8 +54,6 @@ function EditRecipeModal(props) {
 				window.location.reload();
 			}, 1000);
 		}, 1000);
-
-		// setEditRecipeShow(false);
 	};
 
 	const ID = selectedRecipe.id;
@@ -119,7 +115,6 @@ function EditRecipeModal(props) {
 							<p className="text-red-500">{errors.recipeName.message}</p>
 						)}
 					</div>
-
 					<div className="md:flex flex-row">
 						<div className="flex-1 pr-4 flex flex-col">
 							<div className="h-1/2">
@@ -141,11 +136,7 @@ function EditRecipeModal(props) {
 										/>
 									)}
 								/>
-								{/* {errors.description && (
-									<p className="text-red-500">{errors.description.message}</p>
-								)} */}
 							</div>
-
 							<div className="mb-4 h-2/3">
 								<label
 									htmlFor="instructions"
@@ -165,12 +156,8 @@ function EditRecipeModal(props) {
 										/>
 									)}
 								/>
-								{/* {errors.instructions && (
-									<p className="text-red-500">{errors.instructions.message}</p>
-								)} */}
 							</div>
 						</div>
-
 						<div className="flex-1">
 							{" "}
 							<label
@@ -201,7 +188,6 @@ function EditRecipeModal(props) {
 												/>
 											)}
 										/>
-
 										<button
 											type="button"
 											className="ml-2 px-4 py-2 text-sm rounded-full bg-gray-100"
@@ -219,9 +205,6 @@ function EditRecipeModal(props) {
 							>
 								Add ingredient
 							</button>
-							{/* {errors.ingredients && (
-								<p className="text-red-500">{errors.ingredients.message}</p>
-							)} */}
 						</div>
 					</div>
 					<div className="border-b border-gray-600 my-2"></div>

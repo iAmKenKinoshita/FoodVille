@@ -1,12 +1,7 @@
-import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-import { useNavigate } from "react-router-dom";
-
-import EditIngredients from "./EditIngredients";
 
 //UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
@@ -22,7 +17,6 @@ const schema = yup.object().shape({
 });
 
 function CreateNewRecipe(props) {
-	const navigate = useNavigate();
 
 	const {
 		handleSubmit,
@@ -46,7 +40,6 @@ function CreateNewRecipe(props) {
 	});
 
 	const onSubmit = async (data) => {
-		console.log("This is the data", data);
 		await UserRecipeUtils.addNewRecipe(userId, data);
 
 		await UserRecipeUtils.getRecipes(
@@ -80,9 +73,6 @@ function CreateNewRecipe(props) {
 		setCreateRecipeShow,
 	} = props;
 
-	// const userData = JSON.parse(localStorage.getItem("userData"));
-	// const userId = userData[0].userId;
-
 	return (
 		<Modal
 			{...props}
@@ -92,11 +82,6 @@ function CreateNewRecipe(props) {
 			dialogClassName="wideModal"
 			className="bg-[#C7C7C7] fixed w-full h-screen top-0 left-0 z-50 md:z-50 bg-opacity-50"
 		>
-			{/* <Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					Create New Recipe
-				</Modal.Title>
-			</Modal.Header> */}
 			<Modal.Body className="font-serif">
 				<form className="p-4" id="create" onSubmit={handleSubmit(onSubmit)}>
 					<div className="mb-4">
@@ -144,11 +129,7 @@ function CreateNewRecipe(props) {
 										/>
 									)}
 								/>
-								{/* {errors.description && (
-									<p className="text-red-500">{errors.description.message}</p>
-								)} */}
 							</div>
-
 							<div className="mb-4">
 								<label
 									htmlFor="instructions"
@@ -227,7 +208,6 @@ function CreateNewRecipe(props) {
 							)} */}
 						</div>
 					</div>
-
 					<button
 						type="submit"
 						form="create"
