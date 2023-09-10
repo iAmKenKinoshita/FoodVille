@@ -1,13 +1,6 @@
 import { useState, useEffect } from "react";
-
-//Icons
-import FVIcon from "../../images/FVIcon.png";
-
-//UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
-
 import sidebarFilters from "./utils/sidebarFilters";
-
 import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";
@@ -234,33 +227,7 @@ function RecipePage(props) {
 											className="w-full h-36 object-cover rounded-t-lgr"
 										/>
 										<div className="mt-2">
-											<h1 className="text-red-600 pb-">
-												{/* {recipe.tags.find((tagname) => tagname.type === "meal")
-													?.display_name || ""} */}
-											</h1>
 											<h1 className="text-3xl mb-2">{recipe.name}</h1>
-											{/* {recipe.total_time_minutes &&
-											recipe.total_time_minutes < 60 ? (
-												<div className="flex">
-													<svg
-														className="meta-text__icon h-6 w-6 mr-2"
-														viewBox="0 0 24 24"
-														fill="none"
-														stroke="currentColor"
-														strokeWidth="2"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-													>
-														<circle cx="12" cy="12" r="10" />
-														<path d="M12 6v6l4 2" />
-													</svg>
-													<span className="text-gray-600">
-														{recipe.total_time_minutes} minutes
-													</span>
-												</div>
-											) : (
-												""
-											)} */}
 										</div>
 									</div>
 								</div>
