@@ -47,9 +47,9 @@ module.exports = {
 
 	editRecipeDetails(details, id) {
 		return knex("recipe").where({ id: id }).update({
-			name: details.name,
+			name: details.recipeName,
 			description: details.description,
-			instruction: details.instruction,
+			instruction: details.instructions,
 			is_fv: details.is_fv,
 		});
 	},

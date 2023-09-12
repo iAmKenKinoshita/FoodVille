@@ -6,7 +6,6 @@ const userModel = require("../model/user");
 exports.logIn = async (req, res) => {
 	const { userEmail, userPassword } = req.body;
 	let allUsers = [];
-	let refreshTokens = [];
 
 	await userModel.getAllUsers().then((data) => {
 		return (allUsers = data);
@@ -19,7 +18,8 @@ exports.logIn = async (req, res) => {
 	//If no user found
 	if (!user) {
 		res.status(400).send({
-			error: "Invalid credentials",
+			error: "email",
+			message: "Invalid email",
 		});
 	} else {
 		let isMatch = await bcrypt.compare(userPassword, user.userPassword);
@@ -43,25 +43,19 @@ exports.logIn = async (req, res) => {
 				}
 			);
 
-			refreshTokens.push(refreshToken);
-
 			res.send({
 				accessToken,
 				refreshToken,
+				message: "Login successful",
 			});
 		} else {
-			console.log("Wrong password");
+			//If the password is wrong
+			res.status(400).send({
+				error: "password",
+				message: "Wrong credentials",
+			});
 		}
 	}
-
-	// if (userPassword === user.userPassword) isMatch =true;
-
-	// if (!isMatch) {
-	// 	console.log(isMatch);
-	// 	res.status(404).send({
-	// 		message: "Email or password is invalid",
-	// 	});
-	// }
 };
 
 exports.signUp = async (req, res) => {
@@ -70,26 +64,39 @@ exports.signUp = async (req, res) => {
 		return (allUsers = data);
 	});
 
-	let user = allUsers.find((user) => {
+	const user = allUsers.find((user) => {
 		return user.userEmail === req.body.userEmail;
 	});
 
-	if (user) {
-		res.status(200).send({
-			email: user.userEmail,
-			message: "This email adress already signed",
-		});
-	} else {
-		let bcryptPassword = bcrypt.hashSync(req.body.userPassword, 10);
-		req.body.userPassword = bcryptPassword;
+	const username = allUsers.find((username) => {
+		return username.userName === req.body.userName;
+	});
 
-		await userModel.sendUserData(req.body).then((data) => {
-			res.status(201).send({
-				message: "Data transmission completed!",
-				auth: { email: req.body.userEmail, password: req.body.userPassword },
-			});
+	//If username is found
+	if (username) {
+		return res.status(400).send({
+			error: "username",
+			message: "This username is already taken",
 		});
 	}
+
+	//If user is found
+	if (user) {
+		return res.status(400).send({
+			error: "email",
+			message: "This email address already taken",
+		});
+	}
+
+	let bcryptPassword = bcrypt.hashSync(req.body.userPassword, 10);
+	req.body.userPassword = bcryptPassword;
+
+	await userModel.sendUserData(req.body).then((data) => {
+		res.status(201).send({
+			message: "Data transmission completed!",
+			auth: { email: req.body.userEmail, password: req.body.userPassword },
+		});
+	});
 };
 
 exports.authToken = async (req, res, next) => {

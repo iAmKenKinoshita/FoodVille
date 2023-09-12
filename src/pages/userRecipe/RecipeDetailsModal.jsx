@@ -1,16 +1,85 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Popover, OverlayTrigger } from "react-bootstrap";
+import UserRecipeUtils from "./utils/userRecipe";
+
+const deletePopover = (
+	ID,
+	currentRecipes,
+	setSelectedRecipes,
+	allRecipes,
+	setAllRecipes,
+	setAllFavoriteRecipes,
+	setFoodVilleRecipes,
+	setFoodVilleFavoriteRecipes,
+	setUserRecipes,
+	setUserFavoriteRecipes,
+	setSingleRecipeShow
+) => {
+	return (
+		<Popover id="popover-basic">
+			<Popover.Body className="p-2 bg-gray-100 font-serif">
+				<p className="font-xl font-thin p-1">
+					This will permanently delete your recipe. Proceed deleting this
+					recipe?
+				</p>
+				<div className="grid grid-cols-2 gap-1">
+					<button
+						onClick={() => {
+							UserRecipeUtils.deleteRecipe(ID);
+							UserRecipeUtils.handleDelete(
+								ID,
+								currentRecipes,
+								setSelectedRecipes,
+								allRecipes,
+								setAllRecipes,
+								setAllFavoriteRecipes,
+								setFoodVilleRecipes,
+								setFoodVilleFavoriteRecipes,
+								setUserRecipes,
+								setUserFavoriteRecipes
+							);
+							setSingleRecipeShow(false);
+						}}
+						className="grid-1 bg-emerald-300 hover:bg-emerald-400 rounded-md focus:outline-none text-white p-2"
+					>
+						Yes
+					</button>
+					<button className="grid-1 bg-emerald-300 hover:bg-emerald-400 rounded-md focus:outline-none text-white p-2">
+						No
+					</button>
+				</div>
+			</Popover.Body>
+		</Popover>
+	);
+};
 
 function RecipeDetailsModal(props) {
-	const { selectedRecipe, setEditRecipeShow } = props;
+	const {
+		user,
+		userId,
+		selectedRecipe,
+		currentRecipes,
+		setSelectedRecipes,
+		allRecipes,
+		setAllRecipes,
+		setAllFavoriteRecipes,
+		setFoodVilleRecipes,
+		setFoodVilleFavoriteRecipes,
+		setUserRecipes,
+		setUserFavoriteRecipes,
+		setEditRecipeShow,
+		setSingleRecipeShow,
+	} = props;
 
 	const [ingredients, setIngredients] = useState([]);
+	const [instructions, setInstructions] = useState([]);
 
 	useEffect(() => {
 		if (selectedRecipe !== "") {
 			fetch(`userRecipe/ingredients/${selectedRecipe.id}`)
 				.then((result) => result.json())
 				.then((data) => setIngredients(data));
+			setInstructions(selectedRecipe.instruction.split("."));
 		}
 	}, [selectedRecipe]);
 
@@ -20,54 +89,133 @@ function RecipeDetailsModal(props) {
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			dialogClassName="wideModal"
+			className="bg-[#C7C7C7] fixed w-full h-screen top-0 left-0 z-50 md:z-50 bg-opacity-50"
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					{selectedRecipe.name}
-				</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				{selectedRecipe.description ? (
-					<>
-						<h3 className="title is-6">Description</h3>
-						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
-					</>
-				) : (
-					""
-				)}
+			<Modal.Body className="font-serif">
+				<h1 className="text-4xl text-center mb-2">{selectedRecipe.name}</h1>
+				<div className="border-b border-gray-600 my-2"></div>
+				<div className="md:flex flex-row ">
+					<div className="flex-2 bg-white">
+						<img
+							src={
+								selectedRecipe.image_url ||
+								"https://bulma.io/images/placeholders/256x256.png"
+							}
+							alt="foodimage"
+							className="w-full h-full object-cover rounded-t-lgr flex-1"
+						/>
+					</div>
+					<div className="flex-1 pl-2 ">
+						<div className="flex justify-center">
+							<table className="table-auto w-44">
+								<thead>
+									<tr>
+										<th className="border-b border-dotted font-semibold">
+											{ingredients.length < 1 ? "" : "Ingredients"}
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{ingredients &&
+										ingredients.map((ingredient, index) => {
+											return (
+												<>
+													<tr
+														key={index}
+														className={
+															index % 2 === 0 ? "bg-gray-100" : "bg-white"
+														}
+													>
+														<td className="">{ingredient.ingredient_info}</td>
+													</tr>
+												</>
+											);
+										})}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div className="pt-2">
+					{/* <h1 className="font-semibold mb-1">Description</h1> */}
+					<p>{selectedRecipe.description}</p>
+				</div>
+				<div className="border-b border-gray-500 my-2"></div>
+				<div className="flex flex-col">
+					<h1 className="font-semibold mb-1">Instructions</h1>
+					{/* Algo when dot. found make another line */}
+					{selectedRecipe.instruction &&
+						selectedRecipe.instruction.split(".").map((instruction, index) => {
+							return (
+								<div key={index} className="flex items-start">
+									<p>
+										<span className="font-semibold">{`${index + 1}. `}</span>
+										{`${instruction}`}
+									</p>
+								</div>
+							);
+						})}
+				</div>
+				<div className="border-b border-gray-500 my-2"></div>
 
-				<div className="table-container">
-					<table className="table is-striped">
-						<thead>{ingredients.length < 1 ? "" : <th>Ingredients</th>}</thead>
-						<tbody>
-							{ingredients.map((ingredient) => {
-								return (
-									<>
-										<tr>
-											<td>{ingredient.ingredient_info}</td>
-											{/* <td>{ingredient.ingredient_name}</td>
-											<td>{ingredient.amount}</td> */}
-										</tr>
-									</>
-								);
-							})}
-						</tbody>
-					</table>
-					<h3 className="title is-6">Instruction</h3>
-					<h5 className="subtitle is-5">{selectedRecipe.instruction}</h5>
+				<div className="grid grid-cols-3">
+					<OverlayTrigger
+						trigger="focus"
+						placement="top"
+						overlay={deletePopover(
+							selectedRecipe.id,
+							currentRecipes,
+							setSelectedRecipes,
+							allRecipes,
+							setAllRecipes,
+							setAllFavoriteRecipes,
+							setFoodVilleRecipes,
+							setFoodVilleFavoriteRecipes,
+							setUserRecipes,
+							setUserFavoriteRecipes,
+							setSingleRecipeShow
+						)}
+					>
+						<button className="bg-rose-400 hover:bg-rose-600 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4 mr-2">
+							Delete
+						</button>
+					</OverlayTrigger>
+					<button
+						onClick={() => {
+							props.onHide();
+							setEditRecipeShow(true);
+						}}
+						className="bg-emerald-300 hover:bg-emerald-600 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4 mr-2"
+					>
+						Edit
+					</button>
+					<button
+						onClick={async () => {
+							await UserRecipeUtils.addOrRemoveFavorite(
+								selectedRecipe.id,
+								selectedRecipe.is_favorite
+							);
+							UserRecipeUtils.handleFavorite(
+								selectedRecipe,
+								currentRecipes,
+								setSelectedRecipes,
+								allRecipes,
+								setAllFavoriteRecipes,
+								setFoodVilleRecipes,
+								setFoodVilleFavoriteRecipes,
+								setUserRecipes,
+								setUserFavoriteRecipes
+							);
+						}}
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none md:p-2 md:mt-4"
+					>
+						{selectedRecipe.is_favorite
+							? "Remove from Favorites"
+							: "Add to Favorites"}
+					</button>
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
-				<button
-					className="button edit-button"
-					onClick={() => {
-						props.onHide();
-						setEditRecipeShow(true);
-					}}
-				>
-					Edit
-				</button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

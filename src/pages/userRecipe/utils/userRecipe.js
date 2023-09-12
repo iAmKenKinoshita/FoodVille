@@ -51,18 +51,15 @@ const userRecipeUtils = {
 			console.log(error);
 		}
 	},
-	addNewRecipe: async (
-		userId,
-		{ name, description, instruction, ingredients }
-	) => {
+	addNewRecipe: async (userId, data) => {
 		try {
 			await fetch(`userRecipe/createNewRecipe/${userId}`, {
 				method: "POST",
 				headers: {
-					name: name,
-					description: description,
-					instruction: instruction,
-					ingredients: JSON.stringify(ingredients),
+					name: data.recipeName,
+					description: data.description,
+					instruction: data.instructions,
+					ingredients: JSON.stringify(data.ingredients),
 					is_fv: false,
 					is_favorite: false,
 				},
@@ -71,14 +68,14 @@ const userRecipeUtils = {
 			console.log(error);
 		}
 	},
-	saveRecipeChanges: async (id, ingredients, recipeDetails) => {
+	saveRecipeChanges: async (id, recipeDetails) => {
 		try {
 			await fetch(`userRecipe/editRecipe/${id}`, {
 				method: "PATCH",
 				headers: {
-					ingredients: JSON.stringify(ingredients),
-					recipeDetails: JSON.stringify(recipeDetails),
+					"Content-Type": "application/json",
 				},
+				body: JSON.stringify(recipeDetails),
 			});
 		} catch (error) {
 			console.log(error);
@@ -127,15 +124,29 @@ const userRecipeUtils = {
 		);
 		setUserFavoriteRecipes(userFavoriteRecipes);
 
-		if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+		if (currentRecipes === "allFavorites") {
 			setSelectedRecipes(AllFavoriteRecipes);
 		}
-		if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
+		if (currentRecipes === "foodVilleFavorites") {
 			setSelectedRecipes(foodVilleFavoriteRecipes);
 		}
-		if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
+
+		if (currentRecipes === "userFavorites") {
 			setSelectedRecipes(userFavoriteRecipes);
 		}
+
+		//Old Codes
+		// if (currentRecipes === "allFavorites" && !recipe.is_favorite) {
+		// 	setSelectedRecipes(AllFavoriteRecipes);
+		// }
+		// if (currentRecipes === "foodVilleFavorites" && !recipe.is_favorite) {
+		// 	console.log("here");
+		// 	setSelectedRecipes(foodVilleFavoriteRecipes);
+		// }
+
+		// if (currentRecipes === "userFavorites" && !recipe.is_favorite) {
+		// 	setSelectedRecipes(userFavoriteRecipes);
+		// }
 	},
 	handleDelete: (
 		recipeId,
@@ -210,15 +221,15 @@ const userRecipeUtils = {
 	) => {
 		return (
 			<Popover id="popover-basic">
-				<Popover.Header as="h3">Delete confirmation</Popover.Header>
+				<Popover.Header as="h2">Delete confirmation</Popover.Header>
 
 				<div className="card">
-					<div class="card-content popover-content">
-						<div class="content">
+					<div className="card-content popover-content">
+						<div className="content">
 							Are you sure you want to <strong>delete</strong> this recipe?
 						</div>
 					</div>
-					<div className="card-footer">
+					<div className="card-footer delete-pop">
 						<a
 							type="button"
 							className="card-footer-item popover-button"

@@ -1,22 +1,51 @@
 import { useState, useEffect } from "react";
-
-//Styling
-import "../../styles/pages/_recipepage.scss";
-
-//Icons
-import FVIcon from "../../images/FVIcon.png";
-
-//UserRecipeUtils
 import UserRecipeUtils from "./utils/userRecipe";
-
-//Bootstrap
-import { OverlayTrigger } from "react-bootstrap";
-
+import sidebarFilters from "./utils/sidebarFilters";
 import CreateNewRecipe from "./CreateNewRecipe";
 import RecipeDetailsModal from "./RecipeDetailsModal";
 import EditRecipeModal from "./EditRecipeModal";
 
+const DropdownMenuMobile = ({ title, children }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleClick = () => {
+		setIsOpen(!isOpen);
+	};
+
+	const handleLinkClick = (event) => {
+		event.stopPropagation();
+	};
+
+	return (
+		<div onClick={handleClick} className="text-center font-serif">
+			<div className="grid place-content-center ">
+				<button className="text-gray-800 rounded-md font-semibold inline-flex justify-center items-center">
+					{title}
+					<svg
+						className={`ml-1 ${isOpen ? "transform rotate-180" : ""}`}
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						viewBox="0 0 16 16"
+					>
+						<path d="M8 11.293l4.646-4.647a1 1 0 111.414 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L8 11.293z" />
+					</svg>
+				</button>
+			</div>
+
+			{isOpen && (
+				<div>
+					<ul className="">{children}</ul>
+				</div>
+			)}
+		</div>
+	);
+};
+
 function RecipePage(props) {
+	const [sideBarActive, setSideBarActive] = useState(0);
+
 	const [createRecipeShow, setCreateRecipeShow] = useState(false);
 	const [singleRecipeShow, setSingleRecipeShow] = useState(false);
 	const [editRecipeShow, setEditRecipeShow] = useState(false);
@@ -54,206 +83,156 @@ function RecipePage(props) {
 	}, []);
 
 	return (
-		<div>
-			<div className="columns">
-				<div className="column is-1 sidebar">
-					<aside className="menu">
-						<p className="menu-label">Recipes</p>
-						<ul className="menu-list">
-							<li>
-								<a
-									className="is-active"
-									onClick={(e) => {
-										UserRecipeUtils.toggleSideBarIsActive(e);
-										setSelectedRecipes(allRecipes);
-										setCurrentRecipes("allRecipes");
-									}}
-								>
-									All
-								</a>
-							</li>
-							<li>
-								<a
-									onClick={(e) => {
-										UserRecipeUtils.toggleSideBarIsActive(e);
-										setSelectedRecipes(allFavoriteRecipes);
-										setCurrentRecipes("allFavorites");
-									}}
-								>
-									Favorites
-								</a>
-							</li>
-						</ul>
-						<p className="menu-label">Food Ville's</p>
-						<ul className="menu-list">
-							<ul className="menu-list">
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(foodVilleRecipes);
-											setCurrentRecipes("foodVilleRecipes");
-										}}
-									>
-										All
-									</a>
-								</li>
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(foodVilleFavoriteRecipes);
-											setCurrentRecipes("foodVilleFavorites");
-										}}
-									>
-										Favorites
-									</a>
-								</li>
-							</ul>
-						</ul>
-						<p className="menu-label">Your Recipes</p>
-						<ul className="menu-list">
-							<ul className="menu-list">
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(userRecipes);
-											setCurrentRecipes("userRecipes");
-										}}
-									>
-										All
-									</a>
-								</li>
-								<li>
-									<a
-										onClick={(e) => {
-											UserRecipeUtils.toggleSideBarIsActive(e);
-											setSelectedRecipes(userFavoriteRecipes);
-											setCurrentRecipes("userFavorites");
-										}}
-									>
-										Favorites
-									</a>
-								</li>
-							</ul>
-						</ul>
-						<a
-							className="button new-recipe"
-							onClick={() => setCreateRecipeShow(true)}
-						>
-							+ New Recipe
-						</a>
-					</aside>
-				</div>
-				<div className="column recipe-container-recipepage">
-					<div className="tile is-ancestor is-flex-wrap-wrap">
-						{selectedRecipes &&
-							selectedRecipes.map((recipe, index) => {
+		<div className="max-w-5xl md:max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 font-serif pt-20 md:flex">
+			<nav className="md:hidden">
+				<div className="mx-auto justify-between items-center space-x-4 font-serif">
+					<DropdownMenuMobile title="Filter by:">
+						<div className="border-b border-gray-500 md:hidden"></div>
+						{sidebarFilters &&
+							sidebarFilters.map((item) => {
 								return (
-									<div className="tile is-parent is-3">
-										<article className="tile is-child card">
-											<div className="card-image">
-												<figure className="image is-4by3">
-													<img
-														src={
-															recipe.image_url
-																? recipe.image_url
-																: "https://bulma.io/images/placeholders/256x256.png"
-														}
-														alt="Food Image"
-													/>
-												</figure>
-											</div>
-											<div className="card-content">
-												<div className="media">
-													<div className="media-content">
-														<p className="title is-6">{recipe.name}</p>
-														{/* <p class="subtitle is-6">@johnsmith</p> */}
-													</div>
-													<div className="media-left">
-														{recipe.is_fv ? (
-															<figure className="image is-48x48">
-																<img src={FVIcon} alt="Placeholder image" />
-															</figure>
-														) : (
-															""
-														)}
-													</div>
-												</div>
-											</div>
-
-											<footer className="card-footer">
-												<a
-													onClick={() => {
-														setSingleRecipeShow(true);
-														setSelectedRecipe(selectedRecipes[index]);
-													}}
-													className="card-footer-item"
-												>
-													Details
-												</a>
-												<a
-													onClick={async () => {
-														await UserRecipeUtils.addOrRemoveFavorite(
-															recipe.id,
-															recipe.is_favorite
-														);
-														UserRecipeUtils.handleFavorite(
-															recipe,
-															currentRecipes,
-															setSelectedRecipes,
-															allRecipes,
-															setAllFavoriteRecipes,
-															setFoodVilleRecipes,
-															setFoodVilleFavoriteRecipes,
-															setUserRecipes,
-															setUserFavoriteRecipes
-														);
-													}}
-													className="card-footer-item favorite"
-												>
-													{/* {!recipe.is_favorite ? (
-														<span class="icon">
-															<i class="fas fa-star favorite"></i>
-														</span>
-													) : (
-														<span class="icon">
-															Add <i class="fas fa-star"></i>
-														</span>
-													)} */}
-													{!recipe.is_favorite
-														? "Add to favorite"
-														: "Remove from favorite"}
-												</a>
-												<OverlayTrigger
-													trigger="focus"
-													placement="top"
-													overlay={UserRecipeUtils.deletePopover(
-														recipe.id,
-														currentRecipes,
-														setSelectedRecipes,
-														allRecipes,
-														setAllRecipes,
-														setAllFavoriteRecipes,
-														setFoodVilleRecipes,
-														setFoodVilleFavoriteRecipes,
-														setUserRecipes,
-														setUserFavoriteRecipes
-													)}
-												>
-													<a href="#" className="card-footer-item">
-														<span className="icon card-footer-item">
-															<i className="fas fa-trash "></i>
-														</span>
+									<>
+										<p className="text-gray-400 text-2xl font-semibold">
+											{item.TITLE}
+										</p>
+										{item.filters &&
+											item.filters.map((filter) => {
+												return (
+													<a
+														onClick={() => {
+															setCurrentRecipes(filter.SELECT_RECIPE);
+															setSideBarActive(filter.INDEX);
+															setSelectedRecipes(
+																filter.SELECT_RECIPE === "allRecipes"
+																	? allRecipes
+																	: filter.SELECT_RECIPE === "allFavorites"
+																	? allFavoriteRecipes
+																	: filter.SELECT_RECIPE === "foodVilleRecipes"
+																	? foodVilleRecipes
+																	: filter.SELECT_RECIPE ===
+																	  "foodVilleFavorites"
+																	? foodVilleFavoriteRecipes
+																	: filter.SELECT_RECIPE === "userRecipes"
+																	? userRecipes
+																	: filter.SELECT_RECIPE === "userFavorites"
+																	? userFavoriteRecipes
+																	: ""
+															);
+														}}
+													>
+														<li
+															className={`text-xl text-gray-400 hover:bg-gray-300 ${
+																sideBarActive === filter.INDEX
+																	? "bg-gray-200"
+																	: ""
+															}`}
+														>
+															{filter.TITLE}
+														</li>
 													</a>
-												</OverlayTrigger>
-											</footer>
-										</article>
-									</div>
+												);
+											})}
+									</>
 								);
 							})}
-					</div>
+
+						<button
+							onClick={() => setCreateRecipeShow(true)}
+							className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-2"
+						>
+							Add New Recipe
+						</button>
+					</DropdownMenuMobile>
+				</div>
+			</nav>
+
+			<div className="border-b border-gray-500 my-2  md:hidden"></div>
+
+			<div className="h-screen p-4 sticky top-0 hidden md:block">
+				{sidebarFilters &&
+					sidebarFilters.map((item) => {
+						return (
+							<div className="py-2">
+								<h1 className="text-gray-400 text-2xl font-semibold">
+									{item.TITLE}
+								</h1>
+								<ul className="pl-4 text-center">
+									{item.filters &&
+										item.filters.map((filter) => {
+											return (
+												<a
+													onClick={() => {
+														setCurrentRecipes(filter.SELECT_RECIPE);
+														setSideBarActive(filter.INDEX);
+														setSelectedRecipes(
+															filter.SELECT_RECIPE === "allRecipes"
+																? allRecipes
+																: filter.SELECT_RECIPE === "allFavorites"
+																? allFavoriteRecipes
+																: filter.SELECT_RECIPE === "foodVilleRecipes"
+																? foodVilleRecipes
+																: filter.SELECT_RECIPE === "foodVilleFavorites"
+																? foodVilleFavoriteRecipes
+																: filter.SELECT_RECIPE === "userRecipes"
+																? userRecipes
+																: filter.SELECT_RECIPE === "userFavorites"
+																? userFavoriteRecipes
+																: ""
+														);
+													}}
+												>
+													<li
+														className={`text-xl text-gray-400 hover:bg-gray-300 ${
+															sideBarActive === filter.INDEX
+																? "bg-gray-200"
+																: ""
+														}`}
+													>
+														{filter.TITLE}
+													</li>
+												</a>
+											);
+										})}
+								</ul>
+							</div>
+						);
+					})}
+				<button
+					onClick={() => setCreateRecipeShow(true)}
+					className="bg-emerald-300 hover:bg-emerald-500 text-white font-medium rounded-md focus:outline-none p-2 mt-4"
+				>
+					Add New Recipe
+				</button>
+			</div>
+
+			<div className="flex-1 p-4">
+				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:py-3 py-5">
+					{selectedRecipes &&
+						selectedRecipes.map((recipe, index) => {
+							return (
+								<div
+									onClick={() => {
+										setSingleRecipeShow(true);
+										setSelectedRecipe(selectedRecipes[index]);
+									}}
+									className="hover:border-2 border-red-500 p-2 bg-white shadow-md"
+								>
+									<div className="p-2">
+										<img
+											src={
+												recipe.image_url ||
+												"https://bulma.io/images/placeholders/256x256.png"
+											}
+											alt="foodimage"
+											className="w-full h-36 object-cover rounded-t-lgr"
+										/>
+										<div className="mt-2">
+											<h1 className="text-3xl mb-2">{recipe.name}</h1>
+										</div>
+									</div>
+								</div>
+							);
+						})}
 				</div>
 			</div>
 			<CreateNewRecipe
@@ -272,13 +251,24 @@ function RecipePage(props) {
 			<RecipeDetailsModal
 				show={singleRecipeShow}
 				onHide={() => setSingleRecipeShow(false)}
-				selectedRecipe={selectedRecipe}
 				setEditRecipeShow={setEditRecipeShow}
+				selectedRecipe={selectedRecipe}
+				currentRecipes={currentRecipes}
+				setSelectedRecipes={setSelectedRecipes}
+				allRecipes={allRecipes}
+				setAllFavoriteRecipes={setAllFavoriteRecipes}
+				setFoodVilleRecipes={setFoodVilleRecipes}
+				setAllRecipes={setAllRecipes}
+				setFoodVilleFavoriteRecipes={setFoodVilleFavoriteRecipes}
+				setUserRecipes={setUserRecipes}
+				setUserFavoriteRecipes={setUserFavoriteRecipes}
+				setSingleRecipeShow={setSingleRecipeShow}
 			/>
 			<EditRecipeModal
 				show={editRecipeShow}
 				onHide={() => setEditRecipeShow(false)}
 				selectedRecipe={selectedRecipe}
+				setEditRecipeShow={setEditRecipeShow}
 			/>
 		</div>
 	);

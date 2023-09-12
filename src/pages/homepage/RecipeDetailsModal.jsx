@@ -1,86 +1,152 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
-
+import { Link, useNavigate } from "react-router-dom";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 import HomepageUtils from "./utils/homepageUtils";
+
+const logInPopover = (navigate) => {
+	return (
+		<Popover className="font-serif" id="popover-basic">
+			<Popover.Body className="p-2 bg-gray-100">
+				<p className="font-md">
+					Click{" "}
+					<Link to={"/signIn"}>
+						<strong className="text-lg text-blue-500 underline decoration-blue-500">
+							here
+						</strong>
+					</Link>{" "}
+					to sign-in and save this recipe!
+				</p>
+			</Popover.Body>
+		</Popover>
+	);
+};
 
 function RecipeDetailsModal(props) {
 	const { selectedRecipe, user, userId } = props;
+	const [saveText, setSaveText] = useState("Save this recipe!");
+	const [backdrop, setBackDrop] = useState(true);
+	const navigate = useNavigate();
 
 	return (
 		<Modal
 			{...props}
+			backdrop={backdrop}
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
+			dialogClassName="wideModal"
+			className="bg-[#C7C7C7] fixed w-full h-screen top-0 left-0 z-50 md:z-50 bg-opacity-50"
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					{selectedRecipe.name}
-				</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				{selectedRecipe.description ? (
-					<>
-						<h3 className="title is-6">Description</h3>
-						<h5 className="subtitle is-5">{selectedRecipe.description}</h5>
-					</>
-				) : (
-					""
-				)}
+			<Modal.Body className="font-serif">
+				<h1 className="text-4xl text-center mb-2">{selectedRecipe.name}</h1>
 
-				<div className="table-container">
-					<table className="table is-striped">
-						<thead>
-							<th>Ingredients</th>
-						</thead>
-						<tbody>
-							{selectedRecipe &&
-								selectedRecipe.sections.map((section) => {
-									return (
-										<>
-											{section.components.map((ingredient) => {
-												return (
-													<>
-														<tr>
-															<td>{ingredient.raw_text}</td>
-														</tr>
-													</>
-												);
-											})}
-										</>
-									);
-								})}
-						</tbody>
-					</table>
-					<h3 className="title is-6">Instruction</h3>
+				<div className="border-b border-gray-600 my-2"></div>
 
+				<div className="md:flex flex-row">
+					<div className="flex-2 bg-white">
+						<img
+							src={selectedRecipe.thumbnail_url}
+							alt="foodimage"
+							className="w-full h-full object-cover rounded-t-lgr flex-1"
+						/>
+					</div>
+					<div className="flex-1 pl-2 ">
+						<div className="flex justify-center">
+							<table className="table-auto w-44">
+								<thead>
+									<tr>
+										<th className="border-b border-dotted font-semibold">
+											Ingredients
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{selectedRecipe &&
+										selectedRecipe.sections.map((item) => {
+											return (
+												<>
+													{item.components.map((ingredient, index) => {
+														return (
+															<tr
+																key={index}
+																className={
+																	index % 2 === 0 ? "bg-gray-100" : "bg-white"
+																}
+															>
+																<td className="">{ingredient.raw_text}</td>
+															</tr>
+														);
+													})}
+												</>
+											);
+										})}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div className="pt-2">
+					{/* <h1 className="font-semibold mb-1">Description</h1> */}
+					<p>{selectedRecipe.description}</p>
+				</div>
+
+				<div className="border-b border-gray-500 my-2"></div>
+
+				<div className="flex flex-col">
+					<h1 className="font-semibold mb-1">Instructions</h1>
 					{selectedRecipe.instructions &&
 						selectedRecipe.instructions.map((instruction, index) => {
 							return (
-								<>
-									<p className="is-6">
-										{index + 1 + ". "}
-										{instruction.display_text}
-									</p>
-								</>
+								<div key={index} className="flex items-start">
+									<span className="">{index + 1 + ". "} </span>
+									<span className="">{instruction.display_text}</span>
+								</div>
 							);
 						})}
 				</div>
+
+				<div className="border-b border-gray-500 my-2"></div>
+
+				{user && userId ? (
+					<button
+						className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium px-4 py-2 rounded-md focus:outline-none"
+						onClick={async () => {
+							setBackDrop(false);
+							setSaveText("Saving...");
+							await HomepageUtils.saveApiRecipe(userId, selectedRecipe);
+
+							setTimeout(() => {
+								setSaveText("Saved");
+								setTimeout(() => {
+									setBackDrop(true);
+									props.onHide();
+									setSaveText("Save this recipe!");
+								}, 1000);
+							}, 2000);
+						}}
+					>
+						{/* Save this recipe! */}
+						{saveText}
+					</button>
+				) : (
+					<button className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none">
+						<OverlayTrigger
+							trigger="focus"
+							placement="top"
+							overlay={logInPopover(navigate)}
+						>
+							<button
+								href="#"
+								className="bg-emerald-300 hover:bg-emerald-400 text-white font-medium rounded-md focus:outline-none p-2"
+							>
+								Save this recipe!
+							</button>
+						</OverlayTrigger>
+					</button>
+				)}
 			</Modal.Body>
-			<Modal.Footer>
-				<button
-					className="button save-button"
-					onClick={async () => {
-						props.onHide();
-						// setEditRecipeShow(true);
-						if (user && userId !== null) {
-							HomepageUtils.saveApiRecipe(userId, selectedRecipe);
-						}
-					}}
-				>
-					Save
-				</button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

@@ -4,7 +4,7 @@ exports.getMyRecipeList = async (req, res) => {
 	try {
 		const userID = req.params.userId;
 		const recipe = await userRecipeModel.getAllRecipeList(userID);
-		res.send(recipe);
+		res.status(200).send(recipe);
 	} catch (error) {
 		console.log(error);
 	}
@@ -14,7 +14,7 @@ exports.getAllIngredients = async (req, res) => {
 	try {
 		const ID = req.params.listId;
 		const ingredients = await userRecipeModel.getAllIngredients(ID);
-		res.send(ingredients);
+		res.status(200).send(ingredients);
 	} catch (error) {
 		console.log(error);
 	}
@@ -39,9 +39,9 @@ exports.createNewRecipe = async (req, res) => {
 			is_favorite
 		);
 
-		// await userRecipeModel.editRecipeIngredients(ingredients, recipeId[0].id);
+		await userRecipeModel.editRecipeIngredients(ingredients, recipeId[0].id);
 
-		res.status(200).send("Created new recipe");
+		res.status(200).send({ message: "Created new recipe" });
 	} catch (error) {
 		console.log(error);
 	}
@@ -50,13 +50,13 @@ exports.createNewRecipe = async (req, res) => {
 exports.editRecipe = async (req, res) => {
 	try {
 		const ID = req.params.listId;
-		const ingredients = JSON.parse(req.get("ingredients"));
-		const recipeDetails = JSON.parse(req.get("recipeDetails"));
+		const { recipeName, description, instructions, ingredients } = req.body;
+		const recipeDetails = { recipeName, description, instructions };
 
 		await userRecipeModel.editRecipeDetails(recipeDetails, ID);
 		await userRecipeModel.deleteIngredients(ID);
 		await userRecipeModel.editRecipeIngredients(ingredients, ID);
-		res.send("Recipe Edited");
+		res.status(200).send({ message: "Edit successful" });
 	} catch (error) {
 		console.log(error);
 	}
@@ -67,7 +67,7 @@ exports.deleteRecipe = async (req, res) => {
 		const ID = req.params.listId;
 		await userRecipeModel.deleteIngredients(ID);
 		await userRecipeModel.deleteRecipe(ID);
-		res.send("Deleted recipe");
+		res.status(200).send({ message: "Deleted recipe" });
 	} catch (error) {
 		console.log(error);
 	}
@@ -78,7 +78,7 @@ exports.addToFavorites = async (req, res) => {
 		const recipeId = req.params.recipeId;
 		const is_favorite = req.get("is_favorite");
 		await userRecipeModel.addToFavorites(recipeId, is_favorite);
-		res.send("Added/Removed Favorites");
+		res.status(200).send({ message: "Added/Removed Favorites" });
 	} catch (error) {
 		console.log(error);
 	}

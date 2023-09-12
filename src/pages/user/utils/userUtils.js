@@ -3,33 +3,38 @@ import axios from "axios";
 const userUtils = {
 	//User Verification
 
-	signUp: async (username, email, password) => {
+	signUp: async (data, setError) => {
 		try {
-			let data = await axios.post("/user/signUp", {
-				userName: username,
-				userEmail: email,
-				userPassword: password,
+			const response = await axios.post("/user/signUp", {
+				userName: data.username,
+				userEmail: data.email,
+				userPassword: data.password,
 			});
-			if (data.data.accessToken) {
-				localStorage.setItem("user", JSON.stringify(data));
-				return data.data;
-			}
+			// if (response.data.accessToken) {
+			// 	localStorage.setItem("user", JSON.stringify(response));
+			// 	return response.data;
+			// }
+			return response;
 		} catch (error) {
-			console.log(error);
+			setError(error.response.data.error, {
+				message: error.response.data.message,
+			});
 		}
 	},
-	signIn: async (email, password) => {
+	signIn: async (data, setError) => {
 		try {
-			let data = await axios.post("/user/logIn", {
-				userEmail: email,
-				userPassword: password,
+			const response = await axios.post("/user/logIn", {
+				userEmail: data.email,
+				userPassword: data.password,
 			});
-			if (data.data.accessToken) {
-				localStorage.setItem("user", JSON.stringify(data));
-				return data.data;
+			if (response.data.accessToken) {
+				localStorage.setItem("user", JSON.stringify(response));
+				return response.data;
 			}
 		} catch (error) {
-			console.log(error);
+			setError(error.response.data.error, {
+				message: error.response.data.message,
+			});
 		}
 	},
 	getUserData: async (token) => {
@@ -48,10 +53,10 @@ const userUtils = {
 			localStorage.removeItem("userData");
 
 			//Return saved button to save
-			var buttons = document.getElementsByTagName("button");
-			for (let i = 0; i < buttons.length; i++) {
-				buttons[i].disabled = false;
-			}
+			// var buttons = document.getElementsByTagName("button");
+			// for (let i = 0; i < buttons.length; i++) {
+			// 	buttons[i].disabled = false;
+			// }
 		} catch (error) {
 			console.log(error);
 		}

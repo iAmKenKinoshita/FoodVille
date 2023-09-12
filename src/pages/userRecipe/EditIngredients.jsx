@@ -21,7 +21,7 @@ export default function EditIngredients(props) {
 					<input
 						className="input"
 						type="text"
-						placeholder="1 kg potatoes, sliced"
+						placeholder="i.e. 1 kg potatoes, sliced"
 						name="ingredient_info"
 						value={ingredient.ingredient_info}
 						onChange={onChange}
@@ -34,7 +34,7 @@ export default function EditIngredients(props) {
 						deleteIngredient(index, ingredients, setIngredients);
 					}}
 				>
-					Delete Ingredient
+					Remove
 				</button>
 			</div>
 		</>

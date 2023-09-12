@@ -1,25 +1,36 @@
-import { Popover } from "react-bootstrap";
-
 const homepageUtils = {
 	searchRecipe: async (setSearchRecipes, keywords) => {
 		try {
 			let recipes = await fetch("/home", {
-				method: "GET",
+				method: "POST",
 				headers: {
 					query: keywords,
 				},
 			});
-
 			recipes = await recipes.json();
-			recipes = await recipes.filter((recipe) => {
+			recipes.results = await recipes.results.filter((recipe) => {
 				if (Object.keys(recipe).length >= 50) {
 					return recipe;
 				}
 			});
-
 			return setSearchRecipes(recipes);
 		} catch (error) {
 			console.log(error);
+		}
+	},
+	searchRecipeByCategory: async (setSearchRecipes, tag, from) => {
+		try {
+			let recipes = await fetch("/home", {
+				method: "POST",
+				headers: {
+					tag,
+					from,
+				},
+			});
+			recipes = await recipes.json();
+			return setSearchRecipes(recipes);
+		} catch (error) {
+			console.error(error);
 		}
 	},
 	saveApiRecipe: async (userId, selectedRecipe) => {
@@ -35,19 +46,21 @@ const homepageUtils = {
 			console.log(error);
 		}
 	},
-	logInPopover: (navigate) => {
-		return (
-			<Popover id="popover-basic">
-				<Popover.Header as="h3">Wanna save this recipe?</Popover.Header>
-				<Popover.Body>
-					Click{" "}
-					<a href="javascript:void(0);" onClick={() => navigate("/signIn")}>
-						<strong>here</strong>
-					</a>{" "}
-					to sign-in and save this recipe!
-				</Popover.Body>
-			</Popover>
-		);
+	getFeaturedRecipes: async (setFeaturedRecipes) => {
+		try {
+			let recipes = await fetch("/home", {
+				method: "GET",
+			});
+			recipes = await recipes.json();
+			// recipes = await recipes.filter((recipe) => {
+			// 	if (Object.keys(recipe).length >= 50) {
+			// 		return recipe;
+			// 	}
+			// });
+			return setFeaturedRecipes(recipes);
+		} catch (error) {
+			console.log(error);
+		}
 	},
 };
 
