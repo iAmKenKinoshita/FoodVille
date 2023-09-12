@@ -9,7 +9,6 @@ import "./styles/_main.scss";
 
 //Pages
 import Navbar from "./pages/NavBar/NavBar";
-import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
 import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
