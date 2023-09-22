@@ -8,7 +8,7 @@ export default function RecipeListLoader(props) {
 	if (home) {
 		return (
 			<>
-				<div className="grid md:grid-rows-2 md:grid-flow-col gap-3 py-3">
+				<div className="grid hidden md:grid-rows-2 md:grid-flow-col gap-3 py-3">
 					{[...Array(3)].map((item, index) => {
 						if (index <= 1) {
 							return (
