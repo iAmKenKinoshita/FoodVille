@@ -9,13 +9,12 @@ import "./styles/_main.scss";
 
 //Pages
 import Navbar from "./pages/NavBar/NavBar";
-import Footer from "./pages/Footer";
 import Homepage from "./pages/homepage/Homepage";
-import SearchPage from "./pages/homepage/SearchPage";
 import SignIn from "./pages/user/SignIn";
 import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 import PageNotFound from "./pages/PageNotFound";
+import SearchPage from "./pages/homepage/SearchPage";
 
 //Test Page
 
