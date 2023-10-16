@@ -15,6 +15,7 @@ import SignUp from "./pages/user/SignUp";
 import RecipePage from "./pages/userRecipe/RecipePage";
 import PageNotFound from "./pages/PageNotFound";
 import SearchPage from "./pages/homepage/SearchPage";
+import Footer from "./pages/Footer";
 
 //Test Page
 
