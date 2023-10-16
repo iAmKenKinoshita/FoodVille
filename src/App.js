@@ -64,7 +64,7 @@ function App() {
 								featuredRecipes={featuredRecipes}
 								setFeaturedRecipes={setFeaturedRecipes}
 							/>
-							{/* <Footer /> */}
+							<Footer />
 						</div>
 					}
 				/>
@@ -91,7 +91,7 @@ function App() {
 								currentPage={currentPage}
 								setCurrentPage={setCurrentPage}
 							/>
-							{/* <Footer /> */}
+							<Footer />
 						</div>
 					}
 				/>
@@ -118,7 +118,7 @@ function App() {
 								currentPage={currentPage}
 								setCurrentPage={setCurrentPage}
 							/>
-							{/* <Footer /> */}
+							<Footer />
 						</div>
 					}
 				/>

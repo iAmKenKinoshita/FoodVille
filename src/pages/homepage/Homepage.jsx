@@ -4,12 +4,7 @@ import RecipeDetailsModal from "./RecipeDetailsModal";
 import HomepageUtils from "./utils/homepageUtils";
 
 export default function Homepage(props) {
-	const {
-		user,
-		userId,
-		featuredRecipes,
-		setFeaturedRecipes,
-	} = props;
+	const { user, userId, featuredRecipes, setFeaturedRecipes } = props;
 
 	const [selectedRecipeShow, setSelectedRecipeShow] = useState(false);
 	const [selectedRecipe, setSelectedRecipe] = useState("");
