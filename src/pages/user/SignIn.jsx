@@ -84,7 +84,7 @@ const SignIn = (props) => {
 						>
 							Sign In
 						</button>
-						<p className="text-gray-600 mt-4 text-center">
+						<p className="text-gray-600 mt-4">
 							Don't have an account?{" "}
 							<a
 								onClick={() => {
@@ -95,6 +95,16 @@ const SignIn = (props) => {
 								Sign Up
 							</a>
 						</p>
+						<div className="mt-3">
+							<p className="text-red-500 font-semibold">Test Account</p>
+							<p className="text-sm">
+								<span className="font-semibold">Email:</span>
+								test@test.com
+							</p>
+							<p className="text-sm">
+								<span className="font-semibold">Password:</span>test1234
+							</p>
+						</div>
 					</div>
 				</form>
 			</div>
